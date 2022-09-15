@@ -1,0 +1,30 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Tooltip renders no tooltip when shape is being hovered 1`] = `
+<div
+  class="ez-tooltip"
+  style="left: 0px; top: 0px; opacity: 0;"
+>
+</div>
+`;
+
+exports[`Tooltip renders the tooltip when a shape is hovered 1`] = `
+<div
+  class="ez-tooltip"
+  style="left: 40px; top: 170px; opacity: 1;"
+>
+  <div
+    class="ez-tooltip-color"
+    style="background-color: red;"
+  >
+  </div>
+  <div class="ez-tooltip-text">
+    <span class="ez-tooltip-domain label">
+      Alpha
+    </span>
+    <span class="ez-tooltip-domain value">
+      50
+    </span>
+  </div>
+</div>
+`;

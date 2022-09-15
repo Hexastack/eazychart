@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Line renders an svg path with the right coordinates / path 1`] = `
+<path
+  d
+  stroke="#1f77b4"
+  stroke-width="1"
+  fill="none"
+  stroke-linejoin="round"
+  stroke-linecap="round"
+  class="ez-line"
+>
+</path>
+`;
+
+exports[`Line renders an svg path with the right coordinates / path 2`] = `
+<path
+  d="M10,20L10,40L20,40"
+  stroke="#1f77b4"
+  stroke-width="1"
+  fill="none"
+  stroke-linejoin="round"
+  stroke-linecap="round"
+  class="ez-line"
+>
+</path>
+`;

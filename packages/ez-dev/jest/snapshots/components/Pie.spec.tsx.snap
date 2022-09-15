@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Pie renders svg pie with the right coordinates / dimensions 1`] = `
+<g
+  transform="translate(400,300)"
+  class="ez-pie"
+>
+  <path
+    d="M-259.8076211353317,-149.99999999999983L0,0Z"
+    fill="red"
+    stroke="red"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+  <path
+    d="M1.8369701987210297e-14,300L0,0Z"
+    fill="blue"
+    stroke="blue"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+  <path
+    d="M1.8369701987210297e-14,-300L0,0Z"
+    fill="green"
+    stroke="green"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+</g>
+`;
+
+exports[`Pie renders svg pie with the right coordinates / dimensions 2`] = `
+<g
+  transform="translate(400,300)"
+  class="ez-pie"
+>
+  <path
+    d="M-259.8076211353317,-149.99999999999983A300,300,0,0,1,-3.2156263187166844e-13,-300L0,0Z"
+    fill="red"
+    stroke="red"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+  <path
+    d="M1.8369701987210297e-14,300A300,300,0,0,1,-259.8076211353317,-149.99999999999983L0,0Z"
+    fill="blue"
+    stroke="blue"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+  <path
+    d="M1.8369701987210297e-14,-300A300,300,0,1,1,1.8369701987210297e-14,300L0,0Z"
+    fill="green"
+    stroke="green"
+    data-testid="ez-arc"
+    class="ez-arc"
+  >
+  </path>
+</g>
+`;

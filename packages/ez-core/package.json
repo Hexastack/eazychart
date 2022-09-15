@@ -1,0 +1,69 @@
+{
+  "name": "@ez/core",
+  "version": "0.1.0",
+  "description": "EazyChart core lib that is used by both React and Vue libraries.",
+  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx --tsconfig tsconfig.build.json build",
+    "test": "TZ=EST tsdx test",
+    "coverage": "TZ=EST tsdx test --coverage",
+    "doc": "jsdoc -c jsdoc.json",
+    "lint": "tsdx lint",
+    "prepare": "tsdx build",
+    "size": "size-limit",
+    "analyze": "size-limit --why"
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
+  "module": "dist/core.esm.js",
+  "size-limit": [
+    {
+      "path": "dist/core.cjs.production.min.js",
+      "limit": "10 KB"
+    },
+    {
+      "path": "dist/core.esm.js",
+      "limit": "10 KB"
+    }
+  ],
+  "dependencies": {
+    "d3-scale": "^4.0.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@size-limit/preset-small-lib": "^7.0.8",
+    "@types/d3-ease": "^3.0.0",
+    "@types/d3-interpolate": "^3.0.1",
+    "@types/d3-scale": "^4.0.2",
+    "@types/jest": "^27.4.0",
+    "better-docs": "^2.7.2",
+    "jsdoc": "^3.6.10",
+    "size-limit": "^7.0.8",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.4.0"
+  }
+}

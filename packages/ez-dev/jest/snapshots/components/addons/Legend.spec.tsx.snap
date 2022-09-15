@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Legend renders filters for data supplied 1`] = `
+<div class="ez-legend">
+  <div
+    role="button"
+    class="ez-legend-key"
+  >
+    <div
+      class="ez-legend-box"
+      style="background-color: red; border: 2px solid red;"
+    >
+    </div>
+    <span class="ez-legend-text">
+      Alpha
+    </span>
+  </div>
+  <div
+    role="button"
+    class="ez-legend-key ez-legend-disable"
+  >
+    <div
+      class="ez-legend-box"
+      style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+    >
+    </div>
+    <span class="ez-legend-text">
+      Beta
+    </span>
+  </div>
+  <div
+    role="button"
+    class="ez-legend-key"
+  >
+    <div
+      class="ez-legend-box"
+      style="background-color: green; border: 2px solid green;"
+    >
+    </div>
+    <span class="ez-legend-text">
+      Gamma
+    </span>
+  </div>
+</div>
+`;
+
+exports[`Legend renders no filters for empty data 1`] = `
+<div class="ez-legend">
+</div>
+`;

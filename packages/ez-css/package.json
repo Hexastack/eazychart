@@ -1,0 +1,34 @@
+{
+  "name": "@ez/css",
+  "version": "0.1.0",
+  "description": "EazyChart SCSS lib following a simplified version of the 7-1 pattern",
+  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "main": "css/style.css",
+  "private": true,
+  "scripts": {
+    "start": "npm-run-all --parallel liveserver watch",
+    "liveserver": "live-server",
+    "watch": "node-sass sass/main.scss css/style.css -w",
+    "compile": "node-sass sass/main.scss css/style.css",
+    "prefix": "postcss css/style.css --use autoprefixer -o css/style.css",
+    "compress": "node-sass css/style.css css/style.css --output-style compressed",
+    "build": "npm-run-all compile prefix compress"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.1",
+    "node-sass": "^7.0.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.5",
+    "postcss-cli": "^9.1.0"
+  }
+}

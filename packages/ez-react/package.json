@@ -1,0 +1,92 @@
+{
+  "name": "@ez/react",
+  "version": "0.1.0",
+  "description": "React version of the EazyChart Library.",
+  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "sideEffects": false,
+  "scripts": {
+    "lint": "eslint src tests stories",
+    "lint:fix": "eslint --fix src/ tests/",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+    "test": "jest --env=jsdom",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "build": "rollup -c rollup.config.js",
+    "type-check": "tsc",
+    "precommit": "yarn lint && yarn type-check"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@babel/helper-module-imports": "^7.18.6",
+    "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/preset-env": "^7.18.6",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@ez/dev": "^0.1.0",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/addons": "^6.5.9",
+    "@storybook/react": "^6.5.9",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/d3-shape": "^3.0.2",
+    "@types/react": "^17.0.38",
+    "@types/testing-library__jest-dom": "^5.14.2",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.2.3",
+    "eslint": "^7.32.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-flowtype": "^5.8.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-jest-dom": "^4.0.1",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-testing-library": "^5.0.5",
+    "husky": "^7.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-is": "^17.0.2",
+    "rollup": "^2.63.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-typescript2": "^0.31.1",
+    "rollup-plugin-uglify": "^6.0.4",
+    "typescript": "^4.5.4",
+    "jest-environment-jsdom": "^26.0.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@ez/core": "^0.1.0",
+    "@ez/css": "^0.1.0",
+    "d3-shape": "^3.0.1"
+  }
+}

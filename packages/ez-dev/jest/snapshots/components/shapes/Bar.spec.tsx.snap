@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Bar renders an svg rect with the right coordinates / dimensions 1`] = `
+<rect
+  fill="#1f77b4"
+  x="0"
+  y="0"
+  width="0"
+  height="0"
+  data-testid="ez-bar"
+  class="ez-bar"
+>
+</rect>
+`;
+
+exports[`Bar renders an svg rect with the right coordinates / dimensions 2`] = `
+<rect
+  fill="yellow"
+  x="50"
+  y="10"
+  width="20"
+  height="100"
+  data-testid="ez-bar"
+  class="ez-bar"
+>
+</rect>
+`;

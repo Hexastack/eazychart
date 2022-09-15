@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BarChart renders a bar chart 1`] = `
+<div
+  class="ez-viz"
+  style="width: 800px; height: 600px;"
+>
+  <div class="ez-fragment-tooltip">
+    <div class="ez-fragment-filter">
+      <div class="ez-chart">
+        <svg
+          class="ez-svg"
+          style="width: 800px; height: 600px;"
+        >
+          <g transform="translate(150, 100)">
+            <g class="ez-bars">
+              <rect
+                fill="#1f77b4"
+                x="0"
+                y="0"
+                width="0"
+                height="0"
+                data-testid="ez-bar"
+                class="ez-bar"
+              >
+              </rect>
+              <rect
+                fill="#1f77b4"
+                x="0"
+                y="0"
+                width="0"
+                height="0"
+                data-testid="ez-bar"
+                class="ez-bar"
+              >
+              </rect>
+            </g>
+            <g
+              text-anchor="middle"
+              transform="translate(0, 0)"
+              class="ez-axis"
+            >
+              <path
+                d="M0,0V0V-0.5H0V0V0"
+                class="ez-axis-path"
+              >
+              </path>
+            </g>
+            <g
+              text-anchor="end"
+              transform="translate(0, 0)"
+              class="ez-axis"
+            >
+              <path
+                d="M0,0H0H-0.5V0H0,0"
+                class="ez-axis-path"
+              >
+              </path>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="ez-legend">
+        <div
+          role="button"
+          class="ez-legend-key"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: red; border: 2px solid red;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Alpha
+          </span>
+        </div>
+        <div
+          role="button"
+          class="ez-legend-key ez-legend-disable"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Beta
+          </span>
+        </div>
+        <div
+          role="button"
+          class="ez-legend-key"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: green; border: 2px solid green;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Gamma
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ez-tooltip"
+      style="left: 0px; top: 0px; opacity: 0;"
+    >
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BarChart renders a bar chart 2`] = `
+<div
+  class="ez-viz"
+  style="width: 800px; height: 600px;"
+>
+  <div class="ez-fragment-tooltip">
+    <div class="ez-fragment-filter">
+      <div class="ez-chart">
+        <svg
+          class="ez-svg"
+          style="width: 800px; height: 600px;"
+        >
+          <g transform="translate(150, 100)">
+            <g class="ez-bars">
+              <rect
+                fill="#1f77b4"
+                x="0"
+                y="0"
+                width="0"
+                height="0"
+                data-testid="ez-bar"
+                class="ez-bar"
+              >
+              </rect>
+              <rect
+                fill="#1f77b4"
+                x="0"
+                y="0"
+                width="0"
+                height="0"
+                data-testid="ez-bar"
+                class="ez-bar"
+              >
+              </rect>
+            </g>
+            <g
+              text-anchor="middle"
+              transform="translate(0, 0)"
+              class="ez-axis"
+            >
+              <path
+                d="M0,0V0V-0.5H0V0V0"
+                class="ez-axis-path"
+              >
+              </path>
+            </g>
+            <g
+              text-anchor="end"
+              transform="translate(0, 0)"
+              class="ez-axis"
+            >
+              <path
+                d="M0,0H0H-0.5V0H0,0"
+                class="ez-axis-path"
+              >
+              </path>
+            </g>
+          </g>
+        </svg>
+      </div>
+      <div class="ez-legend">
+        <div
+          role="button"
+          class="ez-legend-key"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: red; border: 2px solid red;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Alpha
+          </span>
+        </div>
+        <div
+          role="button"
+          class="ez-legend-key ez-legend-disable"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Beta
+          </span>
+        </div>
+        <div
+          role="button"
+          class="ez-legend-key"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: green; border: 2px solid green;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            Gamma
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="ez-tooltip"
+      style="left: 0px; top: 0px; opacity: 0;"
+    >
+    </div>
+  </div>
+</div>
+`;

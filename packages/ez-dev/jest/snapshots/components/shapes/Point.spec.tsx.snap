@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Point renders an svg circle with the right coordinates 1`] = `
+<circle
+  stroke="#1f77b4"
+  fill="#1f77b4"
+  r="5"
+  cx="0"
+  cy="0"
+  stroke-width="1"
+  data-testid="ez-point"
+  class="ez-point"
+>
+</circle>
+`;
+
+exports[`Point renders an svg circle with the right coordinates 2`] = `
+<circle
+  stroke="red"
+  fill="red"
+  r="5"
+  cx="10"
+  cy="20"
+  stroke-width="1"
+  data-testid="ez-point"
+  class="ez-point"
+>
+</circle>
+`;

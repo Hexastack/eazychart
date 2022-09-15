@@ -1,0 +1,27 @@
+{
+  "name": "@ez/dev",
+  "version": "0.1.0",
+  "description": "Common jest code (used by react/vue)",
+  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "jest"
+  },
+  "files": [
+    "jest"
+  ],
+  "devDependencies": {
+    "@ez/core": "^0.1.0",
+    "diffable-html": "^5.0.0"
+  }
+}

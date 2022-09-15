@@ -1,0 +1,91 @@
+{
+  "name": "@ez/vue",
+  "version": "0.1.0",
+  "description": "Vue version of the EazyChart Library.",
+  "keywords": [
+    "chart",
+    "library",
+    "svg",
+    "react",
+    "dataviz",
+    "graph",
+    "typescript",
+    "javascript",
+    "data",
+    "visualization",
+    "web"
+  ],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "private": true,
+  "scripts": {
+    "build": "vue-cli-service build",
+    "test": "vue-cli-service test:unit",
+    "lint": "vue-cli-service lint",
+    "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.js",
+    "build:lib": "npx vue-cli-service build --target lib --name eazychart ./index.js",
+    "build:recipes": "npx vue-cli-service build --target lib --name ezRecipes ./recipes.js",
+    "build:wp": "npx vue-cli-service build --target wc-async --name eazychart 'src/recipes/**/*.vue'",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "type-check": "tsc",
+    "precommit": "yarn type-check && yarn lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "vue-cli-service lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "all"
+  },
+  "dependencies": {
+    "@ez/core": "^0.1.0",
+    "@ez/css": "^0.1.0",
+    "core-js": "^3.6.5",
+    "d3": "^5.12.0",
+    "d3-shape": "^3.0.1",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.1.2"
+  },
+  "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8",
+    "@ez/dev": "^0.1.0",
+    "@storybook/addon-actions": "^6.4.19",
+    "@storybook/addon-essentials": "^6.4.19",
+    "@storybook/addon-links": "^6.4.19",
+    "@storybook/vue": "^6.4.19",
+    "@testing-library/vue": "^5.8.2",
+    "@types/d3-shape": "^3.0.2",
+    "@types/jest": "^24.0.19",
+    "@typescript-eslint/eslint-plugin": "^4.18.0",
+    "@typescript-eslint/parser": "^4.18.0",
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-typescript": "~4.5.0",
+    "@vue/cli-plugin-unit-jest": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-airbnb": "^5.0.2",
+    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/test-utils": "^1.0.3",
+    "babel-loader": "^8.2.3",
+    "eslint": "^6.7.2",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "typescript": "~4.1.5",
+    "vue-template-compiler": "^2.6.11"
+  }
+}

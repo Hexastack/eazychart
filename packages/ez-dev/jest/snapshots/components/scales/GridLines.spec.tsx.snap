@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GridLines renders horizontal grid lines with four ticks 1`] = `
+<g class="ez-grid-lines">
+  <line
+    transform="translate(0, 0.5)"
+    x2="800"
+    y2="0"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(0, 200.5)"
+    x2="800"
+    y2="0"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(0, 400.5)"
+    x2="800"
+    y2="0"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(0, 600.5)"
+    x2="800"
+    y2="0"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(0, 800.5)"
+    x2="800"
+    y2="0"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+</g>
+`;
+
+exports[`GridLines renders vertical grid lines with four ticks 1`] = `
+<g class="ez-grid-lines">
+  <line
+    transform="translate(600.5, 0)"
+    x2="0"
+    y2="600"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(400.50000000000006, 0)"
+    x2="0"
+    y2="600"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(200.50000000000003, 0)"
+    x2="0"
+    y2="600"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+  <line
+    transform="translate(0.5, 0)"
+    x2="0"
+    y2="600"
+    stroke="#a8a8a8"
+    class="ez-grid-line"
+  >
+  </line>
+</g>
+`;

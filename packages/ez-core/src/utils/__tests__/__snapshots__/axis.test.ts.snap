@@ -1,0 +1,339 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`getAxis returns the requested horizontal axis 1`] = `
+Object {
+  "anchor": "middle",
+  "path": Object {
+    "range0": 0.5,
+    "range1": 400.5,
+    "tick": 6,
+  },
+  "ticks": Array [
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "0",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 0.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "10",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 40.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "20",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 80.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "30",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 120.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "40",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 160.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "50",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 200.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "60",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 240.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "70",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 280.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "80",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 320.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "90",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 360.5,
+        "y": 0,
+      },
+    },
+    Object {
+      "line": Object {
+        "y2": 6,
+      },
+      "text": Object {
+        "dy": 0.6,
+        "text": "100",
+        "y": 9,
+      },
+      "transform": Object {
+        "x": 400.5,
+        "y": 0,
+      },
+    },
+  ],
+  "x": 0,
+  "y": 300,
+}
+`;
+
+exports[`getAxis returns the requested vertical axis 1`] = `
+Object {
+  "anchor": "end",
+  "path": Object {
+    "range0": 300.5,
+    "range1": 0.5,
+    "tick": -6,
+  },
+  "ticks": Array [
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "0",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 300.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "10",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 270.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "20",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 240.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "30",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 210.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "40",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 180.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "50",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 150.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "60",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 120.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "70",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 90.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "80",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 60.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "90",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 30.5,
+      },
+    },
+    Object {
+      "line": Object {
+        "x2": -6,
+      },
+      "text": Object {
+        "dy": 0.3,
+        "text": "100",
+        "x": -9,
+      },
+      "transform": Object {
+        "x": 0,
+        "y": 0.5,
+      },
+    },
+  ],
+  "x": 0,
+  "y": 0,
+}
+`;

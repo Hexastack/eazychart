@@ -1,0 +1,49 @@
+{
+  "name": "eazychart",
+  "description": "EazyChart is an easy to use reactive library that allows you to add customizable charts into your React or Vue web applications.",
+  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "author": "Hexastack",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hexastack/eazychart.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Hexastack/eazychart/issues"
+  },
+  "homepage": "https://eazychart.com",
+  "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
+    "husky": "^7.0.4",
+    "lerna": "^4.0.0"
+  },
+  "private": true,
+  "engines": {
+    "node": "=16"
+  },
+  "workspaces": {
+    "packages": [
+      "packages/**"
+    ],
+    "nohoist": [
+      "**/tsdx",
+      "**/tsdx/**",
+      "**/@vue/cli-plugin-eslint",
+      "**/@vue/cli-plugin-eslint/**"
+    ]
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "clean": "lerna clean",
+    "bootstrap": "lerna bootstrap",
+    "setup": "lerna clean -y && rm -rf node_modules/ && lerna bootstrap",
+    "storybook:react": "lerna run storybook --scope=@ez/react",
+    "storybook:vue": "lerna run storybook --scope=@ez/vue",
+    "serve:vue": "lerna run serve --scope=@ez/vue --stream",
+    "test:core": "lerna run test --scope=@ez/core --stream",
+    "test:vue": "lerna run test --scope=@ez/vue --stream",
+    "test:react": "lerna run test --scope=@ez/react --stream",
+    "test": "lerna run test --stream"
+  }
+}

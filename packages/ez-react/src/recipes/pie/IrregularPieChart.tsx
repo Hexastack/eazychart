@@ -1,0 +1,91 @@
+import React, { FC, SVGAttributes, useMemo } from 'react';
+import {
+  Direction,
+  RawData,
+  AnimationOptions,
+  ChartPadding,
+  Dimensions,
+  PieConfig,
+} from '@ez/core/src/types';
+import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
+import { Chart } from '@/components/Chart';
+import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { ScaleLinear } from '@ez/core/src';
+import { IrregularArcs } from '@/components/IrregularArcs';
+
+export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
+  rawData: RawData;
+  colors?: string[];
+  animationOptions?: AnimationOptions;
+  padding?: ChartPadding;
+  domainKey?: string;
+  arc?: PieConfig;
+  dimensions: Partial<Dimensions>;
+  scopedSlots?: {
+    LegendComponent: React.FC<LegendPropsWithRef>;
+    TooltipComponent: React.FC<TooltipProps>;
+  };
+  onResize?: (dimensions: Dimensions) => void;
+}
+
+export const IrregularPieChart: FC<IrregularPieChartProps> = ({
+  rawData,
+  colors = ['#339999', '#993399', '#333399'],
+  animationOptions = {
+    easing: 'easeBack',
+    duration: 400,
+    delay: 0,
+  },
+  padding = {
+    left: 100,
+    bottom: 100,
+    right: 100,
+    top: 100,
+  },
+  domainKey = 'value',
+  arc = {
+    donutRadius: 0,
+    cornerRadius: 0,
+    padAngle: 0,
+    padRadius: 0,
+    stroke: '#FFF',
+    strokeWidth: 0,
+  },
+  dimensions = {},
+  scopedSlots = {
+    LegendComponent: Legend,
+    TooltipComponent: Tooltip,
+  },
+  onResize,
+}) => {
+  const aScale = useMemo<ScaleLinear>(
+    () =>
+      new ScaleLinear({
+        direction: Direction.HORIZONTAL,
+        domainKey,
+      }),
+    [domainKey]
+  );
+  const rScale = useMemo<ScaleLinear>(
+    () =>
+      new ScaleLinear({
+        direction: Direction.HORIZONTAL,
+        domainKey,
+      }),
+    [domainKey]
+  );
+  return (
+    <Chart
+      dimensions={dimensions}
+      rawData={rawData}
+      scales={[aScale, rScale]}
+      padding={padding}
+      colors={colors}
+      animationOptions={animationOptions}
+      scopedSlots={scopedSlots}
+      onResize={onResize}
+    >
+      <IrregularArcs aScale={aScale} rScale={rScale} {...arc} />
+    </Chart>
+  );
+};

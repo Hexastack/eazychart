@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Arc renders an svg arc with the right coordinates / dimensions 1`] = `
+<path
+  d="M6.123233995736766e-15,-100L6.123233995736766e-16,-10Z"
+  fill="yellow"
+  stroke="yellow"
+  data-testid="ez-arc"
+  class="ez-arc"
+>
+</path>
+`;
+
+exports[`Arc renders an svg arc with the right coordinates / dimensions 2`] = `
+<path
+  d="M6.123233995736766e-15,-100A100,100,0,1,1,-6.123233995736766e-15,100A100,100,0,1,1,6.123233995736766e-15,-100M8.509035245341176,-5.253219888177312A10,10,0,1,0,-8.509035245341176,5.253219888177312A10,10,0,1,0,8.509035245341176,-5.253219888177312Z"
+  fill="yellow"
+  stroke="yellow"
+  data-testid="ez-arc"
+  class="ez-arc"
+>
+</path>
+`;

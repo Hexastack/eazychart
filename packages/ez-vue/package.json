@@ -1,6 +1,6 @@
 {
   "name": "@ez/vue",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "Vue version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -51,8 +51,8 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "@ez/core": "^0.1.0",
-    "@ez/css": "^0.1.0",
+    "@ez/core": "^0.1.0-alpha.0",
+    "@ez/css": "^0.1.0-alpha.0",
     "core-js": "^3.6.5",
     "d3": "^5.12.0",
     "d3-shape": "^3.0.1",
@@ -62,7 +62,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
-    "@ez/dev": "^0.1.0",
+    "@ez/dev": "^0.1.0-alpha.0",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",

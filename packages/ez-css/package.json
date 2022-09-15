@@ -1,8 +1,20 @@
 {
   "name": "@ez/css",
-  "version": "0.1.0",
+  "version": "0.1.0-alpha.0",
   "description": "EazyChart SCSS lib following a simplified version of the 7-1 pattern",
-  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "keywords": [
+    "chart",
+    "library",
+    "svg",
+    "react",
+    "dataviz",
+    "graph",
+    "typescript",
+    "javascript",
+    "data",
+    "visualization",
+    "web"
+  ],
   "author": "Hexastack",
   "license": "MIT",
   "repository": {

@@ -25,7 +25,7 @@
     "url": "https://github.com/Hexastack/eazychart/issues"
   },
   "homepage": "https://eazychart.com",
-  "private": true,
+  "private": false,
   "scripts": {
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",

@@ -14,7 +14,7 @@
   },
   "homepage": "https://eazychart.com",
   "main": "css/style.css",
-  "private": true,
+  "private": false,
   "scripts": {
     "start": "npm-run-all --parallel liveserver watch",
     "liveserver": "live-server",

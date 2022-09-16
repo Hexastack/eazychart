@@ -25,6 +25,8 @@
     "url": "https://github.com/Hexastack/eazychart/issues"
   },
   "homepage": "https://eazychart.com",
+  "main": "dist/eazychart.umd.js",
+  "module": "dist/eazychart.common.js",
   "private": false,
   "publishConfig": {
     "access": "public",

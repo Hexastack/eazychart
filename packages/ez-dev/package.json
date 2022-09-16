@@ -25,6 +25,7 @@
     "url": "https://github.com/Hexastack/eazychart/issues"
   },
   "homepage": "https://eazychart.com",
+  "private": true,
   "main": "lib/index.js",
   "directories": {
     "lib": "jest"

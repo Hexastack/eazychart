@@ -43,6 +43,7 @@
     "test:core": "lerna run test --scope=eazychart-core --stream",
     "test:vue": "lerna run test --scope=eazychart-vue --stream",
     "test:react": "lerna run test --scope=eazychart-react --stream",
-    "test": "lerna run test --stream"
+    "test": "lerna run test --stream",
+    "build": "lerna run build --stream"
   }
 }

@@ -8,8 +8,8 @@ import { babel } from '@rollup/plugin-babel';
 export default {
   input: './src/index.ts',
   output: [
-    { file: 'dist/index.cjs.js', format: 'cjs' },
-    { file: 'dist/index.esm.js', format: 'es' },
+    { file: 'dist/eazychart.cjs.js', format: 'cjs' },
+    { file: 'dist/eazychart.esm.js', format: 'es' },
   ],
   plugins: [peerDepsExternal(), resolve(), typescript(), uglify(), babel()],
 };

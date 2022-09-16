@@ -31,13 +31,10 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.js",
-    "build:lib": "npx vue-cli-service build --target lib --name eazychart ./index.js",
-    "build:recipes": "npx vue-cli-service build --target lib --name ezRecipes ./recipes.js",
-    "build:wp": "npx vue-cli-service build --target wc-async --name eazychart 'src/recipes/**/*.vue'",
+    "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
+    "build": "npx vue-cli-service build --target lib --name eazychart ./index.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "type-check": "tsc",

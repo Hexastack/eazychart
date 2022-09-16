@@ -1,10 +1,17 @@
-export { ColumnChart } from '@/recipes/column/ColumnChart';
+export { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
 export { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 export { PieChart, PieChartProps } from '@/recipes/pie/PieChart';
 export { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 export { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 export { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
-export { LineColumnChart } from '@/recipes/column/LineColumnChart';
+export {
+  LineColumnChart,
+  LineColumnChartProps,
+} from '@/recipes/column/LineColumnChart';
+export {
+  SemiCircleChart,
+  SemiCircleChartProps,
+} from '@/recipes/pie/SemiCircleChart';
 export {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
@@ -22,4 +29,4 @@ export {
   LegendProps,
   LegendPropsWithRef,
 } from '@/components/addons/legend/Legend';
-export { RadialChartProps, RadialChart } from '@/recipes/pie/RadialChart';
+export { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';

@@ -1,6 +1,6 @@
 {
   "name": "@ez/react",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.0-alpha.2",
   "description": "React version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -28,6 +28,11 @@
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "sideEffects": false,
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "lint": "eslint src tests stories",
     "lint:fix": "eslint --fix src/ tests/",

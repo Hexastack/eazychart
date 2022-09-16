@@ -25,6 +25,11 @@
     "url": "https://github.com/Hexastack/eazychart/issues"
   },
   "homepage": "https://eazychart.com",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "files": [

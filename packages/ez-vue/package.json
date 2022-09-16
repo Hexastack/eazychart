@@ -26,6 +26,10 @@
   },
   "homepage": "https://eazychart.com",
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",

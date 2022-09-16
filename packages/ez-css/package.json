@@ -27,6 +27,10 @@
   "homepage": "https://eazychart.com",
   "main": "css/style.css",
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "start": "npm-run-all --parallel liveserver watch",
     "liveserver": "live-server",

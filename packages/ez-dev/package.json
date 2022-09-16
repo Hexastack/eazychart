@@ -1,6 +1,6 @@
 {
   "name": "eazychart-dev",
-  "version": "0.1.1-alpha.0",
+  "version": "0.1.2-alpha.0",
   "description": "Common jest code (used by react/vue)",
   "keywords": [
     "chart",
@@ -33,8 +33,8 @@
     "jest"
   ],
   "devDependencies": {
-    "eazychart-core": "^0.1.1-alpha.0",
-    "diffable-html": "^5.0.0"
+    "diffable-html": "^5.0.0",
+    "eazychart-core": "^0.1.2-alpha.0"
   },
   "gitHead": "90c689aeed81982bc7eba068094e5153762047f7"
 }

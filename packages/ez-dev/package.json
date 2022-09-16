@@ -1,6 +1,6 @@
 {
   "name": "@ez/dev",
-  "version": "0.1.0-alpha.0",
+  "version": "0.1.1-alpha.0",
   "description": "Common jest code (used by react/vue)",
   "keywords": [
     "chart",
@@ -33,7 +33,7 @@
     "jest"
   ],
   "devDependencies": {
-    "@ez/core": "^0.1.0-alpha.0",
+    "@ez/core": "^0.1.1-alpha.0",
     "diffable-html": "^5.0.0"
   }
 }

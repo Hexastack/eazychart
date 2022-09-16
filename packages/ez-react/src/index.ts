@@ -5,6 +5,7 @@ export { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 export { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 export { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
 export { LineColumnChart } from '@/recipes/column/LineColumnChart';
+export { SemiCircleChart } from '@/recipes/pie/SemiCircleChart';
 export {
   LineErrorMarginChart,
   LineErrorMarginChartProps,

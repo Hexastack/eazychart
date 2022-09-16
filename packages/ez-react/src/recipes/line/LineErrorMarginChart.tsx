@@ -7,7 +7,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { Line } from '@/components/shapes/Line';
 import { Point } from '@/components/shapes/Point';
 import { Area } from '@/components/shapes/Area';
-import { getDataMarginBounds, ScaleLinear } from '@ez/core/src';
+import { getDataMarginBounds, ScaleLinear } from 'eazychart-core/src';
 import {
   LineConfig,
   RawData,
@@ -23,7 +23,7 @@ import {
   RawDatum,
   AreaData,
   AreaCurve,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 
 export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
   line: LineConfig;

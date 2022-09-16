@@ -1,7 +1,7 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { getDataMarginBounds, ScaleLinear } from '@ez/core/src';
+import { getDataMarginBounds, ScaleLinear } from 'eazychart-core/src';
 import {
   RawData,
   Dimensions,
@@ -17,7 +17,7 @@ import {
   PointDatum,
   AreaData,
   AreaCurve,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';

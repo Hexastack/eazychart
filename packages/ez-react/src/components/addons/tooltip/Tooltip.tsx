@@ -4,13 +4,13 @@ import {
   NormalizedDatum,
   Point,
   ShapeDatum,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { useAnimation } from '@/lib/use-animation';
 import {
   defaultTooltipOffset,
   initialTooltipStyle,
   tooltipAnimationOptions,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 
 export interface TooltipProps extends DOMAttributes<HTMLDivElement> {
   offset?: Point;

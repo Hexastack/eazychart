@@ -4,8 +4,8 @@ import {
   ChartContext,
   RectangleDatum,
   TooltipContext,
-} from '@ez/core/src/types';
-import { defaultRectangleDatum } from '@ez/core/src';
+} from 'eazychart-core/src/types';
+import { defaultRectangleDatum } from 'eazychart-core/src';
 import {
   Inject, InjectReactive, Prop,
 } from 'vue-property-decorator';

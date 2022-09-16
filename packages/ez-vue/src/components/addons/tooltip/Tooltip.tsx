@@ -5,13 +5,13 @@ import {
   NormalizedDatum,
   Point,
   ShapeDatum,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import {
   defaultTooltipOffset,
   initialTooltipStyle,
   tooltipAnimationOptions,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 type TooltipAnimationStyle = {

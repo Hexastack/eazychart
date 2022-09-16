@@ -13,10 +13,10 @@ import {
   animate,
   ScaleBand,
   ScaleLinear,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import {
   Anchor, ChartContext, Position, AxisData,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 
 @Component
 export default class Axis extends Vue {

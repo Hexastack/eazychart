@@ -7,7 +7,7 @@ import {
   scales,
   horizontalLinearScale,
   tooltip,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import Points from '@/components/Points';
 
 describe('Points', () => {

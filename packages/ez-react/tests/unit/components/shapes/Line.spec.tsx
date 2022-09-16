@@ -2,7 +2,7 @@ import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { Line } from '@/components/shapes/Line';
 import { Chart } from '@/components/Chart';
-import { pointsData } from '@ez/dev/jest/data';
+import { pointsData } from 'eazychart-dev/jest/data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 

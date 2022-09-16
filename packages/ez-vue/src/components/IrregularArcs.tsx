@@ -1,8 +1,8 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext, Dimensions, Point } from '@ez/core/src/types';
+import { ChartContext, Dimensions, Point } from 'eazychart-core/src/types';
 import { InjectReactive, Prop, Watch } from 'vue-property-decorator';
-import { ScaleLinear, scalePieArcData } from '@ez/core/src';
+import { ScaleLinear, scalePieArcData } from 'eazychart-core/src';
 import Arc from '@/components/shapes/Arc';
 
 @Component({ components: { Arc } })

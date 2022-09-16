@@ -2,14 +2,14 @@ import React from 'react';
 import { act, render } from '@testing-library/react';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
-import { Position } from '@ez/core/src/types';
+import { Position } from 'eazychart-core/src/types';
 import {
   colors,
   dimensions,
   rawData,
   scaleDefinitions,
   horizontalLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 

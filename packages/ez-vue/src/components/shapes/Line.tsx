@@ -1,8 +1,8 @@
 import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { ChartContext, PointDatum, LineCurve } from '@ez/core/src/types';
+import { ChartContext, PointDatum, LineCurve } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
-import { defaultColor, generateLinePath } from '@ez/core/src';
+import { defaultColor, generateLinePath } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component

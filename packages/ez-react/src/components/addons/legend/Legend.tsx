@@ -1,6 +1,6 @@
 import React, { DOMAttributes } from 'react';
-import { NormalizedData, NormalizedDatum } from '@ez/core/src/types';
-import { computedLegendBoxStyle } from '@ez/core/src';
+import { NormalizedData, NormalizedDatum } from 'eazychart-core/src/types';
+import { computedLegendBoxStyle } from 'eazychart-core/src';
 
 export interface LegendProps extends DOMAttributes<HTMLDivElement> {
   data: NormalizedData;

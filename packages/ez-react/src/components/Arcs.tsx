@@ -1,8 +1,8 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { Arc } from './shapes/Arc';
-import { Dimensions, Point, PieConfig } from '@ez/core/src/types';
-import { ScaleLinear, scaleArcData } from '@ez/core/src';
+import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
+import { ScaleLinear, scaleArcData } from 'eazychart-core/src';
 
 export interface ArcsProps
   extends PieConfig,

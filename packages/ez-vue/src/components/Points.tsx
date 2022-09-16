@@ -1,10 +1,10 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext } from '@ez/core/src/types';
+import { ChartContext } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
 import {
   defaultPointRadius, ScaleBand, ScaleLinear, scalePointData,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import Point from '@/components/shapes/Point';
 import Line from '@/components/shapes/Line';
 

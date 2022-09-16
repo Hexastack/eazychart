@@ -1,8 +1,8 @@
 import React, { FC, MouseEventHandler, SVGAttributes, useMemo } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { useAnimation } from '@/lib/use-animation';
-import { ArcDatum, ArcConfig } from '@ez/core/src/types';
-import { generateArc } from '@ez/core/src';
+import { ArcDatum, ArcConfig } from 'eazychart-core/src/types';
+import { generateArc } from 'eazychart-core/src';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
 
 export interface ArcProps

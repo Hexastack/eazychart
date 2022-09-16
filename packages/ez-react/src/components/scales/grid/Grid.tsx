@@ -1,7 +1,7 @@
 import React, { FC, SVGAttributes } from 'react';
-import { Direction, GridConfig } from '@ez/core/src/types';
+import { Direction, GridConfig } from 'eazychart-core/src/types';
 import { GridLines } from './GridLines';
-import { ScaleBand, ScaleLinear } from '@ez/core/src';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 export interface GridProps
   extends Omit<SVGAttributes<SVGRectElement>, 'directions'>,

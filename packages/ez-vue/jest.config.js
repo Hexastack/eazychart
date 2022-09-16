@@ -1,4 +1,4 @@
-const baseConfig = require('@ez/dev/jest/base.config');
+const baseConfig = require('eazychart-dev/jest/base.config');
 
 module.exports = {
   ...baseConfig,

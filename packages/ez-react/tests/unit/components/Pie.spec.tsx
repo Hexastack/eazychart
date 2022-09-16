@@ -7,7 +7,7 @@ import {
   scaleDefinitions,
   horizontalLinearScale,
   chartData,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 

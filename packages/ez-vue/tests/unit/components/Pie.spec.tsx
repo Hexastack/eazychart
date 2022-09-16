@@ -6,7 +6,7 @@ import {
   scales,
   tooltip,
   horizontalLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import Pie from '@/components/Pie';
 
 describe('Pie', () => {

@@ -4,7 +4,7 @@ import {
   colors,
   correlationData,
   padding,
-} from '@ez/dev/storybook/data';
+} from 'eazychart-dev/storybook/data';
 import ScatterChart from '../src/recipes/scatter/ScatterChart';
 import BubbleChart from '../src/recipes/scatter/BubbleChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';

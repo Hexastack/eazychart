@@ -3,8 +3,8 @@ import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
-import { ShapeDatum, TooltipContext } from '@ez/core/src/types';
-import { chartData } from '@ez/dev/jest/data';
+import { ShapeDatum, TooltipContext } from 'eazychart-core/src/types';
+import { chartData } from 'eazychart-dev/jest/data';
 import 'tests/mocks/ResizeObserver';
 
 const mockShowTooltip = jest.fn();

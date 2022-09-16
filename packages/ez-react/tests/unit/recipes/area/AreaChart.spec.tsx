@@ -1,8 +1,8 @@
 import React from 'react';
-import { dimensions, pointsData } from '@ez/dev/jest/data';
+import { dimensions, pointsData } from 'eazychart-dev/jest/data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { AreaChart } from '@/recipes/area/AreaChart';
-import { RawData } from '@ez/core/src/types';
+import { RawData } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
 describe('AreaChart', () => {

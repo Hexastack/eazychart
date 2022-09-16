@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
-import { colors, dimensions, rawData } from '@ez/dev/storybook/data';
+import { colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Bar Chart',

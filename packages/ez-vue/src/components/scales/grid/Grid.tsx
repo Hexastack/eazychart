@@ -1,8 +1,8 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import { Prop } from 'vue-property-decorator';
-import { Direction } from '@ez/core/src/types';
-import { ScaleBand, ScaleLinear } from '@ez/core/src';
+import { Direction } from 'eazychart-core/src/types';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import GridLines from './GridLines';
 
 @Component

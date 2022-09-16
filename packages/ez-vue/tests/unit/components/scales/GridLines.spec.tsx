@@ -1,11 +1,11 @@
 import { render } from '@testing-library/vue';
-import { Direction } from '@ez/core/src/types';
+import { Direction } from 'eazychart-core/src/types';
 import {
   dimensions,
   scales,
   horizontalLinearScale,
   verticalLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import GridLines from '@/components/scales/grid/GridLines';
 
 describe('GridLines', () => {

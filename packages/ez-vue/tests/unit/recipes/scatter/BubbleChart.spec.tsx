@@ -1,4 +1,4 @@
-import { dimensions, rawData } from '@ez/dev/jest/data';
+import { dimensions, rawData } from 'eazychart-dev/jest/data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import BubbleChart from '@/recipes/scatter/BubbleChart';

@@ -1,6 +1,6 @@
-import { AnimationOptions, Interpolables } from '@ez/core/src/types';
+import { AnimationOptions, Interpolables } from 'eazychart-core/src/types';
 import { useState, useEffect, useCallback } from 'react';
-import { defaultChartAnimationOptions, animate } from '@ez/core/src';
+import { defaultChartAnimationOptions, animate } from 'eazychart-core/src';
 
 export const useAnimation = <T extends Interpolables>(
   targetData: T,

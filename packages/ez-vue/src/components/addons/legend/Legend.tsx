@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext, NormalizedDatum } from '@ez/core/src/types';
+import { ChartContext, NormalizedDatum } from 'eazychart-core/src/types';
 import { InjectReactive } from 'vue-property-decorator';
-import { computedLegendBoxStyle } from '@ez/core/src';
+import { computedLegendBoxStyle } from 'eazychart-core/src';
 
 @Component
 export default class Legend extends Vue {

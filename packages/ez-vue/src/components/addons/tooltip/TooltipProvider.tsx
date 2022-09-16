@@ -7,8 +7,8 @@ import {
   Point,
   ShapeDatum,
   NormalizedDatum,
-} from '@ez/core/src/types';
-import { debounce } from '@ez/core/src';
+} from 'eazychart-core/src/types';
+import { debounce } from 'eazychart-core/src';
 import Fragment from '@/lib/Fragment';
 import Tooltip from './Tooltip';
 

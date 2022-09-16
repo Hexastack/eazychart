@@ -1,5 +1,5 @@
 {
-  "name": "@ez/core",
+  "name": "eazychart-core",
   "version": "0.1.1-alpha.0",
   "description": "EazyChart core lib that is used by both React and Vue libraries.",
   "keywords": [
@@ -82,5 +82,6 @@
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",
     "tslib": "^2.4.0"
-  }
+  },
+  "gitHead": "90c689aeed81982bc7eba068094e5153762047f7"
 }

@@ -1,6 +1,6 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { AreaCurve, AreaData } from '@ez/core/src/types';
-import { defaultColor, generateAreaPath } from '@ez/core/src';
+import { AreaCurve, AreaData } from 'eazychart-core/src/types';
+import { defaultColor, generateAreaPath } from 'eazychart-core/src';
 import { useAnimation } from '../../lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 

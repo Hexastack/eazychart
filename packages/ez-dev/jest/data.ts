@@ -12,12 +12,12 @@ import {
   ScaleBandDefinition,
   ScaleLinearDefinition,
   TooltipContext,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 
 import  {
   ScaleLinear,
   ScaleBand,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 
 export const rawData: RawData = [
   {

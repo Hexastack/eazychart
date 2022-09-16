@@ -1,8 +1,8 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext } from '@ez/core/src/types';
+import { ChartContext } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
-import { ScaleBand, ScaleLinear, scaleBubbleData } from '@ez/core/src';
+import { ScaleBand, ScaleLinear, scaleBubbleData } from 'eazychart-core/src';
 import Bubble from './shapes/Bubble';
 
 @Component({ components: { Bubble } })

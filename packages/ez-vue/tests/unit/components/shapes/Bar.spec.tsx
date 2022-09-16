@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
-import { dimensions, rectData, tooltip } from '@ez/dev/jest/data';
+import { dimensions, rectData, tooltip } from 'eazychart-dev/jest/data';
 import Bar from '@/components/shapes/Bar';
 
 describe('Bar', () => {

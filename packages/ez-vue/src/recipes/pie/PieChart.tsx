@@ -7,9 +7,9 @@ import {
   RawData,
   PieConfig,
   Dimensions,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';

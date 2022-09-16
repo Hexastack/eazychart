@@ -2,7 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
-import { colors, evolutionData } from '@ez/dev/storybook/data';
+import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Area Chart',

@@ -6,7 +6,7 @@ import {
   scales,
   tooltip,
   radialLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import Arcs from '@/components/Arcs';
 
 describe('Arcs', () => {

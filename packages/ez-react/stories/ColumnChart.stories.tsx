@@ -6,7 +6,7 @@ import {
   LineColumnChartProps,
 } from '@/recipes/column/LineColumnChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
-import { colors, rawData } from '@ez/dev/storybook/data';
+import { colors, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Column Chart',

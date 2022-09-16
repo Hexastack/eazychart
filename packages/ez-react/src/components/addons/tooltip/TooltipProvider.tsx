@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { NormalizedDatum, Point, ShapeDatum } from '@ez/core/src/types';
-import { debounce, AbstractScale } from '@ez/core/src';
+import { NormalizedDatum, Point, ShapeDatum } from 'eazychart-core/src/types';
+import { debounce, AbstractScale } from 'eazychart-core/src';
 import { Fragment } from '@/lib/Fragment';
 import { useChart } from '@/lib/use-chart';
 import { TooltipProps } from './Tooltip';

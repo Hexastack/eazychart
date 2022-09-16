@@ -8,10 +8,10 @@ import {
 } from '@testing-library/react';
 import { Bar } from '@/components/shapes/Bar';
 import { Chart } from '@/components/Chart';
-import { rectData } from '@ez/dev/jest/data';
+import { rectData } from 'eazychart-dev/jest/data';
 import { baseChartProps } from 'tests/common';
 import { act } from 'react-dom/test-utils';
-import { TooltipContext } from '@ez/core/src/types';
+import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
 const mockShowTooltip = jest.fn();

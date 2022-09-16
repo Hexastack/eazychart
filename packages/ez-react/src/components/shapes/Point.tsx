@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, SVGAttributes } from 'react';
-import { PointDatum } from '@ez/core/src/types';
-import { defaultPointDatum, defaultPointRadius } from '@ez/core/src';
+import { PointDatum } from 'eazychart-core/src/types';
+import { defaultPointDatum, defaultPointRadius } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useTooltip } from '@/components/addons/tooltip/use-tooltip';
 import { useChart } from '@/lib/use-chart';

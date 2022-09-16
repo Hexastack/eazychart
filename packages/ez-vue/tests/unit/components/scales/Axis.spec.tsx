@@ -1,11 +1,11 @@
 import { render } from '@testing-library/vue';
-import { Position } from '@ez/core/src/types';
+import { Position } from 'eazychart-core/src/types';
 import {
   dimensions,
   scales,
   horizontalLinearScale,
   padding,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import Axis from '@/components/scales/Axis';
 
 // eslint-disable-next-line import/no-unresolved

@@ -9,13 +9,13 @@ import {
   AxisConfig,
   Dimensions,
   PointConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 
 export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;

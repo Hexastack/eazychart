@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, dimensions, rawData } from '@ez/dev/jest/data';
+import { colors, dimensions, rawData } from 'eazychart-dev/jest/data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { RadialChart } from '@/recipes/pie/RadialChart';
 import 'tests/mocks/ResizeObserver';

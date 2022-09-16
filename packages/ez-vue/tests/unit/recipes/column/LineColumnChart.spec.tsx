@@ -1,4 +1,4 @@
-import { colors, dimensions, rawData } from '@ez/dev/jest/data';
+import { colors, dimensions, rawData } from 'eazychart-dev/jest/data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import LineColumnChart from '@/recipes/column/LineColumnChart';

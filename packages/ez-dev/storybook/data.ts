@@ -1,4 +1,4 @@
-import { AnimationOptions, ChartPadding, RawData } from '@ez/core/src/types';
+import { AnimationOptions, ChartPadding, RawData } from 'eazychart-core/src/types';
 
 
 export const dimensions = {

@@ -1,7 +1,7 @@
 import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { ChartContext, PointDatum, TooltipContext } from '@ez/core/src/types';
-import { defaultPointDatum, defaultPointRadius } from '@ez/core/src';
+import { ChartContext, PointDatum, TooltipContext } from 'eazychart-core/src/types';
+import { defaultPointDatum, defaultPointRadius } from 'eazychart-core/src';
 import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
 import AnimationMixin from '@/lib/AnimationMixin';
 

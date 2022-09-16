@@ -1,11 +1,11 @@
-# `@ez/css`
+# `eazychart-css`
 
 > TODO: description
 
 ## Usage
 
 ```
-const css = require('@ez/css');
+const css = require('eazychart-css');
 
 // TODO: DEMONSTRATE API
 ```

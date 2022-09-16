@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Component from 'vue-class-component';
-import { animate } from '@ez/core/src';
-import { AnimationOptions, Interpolables } from '@ez/core/src/types';
+import { animate } from 'eazychart-core/src';
+import { AnimationOptions, Interpolables } from 'eazychart-core/src/types';
 
 type AnimationArguments = {
   from: Interpolables;

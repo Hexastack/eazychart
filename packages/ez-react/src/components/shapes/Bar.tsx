@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, SVGAttributes } from 'react';
-import { RectangleDatum } from '@ez/core/src/types';
-import { defaultRectangleDatum } from '@ez/core/src';
+import { RectangleDatum } from 'eazychart-core/src/types';
+import { defaultRectangleDatum } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useTooltip } from '@/components/addons/tooltip/use-tooltip';
 import { useChart } from '@/lib/use-chart';

@@ -5,7 +5,7 @@ import {
   Position,
   LineConfig,
   MarkerConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
 import { Bars } from '@/components/Bars';
@@ -16,7 +16,7 @@ import { ColumnChartProps } from './ColumnChart';
 import { Points } from '@/components/Points';
 import { Line } from '@/components/shapes/Line';
 import { Point } from '@/components/shapes/Point';
-import { ScaleBand, ScaleLinear } from '@ez/core/src';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 export interface LineColumnChartProps extends ColumnChartProps {
   yLineAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;

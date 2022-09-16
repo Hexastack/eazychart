@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
-import { dimensions, pointsData, tooltip } from '@ez/dev/jest/data';
+import { dimensions, pointsData, tooltip } from 'eazychart-dev/jest/data';
 import Line from '@/components/shapes/Line';
 
 describe('Line', () => {

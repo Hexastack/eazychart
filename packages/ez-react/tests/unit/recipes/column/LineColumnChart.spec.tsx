@@ -1,5 +1,5 @@
 import React from 'react';
-import { colors, dimensions, rawData } from '@ez/dev/jest/data';
+import { colors, dimensions, rawData } from 'eazychart-dev/jest/data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { LineColumnChart } from '@/recipes/column/LineColumnChart';
 import 'tests/mocks/ResizeObserver';

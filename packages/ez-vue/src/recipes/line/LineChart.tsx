@@ -12,9 +12,9 @@ import {
   RawData,
   LineConfig,
   MarkerConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
 import { Chart, ChartProps } from '@/components/Chart';
-import { Direction } from '@ez/core/src/types';
+import { Direction } from 'eazychart-core/src/types';
 import {
   colors,
   dimensions,
@@ -9,7 +9,7 @@ import {
   scaleDefinitions,
   horizontalLinearScale,
   verticalLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import { baseChartProps } from 'tests/common';
 import { GridLines } from '@/components/scales/grid/GridLines';
 import 'tests/mocks/ResizeObserver';

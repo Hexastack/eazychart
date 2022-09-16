@@ -11,7 +11,7 @@ import {
   AreaConfig,
   MarkerConfig,
   AreaData,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Points } from '@/components/Points';
@@ -20,7 +20,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { Line } from '@/components/shapes/Line';
 import { Point } from '@/components/shapes/Point';
 import { Area } from '@/components/shapes/Area';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 
 export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;

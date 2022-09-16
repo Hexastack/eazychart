@@ -5,7 +5,7 @@ import {
   Dimensions,
   RawData,
   NormalizedDatum,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
 import { LegendProvider } from './addons/legend/LegendProvider';
 import { ChartContext } from '@/lib/use-chart';
@@ -19,7 +19,7 @@ import {
   defaultChartPadding,
   normalizeData,
   transformTranslate,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 
 export type ChartProps = {
   padding?: Partial<ChartPadding>;

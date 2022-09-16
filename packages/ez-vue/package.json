@@ -1,5 +1,5 @@
 {
-  "name": "@ez/vue",
+  "name": "eazychart-vue",
   "version": "0.1.1-alpha.0",
   "description": "Vue version of the EazyChart Library.",
   "keywords": [
@@ -55,8 +55,8 @@
     "trailingComma": "all"
   },
   "dependencies": {
-    "@ez/core": "^0.1.1-alpha.0",
-    "@ez/css": "^0.1.1-alpha.0",
+    "eazychart-core": "^0.1.1-alpha.0",
+    "eazychart-css": "^0.1.1-alpha.0",
     "core-js": "^3.6.5",
     "d3": "^5.12.0",
     "d3-shape": "^3.0.1",
@@ -66,7 +66,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
-    "@ez/dev": "^0.1.1-alpha.0",
+    "eazychart-dev": "^0.1.1-alpha.0",
     "@storybook/addon-actions": "^6.4.19",
     "@storybook/addon-essentials": "^6.4.19",
     "@storybook/addon-links": "^6.4.19",
@@ -91,5 +91,6 @@
     "eslint-plugin-vue": "^6.2.2",
     "typescript": "~4.1.5",
     "vue-template-compiler": "^2.6.11"
-  }
+  },
+  "gitHead": "90c689aeed81982bc7eba068094e5153762047f7"
 }

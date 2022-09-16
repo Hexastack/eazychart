@@ -6,9 +6,9 @@ import {
   animationOptions,
   rawData,
   colors,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import { Component, InjectReactive } from 'vue-property-decorator';
-import { ChartContext } from '@ez/core/src/types';
+import { ChartContext } from 'eazychart-core/src/types';
 import Chart from '@/components/Chart';
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';

@@ -8,14 +8,14 @@ import {
   GridConfig,
   Position,
   RawData,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
 import { Bars } from '@/components/Bars';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ScaleBand, ScaleLinear } from '@ez/core/src';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
   rawData: RawData;

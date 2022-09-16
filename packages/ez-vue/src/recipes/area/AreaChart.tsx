@@ -13,14 +13,14 @@ import {
   AreaConfig,
   MarkerConfig,
   AreaData,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
-import '@ez/css/css/style.css';
+import 'eazychart-css/css/style.css';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
 import Line from '@/components/shapes/Line';

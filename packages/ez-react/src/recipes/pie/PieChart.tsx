@@ -6,12 +6,12 @@ import {
   ChartPadding,
   Dimensions,
   PieConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
   rawData: RawData;

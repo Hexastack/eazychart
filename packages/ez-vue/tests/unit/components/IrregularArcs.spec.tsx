@@ -6,7 +6,7 @@ import {
   scales,
   tooltip,
   verticalLinearScale,
-} from '@ez/dev/jest/data';
+} from 'eazychart-dev/jest/data';
 import IrregularArcs from '@/components/IrregularArcs';
 
 describe('IrregularArcs', () => {

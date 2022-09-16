@@ -8,7 +8,7 @@ import {
   Dimensions,
   RawData,
   NormalizedDatum,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import {
   debounce,
   defaultChartAnimationOptions,
@@ -17,7 +17,7 @@ import {
   defaultChartPadding,
   normalizeData,
   AbstractScale,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import TooltipProvider from '@/components/addons/tooltip/TooltipProvider';
 import LegendProvider from '@/components/addons/legend/LegendProvider';
 

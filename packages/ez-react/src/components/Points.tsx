@@ -6,8 +6,8 @@ import {
   ScaleLinear,
   defaultPointRadius,
   scalePointData,
-} from '@ez/core/src';
-import { Dimensions, PointDatum } from '@ez/core/src/types';
+} from 'eazychart-core/src';
+import { Dimensions, PointDatum } from 'eazychart-core/src/types';
 
 export interface PointsProps extends SVGAttributes<SVGGElement> {
   xScale: ScaleLinear | ScaleBand;

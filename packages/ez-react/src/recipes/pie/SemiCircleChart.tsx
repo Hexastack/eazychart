@@ -1,11 +1,11 @@
 import React, { FC, useMemo } from 'react';
-import { Direction } from '@ez/core/src/types';
+import { Direction } from 'eazychart-core/src/types';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend } from '@/components/addons/legend/Legend';
 import { PieChartProps } from './PieChart';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 
 export const SemiCircleChart: FC<PieChartProps> = ({
   rawData,

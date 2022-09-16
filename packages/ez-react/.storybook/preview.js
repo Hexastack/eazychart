@@ -1,4 +1,4 @@
-import '@ez/css/css/style.css';
+import 'eazychart-css/css/style.css';
 
 export const parameters = {
   // https://storybook.js.org/docs/react/essentials/actions#automatically-matching-args

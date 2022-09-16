@@ -6,7 +6,7 @@ import {
   Position,
   AxisTick,
   AxisData,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import {
   getAxis,
   getAxisTickByCoordinate,
@@ -18,7 +18,7 @@ import {
   getAxisLabelAttributes,
   ScaleLinear,
   ScaleBand,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 

@@ -7,7 +7,7 @@ import {
 } from '@/recipes/pie/SemiCircleChart';
 import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
 import { ChartWrapper } from './lib/utils';
-import { colors, rawData } from '@ez/dev/storybook/data';
+import { colors, rawData } from 'eazychart-dev/storybook/data';
 import {
   IrregularPieChart,
   IrregularPieChartProps,

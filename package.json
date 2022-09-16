@@ -1,5 +1,5 @@
 {
-  "name": "eazychart",
+  "name": "eazychart-monorepo",
   "description": "EazyChart is an easy to use reactive library that allows you to add customizable charts into your React or Vue web applications.",
   "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
   "author": "Hexastack",
@@ -38,12 +38,12 @@
     "clean": "lerna clean",
     "bootstrap": "lerna bootstrap",
     "setup": "lerna clean -y && rm -rf node_modules/ && lerna bootstrap",
-    "storybook:react": "lerna run storybook --scope=@ez/react",
-    "storybook:vue": "lerna run storybook --scope=@ez/vue",
-    "serve:vue": "lerna run serve --scope=@ez/vue --stream",
-    "test:core": "lerna run test --scope=@ez/core --stream",
-    "test:vue": "lerna run test --scope=@ez/vue --stream",
-    "test:react": "lerna run test --scope=@ez/react --stream",
+    "storybook:react": "lerna run storybook --scope=eazychart-react",
+    "storybook:vue": "lerna run storybook --scope=eazychart-vue",
+    "serve:vue": "lerna run serve --scope=eazychart-vue --stream",
+    "test:core": "lerna run test --scope=eazychart-core --stream",
+    "test:vue": "lerna run test --scope=eazychart-vue --stream",
+    "test:react": "lerna run test --scope=eazychart-react --stream",
     "test": "lerna run test --stream"
   }
 }

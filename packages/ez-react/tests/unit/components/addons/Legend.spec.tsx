@@ -1,7 +1,7 @@
 import React from 'react';
 import { fireEvent, render } from '@testing-library/react';
 import { Legend } from '@/components/addons/legend/Legend';
-import { chartData } from '@ez/dev/jest/data';
+import { chartData } from 'eazychart-dev/jest/data';
 import 'tests/mocks/ResizeObserver';
 
 describe('Legend', () => {

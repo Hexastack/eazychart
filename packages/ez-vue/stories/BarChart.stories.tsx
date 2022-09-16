@@ -5,7 +5,7 @@ import {
   ResizableChartWrapper,
 } from './lib/utils';
 import BarChart from '../src/recipes/bar/BarChart';
-import { animationOptions, colors, dimensions, rawData } from '@ez/dev/storybook/data';
+import { animationOptions, colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Charts/Bar Chart',

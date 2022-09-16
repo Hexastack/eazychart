@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/vue';
-import { animationOptions, colors, rawData } from '@ez/dev/storybook/data';
+import { animationOptions, colors, rawData } from 'eazychart-dev/storybook/data';
 import { ChartWrapper } from './lib/utils';
 import PieChart from '../src/recipes/pie/PieChart';
 import SemiCircleChart from '../src/recipes/pie/SemiCircleChart';

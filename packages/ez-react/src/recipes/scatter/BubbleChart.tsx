@@ -9,13 +9,13 @@ import {
   AxisConfig,
   Dimensions,
   BubbleConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { Bubbles } from '@/components/Bubbles';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;

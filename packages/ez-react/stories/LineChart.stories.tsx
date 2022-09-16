@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { colors, evolutionData } from '@ez/dev/storybook/data';
+import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
 import {

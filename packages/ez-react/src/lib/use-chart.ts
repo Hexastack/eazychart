@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { defaultChartContext } from '@ez/core/src';
+import { defaultChartContext } from 'eazychart-core/src';
 
 export const ChartContext = createContext(defaultChartContext);
 

@@ -1,4 +1,4 @@
-import { dimensions, pointsWithMarginData } from '@ez/dev/jest/data';
+import { dimensions, pointsWithMarginData } from 'eazychart-dev/jest/data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';

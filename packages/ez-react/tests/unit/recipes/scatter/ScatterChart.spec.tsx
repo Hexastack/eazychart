@@ -1,5 +1,5 @@
 import React from 'react';
-import { dimensions, rawData } from '@ez/dev/jest/data';
+import { dimensions, rawData } from 'eazychart-dev/jest/data';
 import { act, render, RenderResult } from '@testing-library/react';
 import { ScatterChart } from '@/recipes/scatter/ScatterChart';
 import 'tests/mocks/ResizeObserver';

@@ -1,9 +1,9 @@
 import React, { FC, useMemo } from 'react';
-import { PointDatum } from '@ez/core/src/types';
+import { PointDatum } from 'eazychart-core/src/types';
 import { useChart } from '@/lib/use-chart';
 import { PointsProps } from './Points';
 import { Bubble } from './shapes/Bubble';
-import { ScaleLinear, scaleBubbleData } from '@ez/core/src';
+import { ScaleLinear, scaleBubbleData } from 'eazychart-core/src';
 
 export interface BubblesProps extends PointsProps {
   rScale: ScaleLinear;

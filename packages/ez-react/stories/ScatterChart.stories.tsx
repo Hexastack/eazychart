@@ -6,7 +6,7 @@ import {
 } from '@/recipes/scatter/ScatterChart';
 import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
-import { colors, correlationData } from '@ez/dev/storybook/data';
+import { colors, correlationData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Scatter Chart',

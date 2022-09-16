@@ -2,7 +2,7 @@ import { Meta, Story } from '@storybook/vue';
 import { baseChartArgTypes, ChartWrapper } from './lib/utils';
 import ColumnChart from '../src/recipes/column/ColumnChart';
 import LineColumnChart from '../src/recipes/column/LineColumnChart';
-import { animationOptions, colors, padding, rawData } from '@ez/dev/storybook/data';
+import { animationOptions, colors, padding, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Charts/Column Chart',

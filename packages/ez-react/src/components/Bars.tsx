@@ -1,7 +1,7 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { Bar } from './shapes/Bar';
 import { useChart } from '@/lib/use-chart';
-import { ScaleBand, ScaleLinear, scaleRectangleData } from '@ez/core/src';
+import { ScaleBand, ScaleLinear, scaleRectangleData } from 'eazychart-core/src';
 
 export interface BarsProps extends SVGAttributes<SVGGElement> {
   xScale: ScaleLinear | ScaleBand;

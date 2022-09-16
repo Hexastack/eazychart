@@ -1,12 +1,12 @@
 import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
-import { ChartContext, ArcDatum, TooltipContext } from '@ez/core/src/types';
+import { ChartContext, ArcDatum, TooltipContext } from 'eazychart-core/src/types';
 import {
   Inject,
   InjectReactive,
   Prop,
 } from 'vue-property-decorator';
-import { generateArc } from '@ez/core/src';
+import { generateArc } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component

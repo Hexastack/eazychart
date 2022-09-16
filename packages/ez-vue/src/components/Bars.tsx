@@ -1,8 +1,8 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext } from '@ez/core/src/types';
+import { ChartContext } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
-import { ScaleBand, ScaleLinear, scaleRectangleData } from '@ez/core/src';
+import { ScaleBand, ScaleLinear, scaleRectangleData } from 'eazychart-core/src';
 import Bar from '@/components/shapes/Bar';
 
 @Component({ components: { Bar } })

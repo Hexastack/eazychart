@@ -1,5 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { Direction, AxisTick, AxisData } from '@ez/core/src/types';
+import { Direction, AxisTick, AxisData } from 'eazychart-core/src/types';
 import {
   getGrid,
   getAxisTickByCoordinate,
@@ -7,7 +7,7 @@ import {
   defaultAxis,
   ScaleLinear,
   ScaleBand,
-} from '@ez/core/src';
+} from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 

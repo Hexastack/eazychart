@@ -6,11 +6,11 @@ import {
   ChartPadding,
   Dimensions,
   RadialConfig,
-} from '@ez/core/src/types';
+} from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from '@ez/core/src';
+import { ScaleLinear } from 'eazychart-core/src';
 import { Arcs } from '@/components/Arcs';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {

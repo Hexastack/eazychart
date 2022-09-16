@@ -1,7 +1,7 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { PointDatum } from '@ez/core/src/types';
-import { defaultBubbleDatum } from '@ez/core/src';
+import { PointDatum } from 'eazychart-core/src/types';
+import { defaultBubbleDatum } from 'eazychart-core/src';
 import { Prop } from 'vue-property-decorator';
 import Point from './Point';
 

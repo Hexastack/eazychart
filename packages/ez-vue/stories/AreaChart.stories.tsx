@@ -4,7 +4,7 @@ import {
   baseChartArgTypes,
   ChartWrapper,
 } from './lib/utils';
-import { animationOptions, colors, evolutionData, padding } from '@ez/dev/storybook/data';
+import { animationOptions, colors, evolutionData, padding } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Charts/Area Chart',

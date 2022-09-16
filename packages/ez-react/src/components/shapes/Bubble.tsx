@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { defaultPointDatum } from '@ez/core/src';
+import { defaultPointDatum } from 'eazychart-core/src';
 import { Point, PointProps } from './Point';
 
 export interface BubbleProps extends PointProps {

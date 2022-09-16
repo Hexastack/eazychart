@@ -42,7 +42,8 @@
     "build-storybook": "build-storybook",
     "build": "rollup -c rollup.config.js",
     "type-check": "tsc",
-    "precommit": "yarn lint && yarn type-check"
+    "precommit": "yarn lint && yarn type-check",
+    "prepare": "yarn build"
   },
   "husky": {
     "hooks": {

@@ -7,9 +7,9 @@ import { Legend } from '@/components/addons/legend/Legend';
 import { PieChartProps } from './PieChart';
 import { ScaleLinear } from 'eazychart-core/src';
 
-export type SemiCircleChartProps = FC<PieChartProps>;
+export type SemiCircleChartProps = PieChartProps;
 
-export const SemiCircleChart: SemiCircleChartProps = ({
+export const SemiCircleChart: FC<SemiCircleChartProps> = ({
   rawData,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {

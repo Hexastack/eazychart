@@ -27,5 +27,5 @@ export default {
   ColumnChart,
   LineColumnChart,
   Legend,
-  Tooltip
+  Tooltip,
 };

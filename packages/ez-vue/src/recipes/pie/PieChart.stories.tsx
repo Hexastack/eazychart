@@ -1,13 +1,13 @@
 import { Meta, Story } from '@storybook/vue';
 import { animationOptions, colors, rawData } from 'eazychart-dev/storybook/data';
-import { ChartWrapper } from './lib/utils';
-import PieChart from '../src/recipes/pie/PieChart';
-import SemiCircleChart from '../src/recipes/pie/SemiCircleChart';
-import RadialChart from '../src/recipes/pie/RadialChart';
-import IrregularPieChart from '../src/recipes/pie/IrregularPieChart';
+import { ChartWrapper } from '@/lib/storybook-utils';
+import PieChart from './PieChart';
+import SemiCircleChart from './SemiCircleChart';
+import RadialChart from './RadialChart';
+import IrregularPieChart from './IrregularPieChart';
 
 const meta: Meta = {
-  title: 'Vue/Charts/Pie Chart',
+  title: 'Vue/Pie Chart',
   component: PieChart,
   parameters: {
     controls: { expanded: true },

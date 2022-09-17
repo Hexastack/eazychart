@@ -2,14 +2,16 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
 } from '@/recipes/line/LineErrorMarginChart';
+import { LineCurve } from 'eazychart-core/src/types';
 
 const meta: Meta = {
-  title: 'Line Chart',
+  id: '5',
+  title: 'React/Line Chart',
   component: LineChart,
   parameters: {
     controls: { expanded: true },
@@ -44,7 +46,7 @@ const defaultArguments = {
   line: {
     strokeWidth: 2,
     stroke: colors[1],
-    curve: 'curveLinear',
+    curve: 'curveLinear' as LineCurve,
     beta: 0,
   },
   marker: {

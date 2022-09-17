@@ -34,11 +34,11 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "lint": "eslint src tests stories",
+    "lint": "eslint src tests",
     "lint:fix": "eslint --fix src/ tests/",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
     "test": "jest --env=jsdom",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "sleep 5; start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "build": "rollup -c rollup.config.js",
     "type-check": "tsc",

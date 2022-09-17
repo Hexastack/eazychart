@@ -1,15 +1,14 @@
 import { Meta, Story } from '@storybook/vue';
-import LineChart from '@/recipes/line/LineChart';
-import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
+import AreaChart from '@/recipes/area/AreaChart';
 import {
   baseChartArgTypes,
   ChartWrapper,
-} from './lib/utils';
+} from '@/lib/storybook-utils';
 import { animationOptions, colors, evolutionData, padding } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Vue/Charts/Line Chart',
-  component: LineChart,
+  title: 'Vue/Area Chart',
+  component: AreaChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -17,24 +16,13 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const Template: Story = (args, { argTypes }) => ({
   title: 'Default',
-  components: { LineChart, ChartWrapper },
+  components: { AreaChart, ChartWrapper },
   props: Object.keys(argTypes),
   template: `
     <ChartWrapper>
-      <LineChart v-bind="$props" />
-    </ChartWrapper>
-  `,
-});
-
-const LineErrorMarginTemplate: Story = (args, { argTypes }) => ({
-  title: 'LineErrorMargin',
-  components: { LineErrorMarginChart, ChartWrapper },
-  props: Object.keys(argTypes),
-  template: `
-    <ChartWrapper>
-      <LineErrorMarginChart v-bind="$props" />
+      <AreaChart v-bind="$props" />
     </ChartWrapper>
   `,
 });
@@ -42,18 +30,17 @@ const LineErrorMarginTemplate: Story = (args, { argTypes }) => ({
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const Default = Template.bind({});
 
-const defaultArguments = {
+Default.args = {
   swapAxis: false,
-  line: {
+  area: {
+    stroke: colors[0],
     strokeWidth: 2,
-    stroke: colors[1],
-    curve: 'curveLinear',
-    beta: 0,
+    fill: `${colors[0]}b0`,
   },
   marker: {
-    hidden: false,
+    hidden: true,
     radius: 5,
     color: '#FFF'
   },
@@ -72,15 +59,4 @@ const defaultArguments = {
   animationOptions,
   isRTL: false,
   rawData: evolutionData,
-};
-
-Default.args = defaultArguments;
-
-export const LineErrorMargin = LineErrorMarginTemplate.bind({});
-
-LineErrorMargin.args = {
-  ...defaultArguments,
-  area: {
-    fill: `${colors[1]}b0`,
-  },
 };

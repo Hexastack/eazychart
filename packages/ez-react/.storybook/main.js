@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  stories: ['../stories/**/*.stories.@(ts|tsx|js|jsx)'],
+  stories: ['../src/**/*.stories.@(ts|tsx|js|jsx|mdx)'],
   addons: ['@storybook/addon-links', '@storybook/addon-essentials'],
   framework: '@storybook/react',
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
@@ -20,5 +20,23 @@ module.exports = {
     };
 
     return config;
+  },
+  refs: (config, { configType }) => {
+    if (configType === 'DEVELOPMENT') {
+      return {
+        vue: {
+          title: 'VUE',
+          url: 'http://localhost:6007',
+          expanded: true
+        },
+      };
+    }
+    return {
+      vue: {
+        title: 'VUE',
+        url: 'https://docs.eazychart.com/vue',
+        expanded: true,
+      },
+    };
   },
 };

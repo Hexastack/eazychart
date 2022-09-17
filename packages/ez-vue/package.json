@@ -37,7 +37,7 @@
     "lint": "vue-cli-service lint",
     "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
     "build": "npx vue-cli-service build --target lib --name eazychart ./index.ts",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6007 --no-open",
     "build-storybook": "build-storybook",
     "type-check": "tsc",
     "precommit": "yarn type-check && yarn lint",

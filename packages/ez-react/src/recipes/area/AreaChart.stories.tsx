@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import { baseChartArgTypes, ChartWrapper } from '../../lib/storybook-utils';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Area Chart',
+  id: '2',
+  title: 'React/Area Chart',
   component: AreaChart,
   parameters: {
     controls: { expanded: true },

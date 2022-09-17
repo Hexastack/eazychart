@@ -48,6 +48,7 @@ yarn setup
 ```
 yarn clean // removes node_modules folders
 yarn setup // installs node_modules in each package
+yarn storybook // runs storybook for both react and vue
 ```
 
 ## License

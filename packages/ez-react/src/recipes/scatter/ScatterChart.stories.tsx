@@ -5,11 +5,12 @@ import {
   ScatterChartProps,
 } from '@/recipes/scatter/ScatterChart';
 import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import { colors, correlationData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Scatter Chart',
+  id: '7',
+  title: 'React/Scatter Chart',
   component: ScatterChart,
   parameters: {
     controls: { expanded: true },

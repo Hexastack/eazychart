@@ -3,14 +3,14 @@ import Vue from 'vue';
 
 @Component
 export class ChartWrapper extends Vue {
-  render(h) {
+  render(h: Function) {
     return h('div', {}, this.$slots.default);
   }
 }
 
 @Component
 export class ResizableChartWrapper extends Vue {
-  render(h) {
+  render(h: Function) {
     return h('div', {
       style: {
         width: '100%',

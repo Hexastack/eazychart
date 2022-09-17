@@ -5,11 +5,12 @@ import {
   LineColumnChart,
   LineColumnChartProps,
 } from '@/recipes/column/LineColumnChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Column Chart',
+  id: '4',
+  title: 'React/Column Chart',
   component: ColumnChart,
   parameters: {
     controls: { expanded: true },

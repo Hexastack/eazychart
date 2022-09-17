@@ -6,7 +6,7 @@ import {
   SemiCircleChartProps,
 } from '@/recipes/pie/SemiCircleChart';
 import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
-import { ChartWrapper } from './lib/utils';
+import { ChartWrapper } from '@/lib/storybook-utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 import {
   IrregularPieChart,
@@ -14,7 +14,8 @@ import {
 } from '@/recipes/pie/IrregularPieChart';
 
 const meta: Meta = {
-  title: 'Pie Chart',
+  id: '6',
+  title: 'React/Pie Chart',
   component: PieChart,
   parameters: {
     controls: { expanded: true },

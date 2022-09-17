@@ -3,12 +3,12 @@ import {
   baseChartArgTypes,
   ChartWrapper,
   ResizableChartWrapper,
-} from './lib/utils';
-import BarChart from '../src/recipes/bar/BarChart';
+} from '@/lib/storybook-utils';
+import BarChart from './BarChart';
 import { animationOptions, colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Vue/Charts/Bar Chart',
+  title: 'Vue/Bar Chart',
   component: BarChart,
   parameters: {
     controls: { expanded: true },

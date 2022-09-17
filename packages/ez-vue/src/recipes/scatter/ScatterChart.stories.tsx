@@ -5,12 +5,12 @@ import {
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
-import ScatterChart from '../src/recipes/scatter/ScatterChart';
-import BubbleChart from '../src/recipes/scatter/BubbleChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import ScatterChart from './ScatterChart';
+import BubbleChart from './BubbleChart';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 
 const meta: Meta = {
-  title: 'Vue/Charts/Scatter Chart',
+  title: 'Vue/Scatter Chart',
   component: ScatterChart,
   parameters: {
     controls: { expanded: true },
@@ -19,7 +19,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const DefaultTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { ScatterChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -30,7 +30,7 @@ const DefaultTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const BubbleTemplate: Story = (args, { argTypes }) => ({
+const BubbleTemplate: Story = (_args, { argTypes }) => ({
   title: 'Bubble',
   components: { BubbleChart, ChartWrapper },
   props: Object.keys(argTypes),

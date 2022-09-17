@@ -1,11 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import { colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Bar Chart',
+  id: '3',
+  title: 'React/Bar Chart',
   component: BarChart,
   parameters: {
     controls: { expanded: true },

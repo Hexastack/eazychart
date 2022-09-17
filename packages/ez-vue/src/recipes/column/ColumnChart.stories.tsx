@@ -1,11 +1,11 @@
 import { Meta, Story } from '@storybook/vue';
-import { baseChartArgTypes, ChartWrapper } from './lib/utils';
-import ColumnChart from '../src/recipes/column/ColumnChart';
-import LineColumnChart from '../src/recipes/column/LineColumnChart';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
+import ColumnChart from './ColumnChart';
+import LineColumnChart from './LineColumnChart';
 import { animationOptions, colors, padding, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
-  title: 'Vue/Charts/Column Chart',
+  title: 'Vue/Column Chart',
   component: ColumnChart,
   parameters: {
     controls: { expanded: true },

@@ -1,8 +1,10 @@
 import { Meta, Story } from '@storybook/vue';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
+import {
+  animationOptions, colors, padding, rawData,
+} from 'eazychart-dev/storybook/data';
 import ColumnChart from './ColumnChart';
 import LineColumnChart from './LineColumnChart';
-import { animationOptions, colors, padding, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Column Chart',

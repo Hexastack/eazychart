@@ -23,6 +23,7 @@ module.exports = {
     // },
   },
   rules: {
+    'max-classes-per-file': ['error', 2],
     'no-console': 'error',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/ban-types': 'off',

@@ -22,11 +22,13 @@
     },
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx",
+    "src/*.vue",
+    "src/*.ts",
+    "src/*.tsx",
+    "src/*.js",
+    "src/*.js",
+    "tests/*.ts",
+    "tests/*.tsx",
   ],
   "exclude": [
     "node_modules"

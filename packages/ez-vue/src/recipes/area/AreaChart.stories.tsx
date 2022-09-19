@@ -4,7 +4,9 @@ import {
   baseChartArgTypes,
   ChartWrapper,
 } from '@/lib/storybook-utils';
-import { animationOptions, colors, evolutionData, padding } from 'eazychart-dev/storybook/data';
+import {
+  animationOptions, colors, evolutionData, padding,
+} from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Area Chart',
@@ -42,7 +44,7 @@ Default.args = {
   marker: {
     hidden: true,
     radius: 5,
-    color: '#FFF'
+    color: '#FFF',
   },
   grid: { directions: [] },
   xAxis: {

@@ -11,7 +11,7 @@ import {
   verticalLinearScale,
   horizontalBandScale,
   horizontalLinearScale,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import 'tests/mocks/ResizeObserver';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 

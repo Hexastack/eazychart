@@ -6,7 +6,7 @@ import {
   animationOptions,
   rawData,
   colors,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import { Component, InjectReactive } from 'vue-property-decorator';
 import { ChartContext } from 'eazychart-core/src/types';
 import Chart from '@/components/Chart';

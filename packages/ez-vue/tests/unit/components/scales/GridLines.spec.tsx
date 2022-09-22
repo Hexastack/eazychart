@@ -5,7 +5,7 @@ import {
   scales,
   horizontalLinearScale,
   verticalLinearScale,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import GridLines from '@/components/scales/grid/GridLines';
 
 describe('GridLines', () => {

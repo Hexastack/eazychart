@@ -5,10 +5,9 @@ import {
   scales,
   horizontalLinearScale,
   padding,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import Axis from '@/components/scales/Axis';
 
-// eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
 

@@ -5,7 +5,9 @@ import {
   baseChartArgTypes,
   ChartWrapper,
 } from '@/lib/storybook-utils';
-import { animationOptions, colors, evolutionData, padding } from 'eazychart-dev/storybook/data';
+import {
+  animationOptions, colors, evolutionData, padding,
+} from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Line Chart',
@@ -17,7 +19,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const DefaultTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { LineChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -28,7 +30,7 @@ const DefaultTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const LineErrorMarginTemplate: Story = (args, { argTypes }) => ({
+const LineErrorMarginTemplate: Story = (_args, { argTypes }) => ({
   title: 'LineErrorMargin',
   components: { LineErrorMarginChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -55,7 +57,7 @@ const defaultArguments = {
   marker: {
     hidden: false,
     radius: 5,
-    color: '#FFF'
+    color: '#FFF',
   },
   grid: { directions: [] },
   xAxis: {

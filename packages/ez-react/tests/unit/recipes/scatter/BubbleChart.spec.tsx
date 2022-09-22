@@ -1,5 +1,5 @@
 import React from 'react';
-import { dimensions, rawData } from 'eazychart-dev/jest/data';
+import { dimensions, rawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult } from '@testing-library/react';
 import { BubbleChart } from '@/recipes/scatter/BubbleChart';
 import 'tests/mocks/ResizeObserver';

@@ -18,7 +18,7 @@ export class ResizableChartWrapper extends Vue {
         border: '2px solid #ccc',
         resize: 'auto',
         overflow: 'scroll',
-      }
+      },
     }, this.$slots.default);
   }
 }

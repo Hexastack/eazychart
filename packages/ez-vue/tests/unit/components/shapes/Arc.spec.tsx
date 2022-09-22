@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
-import { dimensions, arcDatum, tooltip } from 'eazychart-dev/jest/data';
+import { dimensions, arcDatum, tooltip } from 'eazychart-core/src/sample-data';
 import Arc from '@/components/shapes/Arc';
 
 describe('Arc', () => {

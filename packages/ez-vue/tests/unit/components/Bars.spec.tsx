@@ -7,7 +7,7 @@ import {
   tooltip,
   horizontalBandScale,
   verticalLinearScale,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import Bars from '@/components/Bars';
 
 describe('Bars', () => {

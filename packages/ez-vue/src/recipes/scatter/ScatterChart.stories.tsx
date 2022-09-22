@@ -5,9 +5,9 @@ import {
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
+import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import ScatterChart from './ScatterChart';
 import BubbleChart from './BubbleChart';
-import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 
 const meta: Meta = {
   title: 'Vue/Scatter Chart',

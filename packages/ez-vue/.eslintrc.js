@@ -52,6 +52,7 @@ module.exports = {
         caughtErrorsIgnorePattern: '^_',
       },
     ],
+    'max-classes-per-file': ['error', 2],
   },
   overrides: [
     {

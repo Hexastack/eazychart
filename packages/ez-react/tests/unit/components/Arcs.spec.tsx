@@ -6,7 +6,7 @@ import {
   scaleDefinitions,
   radialLinearScale,
   chartData,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { Arcs } from '@/components/Arcs';

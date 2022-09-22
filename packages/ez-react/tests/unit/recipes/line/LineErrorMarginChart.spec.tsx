@@ -1,5 +1,8 @@
 import React from 'react';
-import { dimensions, pointsWithMarginData } from 'eazychart-dev/jest/data';
+import {
+  dimensions,
+  pointsWithMarginData,
+} from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { LineErrorMarginChart } from '@/recipes/line/LineErrorMarginChart';
 import 'tests/mocks/ResizeObserver';

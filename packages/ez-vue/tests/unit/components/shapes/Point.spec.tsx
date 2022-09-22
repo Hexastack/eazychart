@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
-import { tooltip, pointA, dimensions } from 'eazychart-dev/jest/data';
+import { tooltip, pointA, dimensions } from 'eazychart-core/src/sample-data';
 import Point from '@/components/shapes/Point';
 
 describe('Point', () => {

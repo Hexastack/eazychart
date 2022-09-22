@@ -1,5 +1,5 @@
 import React from 'react';
-import { dimensions, pointsData } from 'eazychart-dev/jest/data';
+import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { LineChart } from '@/recipes/line/LineChart';
 import { RawData } from 'eazychart-core/src/types';

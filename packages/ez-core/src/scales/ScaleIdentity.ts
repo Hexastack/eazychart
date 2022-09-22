@@ -1,4 +1,5 @@
-import { ScaleIdentity as D3ScaleIdentity, scaleIdentity } from 'd3-scale';
+import { ScaleIdentity as D3ScaleIdentity } from 'd3-scale';
+import { scaleIdentity } from 'd3-scale';
 import { Dimensions, RawData } from '../types';
 import {
   ScaleInterface,

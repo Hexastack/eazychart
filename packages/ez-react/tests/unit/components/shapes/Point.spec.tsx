@@ -9,7 +9,7 @@ import {
 } from '@testing-library/react';
 import { Point } from '@/components/shapes/Point';
 import { Chart } from '@/components/Chart';
-import { pointA } from 'eazychart-dev/jest/data';
+import { pointA } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';

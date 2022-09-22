@@ -8,7 +8,7 @@ import {
 } from '@testing-library/react';
 import { Arc } from '@/components/shapes/Arc';
 import { Chart } from '@/components/Chart';
-import { arcDatum } from 'eazychart-dev/jest/data';
+import { arcDatum } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import { act } from 'react-dom/test-utils';
 import { TooltipContext } from 'eazychart-core/src/types';

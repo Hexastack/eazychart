@@ -51,6 +51,11 @@ yarn setup // installs node_modules in each package
 yarn storybook // runs storybook for both react and vue
 ```
 
+### FAQ
+
+- Why is there a "nohoist" to all npm packages ? 
+> We have had some trouble with Vue + TSX, as it occured multiple times where we get react TS errors in Vue JSX code. After passing a long time troubleshooting, we didn't find the root cause. We hope this gets fixed in Vue3 or with Vite bundler. Until then ... we do not hoist ! More on https://lerna.js.org/docs/concepts/hoisting
+
 ## License
 
 EazyChart is available under the MIT license.

@@ -9,7 +9,7 @@ import {
   scaleDefinitions,
   colors,
   horizontalLinearScale,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 

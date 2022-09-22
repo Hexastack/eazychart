@@ -1,8 +1,10 @@
 import { Meta, Story } from '@storybook/vue';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
+import {
+  animationOptions, colors, padding, rawData,
+} from 'eazychart-dev/storybook/data';
 import ColumnChart from './ColumnChart';
 import LineColumnChart from './LineColumnChart';
-import { animationOptions, colors, padding, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Column Chart',
@@ -14,7 +16,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const DefaultTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { ColumnChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -25,7 +27,7 @@ const DefaultTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const LineColumnTemplate: Story = (args, { argTypes }) => ({
+const LineColumnTemplate: Story = (_args, { argTypes }) => ({
   title: 'LineColumn',
   components: { LineColumnChart, ChartWrapper },
   props: Object.keys(argTypes),

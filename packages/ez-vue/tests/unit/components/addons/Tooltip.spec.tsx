@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
-import { chartData, tooltip } from 'eazychart-dev/jest/data';
+import { chartData, tooltip } from 'eazychart-core/src/sample-data';
 import { ShapeDatum } from 'eazychart-core/src/types';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 

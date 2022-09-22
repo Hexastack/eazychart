@@ -1,10 +1,9 @@
-import { dimensions, pointsData } from 'eazychart-dev/jest/data';
+import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import { RawData } from 'eazychart-core/src/types';
 import AreaChart from '@/recipes/area/AreaChart';
 
-// eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
 

@@ -1,5 +1,5 @@
 import { render, fireEvent } from '@testing-library/vue';
-import { chartData } from 'eazychart-dev/jest/data';
+import { chartData } from 'eazychart-core/src/sample-data';
 import Legend from '@/components/addons/legend/Legend';
 
 describe('Legend', () => {

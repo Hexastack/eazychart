@@ -16,7 +16,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const DefaultTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { PieChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -27,7 +27,7 @@ const DefaultTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const SemiCircleTemplate: Story = (args, { argTypes }) => ({
+const SemiCircleTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { SemiCircleChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -38,7 +38,7 @@ const SemiCircleTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const RadialTemplate: Story = (args, { argTypes }) => ({
+const RadialTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { RadialChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -49,7 +49,7 @@ const RadialTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const IrregularTemplate: Story = (args, { argTypes }) => ({
+const IrregularTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { IrregularPieChart, ChartWrapper },
   props: Object.keys(argTypes),

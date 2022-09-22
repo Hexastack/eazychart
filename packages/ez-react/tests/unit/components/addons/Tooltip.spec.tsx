@@ -4,7 +4,7 @@ import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import { ShapeDatum, TooltipContext } from 'eazychart-core/src/types';
-import { chartData } from 'eazychart-dev/jest/data';
+import { chartData } from 'eazychart-core/src/sample-data';
 import 'tests/mocks/ResizeObserver';
 
 const mockShowTooltip = jest.fn();

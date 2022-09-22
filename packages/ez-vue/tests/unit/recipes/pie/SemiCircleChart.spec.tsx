@@ -1,8 +1,7 @@
-import { colors, dimensions, rawData } from 'eazychart-dev/jest/data';
+import { colors, dimensions, rawData } from 'eazychart-core/src/sample-data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import SemiCircleChart from '@/recipes/pie/SemiCircleChart';
-// eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
 

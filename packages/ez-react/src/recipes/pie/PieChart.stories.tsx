@@ -75,7 +75,10 @@ SemiCircle.args = defaultArguments;
 
 export const Radial = RadialTemplate.bind({});
 
-Radial.args = defaultArguments;
+Radial.args = {
+  ...defaultArguments,
+  arc: { spacing: 0.5 },
+};
 
 export const Irregular = IrregularTemplate.bind({});
 

@@ -12,5 +12,14 @@ export default {
     { file: 'dist/eazychart.cjs.js', format: 'cjs' },
     { file: 'dist/eazychart.esm.js', format: 'es' },
   ],
-  plugins: [peerDepsExternal(), resolve(), typescript(), uglify(), babel()],
+  plugins: [
+    peerDepsExternal(),
+    resolve(),
+    typescript({
+      tsconfig: 'tsconfig.build.json',
+      useTsconfigDeclarationDir: true,
+    }),
+    uglify(),
+    babel(),
+  ],
 };

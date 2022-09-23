@@ -25,6 +25,7 @@
     "url": "https://github.com/Hexastack/eazychart/issues"
   },
   "homepage": "https://eazychart.com",
+  "types": "./dist/types/src/index.d.ts",
   "main": "dist/eazychart.cjs.js",
   "module": "dist/eazychart.esm.js",
   "sideEffects": false,

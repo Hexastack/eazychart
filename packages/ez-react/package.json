@@ -1,6 +1,6 @@
 {
   "name": "eazychart-react",
-  "version": "0.1.11-alpha.0",
+  "version": "0.1.12-alpha.0",
   "description": "React version of the EazyChart Library.",
   "keywords": [
     "chart",

@@ -34,7 +34,7 @@ module.exports = {
     return {
       vue: {
         title: 'VUE',
-        url: 'https://docs.eazychart.com/vue',
+        url: 'https://docs-vue.eazychart.com',
         expanded: true,
       },
     };

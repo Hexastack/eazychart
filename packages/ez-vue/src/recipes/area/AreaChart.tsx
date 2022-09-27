@@ -23,7 +23,7 @@ import Tooltip from '@/components/addons/tooltip/Tooltip';
 import 'eazychart-css/css/style.css';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
-import Line from '@/components/shapes/Line';
+import LinePath from '@/components/shapes/LinePath';
 import Area from '@/components/shapes/Area';
 import Point from '@/components/shapes/Point';
 
@@ -32,7 +32,7 @@ import Point from '@/components/shapes/Point';
     Chart,
     Grid,
     Area,
-    Line,
+    LinePath,
     Points,
     Point,
     Axis,
@@ -244,7 +244,7 @@ export default class AreaChart extends Vue {
                     beta={area.beta}
                     fill={area.fill}
                   />
-                  <Line
+                  <LinePath
                     shapeData={scaledData}
                     curve={area.curve}
                     beta={area.beta}

@@ -4,13 +4,13 @@ import { defaultColor, generateLinePath } from 'eazychart-core/src';
 import { useAnimation } from '../../lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 
-export interface LineProps extends SVGAttributes<SVGPathElement> {
+export interface LinePathProps extends SVGAttributes<SVGPathElement> {
   shapeData?: LineData;
   curve?: LineCurve;
   beta?: number;
 }
 
-export const Line: FC<LineProps> = ({
+export const LinePath: FC<LinePathProps> = ({
   shapeData = [],
   curve = 'curveLinear',
   beta,

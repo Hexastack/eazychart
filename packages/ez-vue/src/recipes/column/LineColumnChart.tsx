@@ -22,7 +22,7 @@ import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Bars from '@/components/Bars';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
-import Line from '@/components/shapes/Line';
+import LinePath from '@/components/shapes/LinePath';
 import Point from '@/components/shapes/Point';
 
 @Component({
@@ -32,7 +32,7 @@ import Point from '@/components/shapes/Point';
     Bars,
     Points,
     Point,
-    Line,
+    LinePath,
     Axis,
     Legend,
     Tooltip,
@@ -262,7 +262,7 @@ export default class LineColumnChart extends Vue {
           scopedSlots={{
             default: ({ scaledData }: { scaledData: PointDatum[] }) => (
               <g class="ez-line">
-                <Line
+                <LinePath
                   shapeData={scaledData}
                   curve={line.curve}
                   beta={line.beta}

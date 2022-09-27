@@ -21,14 +21,14 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
-import Line from '@/components/shapes/Line';
+import LinePath from '@/components/shapes/LinePath';
 import Point from '@/components/shapes/Point';
 
 @Component({
   components: {
     Chart,
     Grid,
-    Line,
+    LinePath,
     Points,
     Point,
     Axis,
@@ -226,7 +226,7 @@ export default class LineChart extends Vue {
           scopedSlots={{
             default: ({ scaledData }: { scaledData: PointDatum[] }) => (
               <g class="ez-line">
-                <Line
+                <LinePath
                   shapeData={scaledData}
                   curve={line.curve}
                   beta={line.beta}

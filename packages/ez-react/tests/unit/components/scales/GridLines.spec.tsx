@@ -9,7 +9,7 @@ import {
   scaleDefinitions,
   horizontalLinearScale,
   verticalLinearScale,
-} from 'eazychart-dev/jest/data';
+} from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import { GridLines } from '@/components/scales/grid/GridLines';
 import 'tests/mocks/ResizeObserver';

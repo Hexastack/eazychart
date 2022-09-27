@@ -1,9 +1,8 @@
-import { dimensions, pointsWithMarginData } from 'eazychart-dev/jest/data';
+import { dimensions, pointsWithMarginData } from 'eazychart-core/src/sample-data';
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
 
-// eslint-disable-next-line import/no-unresolved
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
 

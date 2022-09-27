@@ -6,7 +6,7 @@ import { defaultColor, generateLinePath } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
-export default class Line extends mixins(AnimationMixin) {
+export default class LinePath extends mixins(AnimationMixin) {
   @InjectReactive('chart')
   private chart!: ChartContext;
 

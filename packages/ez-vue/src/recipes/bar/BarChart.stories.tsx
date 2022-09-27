@@ -4,8 +4,10 @@ import {
   ChartWrapper,
   ResizableChartWrapper,
 } from '@/lib/storybook-utils';
+import {
+  animationOptions, colors, dimensions, rawData,
+} from 'eazychart-dev/storybook/data';
 import BarChart from './BarChart';
-import { animationOptions, colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
   title: 'Vue/Bar Chart',
@@ -17,7 +19,7 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args, { argTypes }) => ({
+const DefaultTemplate: Story = (_args, { argTypes }) => ({
   title: 'Default',
   components: { BarChart, ChartWrapper },
   props: Object.keys(argTypes),
@@ -28,7 +30,7 @@ const DefaultTemplate: Story = (args, { argTypes }) => ({
   `,
 });
 
-const TemplateWithParentDimensions: Story = (args, { argTypes }) => ({
+const TemplateWithParentDimensions: Story = (_args, { argTypes }) => ({
   title: 'Withparent',
   components: { BarChart, ResizableChartWrapper },
   props: Object.keys(argTypes),
@@ -38,7 +40,6 @@ const TemplateWithParentDimensions: Story = (args, { argTypes }) => ({
     </ResizableChartWrapper>
   `,
 });
-
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
@@ -67,7 +68,7 @@ const initialArguments = {
   animationOptions,
   isRTL: false,
   rawData,
-}
+};
 
 Default.args = {
   ...initialArguments,

@@ -24,7 +24,7 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
-import Line from '@/components/shapes/Line';
+import LinePath from '@/components/shapes/LinePath';
 import Point from '@/components/shapes/Point';
 import Area from '@/components/shapes/Area';
 
@@ -32,7 +32,7 @@ import Area from '@/components/shapes/Area';
   components: {
     Chart,
     Grid,
-    Line,
+    LinePath,
     Points,
     Point,
     Axis,
@@ -290,7 +290,7 @@ export default class LineErrorMarginChart extends Vue {
                     beta={line.beta}
                     fill={area.fill}
                   />
-                  <Line
+                  <LinePath
                     shapeData={scaledData}
                     curve={line.curve}
                     beta={line.beta}

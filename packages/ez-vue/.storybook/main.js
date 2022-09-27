@@ -32,4 +32,9 @@ module.exports = {
     config.resolve.symlinks = false;
     return config;
   },
+  features: {
+    // We enable this to build the stories.json file.
+    // This is useful to be able to display vue storybook inside the react storybook.
+    buildStoriesJson: true,
+  },
 };

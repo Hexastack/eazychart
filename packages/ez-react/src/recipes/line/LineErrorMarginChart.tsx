@@ -4,7 +4,7 @@ import { Chart } from '@/components/Chart';
 import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
-import { Line } from '@/components/shapes/Line';
+import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
 import { Area } from '@/components/shapes/Area';
 import { getDataMarginBounds, ScaleLinear } from 'eazychart-core/src';
@@ -171,7 +171,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
                   beta={line.beta}
                   fill={area.fill}
                 />
-                <Line
+                <LinePath
                   shapeData={scaledData}
                   curve={line.curve}
                   beta={line.beta}

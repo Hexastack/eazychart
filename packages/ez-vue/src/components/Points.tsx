@@ -6,9 +6,9 @@ import {
   defaultPointRadius, ScaleBand, ScaleLinear, scalePointData,
 } from 'eazychart-core/src';
 import Point from '@/components/shapes/Point';
-import Line from '@/components/shapes/Line';
+import LinePath from '@/components/shapes/LinePath';
 
-@Component({ components: { Point, Line } })
+@Component({ components: { Point, LinePath } })
 export default class Points extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;

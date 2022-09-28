@@ -6,7 +6,7 @@ import ScatterChart from '@/recipes/scatter/ScatterChart';
 import 'tests/mocks/ResizeObserver';
 
 describe('ScatterChart', () => {
-  it('renders a scatter chart', async (/** done */) => {
+  it('renders a scatter chart', async () => {
     const wrapper = render(ScatterChart, {
       propsData: {
         data: rawData,
@@ -29,10 +29,32 @@ describe('ScatterChart', () => {
 
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
-    // still need to reschudle to get the updated chart
-    // setTimeout(() => {
-    //   expect(wrapper.container.innerHTML).toMatchSnapshot();
-    //   done();
-    // }, 0)
+    const wrapper2 = render(ScatterChart, {
+      propsData: {
+        data: rawData,
+        point: {
+          radius: 6,
+          color: 'red',
+        },
+        grid: { directions: [] },
+        dimensions,
+        xAxis: {
+          domainKey: 'value',
+        },
+        yAxis: {
+          domainKey: 'amount',
+        },
+      },
+    });
+
+    await wrapper2.updateProps({
+      animationOptions: {
+        easing: 'easeLinear',
+        duration: 0,
+        delay: 0,
+      },
+    });
+
+    expect(wrapper2.container.innerHTML).toMatchSnapshot();
   });
 });

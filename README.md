@@ -29,7 +29,9 @@ EazyChart has not been yet released. It's still in the alpha stage as we are cur
 
 For each framework, you will need to install the appropriate packages.
 
-For a React, use one of the following commands :
+### React
+
+Use one of the following commands :
 
 ```
 // Using npm
@@ -39,7 +41,9 @@ npm install --save eazychart-react eazychart-css
 yarn add eazychart-react eazychart-css
 ```
 
-As for Vue, you will need one of the following commands :
+### Vue
+
+You will need one of the following commands :
 
 ```
 // Using npm

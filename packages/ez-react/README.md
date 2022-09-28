@@ -48,7 +48,7 @@ import 'eazychart-css'; // You just need to import this once.
 ```
 
 Use any chart component with the JSX syntax :
-```js
+```jsx
 <PieChart
   colors={['red', 'blue', 'green']}
   domainKey={'value'}

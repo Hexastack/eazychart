@@ -52,7 +52,7 @@ const defaultArguments = {
     title: 'Count',
     nice: 2,
   },
-  rawData,
+  data: rawData,
 };
 
 Default.args = defaultArguments;

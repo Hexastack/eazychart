@@ -24,7 +24,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 
 export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
-  rawData: RawData;
+  data: RawData;
   area?: AreaConfig;
   marker?: MarkerConfig;
   animationOptions?: AnimationOptions;
@@ -42,7 +42,7 @@ export interface AreaChartProps extends SVGAttributes<SVGGElement> {
 
 export const AreaChart: FC<AreaChartProps> = ({
   swapAxis = false,
-  rawData,
+  data,
   area = {
     stroke: '#339999',
     strokeWidth: 2,
@@ -106,7 +106,7 @@ export const AreaChart: FC<AreaChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={[area.stroke]}

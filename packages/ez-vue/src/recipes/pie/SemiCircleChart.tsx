@@ -28,7 +28,7 @@ export default class SemiCircleChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -115,7 +115,7 @@ export default class SemiCircleChart extends Vue {
   render() {
     const {
       scale,
-      rawData,
+      data,
       padding,
       colors,
       animationOptions,
@@ -133,7 +133,7 @@ export default class SemiCircleChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[scale]}
         padding={padding}
         colors={colors}

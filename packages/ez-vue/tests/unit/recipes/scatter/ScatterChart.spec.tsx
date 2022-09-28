@@ -9,7 +9,7 @@ describe('ScatterChart', () => {
   it('renders a scatter chart', async (/** done */) => {
     const wrapper = render(ScatterChart, {
       propsData: {
-        rawData,
+        data: rawData,
         point: {
           radius: 6,
           color: 'red',

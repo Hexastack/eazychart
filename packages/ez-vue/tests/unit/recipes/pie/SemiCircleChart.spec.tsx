@@ -9,7 +9,7 @@ describe('SemiCircleChart', () => {
   it('renders a semi-circle chart', async () => {
     const wrapper = render(SemiCircleChart, {
       propsData: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },
@@ -21,7 +21,7 @@ describe('SemiCircleChart', () => {
 
     const wrapper2 = render(SemiCircleChart, {
       props: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },

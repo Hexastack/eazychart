@@ -52,7 +52,7 @@ Use any chart component with the JSX syntax :
 <PieChart
   colors={['red', 'blue', 'green']}
   domainKey={'value'}
-  rawData={[
+  data={[
     { label: 'Alpha', value: 10 },
     { label: 'Beta', value: 20 },
     { label: 'Gamma', value: 30 },

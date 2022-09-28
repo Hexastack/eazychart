@@ -10,7 +10,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 export type SemiCircleChartProps = PieChartProps;
 
 export const SemiCircleChart: FC<SemiCircleChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -50,7 +50,7 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[scale]}
       padding={padding}
       colors={colors}

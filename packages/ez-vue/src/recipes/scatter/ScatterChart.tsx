@@ -44,7 +44,7 @@ export default class ScatterChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -171,7 +171,7 @@ export default class ScatterChart extends Vue {
       yScale,
       horizontalAxis,
       verticalAxis,
-      rawData,
+      data,
       padding,
       point,
       animationOptions,
@@ -185,7 +185,7 @@ export default class ScatterChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale]}
         padding={padding}
         colors={[point.color]}

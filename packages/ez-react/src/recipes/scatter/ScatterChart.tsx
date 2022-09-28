@@ -19,7 +19,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 
 export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
-  rawData: RawData;
+  data: RawData;
   point?: PointConfig;
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -36,7 +36,7 @@ export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
 
 export const ScatterChart: FC<ScatterChartProps> = ({
   swapAxis = false,
-  rawData,
+  data,
   point = {
     radius: 5,
     color: '#339999',
@@ -93,7 +93,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={[point.color]}

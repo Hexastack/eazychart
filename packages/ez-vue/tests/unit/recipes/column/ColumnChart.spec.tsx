@@ -10,7 +10,7 @@ describe('ColumnChart', () => {
   it('renders a column chart', async () => {
     const wrapper = render(ColumnChart, {
       propsData: {
-        rawData,
+        data: rawData,
         colors,
         grid: { directions: [] },
         dimensions,

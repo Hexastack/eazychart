@@ -19,7 +19,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
-  rawData: RawData;
+  data: RawData;
   bubble?: BubbleConfig;
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -36,7 +36,7 @@ export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
 
 export const BubbleChart: FC<BubbleChartProps> = ({
   swapAxis = false,
-  rawData,
+  data,
   bubble = {
     domainKey: 'yValue',
     minRadius: 1,
@@ -103,7 +103,7 @@ export const BubbleChart: FC<BubbleChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale, rScale]}
       padding={padding}
       colors={[bubble.fill]}

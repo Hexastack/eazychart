@@ -84,7 +84,7 @@ const defaultArguments = {
     strokeWidth: 0,
     sortValues: null,
   },
-  rawData,
+  data: rawData,
 };
 
 Default.args = defaultArguments;

@@ -10,7 +10,7 @@ describe('BarChart', () => {
   it('renders a bar chart', async () => {
     const wrapper = render(BarChart, {
       propsData: {
-        rawData,
+        data: rawData,
         colors,
         grid: { directions: [] },
         dimensions,

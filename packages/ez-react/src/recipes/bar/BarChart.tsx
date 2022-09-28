@@ -18,7 +18,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
-  rawData: RawData;
+  data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -35,7 +35,7 @@ export interface BarChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const BarChart: FC<BarChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -90,7 +90,7 @@ export const BarChart: FC<BarChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={colors}

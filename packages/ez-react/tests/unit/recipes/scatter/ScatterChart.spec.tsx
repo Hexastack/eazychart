@@ -11,7 +11,7 @@ describe('ScatterChart', () => {
       // 1st render
       wrapper = render(
         <ScatterChart
-          rawData={rawData}
+          data={rawData}
           color={'red'}
           grid={{ directions: [] }}
           dimensions={dimensions}

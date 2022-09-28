@@ -12,4 +12,9 @@
 <br />
 <hr />
 
-This package is the CSS lib that is used by both `eazychart-react` and `eazychart-vue` packages. It contains the base CSS stylesheets required by EazyChart to work properly. Please refer to the main repo [README](../../README.md) to learn more about this package.
+This package is a utility lib that is used by both `eazychart-react` and `eazychart-vue` packages. It includes mainly :
+- Typescript declaration file
+- Scale classes
+- Helper functions
+
+Please refer to the main repo [README](../../README.md) to learn more about this package.

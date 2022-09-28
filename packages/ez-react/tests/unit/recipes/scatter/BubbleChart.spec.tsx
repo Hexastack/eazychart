@@ -1,6 +1,6 @@
 import React from 'react';
 import { dimensions, rawData } from 'eazychart-core/src/sample-data';
-import { act, render, RenderResult } from '@testing-library/react';
+import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { BubbleChart } from '@/recipes/scatter/BubbleChart';
 import 'tests/mocks/ResizeObserver';
 
@@ -37,8 +37,8 @@ describe('BubbleChart', () => {
     });
 
     // 2nd render
-    // await waitFor(() => {
-    //   expect(wrapper.container.innerHTML).toMatchSnapshot();
-    // });
+    await waitFor(() => {
+      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    });
   });
 });

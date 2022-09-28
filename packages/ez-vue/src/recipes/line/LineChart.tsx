@@ -49,7 +49,7 @@ export default class LineChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -190,7 +190,7 @@ export default class LineChart extends Vue {
       yScale,
       horizontalAxis,
       verticalAxis,
-      rawData,
+      data,
       line,
       marker,
       padding,
@@ -205,7 +205,7 @@ export default class LineChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale]}
         padding={padding}
         colors={[line.stroke]}

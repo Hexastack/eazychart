@@ -60,5 +60,5 @@ Default.args = {
   padding,
   animationOptions,
   isRTL: false,
-  rawData: evolutionData,
+  data: evolutionData,
 };

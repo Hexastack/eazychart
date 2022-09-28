@@ -73,7 +73,7 @@ const defaultArguments = {
   padding,
   animationOptions,
   isRTL: false,
-  rawData: evolutionData,
+  data: evolutionData,
 };
 
 Default.args = defaultArguments;

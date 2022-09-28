@@ -58,7 +58,7 @@ const defaultArguments = {
   padding,
   animationOptions,
   isRTL: false,
-  rawData,
+  data: rawData,
 };
 
 Default.args = defaultArguments;

@@ -11,7 +11,7 @@ describe('BarChart', () => {
       // 1st render
       wrapper = render(
         <BarChart
-          rawData={rawData}
+          data={rawData}
           colors={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}

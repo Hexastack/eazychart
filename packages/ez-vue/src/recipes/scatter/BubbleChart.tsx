@@ -44,7 +44,7 @@ export default class BubbleChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -182,7 +182,7 @@ export default class BubbleChart extends Vue {
       rScale,
       horizontalAxis,
       verticalAxis,
-      rawData,
+      data,
       bubble,
       padding,
       animationOptions,
@@ -196,7 +196,7 @@ export default class BubbleChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale, rScale]}
         padding={padding}
         colors={[bubble.fill]}

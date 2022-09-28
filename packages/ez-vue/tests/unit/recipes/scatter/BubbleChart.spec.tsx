@@ -9,7 +9,7 @@ describe('BubbleChart', () => {
   it('renders a bubble chart', async (/** done */) => {
     const wrapper = render(BubbleChart, {
       propsData: {
-        rawData,
+        data: rawData,
         bubble: {
           domainKey: 'amount',
           minRadius: 1,

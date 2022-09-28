@@ -11,7 +11,7 @@ describe('LineColumnChart', () => {
       // 1st render
       wrapper = render(
         <LineColumnChart
-          rawData={rawData}
+          data={rawData}
           colors={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}

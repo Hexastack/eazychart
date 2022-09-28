@@ -11,7 +11,7 @@ describe('BubbleChart', () => {
       // 1st render
       wrapper = render(
         <BubbleChart
-          rawData={rawData}
+          data={rawData}
           grid={{ directions: [] }}
           dimensions={dimensions}
           bubble={{

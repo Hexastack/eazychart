@@ -1,6 +1,6 @@
 {
   "name": "eazychart-css",
-  "version": "0.1.9-alpha.0",
+  "version": "0.1.15-alpha.0",
   "description": "EazyChart SCSS lib following a simplified version of the 7-1 pattern",
   "keywords": [
     "chart",

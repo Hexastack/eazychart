@@ -1,6 +1,6 @@
 {
   "name": "eazychart-vue",
-  "version": "0.1.9-alpha.0",
+  "version": "0.1.15-alpha.0",
   "description": "Vue version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -56,13 +56,10 @@
   },
   "dependencies": {
     "core-js": "^3.22.2",
-    "d3": "^5.12.0",
-    "d3-shape": "^3.0.1",
-    "eazychart-core": "^0.1.9-alpha.0",
-    "eazychart-css": "^0.1.9-alpha.0",
-    "vue": "^2.6.11",
-    "vue-class-component": "^7.2.3",
-    "vue-property-decorator": "^9.1.2"
+    "eazychart-core": "^0.1.15-alpha.0"
+  },
+  "peerDependencies": {
+    "vue": "^2.6.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
@@ -71,7 +68,6 @@
     "@storybook/addon-links": "^6.4.19",
     "@storybook/vue": "^6.4.19",
     "@testing-library/vue": "^5.8.2",
-    "@types/d3-shape": "^3.0.2",
     "@types/jest": "^24.0.19",
     "@typescript-eslint/eslint-plugin": "^4.18.0",
     "@typescript-eslint/parser": "^4.18.0",
@@ -84,12 +80,16 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-loader": "^8.2.3",
-    "eazychart-dev": "^0.1.9-alpha.0",
+    "eazychart-css": "^0.1.15-alpha.0",
+    "eazychart-dev": "^0.1.15-alpha.0",
     "eslint": "^6.7.2",
     "eslint-import-resolver-typescript": "^3.5.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-vue": "^6.2.2",
     "typescript": "~4.1.5",
+    "vue": "^2.6.11",
+    "vue-class-component": "^7.2.3",
+    "vue-property-decorator": "^9.1.2",
     "vue-template-compiler": "^2.6.11"
   },
   "gitHead": "3eb2feb73572be3e79cfdeb3cc3e2412160cbbff"

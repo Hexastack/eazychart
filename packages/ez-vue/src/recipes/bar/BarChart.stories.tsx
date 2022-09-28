@@ -67,7 +67,7 @@ const initialArguments = {
   },
   animationOptions,
   isRTL: false,
-  rawData,
+  data: rawData,
 };
 
 Default.args = {

@@ -28,7 +28,7 @@ export default class IrregularPieChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -118,7 +118,7 @@ export default class IrregularPieChart extends Vue {
     const {
       aScale,
       rScale,
-      rawData,
+      data,
       padding,
       colors,
       animationOptions,
@@ -136,7 +136,7 @@ export default class IrregularPieChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[aScale, rScale]}
         padding={padding}
         colors={colors}

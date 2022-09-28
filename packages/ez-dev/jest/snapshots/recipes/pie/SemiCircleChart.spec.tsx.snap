@@ -18,7 +18,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
               class="ez-pie"
             >
               <path
-                d="M-96.56781074217112,-297.2051613422355L0,0Z"
+                d="M-123.60679774997902,-380.4226065180614L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -27,7 +27,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
               >
               </path>
               <path
-                d="M312.5,0L0,0Z"
+                d="M400,0L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -108,7 +108,7 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
               class="ez-pie"
             >
               <path
-                d="M-96.56781074217112,-297.2051613422355A312.5,312.5,0,0,0,-312.5,-3.827021247335479e-14L0,0Z"
+                d="M-123.60679774997902,-380.4226065180614A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -117,7 +117,7 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
               >
               </path>
               <path
-                d="M312.5,0A312.5,312.5,0,0,0,-96.56781074217112,-297.2051613422355L0,0Z"
+                d="M400,0A400,400,0,0,0,-123.60679774997902,-380.4226065180614L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"

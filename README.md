@@ -52,6 +52,8 @@ npm install --save eazychart-vue eazychart-css
 // Using yarn
 yarn add eazychart-vue eazychart-css
 ```
+> **_NOTE:_**  This library supports Vue v2.x as it hasn't been tested for v3.x. We expect to work on v3 soon.
+
 ## Basic Usage
 
 ### React
@@ -128,7 +130,6 @@ Here are some of technical stuff that you need to know before adding any code :
 
 Clone the project and then in the root folder, perform the following commands :
 ```
-yarn
 yarn setup
 ```
 

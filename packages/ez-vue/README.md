@@ -12,6 +12,8 @@
 <br />
 <hr />
 
+> **_NOTE:_**  This library supports Vue v2.x as it hasn't been tested for v3.x. We expect to work on v3 soon.
+
 ## Motivation
 
 The purpose of this library is to provide :

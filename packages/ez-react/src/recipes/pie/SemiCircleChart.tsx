@@ -61,9 +61,7 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
       <Pie
         aScale={scale}
         getCenter={({ width, height }) => ({ x: width / 2, y: height })}
-        getRadius={({ width, height }) =>
-          height / 2 + width ** 2 / (8 * height)
-        }
+        getRadius={({ width, height }) => Math.min(width, height)}
         startAngle={Math.PI / 2}
         endAngle={-Math.PI / 2}
         {...arc}

@@ -94,14 +94,10 @@ export default class SemiCircleChart extends Vue {
   private readonly arc!: PieConfig;
 
   @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
+    type: Function as PropType<(dimensions: Dimensions) => void>,
     required: false,
   })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
+  private readonly onResize?: (dimensions: Dimensions) => void;
 
   private scale!: ScaleLinear;
 
@@ -142,10 +138,11 @@ export default class SemiCircleChart extends Vue {
         onResize={onResize}
       >
         <Pie
-          getCenter={({ width, height }: Dimensions) => ({ x: width / 2, y: height })}
-          getRadius={({ width, height }: Dimensions) => (
-            height / 2 + width ** 2 / (8 * height)
-          )}
+          getCenter={({ width, height }: Dimensions) => ({
+            x: width / 2,
+            y: height,
+          })}
+          getRadius={({ width, height }: Dimensions) => Math.min(width, height)}
           startAngle={Math.PI / 2}
           endAngle={-Math.PI / 2}
           aScale={scale}

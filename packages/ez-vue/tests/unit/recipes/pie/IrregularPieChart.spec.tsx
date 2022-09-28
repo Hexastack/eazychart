@@ -10,7 +10,7 @@ describe('IrregularPieChart', () => {
   it('renders a irregular pie chart', async () => {
     const wrapper = render(IrregularPieChart, {
       propsData: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },
@@ -22,7 +22,7 @@ describe('IrregularPieChart', () => {
 
     const wrapper2 = render(IrregularPieChart, {
       props: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },

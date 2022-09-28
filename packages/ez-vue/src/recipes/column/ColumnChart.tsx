@@ -34,7 +34,7 @@ export default class ColumnChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -151,7 +151,7 @@ export default class ColumnChart extends Vue {
       yScale,
       xAxis,
       yAxis,
-      rawData,
+      data,
       padding,
       colors,
       animationOptions,
@@ -170,7 +170,7 @@ export default class ColumnChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale]}
         padding={padding}
         colors={colors}

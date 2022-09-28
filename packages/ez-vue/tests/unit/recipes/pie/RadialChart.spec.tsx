@@ -10,7 +10,7 @@ describe('RadialChart', () => {
   it('renders a Radial chart', async () => {
     const wrapper = render(RadialChart, {
       propsData: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },
@@ -22,7 +22,7 @@ describe('RadialChart', () => {
 
     const wrapper2 = render(RadialChart, {
       props: {
-        rawData,
+        data: rawData,
         colors,
         dimensions,
       },

@@ -14,7 +14,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 import { Arcs } from '@/components/Arcs';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {
-  rawData: RawData;
+  data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -30,7 +30,7 @@ export interface RadialChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const RadialChart: FC<RadialChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -70,7 +70,7 @@ export const RadialChart: FC<RadialChartProps> = ({
     <>
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[scale]}
         padding={padding}
         colors={colors}

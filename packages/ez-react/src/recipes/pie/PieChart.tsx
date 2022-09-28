@@ -14,7 +14,7 @@ import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { ScaleLinear } from 'eazychart-core/src';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
-  rawData: RawData;
+  data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -29,7 +29,7 @@ export interface PieChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const PieChart: FC<PieChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -69,7 +69,7 @@ export const PieChart: FC<PieChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[scale]}
       padding={padding}
       colors={colors}

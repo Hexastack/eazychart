@@ -54,7 +54,7 @@ const initialArguments = {
     domainKey: 'name',
     title: 'Letter',
   },
-  rawData,
+  data: rawData,
 };
 
 export const Default = DefaultTemplate.bind({});

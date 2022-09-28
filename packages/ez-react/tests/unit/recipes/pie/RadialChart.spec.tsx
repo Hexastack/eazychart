@@ -11,7 +11,7 @@ describe('RadialChart', () => {
       // 1st render
       wrapper = render(
         <RadialChart
-          rawData={rawData}
+          data={rawData}
           colors={colors}
           animationOptions={{
             easing: 'easeBack',

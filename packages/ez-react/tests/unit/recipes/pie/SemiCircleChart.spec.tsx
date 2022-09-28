@@ -11,7 +11,7 @@ describe('SemiCircleChart', () => {
       // 1st render
       wrapper = render(
         <SemiCircleChart
-          rawData={rawData}
+          data={rawData}
           colors={colors}
           animationOptions={{
             easing: 'easeBack',

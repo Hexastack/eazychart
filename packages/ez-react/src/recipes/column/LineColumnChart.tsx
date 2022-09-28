@@ -25,7 +25,7 @@ export interface LineColumnChartProps extends ColumnChartProps {
 }
 
 export const LineColumnChart: FC<LineColumnChartProps> = ({
-  rawData,
+  data,
   line = {
     stroke: '#339999',
     strokeWidth: 2,
@@ -113,7 +113,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xColumnScale, yColumnScale, xLineScale, yLineScale]}
       padding={padding}
       colors={colors}

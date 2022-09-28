@@ -18,7 +18,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
-  rawData: RawData;
+  data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
@@ -35,7 +35,7 @@ export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const ColumnChart: FC<ColumnChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -89,7 +89,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={colors}

@@ -11,7 +11,7 @@ describe('ColumnChart', () => {
       // 1st render
       wrapper = render(
         <ColumnChart
-          rawData={rawData}
+          data={rawData}
           colors={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}

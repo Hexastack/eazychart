@@ -50,7 +50,7 @@ Use any chart component with vue component syntax :
 ```vue
 <template>
   <div id="app">
-    <pie-chart :colors="colors" domainKey="value" :rawData="rawData"/>
+    <pie-chart :colors="colors" domainKey="value" :data="data"/>
   </div>
 </template>
 <script>
@@ -65,7 +65,7 @@ export default {
   data() {
     return {
       colors: ['red', 'blue', 'green'],
-      rawData: [
+      data: [
         { label: 'Alpha', value: 10 },
         { label: 'Beta', value: 20 },
         { label: 'Gamma', value: 30 },

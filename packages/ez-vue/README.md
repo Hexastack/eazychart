@@ -1,7 +1,7 @@
 # EazyChart
 <img align="center" width="500" alt="EazyChart logo" src="https://eazychart.com/img/logo.png"/>
 <br/>
-[EazyChart](https://eazychart.com) is a chart library, `eazychart-vue` offers the ability to easily add charts in your Vue web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the [D3.js](https://d3js.org/) library's submodules.
+<a href="https://eazychart.com/">EazyChart</a> is a chart library, `eazychart-vue` offers the ability to easily add charts in your Vue web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the <a href="https://d3js.org/">D3.js</a> library's submodules.
 
 <br />
 <a href="https://docs.eazychart.com/">Website</a>

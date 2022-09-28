@@ -14,7 +14,7 @@ import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
 import { ColumnChartProps } from './ColumnChart';
 import { Points } from '@/components/Points';
-import { Line } from '@/components/shapes/Line';
+import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
@@ -136,7 +136,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
           default: ({ scaledData }) => {
             return (
               <g className="ez-line">
-                <Line
+                <LinePath
                   shapeData={scaledData}
                   curve={line.curve}
                   beta={line.beta}

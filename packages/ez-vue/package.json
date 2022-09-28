@@ -1,6 +1,6 @@
 {
   "name": "eazychart-vue",
-  "version": "0.1.15-alpha.0",
+  "version": "0.1.16-alpha.0",
   "description": "Vue version of the EazyChart Library.",
   "keywords": [
     "chart",

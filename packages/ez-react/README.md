@@ -1,7 +1,7 @@
 # EazyChart
 <img align="center" width="500" alt="EazyChart logo" src="https://eazychart.com/img/logo.png"/>
 <br/>
-[EazyChart](https://eazychart.com) is a chart library, `eazychart-vue` offers the ability to easily add charts in your Vue web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the [D3.js](https://d3js.org/) library's submodules.
+[EazyChart](https://eazychart.com) is a chart library, `eazychart-react` offers the ability to easily add charts in your React web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the [D3.js](https://d3js.org/) library's submodules.
 
 <br />
 <a href="https://docs.eazychart.com/">Website</a>
@@ -33,47 +33,31 @@ Use one of the following commands :
 
 ```
 // Using npm
-npm install --save eazychart-vue eazychart-css
+npm install --save eazychart-react eazychart-css
 
 // Using yarn
-yarn add eazychart-vue eazychart-css
+yarn add eazychart-react eazychart-css
 ```
 
 ## Basic Usage
 
-Import the chart from the library :
+Import the chart from the library first :
 ```js
-import { PieChart } from 'eazychart-vue';
+import { PieChart } from 'eazychart-react';
 import 'eazychart-css'; // You just need to import this once.
 ```
-Use any chart component with vue component syntax :
-```vue
-<template>
-  <div id="app">
-    <pie-chart :colors="colors" domainKey="value" :rawData="rawData"/>
-  </div>
-</template>
-<script>
-import { PieChart } from 'eazychart-vue';
-import 'eazychart-css';
 
-export default {
-  name: 'App',
-  components: {
-    PieChart
-  },
-  data() {
-    return {
-      colors: ['red', 'blue', 'green'],
-      rawData: [
-        { label: 'Alpha', value: 10 },
-        { label: 'Beta', value: 20 },
-        { label: 'Gamma', value: 30 },
-      ],
-    };
-  },
-};
-</script>
+Use any chart component with the JSX syntax :
+```js
+<PieChart
+  colors={['red', 'blue', 'green']}
+  domainKey={'value'}
+  rawData={[
+    { label: 'Alpha', value: 10 },
+    { label: 'Beta', value: 20 },
+    { label: 'Gamma', value: 30 },
+  ]}
+/>
 ```
 
 ## Documentation

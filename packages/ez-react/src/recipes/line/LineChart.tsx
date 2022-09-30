@@ -22,7 +22,6 @@ import { Point } from '@/components/shapes/Point';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface LineChartProps extends SVGAttributes<SVGGElement> {
-  swapAxis?: boolean;
   data: RawData;
   line?: LineConfig;
   marker?: MarkerConfig;

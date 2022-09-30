@@ -31,7 +31,6 @@ export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const BubbleChart: FC<BubbleChartProps> = ({
@@ -69,7 +68,6 @@ export const BubbleChart: FC<BubbleChartProps> = ({
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const horizontalAxis = swapAxis ? yAxis : xAxis;
   const verticalAxis = swapAxis ? xAxis : yAxis;
@@ -109,7 +107,6 @@ export const BubbleChart: FC<BubbleChartProps> = ({
       colors={[bubble.fill]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

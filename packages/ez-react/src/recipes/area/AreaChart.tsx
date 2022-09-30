@@ -37,7 +37,6 @@ export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   scopedSlots?: {
     TooltipComponent?: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const AreaChart: FC<AreaChartProps> = ({
@@ -80,7 +79,6 @@ export const AreaChart: FC<AreaChartProps> = ({
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const horizontalAxis = swapAxis ? yAxis : xAxis;
   const verticalAxis = swapAxis ? xAxis : yAxis;
@@ -112,7 +110,6 @@ export const AreaChart: FC<AreaChartProps> = ({
       colors={[area.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

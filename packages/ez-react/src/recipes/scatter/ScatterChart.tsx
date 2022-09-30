@@ -31,7 +31,6 @@ export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const ScatterChart: FC<ScatterChartProps> = ({
@@ -67,7 +66,6 @@ export const ScatterChart: FC<ScatterChartProps> = ({
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const horizontalAxis = swapAxis ? yAxis : xAxis;
   const verticalAxis = swapAxis ? xAxis : yAxis;
@@ -99,7 +97,6 @@ export const ScatterChart: FC<ScatterChartProps> = ({
       colors={[point.color]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

@@ -70,7 +70,6 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const xColumnScale = useMemo<ScaleBand>(
     () =>
@@ -120,7 +119,6 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

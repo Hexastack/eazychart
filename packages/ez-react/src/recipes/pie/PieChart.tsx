@@ -25,7 +25,6 @@ export interface PieChartProps extends SVGAttributes<SVGGElement> {
     LegendComponent: React.FC<LegendPropsWithRef>;
     TooltipComponent: React.FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const PieChart: FC<PieChartProps> = ({
@@ -56,7 +55,6 @@ export const PieChart: FC<PieChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const scale = useMemo<ScaleLinear>(
     () =>
@@ -75,7 +73,6 @@ export const PieChart: FC<PieChartProps> = ({
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Pie aScale={scale} {...arc} />
     </Chart>

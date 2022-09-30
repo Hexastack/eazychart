@@ -37,7 +37,6 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const scale = useMemo<ScaleLinear>(
     () =>
@@ -56,7 +55,6 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Pie
         aScale={scale}

@@ -31,7 +31,6 @@ export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
     LegendComponent: React.FC<LegendPropsWithRef>;
     TooltipComponent: React.FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const ColumnChart: FC<ColumnChartProps> = ({
@@ -66,7 +65,6 @@ export const ColumnChart: FC<ColumnChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const xScale = useMemo<ScaleBand>(
     () =>
@@ -96,7 +94,6 @@ export const ColumnChart: FC<ColumnChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

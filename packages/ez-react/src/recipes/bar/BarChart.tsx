@@ -31,7 +31,6 @@ export interface BarChartProps extends SVGAttributes<SVGGElement> {
     LegendComponent?: React.FC<LegendPropsWithRef>;
     TooltipComponent?: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const BarChart: FC<BarChartProps> = ({
@@ -66,7 +65,6 @@ export const BarChart: FC<BarChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const xScale = useMemo<ScaleLinear>(
     () =>
@@ -97,7 +95,6 @@ export const BarChart: FC<BarChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

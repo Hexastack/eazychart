@@ -35,7 +35,6 @@ export interface LineChartProps extends SVGAttributes<SVGGElement> {
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const LineChart: FC<LineChartProps> = ({
@@ -77,7 +76,6 @@ export const LineChart: FC<LineChartProps> = ({
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const horizontalAxis = swapAxis ? yAxis : xAxis;
   const verticalAxis = swapAxis ? xAxis : yAxis;
@@ -109,7 +107,6 @@ export const LineChart: FC<LineChartProps> = ({
       colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

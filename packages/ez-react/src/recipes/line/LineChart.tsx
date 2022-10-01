@@ -14,12 +14,10 @@ import {
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
-import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
-import { LinePath } from '@/components/shapes/LinePath';
-import { Point } from '@/components/shapes/Point';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { Segments } from '@/components/Segments';
 
 export interface LineChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -104,37 +102,11 @@ export const LineChart: FC<LineChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <Points
+        <Segments
           xDomainKey={xAxis.domainKey}
           yDomainKey={yAxis.domainKey}
-          scopedSlots={{
-            default: ({ shapeData }) => {
-              return (
-                <g className="ez-line">
-                  <LinePath
-                    shapeData={shapeData}
-                    curve={line.curve}
-                    beta={line.beta}
-                    stroke={line.stroke}
-                    strokeWidth={line.strokeWidth}
-                  />
-                  {!marker.hidden &&
-                    shapeData.map((shapeDatum) => {
-                      return (
-                        <Point
-                          key={shapeDatum.id}
-                          shapeDatum={shapeDatum}
-                          r={marker.radius}
-                          fill={marker.color}
-                          stroke={line.stroke}
-                          strokeWidth={line.strokeWidth}
-                        />
-                      );
-                    })}
-                </g>
-              );
-            },
-          }}
+          line={line}
+          marker={marker}
         />
         <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
         <Axis

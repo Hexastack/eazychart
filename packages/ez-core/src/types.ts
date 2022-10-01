@@ -76,6 +76,11 @@ export interface AxisConfig<P = Position>
   domainKey: string;
 }
 
+export interface AxisConfigMulti<P = Position>
+  extends AxisConfigBase<P> {
+  domainKeys: string[];
+}
+
 export interface PointConfig {
   radius: number;
   color: string;

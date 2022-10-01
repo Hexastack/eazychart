@@ -6,7 +6,7 @@
 .ez-tooltip {
   position: fixed;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   background-color: rgba(0, 0, 0, 0.85);
   pointer-events: none;
   padding: 1rem;
@@ -18,16 +18,34 @@
 }
 
 .ez-tooltip-color {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
   vertical-align: middle;
   border: 1px solid #FFF;
+  margin: .25rem;
 }
 
 .ez-tooltip-text {
   margin: 0 0 0 .5rem;
 }
 
-.ez-tooltip-domain {
+.ez-tooltip-attribute {
   margin: 0 .25rem;
+  display: table-row;
+}
+
+.ez-tooltip-attribute--name,
+.ez-tooltip-attribute--value {
+  display: table-cell;
+  padding: .125rem;
+}
+
+.ez-tooltip-attribute--name {
+  // font-weight: 700;
+  text-align: right;
+}
+
+
+.ez-tooltip-attribute--value {
+  font-weight: 700;
 }

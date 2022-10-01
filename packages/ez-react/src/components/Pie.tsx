@@ -1,13 +1,13 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { useChart } from '@/lib/use-chart';
-import { Arc } from './shapes/Arc';
+import { scalePieArcData } from 'eazychart-core/src';
 import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
-import { ScaleLinear, scalePieArcData } from 'eazychart-core/src';
+import { useChart } from '@/lib/use-chart';
+import { Arc } from '@/components/shapes/Arc';
 
 export interface PieProps
   extends PieConfig,
     Omit<SVGAttributes<SVGPathElement>, 'stroke' | 'strokeWidth'> {
-  aScale: ScaleLinear;
+  domainKey: string;
   getCenter?: (dimensions: Dimensions) => Point;
   getRadius?: (dimensions: Dimensions) => number;
   startAngle?: number;
@@ -15,9 +15,9 @@ export interface PieProps
 }
 
 export const Pie: FC<PieProps> = ({
+  domainKey,
   startAngle = 0,
   endAngle = 2 * Math.PI,
-  aScale,
   getCenter = ({ width, height }) => ({ x: width / 2, y: height / 2 }),
   getRadius = ({ width, height }) => Math.min(width, height) / 2,
   donutRadius = 0,
@@ -39,12 +39,12 @@ export const Pie: FC<PieProps> = ({
   const shapeData = useMemo(() => {
     return scalePieArcData(
       activeData,
-      aScale,
+      domainKey,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [activeData, aScale, sortValues, startAngle, endAngle]);
+  }, [activeData, domainKey, sortValues, startAngle, endAngle]);
 
   return (
     <g

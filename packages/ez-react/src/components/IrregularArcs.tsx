@@ -1,14 +1,14 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { useChart } from '@/lib/use-chart';
-import { Arc } from './shapes/Arc';
 import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
-import { ScaleLinear, scalePieArcData } from 'eazychart-core/src';
+import { scalePieArcData } from 'eazychart-core/src';
+import { useChart } from '@/lib/use-chart';
+import { Arc } from '@/components/shapes/Arc';
+import { useRadialScale } from '@/components/scales/RadialScale';
 
 export interface IrregularArcsProps
   extends PieConfig,
     Omit<SVGAttributes<SVGPathElement>, 'stroke' | 'strokeWidth'> {
-  aScale: ScaleLinear;
-  rScale: ScaleLinear;
+  domainKey: string;
   getCenter?: (dimensions: Dimensions) => Point;
   getRadius?: (dimensions: Dimensions) => number;
   startAngle?: number;
@@ -18,8 +18,7 @@ export interface IrregularArcsProps
 export const IrregularArcs: FC<IrregularArcsProps> = ({
   startAngle = 0,
   endAngle = 2 * Math.PI,
-  aScale,
-  rScale,
+  domainKey,
   getCenter = ({ width, height }) => ({ x: width / 2, y: height / 2 }),
   getRadius = ({ width, height }) => Math.min(width, height) / 2,
   donutRadius = 0,
@@ -32,8 +31,11 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
   ...rest
 }) => {
   const { activeData, dimensions } = useChart();
+  const { rScale } = useRadialScale();
+
   const center = useMemo(() => getCenter(dimensions), [dimensions, getCenter]);
   const radius = useMemo(() => getRadius(dimensions), [dimensions, getRadius]);
+
   const radiusScale = useMemo(() => {
     rScale.appendDefinition({ range: [radius / 2, radius] });
     return rScale;
@@ -42,12 +44,12 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
   const shapeData = useMemo(() => {
     return scalePieArcData(
       activeData,
-      aScale,
+      domainKey,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [activeData, aScale, sortValues, startAngle, endAngle]);
+  }, [activeData, domainKey, sortValues, startAngle, endAngle]);
 
   const minArcValue = useMemo(
     () =>

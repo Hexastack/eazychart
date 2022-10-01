@@ -1,8 +1,7 @@
 import React from 'react';
-import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
+import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { AreaChart } from '@/recipes/area/AreaChart';
-import { RawData } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
 describe('AreaChart', () => {
@@ -12,7 +11,7 @@ describe('AreaChart', () => {
       // 1st render
       wrapper = render(
         <AreaChart
-          data={pointsData as unknown as RawData}
+          data={pointsRawData}
           area={{
             stroke: 'red',
             strokeWidth: 2,

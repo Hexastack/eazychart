@@ -46,8 +46,6 @@ export type NormalizedDataDict = { [id: string]: NormalizedDatum };
 export interface ShapeAttributes {
   id: string;
   color: string;
-  xValue: string | number;
-  yValue: string | number;
 }
 
 export interface GridConfig {
@@ -67,12 +65,16 @@ export interface AxisTitleConfig {
   titleAlign?: Anchor;
 }
 
-export interface AxisConfig<P = Position>
+export interface AxisConfigBase<P = Position>
   extends AxisTickConfig,
     AxisTitleConfig {
-  domainKey: string;
   position?: P;
   nice?: number;
+}
+
+export interface AxisConfig<P = Position>
+  extends AxisConfigBase<P> {
+  domainKey: string;
 }
 
 export interface PointConfig {

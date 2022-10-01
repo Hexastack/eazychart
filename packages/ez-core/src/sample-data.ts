@@ -12,6 +12,7 @@ import {
   ScaleBandDefinition,
   ScaleLinearDefinition,
   TooltipContext,
+  RawDatum,
 } from './types';
 
 import  {
@@ -130,12 +131,10 @@ export const scales: {[scaleName: string]: D3Scales} = {
 export const rectData: RectangleDatum = {
   id: '1',
   color: 'yellow',
-  xValue: 'GDP',
-  yValue: 100,
   x: 50,
   y: 10,
   width: 20,
-  height: 100,
+  height: 100
 };
 
 export const tooltip: TooltipContext = {
@@ -144,39 +143,56 @@ export const tooltip: TooltipContext = {
   moveTooltip: jest.fn(),
 };
 
-export const pointA: PointDatum = {
-  x: 10,
-  y: 20,
-  radius: 5,
+export const datumA: RawDatum = {
   id: 'A',
   color: 'red',
   xValue: 'A',
   yValue: 10,
+}
+
+export const pointA: PointDatum = {
+  id: 'A',
+  color: 'red',
+  x: 10,
+  y: 20,
+  radius: 5,
 };
 
-export const pointB: PointDatum = {
-  x: 10,
-  y: 40,
-  radius: 5,
+export const datumB: RawDatum = {
   id: 'B',
   color: 'blue',
   xValue: 'B',
   yValue: 25,
-};
+}
 
-export const pointC: PointDatum = {
-  x: 20,
+export const pointB: PointDatum = {
+  id: 'B',
+  color: 'blue',
+  x: 10,
   y: 40,
   radius: 5,
+};
+
+export const datumC: RawDatum = {
   id: 'C',
   color: 'yellow',
   xValue: 'C',
   yValue: 30,
+}
+
+export const pointC: PointDatum = {
+  id: 'C',
+  color: 'yellow',
+  x: 20,
+  y: 40,
+  radius: 5,
 };
+
+export const pointsRawData: RawData = [datumA, datumB, datumC];
 
 export const pointsData: PointDatum[] = [pointA, pointB, pointC];
 
-export const pointsWithMarginData: RawData = pointsData.map((d, idx) => {
+export const pointsWithMarginData: RawData = pointsRawData.map((d, idx) => {
   return {
     ...d,
     positiveMargin: (idx + 1) / 10,
@@ -187,12 +203,10 @@ export const pointsWithMarginData: RawData = pointsData.map((d, idx) => {
 export const arcDatum: ArcDatum = {
   id: '1',
   color: 'yellow',
-  xValue: 'GDP',
-  yValue: 100,
   data: 100,
   value: 100,
   startAngle: 0,
   endAngle: 45,
   padAngle: 0,
-  index: 0
+  index: 0,
 };

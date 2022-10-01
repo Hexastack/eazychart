@@ -1,4 +1,5 @@
 import React from 'react';
+import { Position } from 'eazychart-core/src/types';
 import { colors, rawData, dimensions } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { BarChart } from '@/recipes/bar/BarChart';
@@ -15,6 +16,14 @@ describe('BarChart', () => {
           colors={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          xAxis={{
+            domainKey: 'value',
+            position: Position.BOTTOM,
+          }}
+          yAxis={{
+            domainKey: 'label',
+            position: Position.LEFT,
+          }}
         />
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

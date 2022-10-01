@@ -73,7 +73,6 @@ describe('Tooltip', () => {
                   }
                   mousePosition={{ x: 50, y: 150 }}
                   isVisible={true}
-                  domains={['label', 'value']}
                 />
               ),
             },

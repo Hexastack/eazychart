@@ -31,11 +31,7 @@ export type TickOptions = {
   tickFormat?: Function;
 };
 
-export type PointDatum = Point & {
-  id: string;
-  color: string;
-  xValue: number | string;
-  yValue: number | string;
+export type PointDatum = Point & ShapeAttributes & {
   radius?: number;
 };
 
@@ -88,7 +84,6 @@ export interface ChartContext {
   ) => void;
   colors: string[];
   isRTL: boolean;
-  scales: any[];
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;

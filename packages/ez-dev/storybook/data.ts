@@ -53,13 +53,17 @@ export const correlationData: RawData = [...Array(100).keys()].map(() => {
 
 export const evolutionData: RawData = [...Array(23).keys()].map((_v, idx) => {
   const x = idx;
-  const y = Math.random() * 50 + x * 10;
+  const y = Math.random() * 10 + x * 10;
+  const y1 = Math.random() * 100 + x * 20;
+  const y2 = Math.random() * 1000 + x * 30;
   return {
     xValue: x,
     yValue: +y.toFixed(2),
+    yValue1: +y1.toFixed(2),
+    yValue2: +y2.toFixed(2),
     temperature: `Temperature at ${x}H`,
-    positiveMargin: 0.2 + Math.random() * 0.2,
-    negativeMargin: 0.2 + Math.random() * 0.2,
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
   };
 });
 

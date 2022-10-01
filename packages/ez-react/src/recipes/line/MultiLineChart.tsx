@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes } from 'react';
+import React, { FC, SVGAttributes, useMemo } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
@@ -11,6 +11,8 @@ import {
   Dimensions,
   LineConfig,
   MarkerConfig,
+  AxisConfigMulti,
+  ArrayOfTwoNumbers,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -19,8 +21,19 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { Segments } from '@/components/Segments';
 
-export interface LineChartProps extends SVGAttributes<SVGGElement> {
+const getDomainByKeys = (domainKeys: string[], data: RawData) => {
+  return domainKeys.reduce(
+    ([min, max], domainKey) => {
+      const values = data.map((datum) => datum[domainKey] as number);
+      return [Math.min(min, ...values), Math.max(max, ...values)];
+    },
+    [+Infinity, -Infinity] as number[]
+  ) as ArrayOfTwoNumbers;
+};
+
+export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
+  colors?: string[];
   line?: LineConfig;
   marker?: MarkerConfig;
   animationOptions?: AnimationOptions;
@@ -28,15 +41,17 @@ export interface LineChartProps extends SVGAttributes<SVGGElement> {
   grid?: GridConfig;
   isRTL?: boolean;
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
-  yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
+  yAxis?: AxisConfigMulti<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
+  onResize?: (dimensions: Dimensions) => void;
 }
 
-export const LineChart: FC<LineChartProps> = ({
+export const MultiLineChart: FC<MultiLineChartProps> = ({
   data,
+  colors = ['#339999', '#993399', '#333399'],
   line = {
     stroke: '#339999',
     strokeWidth: 2,
@@ -66,48 +81,60 @@ export const LineChart: FC<LineChartProps> = ({
     domainKey: 'xValue',
   },
   yAxis = {
-    domainKey: 'yValue',
+    domainKeys: ['yValue1', 'yValue2'],
   },
   isRTL = false,
   dimensions = {},
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
+  onResize,
 }) => {
+  const yDomain = useMemo(
+    () => getDomainByKeys(yAxis.domainKeys, data),
+    [yAxis, data]
+  );
+  const xScale = useMemo<ScaleLinear>(
+    () =>
+      new ScaleLinear({
+        direction: Direction.HORIZONTAL,
+        domainKey: xAxis.domainKey,
+        nice: xAxis.nice || 0,
+        reverse: isRTL,
+      }),
+    [isRTL, xAxis]
+  );
+  const yScale = useMemo<ScaleLinear>(
+    () =>
+      new ScaleLinear({
+        direction: Direction.VERTICAL,
+        domain: yDomain,
+        nice: yAxis.nice || 0,
+      }),
+    [yAxis, yDomain]
+  );
   return (
     <Chart
       dimensions={dimensions}
       rawData={data}
       padding={padding}
+      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onResize={onResize}
     >
-      <CartesianScale
-        xScaleConfig={{
-          ScaleClass: ScaleLinear,
-          definition: {
-            direction: Direction.HORIZONTAL,
-            domainKey: xAxis.domainKey,
-            nice: xAxis.nice || 0,
-            reverse: isRTL,
-          },
-        }}
-        yScaleConfig={{
-          ScaleClass: ScaleLinear,
-          definition: {
-            direction: Direction.VERTICAL,
-            domainKey: yAxis.domainKey,
-            nice: yAxis.nice || 0,
-          },
-        }}
-      >
+      <CartesianScale xScale={xScale} yScale={yScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        <Segments
-          xDomainKey={xAxis.domainKey}
-          yDomainKey={yAxis.domainKey}
-          line={line}
-          marker={marker}
-        />
+        {yAxis.domainKeys.map((yDomainKey) => {
+          return (
+            <Segments
+              xDomainKey={xAxis.domainKey}
+              yDomainKey={yDomainKey}
+              line={line}
+              marker={marker}
+            />
+          );
+        })}
         <Axis
           position={xAxis.position || Position.BOTTOM}
           title={xAxis.title}

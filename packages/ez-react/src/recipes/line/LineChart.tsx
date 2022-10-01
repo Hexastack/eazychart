@@ -1,4 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
+import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
   Position,
@@ -18,7 +19,7 @@ import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
-import { ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface LineChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
@@ -102,71 +103,65 @@ export const LineChart: FC<LineChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale]}
       padding={padding}
       colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Points
-        xScale={xScale}
-        yScale={yScale}
-        scopedSlots={{
-          default: ({ scaledData }) => {
-            return (
-              <g className="ez-line">
-                <LinePath
-                  shapeData={scaledData}
-                  curve={line.curve}
-                  beta={line.beta}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                />
-                {!marker.hidden &&
-                  scaledData.map((pointDatum) => {
-                    return (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    );
-                  })}
-              </g>
-            );
-          },
-        }}
-      />
-      <Axis
-        position={horizontalAxis.position || Position.BOTTOM}
-        aScale={xScale}
-        title={horizontalAxis.title}
-        titleAlign={horizontalAxis.titleAlign}
-        tickLength={horizontalAxis.tickLength}
-        tickCount={horizontalAxis.tickCount}
-        tickSize={horizontalAxis.tickLength}
-        tickFormat={horizontalAxis.tickFormat}
-      />
-      <Axis
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-        aScale={yScale}
-        title={verticalAxis.title}
-        titleAlign={verticalAxis.titleAlign}
-        tickLength={verticalAxis.tickLength}
-        tickCount={verticalAxis.tickCount}
-        tickSize={verticalAxis.tickLength}
-        tickFormat={verticalAxis.tickFormat}
-      />
+      <CartesianScale xScale={xScale} yScale={yScale}>
+        <Grid directions={grid.directions} color={grid.color} />
+        <Points
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yAxis.domainKey}
+          scopedSlots={{
+            default: ({ shapeData }) => {
+              return (
+                <g className="ez-line">
+                  <LinePath
+                    shapeData={shapeData}
+                    curve={line.curve}
+                    beta={line.beta}
+                    stroke={line.stroke}
+                    strokeWidth={line.strokeWidth}
+                  />
+                  {!marker.hidden &&
+                    shapeData.map((shapeDatum) => {
+                      return (
+                        <Point
+                          key={shapeDatum.id}
+                          shapeDatum={shapeDatum}
+                          r={marker.radius}
+                          fill={marker.color}
+                          strokeWidth={line.strokeWidth}
+                        />
+                      );
+                    })}
+                </g>
+              );
+            },
+          }}
+        />
+        <Axis
+          position={horizontalAxis.position || Position.BOTTOM}
+          title={horizontalAxis.title}
+          titleAlign={horizontalAxis.titleAlign}
+          tickLength={horizontalAxis.tickLength}
+          tickCount={horizontalAxis.tickCount}
+          tickSize={horizontalAxis.tickLength}
+          tickFormat={horizontalAxis.tickFormat}
+        />
+        <Axis
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
+          title={verticalAxis.title}
+          titleAlign={verticalAxis.titleAlign}
+          tickLength={verticalAxis.tickLength}
+          tickCount={verticalAxis.tickCount}
+          tickSize={verticalAxis.tickLength}
+          tickFormat={verticalAxis.tickFormat}
+        />
+      </CartesianScale>
     </Chart>
   );
 };

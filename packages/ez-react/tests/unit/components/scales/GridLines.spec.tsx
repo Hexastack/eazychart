@@ -1,6 +1,5 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
-import { Chart, ChartProps } from '@/components/Chart';
 import { Direction } from 'eazychart-core/src/types';
 import {
   colors,
@@ -10,9 +9,11 @@ import {
   horizontalLinearScale,
   verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
+import { Chart, ChartProps } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import { GridLines } from '@/components/scales/grid/GridLines';
 import 'tests/mocks/ResizeObserver';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 const commonProps: ChartProps = {
   ...{
@@ -35,11 +36,12 @@ describe('GridLines', () => {
   it('renders horizontal grid lines with four ticks', async () => {
     const gridChart = (
       <Chart {...commonProps}>
-        <GridLines
-          direction={Direction.HORIZONTAL}
-          aScale={horizontalLinearScale}
-          tickCount={4}
-        />
+        <CartesianScale
+          xScale={horizontalLinearScale}
+          yScale={verticalLinearScale}
+        >
+          <GridLines direction={Direction.HORIZONTAL} tickCount={4} />
+        </CartesianScale>
       </Chart>
     );
     const wrapper = render(gridChart);
@@ -54,11 +56,12 @@ describe('GridLines', () => {
   it('renders vertical grid lines with four ticks', async () => {
     const gridChart = (
       <Chart {...commonProps}>
-        <GridLines
-          direction={Direction.VERTICAL}
-          aScale={verticalLinearScale}
-          tickCount={4}
-        />
+        <CartesianScale
+          xScale={horizontalLinearScale}
+          yScale={verticalLinearScale}
+        >
+          <GridLines direction={Direction.VERTICAL} tickCount={4} />
+        </CartesianScale>
       </Chart>
     );
     const wrapper = render(gridChart);

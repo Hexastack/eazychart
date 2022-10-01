@@ -1,5 +1,5 @@
 import { AnimationOptions, Interpolables } from 'eazychart-core/src/types';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { defaultChartAnimationOptions, animate } from 'eazychart-core/src';
 
 export const useAnimation = <T extends Interpolables>(
@@ -23,29 +23,37 @@ export const useAnimation = <T extends Interpolables>(
     },
     [setCurrentData]
   );
+  const cancelRef = useRef<Function | null>(null);
+  const cancelAnimation = (forceUpdate = false) => {
+    if (cancelRef.current) {
+      cancelRef.current(forceUpdate);
+    }
+  };
 
   useEffect(() => {
-    const cancel = animate<T>(
+    cancelAnimation();
+    cancelRef.current = animate<T>(
       initialData,
       targetData,
       options,
       updateOnAnimate
     );
     return () => {
-      cancel(true);
+      cancelAnimation(true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(options)]);
 
   useEffect(() => {
-    const cancel = animate<T>(
+    cancelAnimation();
+    cancelRef.current = animate<T>(
       currentData,
       targetData,
       options,
       updateOnAnimate
     );
     return () => {
-      cancel(true);
+      cancelAnimation(true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(targetData), ...deps]);

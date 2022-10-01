@@ -1,4 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
+import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
   RawData,
@@ -10,8 +11,8 @@ import {
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from 'eazychart-core/src';
 import { IrregularArcs } from '@/components/IrregularArcs';
+import { RadialScale } from '@/components/scales/RadialScale';
 
 export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -56,14 +57,6 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const aScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
-  );
   const rScale = useMemo<ScaleLinear>(
     () =>
       new ScaleLinear({
@@ -76,13 +69,14 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[aScale, rScale]}
       padding={padding}
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <IrregularArcs aScale={aScale} rScale={rScale} {...arc} />
+      <RadialScale rScale={rScale}>
+        <IrregularArcs domainKey={domainKey} {...arc} />
+      </RadialScale>
     </Chart>
   );
 };

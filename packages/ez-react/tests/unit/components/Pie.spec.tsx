@@ -5,7 +5,6 @@ import { Chart } from '@/components/Chart';
 import {
   dimensions,
   scaleDefinitions,
-  horizontalLinearScale,
   chartData,
 } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
@@ -29,7 +28,7 @@ describe('Pie', () => {
             },
           }}
         >
-          <Pie aScale={horizontalLinearScale} donutRadius={0} />
+          <Pie domainKey={'amount'} donutRadius={0} />
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

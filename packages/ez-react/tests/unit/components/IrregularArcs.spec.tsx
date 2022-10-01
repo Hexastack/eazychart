@@ -1,15 +1,16 @@
 import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
-import { IrregularArcs } from '@/components/IrregularArcs';
-import { Chart } from '@/components/Chart';
 import {
   dimensions,
   scaleDefinitions,
   verticalLinearScale,
   chartData,
 } from 'eazychart-core/src/sample-data';
+import { IrregularArcs } from '@/components/IrregularArcs';
+import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { RadialScale } from '@/components/scales/RadialScale';
 
 describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
@@ -29,11 +30,9 @@ describe('IrregularArcs', () => {
             },
           }}
         >
-          <IrregularArcs
-            aScale={verticalLinearScale}
-            rScale={verticalLinearScale}
-            donutRadius={0}
-          />
+          <RadialScale rScale={verticalLinearScale}>
+            <IrregularArcs domainKey={'value'} donutRadius={0} />
+          </RadialScale>
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

@@ -12,6 +12,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 describe('Points', () => {
   it('renders svg points with the right coordinates / path', async () => {
@@ -32,11 +33,12 @@ describe('Points', () => {
             },
           }}
         >
-          <Points
+          <CartesianScale
             xScale={horizontalLinearScale}
             yScale={verticalLinearScale}
-            r={6}
-          />
+          >
+            <Points xDomainKey={'amount'} yDomainKey={'value'} r={6} />
+          </CartesianScale>
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

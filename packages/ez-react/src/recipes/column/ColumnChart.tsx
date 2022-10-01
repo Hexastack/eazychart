@@ -1,4 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
   AxisConfig,
@@ -15,7 +16,7 @@ import { Bars } from '@/components/Bars';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -88,30 +89,21 @@ export const ColumnChart: FC<ColumnChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale]}
       padding={padding}
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Bars xScale={xScale} yScale={yScale} />
-      <Axis
-        {...xAxis}
-        aScale={xScale}
-        position={xAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...yAxis}
-        aScale={yScale}
-        position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
-      />
+      <CartesianScale xScale={xScale} yScale={yScale}>
+        <Grid directions={grid.directions} color={grid.color} />
+        <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
+        <Axis
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+        />
+      </CartesianScale>
     </Chart>
   );
 };

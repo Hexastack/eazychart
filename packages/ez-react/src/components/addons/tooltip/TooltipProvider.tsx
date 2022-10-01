@@ -1,6 +1,6 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { NormalizedDatum, Point, ShapeDatum } from 'eazychart-core/src/types';
-import { debounce, AbstractScale } from 'eazychart-core/src';
+import { debounce } from 'eazychart-core/src';
 import { Fragment } from '@/lib/Fragment';
 import { useChart } from '@/lib/use-chart';
 import { TooltipProps } from './Tooltip';
@@ -16,23 +16,15 @@ export const TooltipProvider: FC<TooltipProviderProps> = ({
   children,
   isWrapped = true,
 }) => {
-  const { dataDict, scales, dimensions } = useChart();
+  const { dataDict, dimensions } = useChart();
   const [isVisible, setIsVisible] = useState(false);
   const [datum, setDatum] = useState<NormalizedDatum | null>(null);
   const [shapeDatum, setShapeDatum] = useState<ShapeDatum | null>(null);
   const [mousePosition, setMousePosition] = useState<Point>({ x: 0, y: 0 });
+
   useEffect(() => {
     setMousePosition({ x: dimensions.width / 2, y: dimensions.height / 2 });
   }, [dimensions]);
-
-  const domains = useMemo(() => {
-    if (scales !== undefined) {
-      return (scales as AbstractScale[])
-        .filter(({ definition }) => typeof definition.domainKey === 'string')
-        .map(({ definition }) => definition.domainKey) as string[];
-    }
-    return [];
-  }, [scales]);
 
   const showTooltip = useCallback(
     (shapeDatum: ShapeDatum, _event: MouseEvent) => {
@@ -64,7 +56,6 @@ export const TooltipProvider: FC<TooltipProviderProps> = ({
     shapeDatum,
     isVisible,
     mousePosition,
-    domains,
   };
 
   const TooltipOverride = Tooltip ? <Tooltip {...tooltipProps} /> : null;

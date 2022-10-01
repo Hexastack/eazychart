@@ -1,5 +1,12 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
+  defaultChartAnimationOptions,
+  defaultChartDimensions,
+  defaultChartPadding,
+  normalizeData,
+  transformTranslate,
+} from 'eazychart-core/src';
+import {
   AnimationOptions,
   ChartPadding,
   Dimensions,
@@ -7,25 +14,16 @@ import {
   NormalizedDatum,
 } from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
-import { LegendProvider } from './addons/legend/LegendProvider';
+import { LegendProvider } from '@/components/addons/legend/LegendProvider';
 import { ChartContext } from '@/lib/use-chart';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
-import { LegendPropsWithRef } from './addons/legend/Legend';
-import {
-  AbstractScale,
-  defaultChartAnimationOptions,
-  defaultChartDimensions,
-  defaultChartPadding,
-  normalizeData,
-  transformTranslate,
-} from 'eazychart-core/src';
 import { useResponsiveChart } from '@/lib/use-responsive-chart';
+import { LegendPropsWithRef } from '@/components/addons/legend/Legend';
 
 export type ChartProps = {
   padding?: Partial<ChartPadding>;
   dimensions?: Partial<Dimensions>;
   animationOptions?: Partial<AnimationOptions>;
-  scales: AbstractScale[];
   rawData: RawData;
   colors: string[];
   scopedSlots?: {
@@ -46,7 +44,6 @@ export const Chart: FC<ChartProps> = ({
   dimensions,
   padding = {},
   animationOptions,
-  scales,
   rawData,
   colors,
   children,
@@ -143,14 +140,6 @@ export const Chart: FC<ChartProps> = ({
     return chartData.filter(({ isActive }) => isActive);
   }, [chartData]);
 
-  useMemo(() => {
-    if (scales !== undefined) {
-      scales.forEach((scale) => {
-        scale.computeScale(chartDimensions, activeData);
-      });
-    }
-  }, [activeData, chartDimensions, scales]);
-
   const toggleDatum = useCallback(
     (datum: NormalizedDatum, newState: boolean, idx: number) => {
       onToggleDatum && onToggleDatum(datum, newState, idx);
@@ -172,7 +161,6 @@ export const Chart: FC<ChartProps> = ({
         dimensions: chartDimensions,
         padding: chartPadding,
         animationOptions: chartAnimationOptions,
-        scales,
         data: chartData,
         dataDict,
         activeData,

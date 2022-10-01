@@ -9,9 +9,11 @@ import {
   rawData,
   scaleDefinitions,
   horizontalLinearScale,
+  verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 describe('Axis', () => {
   it('renders axis with four ticks', async () => {
@@ -32,11 +34,12 @@ describe('Axis', () => {
           },
         }}
       >
-        <Axis
-          position={Position.BOTTOM}
-          aScale={horizontalLinearScale}
-          tickCount={4}
-        />
+        <CartesianScale
+          xScale={horizontalLinearScale}
+          yScale={verticalLinearScale}
+        >
+          <Axis position={Position.BOTTOM} tickCount={4} />
+        </CartesianScale>
       </Chart>
     );
     const wrapper = render(axisChart);

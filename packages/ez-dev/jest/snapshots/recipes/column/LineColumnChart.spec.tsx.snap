@@ -35,20 +35,6 @@ exports[`LineColumnChart renders a line & column chart 1`] = `
               >
               </rect>
             </g>
-            <g class="ez-points">
-              <g class="ez-line">
-                <path
-                  d
-                  stroke="#339999"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
-                >
-                </path>
-              </g>
-            </g>
             <g
               text-anchor="middle"
               transform="translate(0, 0)"
@@ -70,6 +56,20 @@ exports[`LineColumnChart renders a line & column chart 1`] = `
                 class="ez-axis-path"
               >
               </path>
+            </g>
+            <g class="ez-points">
+              <g class="ez-line">
+                <path
+                  d
+                  stroke="#339999"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  class="ez-line"
+                >
+                </path>
+              </g>
             </g>
             <g
               text-anchor="start"
@@ -171,20 +171,6 @@ exports[`LineColumnChart renders a line & column chart 2`] = `
               >
               </rect>
             </g>
-            <g class="ez-points">
-              <g class="ez-line">
-                <path
-                  d
-                  stroke="#339999"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
-                >
-                </path>
-              </g>
-            </g>
             <g
               text-anchor="middle"
               transform="translate(0, 0)"
@@ -206,6 +192,20 @@ exports[`LineColumnChart renders a line & column chart 2`] = `
                 class="ez-axis-path"
               >
               </path>
+            </g>
+            <g class="ez-points">
+              <g class="ez-line">
+                <path
+                  d
+                  stroke="#339999"
+                  stroke-width="2"
+                  fill="none"
+                  stroke-linejoin="round"
+                  stroke-linecap="round"
+                  class="ez-line"
+                >
+                </path>
+              </g>
             </g>
             <g
               text-anchor="start"

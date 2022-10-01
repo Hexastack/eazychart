@@ -1,6 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -11,7 +10,6 @@ import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from 'eazychart-core/src';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -56,25 +54,16 @@ export const PieChart: FC<PieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const scale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
-  );
   return (
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[scale]}
       padding={padding}
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Pie aScale={scale} {...arc} />
+      <Pie domainKey={domainKey} {...arc} />
     </Chart>
   );
 };

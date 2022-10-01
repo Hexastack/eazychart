@@ -1,4 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
+import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
   Position,
@@ -15,7 +16,8 @@ import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { Bubbles } from '@/components/Bubbles';
-import { ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
+import { RadialScale } from '@/components/scales/RadialScale';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
@@ -102,31 +104,31 @@ export const BubbleChart: FC<BubbleChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale, rScale]}
       padding={padding}
       colors={[bubble.fill]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Bubbles xScale={xScale} yScale={yScale} rScale={rScale} />
-      <Axis
-        {...horizontalAxis}
-        aScale={xScale}
-        position={horizontalAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...verticalAxis}
-        aScale={yScale}
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-      />
+      <CartesianScale xScale={xScale} yScale={yScale}>
+        <Grid directions={grid.directions} color={grid.color} />
+        <RadialScale rScale={rScale}>
+          <Bubbles
+            xDomainKey={xAxis.domainKey}
+            yDomainKey={yAxis.domainKey}
+            rDomainKey={bubble.domainKey}
+          />
+        </RadialScale>
+        <Axis
+          {...horizontalAxis}
+          position={horizontalAxis.position || Position.BOTTOM}
+        />
+        <Axis
+          {...verticalAxis}
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
+        />
+      </CartesianScale>
     </Chart>
   );
 };

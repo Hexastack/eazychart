@@ -1,8 +1,7 @@
 import React from 'react';
-import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
+import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { LineChart } from '@/recipes/line/LineChart';
-import { RawData } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
 describe('LineChart', () => {
@@ -12,7 +11,7 @@ describe('LineChart', () => {
       // 1st render
       wrapper = render(
         <LineChart
-          data={pointsData as unknown as RawData}
+          data={pointsRawData}
           line={{
             stroke: 'red',
             strokeWidth: 2,

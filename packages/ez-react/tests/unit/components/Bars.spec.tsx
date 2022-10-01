@@ -1,7 +1,5 @@
 import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
-import { Bars } from '@/components/Bars';
-import { Chart } from '@/components/Chart';
 import {
   dimensions,
   verticalLinearScale,
@@ -10,8 +8,11 @@ import {
   rawData,
   colors,
 } from 'eazychart-core/src/sample-data';
+import { Bars } from '@/components/Bars';
+import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 describe('Bars', () => {
   it('renders svg rects with the right coordinates / dimensions', async () => {
@@ -32,7 +33,12 @@ describe('Bars', () => {
             },
           }}
         >
-          <Bars xScale={horizontalBandScale} yScale={verticalLinearScale} />
+          <CartesianScale
+            xScale={horizontalBandScale}
+            yScale={verticalLinearScale}
+          >
+            <Bars xDomainKey={'label'} yDomainKey={'value'} />
+          </CartesianScale>
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

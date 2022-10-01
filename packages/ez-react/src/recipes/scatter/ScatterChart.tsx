@@ -16,6 +16,7 @@ import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
@@ -92,31 +93,29 @@ export const ScatterChart: FC<ScatterChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale]}
       padding={padding}
       colors={[point.color]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Points xScale={xScale} yScale={yScale} r={point.radius} />
-      <Axis
-        {...horizontalAxis}
-        aScale={xScale}
-        position={horizontalAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...verticalAxis}
-        aScale={yScale}
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-      />
+      <CartesianScale xScale={xScale} yScale={yScale}>
+        <Grid directions={grid.directions} color={grid.color} />
+        <Points
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yAxis.domainKey}
+          r={point.radius}
+        />
+        <Axis
+          {...horizontalAxis}
+          position={horizontalAxis.position || Position.BOTTOM}
+        />
+        <Axis
+          {...verticalAxis}
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
+        />
+      </CartesianScale>
     </Chart>
   );
 };

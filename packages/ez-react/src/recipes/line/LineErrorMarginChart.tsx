@@ -1,12 +1,4 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
-import { Chart } from '@/components/Chart';
-import { Points } from '@/components/Points';
-import { Axis } from '@/components/scales/Axis';
-import { Grid } from '@/components/scales/grid/Grid';
-import { LinePath } from '@/components/shapes/LinePath';
-import { Point } from '@/components/shapes/Point';
-import { Area } from '@/components/shapes/Area';
 import { getDataMarginBounds, ScaleLinear } from 'eazychart-core/src';
 import {
   LineConfig,
@@ -24,6 +16,15 @@ import {
   AreaData,
   AreaCurve,
 } from 'eazychart-core/src/types';
+import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
+import { Chart } from '@/components/Chart';
+import { Points } from '@/components/Points';
+import { Axis } from '@/components/scales/Axis';
+import { Grid } from '@/components/scales/grid/Grid';
+import { LinePath } from '@/components/shapes/LinePath';
+import { Point } from '@/components/shapes/Point';
+import { Area } from '@/components/shapes/Area';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
   line: LineConfig;
@@ -131,82 +132,76 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale]}
       padding={padding}
       colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Points
-        xScale={xScale}
-        yScale={yScale}
-        scopedSlots={{
-          default: ({ scaledData }) => {
-            const lineAreaData = scaledData.map((d, idx) => {
-              const datum: RawDatum = data[idx];
-              return {
-                x: d.x,
-                // @todo error margin data must be scaled
-                y0: yScale.scale(
-                  (datum[yAxis.domainKey] as number) *
-                    (1 - Number(datum[errorMargins.negative]))
-                ),
-                y1: yScale.scale(
-                  (datum[yAxis.domainKey] as number) *
-                    (1 + Number(datum[errorMargins.positive]))
-                ),
-              };
-            });
-            return (
-              <g className="ez-line-error-margin">
-                <Area
-                  shapeData={lineAreaData as AreaData}
-                  curve={line.curve as AreaCurve}
-                  beta={line.beta}
-                  fill={area.fill}
-                />
-                <LinePath
-                  shapeData={scaledData}
-                  curve={line.curve}
-                  beta={line.beta}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                />
-                {!marker.hidden &&
-                  scaledData.map((pointDatum) => {
-                    return (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    );
-                  })}
-              </g>
-            );
-          },
-        }}
-      />
-      <Axis
-        {...horizontalAxis}
-        aScale={xScale}
-        position={horizontalAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...verticalAxis}
-        aScale={yScale}
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-      />
+      <CartesianScale xScale={xScale} yScale={yScale}>
+        <Grid directions={grid.directions} color={grid.color} />
+        <Points
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yAxis.domainKey}
+          scopedSlots={{
+            default: ({ shapeData }) => {
+              const lineAreaData = shapeData.map((d, idx) => {
+                const datum: RawDatum = data[idx];
+                return {
+                  x: d.x,
+                  // @todo error margin data must be scaled
+                  y0: yScale.scale(
+                    (datum[yAxis.domainKey] as number) *
+                      (1 - Number(datum[errorMargins.negative]))
+                  ),
+                  y1: yScale.scale(
+                    (datum[yAxis.domainKey] as number) *
+                      (1 + Number(datum[errorMargins.positive]))
+                  ),
+                };
+              });
+              return (
+                <g className="ez-line-error-margin">
+                  <Area
+                    shapeData={lineAreaData as AreaData}
+                    curve={line.curve as AreaCurve}
+                    beta={line.beta}
+                    fill={area.fill}
+                  />
+                  <LinePath
+                    shapeData={shapeData}
+                    curve={line.curve}
+                    beta={line.beta}
+                    stroke={line.stroke}
+                    strokeWidth={line.strokeWidth}
+                  />
+                  {!marker.hidden &&
+                    shapeData.map((pointDatum) => {
+                      return (
+                        <Point
+                          key={pointDatum.id}
+                          shapeDatum={pointDatum}
+                          r={marker.radius}
+                          fill={marker.color}
+                          strokeWidth={line.strokeWidth}
+                        />
+                      );
+                    })}
+                </g>
+              );
+            },
+          }}
+        />
+        <Axis
+          {...horizontalAxis}
+          position={horizontalAxis.position || Position.BOTTOM}
+        />
+        <Axis
+          {...verticalAxis}
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
+        />
+      </CartesianScale>
     </Chart>
   );
 };

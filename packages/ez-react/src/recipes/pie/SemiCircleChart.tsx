@@ -1,11 +1,9 @@
-import React, { FC, useMemo } from 'react';
-import { Direction } from 'eazychart-core/src/types';
+import React, { FC } from 'react';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend } from '@/components/addons/legend/Legend';
-import { PieChartProps } from './PieChart';
-import { ScaleLinear } from 'eazychart-core/src';
+import { PieChartProps } from '@/recipes/pie/PieChart';
 
 export type SemiCircleChartProps = PieChartProps;
 
@@ -38,26 +36,17 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const scale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
-  );
   return (
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[scale]}
       padding={padding}
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
       <Pie
-        aScale={scale}
+        domainKey={domainKey}
         getCenter={({ width, height }) => ({ x: width / 2, y: height })}
         getRadius={({ width, height }) => Math.min(width, height)}
         startAngle={Math.PI / 2}

@@ -94,7 +94,6 @@ export const ScatterChart: FC<ScatterChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={[point.color]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
@@ -104,6 +103,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
           xDomainKey={xAxis.domainKey}
           yDomainKey={yAxis.domainKey}
           r={point.radius}
+          fill={point.color}
         />
         <Axis
           {...horizontalAxis}

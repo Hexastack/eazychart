@@ -40,7 +40,16 @@ export const Bubbles: FC<BubblesProps> = ({
       yScale,
       rScale
     );
-  }, [activeData, xDomainKey, yDomainKey, rDomainKey, xScale, yScale, rScale]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    activeData,
+    xDomainKey,
+    yDomainKey,
+    rDomainKey,
+    xScale.scale,
+    yScale.scale,
+    rScale,
+  ]);
 
   if (scopedSlots && scopedSlots.default) {
     return <g className="ez-bubbles">{scopedSlots.default({ shapeData })}</g>;

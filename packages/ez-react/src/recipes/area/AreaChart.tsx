@@ -108,7 +108,6 @@ export const AreaChart: FC<AreaChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={[area.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
@@ -149,6 +148,7 @@ export const AreaChart: FC<AreaChartProps> = ({
                           shapeDatum={shapeDatum}
                           r={marker.radius}
                           fill={marker.color}
+                          stroke={area.stroke}
                           strokeWidth={area.strokeWidth}
                         />
                       );

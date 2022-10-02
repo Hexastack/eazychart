@@ -2,7 +2,6 @@ import { ChartProps } from '@/components/Chart';
 
 export const baseChartProps: ChartProps = {
   rawData: [],
-  colors: [],
   animationOptions: {
     easing: 'easeLinear',
     duration: 0,

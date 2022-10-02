@@ -4,6 +4,7 @@ import { Arc } from './shapes/Arc';
 import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
 import { scaleArcData } from 'eazychart-core/src';
 import { useRadialScale } from './scales/RadialScale';
+import { useColorScale } from './scales/ColorScale';
 
 export interface ArcsProps
   extends PieConfig,
@@ -31,6 +32,7 @@ export const Arcs: FC<ArcsProps> = ({
 }) => {
   const { activeData, dimensions } = useChart();
   const { rScale: angleScale } = useRadialScale();
+  const { colorScale } = useColorScale();
   const { width, height } = dimensions;
   const center = getCenter({ width, height });
   const radius = getRadius({ width, height });
@@ -40,10 +42,11 @@ export const Arcs: FC<ArcsProps> = ({
       activeData,
       domainKey,
       angleScale,
+      colorScale,
       startAngle,
       sortValues
     );
-  }, [activeData, domainKey, angleScale, sortValues, startAngle]);
+  }, [activeData, domainKey, angleScale, colorScale, sortValues, startAngle]);
 
   return (
     <g

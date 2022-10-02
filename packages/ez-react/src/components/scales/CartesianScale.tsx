@@ -4,23 +4,18 @@ import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 
 type ScaleLinearOrBand = ScaleLinear | ScaleBand;
 
-export type CartesianScaleContext = {
+export type CartesianScaleProps = {
   xScale: ScaleLinearOrBand;
   yScale: ScaleLinearOrBand;
 };
 
-const cartesianScaleContext = createContext<CartesianScaleContext>({
+const CartesianScaleContext = createContext<CartesianScaleProps>({
   xScale: new ScaleLinear(),
   yScale: new ScaleLinear(),
 });
 
 export const useCartesianScales = () => {
-  return useContext(cartesianScaleContext);
-};
-
-export type CartesianScaleProps = {
-  xScale: ScaleLinearOrBand;
-  yScale: ScaleLinearOrBand;
+  return useContext(CartesianScaleContext);
 };
 
 export const CartesianScale: FC<CartesianScaleProps> = ({
@@ -34,8 +29,8 @@ export const CartesianScale: FC<CartesianScaleProps> = ({
   yScale.computeScale(dimensions, activeData);
 
   return (
-    <cartesianScaleContext.Provider value={{ xScale, yScale }}>
+    <CartesianScaleContext.Provider value={{ xScale, yScale }}>
       {children}
-    </cartesianScaleContext.Provider>
+    </CartesianScaleContext.Provider>
   );
 };

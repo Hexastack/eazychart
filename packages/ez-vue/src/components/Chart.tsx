@@ -253,10 +253,12 @@ export default class Chart extends Vue {
     const {
       top, right, bottom, left,
     } = chartPadding;
-    // It take the container dimensions and subsctract padding and legend height
+    // It takes the container dimensions and subtracts padding and legend height
+    const width = containerDimensions.width - left - right;
+    const height = containerDimensions.height - top - bottom;
     return {
-      width: containerDimensions.width - left - right,
-      height: containerDimensions.height - top - bottom,
+      width: Math.max(width, 0),
+      height: Math.max(height, 0),
     };
   }
 

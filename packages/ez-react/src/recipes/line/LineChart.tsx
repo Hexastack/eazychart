@@ -104,7 +104,6 @@ export const LineChart: FC<LineChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
@@ -132,6 +131,7 @@ export const LineChart: FC<LineChartProps> = ({
                           shapeDatum={shapeDatum}
                           r={marker.radius}
                           fill={marker.color}
+                          stroke={line.stroke}
                           strokeWidth={line.strokeWidth}
                         />
                       );

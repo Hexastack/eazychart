@@ -133,7 +133,6 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
@@ -182,6 +181,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
                           shapeDatum={pointDatum}
                           r={marker.radius}
                           fill={marker.color}
+                          stroke={line.stroke}
                           strokeWidth={line.strokeWidth}
                         />
                       );

@@ -25,7 +25,6 @@ export type ChartProps = {
   dimensions?: Partial<Dimensions>;
   animationOptions?: Partial<AnimationOptions>;
   rawData: RawData;
-  colors: string[];
   scopedSlots?: {
     LegendComponent?: React.FC<LegendPropsWithRef>;
     TooltipComponent?: React.FC<TooltipProps>;
@@ -45,7 +44,6 @@ export const Chart: FC<ChartProps> = ({
   padding = {},
   animationOptions,
   rawData,
-  colors,
   children,
   scopedSlots = { TooltipComponent: Tooltip },
   isRTL = false,
@@ -53,7 +51,7 @@ export const Chart: FC<ChartProps> = ({
   isWrapped = true,
 }) => {
   // Data
-  const [dataDict, setDataDict] = useState(normalizeData(rawData, colors));
+  const [dataDict, setDataDict] = useState(normalizeData(rawData));
 
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
@@ -128,8 +126,8 @@ export const Chart: FC<ChartProps> = ({
   }, [padding]);
 
   useEffect(() => {
-    setDataDict(normalizeData(rawData, colors));
-  }, [rawData, colors]);
+    setDataDict(normalizeData(rawData));
+  }, [rawData]);
 
   const chartData = useMemo(() => {
     const values = Object.values(dataDict);
@@ -165,7 +163,6 @@ export const Chart: FC<ChartProps> = ({
         dataDict,
         activeData,
         toggleDatum,
-        colors,
         isRTL,
       }}
     >

@@ -10,6 +10,7 @@ import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -59,11 +60,12 @@ export const PieChart: FC<PieChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Pie domainKey={domainKey} {...arc} />
+      <ColorScale domainKey={domainKey} colors={colors}>
+        <Pie domainKey={domainKey} {...arc} />
+      </ColorScale>
     </Chart>
   );
 };

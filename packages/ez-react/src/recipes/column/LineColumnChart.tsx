@@ -18,6 +18,7 @@ import { Points } from '@/components/Points';
 import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface LineColumnChartProps extends ColumnChartProps {
   yLineAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
@@ -115,14 +116,15 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
     >
       <CartesianScale xScale={xColumnScale} yScale={yColumnScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        <ColorScale domainKey={xAxis.domainKey} colors={colors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}
           title={xAxis.title}

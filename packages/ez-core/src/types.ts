@@ -34,7 +34,6 @@ export type RawData = RawDatum[];
 
 export type NormalizedDatum = RawDatum & {
   id: string;
-  color: string;
   label: string;
   isActive: boolean;
 };
@@ -45,7 +44,7 @@ export type NormalizedDataDict = { [id: string]: NormalizedDatum };
 
 export interface ShapeAttributes {
   id: string;
-  color: string;
+  color?: string;
 }
 
 export interface GridConfig {

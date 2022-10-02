@@ -13,6 +13,7 @@ import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Arcs } from '@/components/Arcs';
 import { RadialScale } from '@/components/scales/RadialScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -70,12 +71,13 @@ export const RadialChart: FC<RadialChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
       <RadialScale rScale={rScale}>
-        <Arcs domainKey={domainKey} {...arc} />
+        <ColorScale domainKey={domainKey} colors={colors}>
+          <Arcs domainKey={domainKey} {...arc} />
+        </ColorScale>
       </RadialScale>
     </Chart>
   );

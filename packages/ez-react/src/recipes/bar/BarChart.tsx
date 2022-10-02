@@ -17,6 +17,7 @@ import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -91,14 +92,15 @@ export const BarChart: FC<BarChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
     >
       <CartesianScale xScale={xScale} yScale={yScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        <ColorScale domainKey={yAxis.domainKey} colors={colors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}
           title={xAxis.title}

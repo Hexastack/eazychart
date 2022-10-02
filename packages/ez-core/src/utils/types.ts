@@ -82,7 +82,6 @@ export interface ChartContext {
     newState: boolean,
     idx: number
   ) => void;
-  colors: string[];
   isRTL: boolean;
 }
 

@@ -107,6 +107,5 @@ export const defaultChartContext: ChartContext = {
   dataDict: {},
   activeData: [],
   toggleDatum: () => {},
-  colors: [],
   isRTL: false,
 };

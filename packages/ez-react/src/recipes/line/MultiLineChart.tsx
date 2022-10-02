@@ -20,6 +20,7 @@ import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { Segments } from '@/components/Segments';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 const getDomainByKeys = (domainKeys: string[], data: RawData) => {
   return domainKeys.reduce(
@@ -118,23 +119,24 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
       <CartesianScale xScale={xScale} yScale={yScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        {yAxis.domainKeys.map((yDomainKey) => {
-          return (
-            <Segments
-              xDomainKey={xAxis.domainKey}
-              yDomainKey={yDomainKey}
-              line={line}
-              marker={marker}
-            />
-          );
-        })}
+        <ColorScale domain={yAxis.domainKeys} colors={colors}>
+          {yAxis.domainKeys.map((yDomainKey) => {
+            return (
+              <Segments
+                xDomainKey={xAxis.domainKey}
+                yDomainKey={yDomainKey}
+                line={line}
+                marker={marker}
+              />
+            );
+          })}
+        </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}
           title={xAxis.title}

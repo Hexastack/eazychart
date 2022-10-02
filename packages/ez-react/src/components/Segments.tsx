@@ -1,5 +1,5 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { scalePointData } from 'eazychart-core/src';
+import { ScaleOrdinal, scalePointData } from 'eazychart-core/src';
 import {
   Dimensions,
   LineConfig,
@@ -9,11 +9,12 @@ import {
 import { Point } from '@/components/shapes/Point';
 import { useChart } from '@/lib/use-chart';
 import {
-  CartesianScaleProps,
+  ScaleLinearOrBand,
   useCartesianScales,
 } from '@/components/scales/CartesianScale';
 import { Points } from '@/components/Points';
 import { LinePath } from '@/components/shapes/LinePath';
+import { useColorScale } from '@/components/scales/ColorScale';
 
 export interface SegmentsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -27,7 +28,11 @@ export interface SegmentsProps extends SVGAttributes<SVGGElement> {
       dimensions,
     }: {
       shapeData: PointDatum[];
-      scales: CartesianScaleProps;
+      scales: {
+        xScale: ScaleLinearOrBand;
+        yScale: ScaleLinearOrBand;
+        colorScale: ScaleOrdinal;
+      };
       dimensions: Dimensions;
     }) => React.ReactChild;
   };
@@ -50,6 +55,7 @@ export const Segments: FC<SegmentsProps> = ({
 }) => {
   const { activeData, dimensions } = useChart();
   const { xScale, yScale } = useCartesianScales();
+  const { colorScale } = useColorScale();
 
   const shapeData = useMemo(() => {
     if (!xScale || !yScale) {
@@ -64,7 +70,7 @@ export const Segments: FC<SegmentsProps> = ({
       <g className="ez-points">
         {scopedSlots.default({
           shapeData,
-          scales: { xScale, yScale },
+          scales: { xScale, yScale, colorScale },
           dimensions,
         })}
       </g>
@@ -77,13 +83,14 @@ export const Segments: FC<SegmentsProps> = ({
       yDomainKey={yDomainKey}
       scopedSlots={{
         default: ({ shapeData }) => {
+          const color = colorScale.scale(yDomainKey);
           return (
             <g className="ez-segment">
               <LinePath
                 shapeData={shapeData}
                 curve={line.curve}
                 beta={line.beta}
-                stroke={line.stroke}
+                stroke={color}
                 strokeWidth={line.strokeWidth}
               />
               {!marker.hidden &&
@@ -94,7 +101,7 @@ export const Segments: FC<SegmentsProps> = ({
                       shapeDatum={shapeDatum}
                       r={marker.radius}
                       fill={marker.color}
-                      stroke={line.stroke}
+                      stroke={color}
                       strokeWidth={line.strokeWidth}
                     />
                   );

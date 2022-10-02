@@ -5,7 +5,7 @@ import { useChart } from '@/lib/use-chart';
 import { PointsProps } from '@/components/Points';
 import { Bubble } from '@/components/shapes/Bubble';
 import { useCartesianScales } from './scales/CartesianScale';
-import { useRadialScale } from './scales/RadialScale';
+import { useLinearScale } from './scales/LinearScale';
 
 export interface BubblesProps extends PointsProps {
   rDomainKey: string;
@@ -25,7 +25,7 @@ export const Bubbles: FC<BubblesProps> = ({
 }) => {
   const { activeData } = useChart();
   const { xScale, yScale } = useCartesianScales();
-  const { rScale } = useRadialScale();
+  const { linearScale: rScale } = useLinearScale();
 
   const shapeData = useMemo(() => {
     if (!xScale || !yScale || !rScale) {

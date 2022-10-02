@@ -3,7 +3,7 @@ import { useChart } from '@/lib/use-chart';
 import { Arc } from './shapes/Arc';
 import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
 import { scaleArcData } from 'eazychart-core/src';
-import { useRadialScale } from './scales/RadialScale';
+import { useLinearScale } from './scales/LinearScale';
 import { useColorScale } from './scales/ColorScale';
 
 export interface ArcsProps
@@ -31,7 +31,7 @@ export const Arcs: FC<ArcsProps> = ({
   ...rest
 }) => {
   const { activeData, dimensions } = useChart();
-  const { rScale: angleScale } = useRadialScale();
+  const { linearScale: angleScale } = useLinearScale();
   const { colorScale } = useColorScale();
   const { width, height } = dimensions;
   const center = getCenter({ width, height });

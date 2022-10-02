@@ -7,24 +7,26 @@ import 'tests/mocks/ResizeObserver';
 
 describe('BubbleChart', () => {
   it('renders a bubble chart', async () => {
-    const wrapper = render(BubbleChart, {
-      propsData: {
-        data: rawData,
-        bubble: {
-          domainKey: 'amount',
-          minRadius: 1,
-          maxRadius: 10,
-          fill: 'blue',
-        },
-        grid: { directions: [] },
-        dimensions,
-        xAxis: {
-          domainKey: 'value',
-        },
-        yAxis: {
-          domainKey: 'amount',
-        },
+    const propsData = {
+      onResize: () => undefined,
+      data: rawData,
+      bubble: {
+        domainKey: 'amount',
+        minRadius: 1,
+        maxRadius: 10,
+        fill: 'blue',
       },
+      grid: { directions: [] },
+      dimensions,
+      xAxis: {
+        domainKey: 'value',
+      },
+      yAxis: {
+        domainKey: 'amount',
+      },
+    };
+    const wrapper = render(BubbleChart, {
+      propsData,
     });
 
     await Vue.nextTick();
@@ -32,23 +34,7 @@ describe('BubbleChart', () => {
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     const wrapper2 = render(BubbleChart, {
-      propsData: {
-        data: rawData,
-        bubble: {
-          domainKey: 'amount',
-          minRadius: 1,
-          maxRadius: 10,
-          fill: 'blue',
-        },
-        grid: { directions: [] },
-        dimensions,
-        xAxis: {
-          domainKey: 'value',
-        },
-        yAxis: {
-          domainKey: 'amount',
-        },
-      },
+      propsData,
     });
 
     await wrapper2.updateProps({

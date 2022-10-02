@@ -11,6 +11,7 @@ describe('LineChart', () => {
   it('renders a line chart', async () => {
     const wrapper = render(LineChart, {
       propsData: {
+        onResize: () => undefined,
         data: pointsData as unknown as RawData,
         line: {
           stroke: 'red',

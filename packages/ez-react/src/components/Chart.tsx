@@ -81,10 +81,12 @@ export const Chart: FC<ChartProps> = ({
     const legendHeight = legendRef.current
       ? Math.floor(legendRef.current.clientHeight)
       : 0;
-    // It take the container dimensions and subsctract padding and legend height
+    // It takes the container dimensions and subtracts padding and legend height
+    const width = containerDimensions.width - left - right;
+    const height = containerDimensions.height - top - bottom - legendHeight;
     return {
-      width: containerDimensions.width - left - right,
-      height: containerDimensions.height - top - bottom - legendHeight,
+      width: Math.max(width, 0),
+      height: Math.max(height, 0),
     };
   }, [containerDimensions, chartPadding]);
 

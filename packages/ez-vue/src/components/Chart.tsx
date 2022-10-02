@@ -257,8 +257,8 @@ export default class Chart extends Vue {
     const width = containerDimensions.width - left - right;
     const height = containerDimensions.height - top - bottom;
     return {
-      width: width >= 0 ? width : 0,
-      height: height >= 0 ? height : 0,
+      width: Math.max(width, 0),
+      height: Math.max(height, 0),
     };
   }
 

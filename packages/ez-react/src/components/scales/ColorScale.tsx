@@ -19,20 +19,29 @@ export const useColorScale = () => {
 };
 
 export type ColorScaleProps = {
-  domainKey: string;
+  domainKey?: string;
+  domain?: string[];
   colors: string[];
 };
 
 export const ColorScale: FC<ColorScaleProps> = ({
   domainKey,
+  domain,
   colors,
   children,
 }) => {
   const { data, dimensions } = useChart();
 
+  if (!domainKey && !domain) {
+    throw new Error(
+      'Either domainKey or domain prop needs to be supplied to the color scale'
+    );
+  }
+
   const colorDomain = useMemo(
-    () => data.map((datum) => datum[domainKey] as string),
-    [data, domainKey]
+    () =>
+      domainKey ? data.map((datum) => datum[domainKey] as string) : domain,
+    [data, domain, domainKey]
   );
 
   const colorScale = useMemo<ScaleOrdinal>(() => {

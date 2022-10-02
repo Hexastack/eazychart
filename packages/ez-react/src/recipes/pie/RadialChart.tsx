@@ -1,7 +1,6 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -60,7 +59,6 @@ export const RadialChart: FC<RadialChartProps> = ({
   const rScale = useMemo<ScaleLinear>(
     () =>
       new ScaleLinear({
-        direction: Direction.HORIZONTAL,
         range: [0, Math.PI * 2],
         domainKey,
       }),

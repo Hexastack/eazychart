@@ -1,7 +1,6 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -61,7 +60,6 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
   const rScale = useMemo<ScaleLinear>(
     () =>
       new ScaleLinear({
-        direction: Direction.HORIZONTAL,
         domainKey,
       }),
     [domainKey]

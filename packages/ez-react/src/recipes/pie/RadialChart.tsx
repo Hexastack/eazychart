@@ -12,7 +12,7 @@ import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Arcs } from '@/components/Arcs';
-import { RadialScale } from '@/components/scales/RadialScale';
+import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {
@@ -77,11 +77,11 @@ export const RadialChart: FC<RadialChartProps> = ({
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <RadialScale rScale={rScale}>
+      <LinearScale linearScale={rScale}>
         <ColorScale domainKey={domainKey} colors={colors}>
           <Arcs domainKey={domainKey} {...arc} />
         </ColorScale>
-      </RadialScale>
+      </LinearScale>
     </Chart>
   );
 };

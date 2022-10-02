@@ -3,7 +3,7 @@ import { Dimensions, Point, PieConfig } from 'eazychart-core/src/types';
 import { scalePieArcData } from 'eazychart-core/src';
 import { useChart } from '@/lib/use-chart';
 import { Arc } from '@/components/shapes/Arc';
-import { useRadialScale } from '@/components/scales/RadialScale';
+import { useLinearScale } from '@/components/scales/LinearScale';
 import { useColorScale } from './scales/ColorScale';
 
 export interface IrregularArcsProps
@@ -32,7 +32,7 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
   ...rest
 }) => {
   const { activeData, dimensions } = useChart();
-  const { rScale } = useRadialScale();
+  const { linearScale: rScale } = useLinearScale();
   const { colorScale } = useColorScale();
 
   const center = useMemo(() => getCenter(dimensions), [dimensions, getCenter]);

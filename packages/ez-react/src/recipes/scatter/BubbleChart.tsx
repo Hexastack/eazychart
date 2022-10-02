@@ -17,7 +17,7 @@ import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { Bubbles } from '@/components/Bubbles';
 import { CartesianScale } from '@/components/scales/CartesianScale';
-import { RadialScale } from '@/components/scales/RadialScale';
+import { LinearScale } from '@/components/scales/LinearScale';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
@@ -113,14 +113,14 @@ export const BubbleChart: FC<BubbleChartProps> = ({
     >
       <CartesianScale xScale={xScale} yScale={yScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        <RadialScale rScale={rScale}>
+        <LinearScale linearScale={rScale}>
           <Bubbles
             xDomainKey={xAxis.domainKey}
             yDomainKey={yAxis.domainKey}
             rDomainKey={bubble.domainKey}
             fill={bubble.fill}
           />
-        </RadialScale>
+        </LinearScale>
         <Axis
           position={horizontalAxis.position || Position.BOTTOM}
           title={horizontalAxis.title}

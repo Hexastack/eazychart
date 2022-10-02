@@ -10,7 +10,7 @@ import {
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { Arcs } from '@/components/Arcs';
-import { RadialScale } from '@/components/scales/RadialScale';
+import { LinearScale } from '@/components/scales/LinearScale';
 
 describe('Arcs', () => {
   it('renders svg radial with the right coordinates / dimensions', async () => {
@@ -30,9 +30,9 @@ describe('Arcs', () => {
             },
           }}
         >
-          <RadialScale rScale={radialLinearScale}>
+          <LinearScale linearScale={radialLinearScale}>
             <Arcs domainKey={'amount'} />
-          </RadialScale>
+          </LinearScale>
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

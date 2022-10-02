@@ -12,7 +12,7 @@ import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { IrregularArcs } from '@/components/IrregularArcs';
-import { RadialScale } from '@/components/scales/RadialScale';
+import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
@@ -74,11 +74,11 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <RadialScale rScale={rScale}>
+      <LinearScale linearScale={rScale}>
         <ColorScale domainKey={domainKey} colors={colors}>
           <IrregularArcs domainKey={domainKey} {...arc} />
         </ColorScale>
-      </RadialScale>
+      </LinearScale>
     </Chart>
   );
 };

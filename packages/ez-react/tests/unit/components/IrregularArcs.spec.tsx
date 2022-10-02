@@ -10,7 +10,7 @@ import { IrregularArcs } from '@/components/IrregularArcs';
 import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
-import { RadialScale } from '@/components/scales/RadialScale';
+import { LinearScale } from '@/components/scales/LinearScale';
 
 describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
@@ -30,9 +30,9 @@ describe('IrregularArcs', () => {
             },
           }}
         >
-          <RadialScale rScale={verticalLinearScale}>
+          <LinearScale linearScale={verticalLinearScale}>
             <IrregularArcs domainKey={'value'} donutRadius={0} />
-          </RadialScale>
+          </LinearScale>
         </Chart>
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

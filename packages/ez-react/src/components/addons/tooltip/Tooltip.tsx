@@ -46,16 +46,20 @@ export const Tooltip: FC<TooltipProps> = ({
     [offset]
   );
 
-  const { id, color, isActive, label, ...attributes } = datum || {};
+  const { id, color, isActive, label, ...attributes } = datum || {
+    color: undefined,
+  };
 
   return (
     <div className="ez-tooltip" style={animatedStyle} {...rest}>
       {datum ? (
         <>
-          <div
-            className="ez-tooltip-color"
-            style={{ backgroundColor: shapeDatum?.color }}
-          ></div>
+          {shapeDatum?.color && (
+            <div
+              className="ez-tooltip-color"
+              style={{ backgroundColor: shapeDatum.color }}
+            ></div>
+          )}
           <div className="ez-tooltip-text">
             {Object.keys(attributes).map((attribute) => {
               return (

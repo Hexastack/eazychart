@@ -3,6 +3,7 @@ import { scaleRectangleData } from 'eazychart-core/src';
 import { Bar } from '@/components/shapes/Bar';
 import { useChart } from '@/lib/use-chart';
 import { useCartesianScales } from '@/components/scales/CartesianScale';
+import { useColorScale } from './scales/ColorScale';
 
 export interface BarsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -12,6 +13,7 @@ export interface BarsProps extends SVGAttributes<SVGGElement> {
 export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
   const { activeData, dimensions, isRTL } = useChart();
   const { xScale, yScale } = useCartesianScales();
+  const { colorScale } = useColorScale();
 
   const scaledData = useMemo(() => {
     if (!xScale || !yScale) {
@@ -23,10 +25,20 @@ export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
       yDomainKey,
       xScale,
       yScale,
+      colorScale,
       dimensions,
       isRTL
     );
-  }, [activeData, xDomainKey, yDomainKey, xScale, yScale, dimensions, isRTL]);
+  }, [
+    activeData,
+    xDomainKey,
+    yDomainKey,
+    xScale,
+    yScale,
+    colorScale,
+    dimensions,
+    isRTL,
+  ]);
 
   return (
     <g className="ez-bars" {...rest}>

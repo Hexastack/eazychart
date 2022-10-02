@@ -17,6 +17,7 @@ import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -92,7 +93,6 @@ export const ColumnChart: FC<ColumnChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
@@ -100,7 +100,9 @@ export const ColumnChart: FC<ColumnChartProps> = ({
     >
       <CartesianScale xScale={xScale} yScale={yScale}>
         <Grid directions={grid.directions} color={grid.color} />
-        <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        <ColorScale domainKey={xAxis.domainKey} colors={colors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}
           title={xAxis.title}

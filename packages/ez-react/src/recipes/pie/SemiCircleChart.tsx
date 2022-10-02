@@ -4,6 +4,7 @@ import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend } from '@/components/addons/legend/Legend';
 import { PieChartProps } from '@/recipes/pie/PieChart';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export type SemiCircleChartProps = PieChartProps;
 
@@ -42,19 +43,20 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <Pie
-        domainKey={domainKey}
-        getCenter={({ width, height }) => ({ x: width / 2, y: height })}
-        getRadius={({ width, height }) => Math.min(width, height)}
-        startAngle={Math.PI / 2}
-        endAngle={-Math.PI / 2}
-        {...arc}
-      />
+      <ColorScale domainKey={domainKey} colors={colors}>
+        <Pie
+          domainKey={domainKey}
+          getCenter={({ width, height }) => ({ x: width / 2, y: height })}
+          getRadius={({ width, height }) => Math.min(width, height)}
+          startAngle={Math.PI / 2}
+          endAngle={-Math.PI / 2}
+          {...arc}
+        />
+      </ColorScale>
     </Chart>
   );
 };

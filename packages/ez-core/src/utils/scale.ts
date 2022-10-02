@@ -1,15 +1,16 @@
+import { ScaleOrdinal } from 'eazychart-core/src';
 import { pie } from 'd3-shape';
 import { ScaleBand, ScaleLinear } from '../scales';
 import { Dimensions, NormalizedData, NormalizedDatum, NumberLike } from '../types';
 import { ArcDatum, PointDatum, RectangleDatum } from './types';
 
-type ComputedScale = ScaleBand | ScaleLinear;
+type ComputedScale = ScaleBand | ScaleLinear | ScaleOrdinal;
 
 export const scaleDatumValue = <T = string | number>(
   datum: NormalizedDatum,
   domainKey: string,
   computedScale: ComputedScale
-): number => {
+) => {
   if (domainKey in datum) {
     const value = datum[domainKey] as T;
     const scaleValue = computedScale.scale(value as NumberLike) || 0;
@@ -24,13 +25,15 @@ export const scaleVerticalRectangleData = (
   yDomainKey: string,
   xScale: ScaleBand,
   yScale: ScaleLinear,
+  colorScale: ScaleOrdinal,
   dimensions: Dimensions
 ): RectangleDatum => {
   const x = scaleDatumValue(datum, xDomainKey, xScale);
   const y = scaleDatumValue(datum, yDomainKey, yScale);
+  const color = scaleDatumValue(datum, xDomainKey, colorScale);
   return {
     id: datum.id,
-    color: datum.color,
+    color,
     x,
     y,
     width: xScale.scale.bandwidth(),
@@ -44,14 +47,16 @@ export const scaleHorizontalRectangleData = (
   yDomainKey: string,
   xScale: ScaleLinear,
   yScale: ScaleBand,
+  colorScale: ScaleOrdinal,
   dimensions: Dimensions,
   isRTL: boolean
 ): RectangleDatum => {
   const x = scaleDatumValue(datum, xDomainKey, xScale);
   const y = scaleDatumValue(datum, yDomainKey, yScale);
+  const color = scaleDatumValue(datum, yDomainKey, colorScale);
   return {
     id: datum.id,
-    color: datum.color,
+    color,
     x: isRTL ? x : 0,
     y,
     width: isRTL ? dimensions.width - x : x,
@@ -65,13 +70,14 @@ export const scaleRectangleData = (
   yDomainKey: string,
   xScale: ComputedScale,
   yScale: ComputedScale,
+  colorScale: ScaleOrdinal,
   dimensions: Dimensions,
   isRTL: boolean
 ): RectangleDatum[] => {
   if (xScale instanceof ScaleBand && yScale instanceof ScaleLinear) {
     // We need to display vertical bars
     return data.map(datum => {
-      return scaleVerticalRectangleData(datum, xDomainKey, yDomainKey, xScale, yScale, dimensions);
+      return scaleVerticalRectangleData(datum, xDomainKey, yDomainKey, xScale, yScale, colorScale, dimensions);
     });
   } else if (xScale instanceof ScaleLinear && yScale instanceof ScaleBand) {
     // We need to display hoziontal bars
@@ -82,6 +88,7 @@ export const scaleRectangleData = (
         yDomainKey,
         xScale,
         yScale,
+        colorScale,
         dimensions,
         isRTL
       );
@@ -102,7 +109,6 @@ export const scalePointDatum = (
   const y = scaleDatumValue(datum, yDomainKey, yScale);
   return {
     id: datum.id,
-    color: datum.color,
     x,
     y,
   };
@@ -141,6 +147,7 @@ export const scaleBubbleData = (
 export const scalePieArcData = (
   data: NormalizedDatum[],
   domainKey: string,
+  colorScale: ScaleOrdinal,
   startAngle: number = 0,
   endAngle: number = Math.PI * 2,
   sortValues?: (a: number, b: number) => number
@@ -156,10 +163,11 @@ export const scalePieArcData = (
   const pieArcs = pieGenerator(values as number[]);
   return pieArcs.map((pieArc, idx) => {
     const datum = data[idx];
+    const color = scaleDatumValue(datum, domainKey, colorScale);
     const shapeDatum: ArcDatum = {
       ...pieArc,
       id: datum.id,
-      color: datum.color,
+      color,
     };
     return shapeDatum;
   });
@@ -168,28 +176,31 @@ export const scalePieArcData = (
 export const scaleArcData = (
   data: NormalizedDatum[],
   domainKey: string,
-  scale: ComputedScale,
+  angleScale: ComputedScale,
+  colorScale: ScaleOrdinal,
   startAngle: number = 0,
   sortValues?: (a: number, b: number) => number
 ): ArcDatum[] => {
-  if (!scale) {
+  if (!angleScale) {
     return [];
   }
   
   const shapeData = data.map((datum, idx) => {
-    const v = datum[domainKey] as number;
+    const endAngle = scaleDatumValue(datum, domainKey, angleScale);
+    const color = scaleDatumValue(datum, domainKey, colorScale);
+    const value = datum[domainKey] as number;
     const arc = {
-      data: v,
-      value: v as number,
+      data: value,
+      value: value,
       index: idx,
       startAngle: startAngle,
-      endAngle: scale.scale(v as number) || 2 * Math.PI,
+      endAngle: endAngle || 2 * Math.PI,
       padAngle: 0,
     };
     const shapeDatum: ArcDatum = {
       ...arc,
       id: datum.id,
-      color: datum.color,
+      color,
     };
     return shapeDatum;
   });

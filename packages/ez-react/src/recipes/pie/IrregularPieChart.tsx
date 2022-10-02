@@ -13,6 +13,7 @@ import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { RadialScale } from '@/components/scales/RadialScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -72,13 +73,14 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
       <RadialScale rScale={rScale}>
-        <IrregularArcs domainKey={domainKey} {...arc} />
+        <ColorScale domainKey={domainKey} colors={colors}>
+          <IrregularArcs domainKey={domainKey} {...arc} />
+        </ColorScale>
       </RadialScale>
     </Chart>
   );

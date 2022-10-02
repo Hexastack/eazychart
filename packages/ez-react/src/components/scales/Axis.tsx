@@ -49,7 +49,7 @@ export const Axis: FC<AxisProps> = ({
       tickSize,
       tickFormat,
     });
-  }, [position, dimensions, axisScale, tickCount, tickSize, tickFormat]);
+  }, [position, dimensions, axisScale.scale, tickCount, tickSize, tickFormat]);
 
   const currentAxis = useAnimation<AxisData>(
     targetAxis,

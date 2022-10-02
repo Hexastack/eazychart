@@ -5,7 +5,6 @@ import {
   padding,
   animationOptions,
   rawData,
-  colors,
   chartData,
 } from 'eazychart-core/src/sample-data';
 import { Chart } from '@/components/Chart';
@@ -20,7 +19,6 @@ describe('Chart', () => {
         padding={padding}
         animationOptions={animationOptions}
         rawData={rawData}
-        colors={colors}
         scopedSlots={{
           LegendComponent: () => <div>Legend Slot</div>,
           TooltipComponent: () => <div>Tooltip Slot</div>,
@@ -40,7 +38,6 @@ describe('Chart', () => {
         padding={padding}
         animationOptions={animationOptions}
         rawData={rawData}
-        colors={colors}
         scopedSlots={{ TooltipComponent: Tooltip }}
       >
         <div>{JSON.stringify(chartData)}</div>

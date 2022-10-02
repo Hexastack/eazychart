@@ -107,7 +107,6 @@ export const BubbleChart: FC<BubbleChartProps> = ({
       dimensions={dimensions}
       rawData={data}
       padding={padding}
-      colors={[bubble.fill]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
@@ -119,6 +118,7 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             xDomainKey={xAxis.domainKey}
             yDomainKey={yAxis.domainKey}
             rDomainKey={bubble.domainKey}
+            fill={bubble.fill}
           />
         </RadialScale>
         <Axis

@@ -2,20 +2,16 @@ import React, { createContext, FC, useContext } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { ScaleLinear } from 'eazychart-core/src';
 
-export type RadialScaleContext = {
+export type RadialScaleProps = {
   rScale: ScaleLinear;
 };
 
-const radialScaleContext = createContext<RadialScaleContext>({
+const RadialScaleContext = createContext<RadialScaleProps>({
   rScale: new ScaleLinear(),
 });
 
 export const useRadialScale = () => {
-  return useContext(radialScaleContext);
-};
-
-export type RadialScaleProps = {
-  rScale: ScaleLinear;
+  return useContext(RadialScaleContext);
 };
 
 export const RadialScale: FC<RadialScaleProps> = ({ rScale, children }) => {
@@ -24,8 +20,8 @@ export const RadialScale: FC<RadialScaleProps> = ({ rScale, children }) => {
   rScale.computeScale(dimensions, activeData);
 
   return (
-    <radialScaleContext.Provider value={{ rScale }}>
+    <RadialScaleContext.Provider value={{ rScale }}>
       {children}
-    </radialScaleContext.Provider>
+    </RadialScaleContext.Provider>
   );
 };

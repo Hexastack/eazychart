@@ -1,12 +1,17 @@
-import React, { createContext, FC, useContext } from 'react';
+import React, {
+  createContext,
+  FC,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
 import { useChart } from '@/lib/use-chart';
 import { ScaleLinear } from 'eazychart-core/src';
+import { ScaleLinearDefinition } from 'eazychart-core/src/types';
 
-export type LinearScaleProps = {
+const LinearScaleContext = createContext<{
   linearScale: ScaleLinear;
-};
-
-const LinearScaleContext = createContext<LinearScaleProps>({
+}>({
   linearScale: new ScaleLinear(),
 });
 
@@ -14,13 +19,22 @@ export const useLinearScale = () => {
   return useContext(LinearScaleContext);
 };
 
-export const LinearScale: FC<LinearScaleProps> = ({
-  linearScale,
+export const LinearScale: FC<ScaleLinearDefinition> = ({
   children,
+  ...definition
 }) => {
   const { activeData, dimensions } = useChart();
 
-  linearScale.computeScale(dimensions, activeData);
+  const linearScale = useMemo<ScaleLinear>(() => {
+    const scale = new ScaleLinear(definition);
+    scale.computeScale(dimensions, activeData);
+    return scale;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [definition]);
+
+  useEffect(() => {
+    linearScale.computeScale(dimensions, activeData);
+  }, [dimensions, activeData, linearScale]);
 
   return (
     <LinearScaleContext.Provider value={{ linearScale }}>

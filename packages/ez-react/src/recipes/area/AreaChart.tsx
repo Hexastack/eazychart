@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
@@ -24,7 +24,6 @@ import { Area } from '@/components/shapes/Area';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface AreaChartProps extends SVGAttributes<SVGGElement> {
-  swapAxis?: boolean;
   data: RawData;
   area?: AreaConfig;
   marker?: MarkerConfig;
@@ -42,7 +41,6 @@ export interface AreaChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const AreaChart: FC<AreaChartProps> = ({
-  swapAxis = false,
   data,
   area = {
     stroke: '#339999',
@@ -83,27 +81,6 @@ export const AreaChart: FC<AreaChartProps> = ({
   },
   onResize,
 }) => {
-  const horizontalAxis = swapAxis ? yAxis : xAxis;
-  const verticalAxis = swapAxis ? xAxis : yAxis;
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: horizontalAxis.domainKey,
-        nice: horizontalAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [isRTL, horizontalAxis]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: verticalAxis.domainKey,
-        nice: verticalAxis.nice || 0,
-      }),
-    [verticalAxis]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -113,11 +90,29 @@ export const AreaChart: FC<AreaChartProps> = ({
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <Points
-          xDomainKey={horizontalAxis.domainKey}
-          yDomainKey={verticalAxis.domainKey}
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yAxis.domainKey}
           scopedSlots={{
             default: ({ shapeData, dimensions: chartDimensions }) => {
               const lineAreaData: AreaData = shapeData.map((d) => {
@@ -161,24 +156,22 @@ export const AreaChart: FC<AreaChartProps> = ({
           }}
         />
         <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickLength}
-          tickFormat={horizontalAxis.tickFormat}
+          position={xAxis.position || Position.BOTTOM}
+          title={xAxis.title}
+          titleAlign={xAxis.titleAlign}
+          tickLength={xAxis.tickLength}
+          tickCount={xAxis.tickCount}
+          tickSize={xAxis.tickLength}
+          tickFormat={xAxis.tickFormat}
         />
         <Axis
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
-          tickFormat={verticalAxis.tickFormat}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+          title={yAxis.title}
+          titleAlign={yAxis.titleAlign}
+          tickLength={yAxis.tickLength}
+          tickCount={yAxis.tickCount}
+          tickSize={yAxis.tickLength}
+          tickFormat={yAxis.tickFormat}
         />
       </CartesianScale>
     </Chart>

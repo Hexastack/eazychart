@@ -1,13 +1,14 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
+import { ScaleLinear } from 'eazychart-core/src';
 import { Direction } from 'eazychart-core/src/types';
 import {
   colors,
   dimensions,
   rawData,
   scaleDefinitions,
-  horizontalLinearScale,
-  verticalLinearScale,
+  verticalLinearScaleDef,
+  horizontalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { Chart, ChartProps } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
@@ -37,8 +38,14 @@ describe('GridLines', () => {
     const gridChart = (
       <Chart {...commonProps}>
         <CartesianScale
-          xScale={horizontalLinearScale}
-          yScale={verticalLinearScale}
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: horizontalLinearScaleDef,
+          }}
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: verticalLinearScaleDef,
+          }}
         >
           <GridLines direction={Direction.HORIZONTAL} tickCount={4} />
         </CartesianScale>
@@ -57,8 +64,14 @@ describe('GridLines', () => {
     const gridChart = (
       <Chart {...commonProps}>
         <CartesianScale
-          xScale={horizontalLinearScale}
-          yScale={verticalLinearScale}
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: horizontalLinearScaleDef,
+          }}
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: verticalLinearScaleDef,
+          }}
         >
           <GridLines direction={Direction.VERTICAL} tickCount={4} />
         </CartesianScale>

@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
@@ -70,25 +70,6 @@ export const BarChart: FC<BarChartProps> = ({
   },
   onResize,
 }) => {
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-        nice: xAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [isRTL, xAxis]
-  );
-  const yScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-      }),
-    [yAxis]
-  );
-
   return (
     <Chart
       dimensions={dimensions}
@@ -99,7 +80,24 @@ export const BarChart: FC<BarChartProps> = ({
       isRTL={isRTL}
       onResize={onResize}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <ColorScale domainKey={yAxis.domainKey} colors={colors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />

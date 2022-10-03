@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AxisConfig,
@@ -74,44 +74,6 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
   },
   onResize,
 }) => {
-  const xColumnScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-      }),
-    [xAxis]
-  );
-  const yColumnScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis]
-  );
-  const xLineScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-        innerPadding: 0.5,
-        outerPadding: 0.1,
-        align: 1,
-      }),
-    [xAxis]
-  );
-  const yLineScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yLineAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis, yLineAxis]
-  );
-
   return (
     <Chart
       dimensions={dimensions}
@@ -122,7 +84,23 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
       isRTL={isRTL}
       onResize={onResize}
     >
-      <CartesianScale xScale={xColumnScale} yScale={yColumnScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <ColorScale domainKey={xAxis.domainKey} colors={colors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
@@ -146,7 +124,26 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
           tickFormat={yAxis.tickFormat}
         />
       </CartesianScale>
-      <CartesianScale xScale={xLineScale} yScale={yLineScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            innerPadding: 0.5,
+            outerPadding: 0.1,
+            align: 1,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yLineAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Points
           xDomainKey={xAxis.domainKey}
           yDomainKey={yLineAxis.domainKey}

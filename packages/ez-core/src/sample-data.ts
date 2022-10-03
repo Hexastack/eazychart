@@ -80,7 +80,7 @@ export const horizontalLinearScaleDef: ScaleLinearDefinition = {
   domainKey: 'amount',
 };
 
-export const RadialLinearScaleDef: ScaleLinearDefinition = {
+export const radialLinearScaleDef: ScaleLinearDefinition = {
   direction: Direction.HORIZONTAL,
   range: [0, 2 * Math.PI],
   domainKey: 'amount',
@@ -108,13 +108,13 @@ export const scaleDefinitions = {
   [verticalLinearScaleId]: verticalLinearScaleDef,
   [horizontalBandScaleId]: horizontalBandScaleDef,
   [horizontalLinearScaleId]: horizontalLinearScaleDef,
-  [RadialLinearScaleId] : RadialLinearScaleDef,
+  [RadialLinearScaleId]: radialLinearScaleDef,
 };
 
 export const verticalLinearScale = new ScaleLinear(verticalLinearScaleDef);
 export const horizontalBandScale = new ScaleBand(horizontalBandScaleDef);
 export const horizontalLinearScale = new ScaleLinear(horizontalLinearScaleDef);
-export const radialLinearScale = new ScaleLinear(RadialLinearScaleDef)
+export const radialLinearScale = new ScaleLinear(radialLinearScaleDef)
 
 verticalLinearScale.computeScale(dimensions, chartData);
 horizontalBandScale.computeScale(dimensions, chartData);

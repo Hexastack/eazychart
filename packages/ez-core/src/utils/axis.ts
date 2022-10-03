@@ -2,7 +2,7 @@ import { AxisData, AxisPath } from '../axis/types';
 import { Position, Dimensions, Anchor, Direction } from '../types';
 import {
   D3CategoricalScales,
-  D3ContuniousScales,
+  D3ContinuousScales,
   D3Scales,
 } from '../scales/types';
 import { ChartPadding, TickOptions } from './types';
@@ -156,7 +156,7 @@ const getAxisLabelAnchorByPosition = (position: Position) => {
 };
 
 const calculateAxisTickRotation = (
-  scale: D3ContuniousScales | D3CategoricalScales,
+  scale: D3ContinuousScales | D3CategoricalScales,
   labels: SVGGraphicsElement[],
   position: Position,
   rotation: number | 'auto'
@@ -189,7 +189,7 @@ const calculateAxisTickRotation = (
 };
 
 export const getAxisLabelAttributes = (
-  scale: D3ContuniousScales | D3CategoricalScales,
+  scale: D3ContinuousScales | D3CategoricalScales,
   elements: SVGGraphicsElement[],
   position: Position,
   rotation: number | 'auto'

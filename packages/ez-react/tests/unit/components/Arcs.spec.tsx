@@ -4,8 +4,8 @@ import { Chart } from '@/components/Chart';
 import {
   dimensions,
   scaleDefinitions,
-  radialLinearScale,
   chartData,
+  radialLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
@@ -30,7 +30,7 @@ describe('Arcs', () => {
             },
           }}
         >
-          <LinearScale linearScale={radialLinearScale}>
+          <LinearScale {...radialLinearScaleDef}>
             <Arcs domainKey={'amount'} />
           </LinearScale>
         </Chart>

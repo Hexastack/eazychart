@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
@@ -70,24 +70,6 @@ export const ColumnChart: FC<ColumnChartProps> = ({
   },
   onResize,
 }) => {
-  const xScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-      }),
-    [xAxis]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis]
-  );
-
   return (
     <Chart
       dimensions={dimensions}
@@ -98,7 +80,23 @@ export const ColumnChart: FC<ColumnChartProps> = ({
       isRTL={isRTL}
       onResize={onResize}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <ColorScale domainKey={xAxis.domainKey} colors={colors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />

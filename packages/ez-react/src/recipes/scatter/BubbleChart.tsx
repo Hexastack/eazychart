@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
@@ -20,7 +20,6 @@ import { CartesianScale } from '@/components/scales/CartesianScale';
 import { LinearScale } from '@/components/scales/LinearScale';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
-  swapAxis?: boolean;
   data: RawData;
   bubble?: BubbleConfig;
   animationOptions?: AnimationOptions;
@@ -36,7 +35,6 @@ export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const BubbleChart: FC<BubbleChartProps> = ({
-  swapAxis = false,
   data,
   bubble = {
     domainKey: 'yValue',
@@ -71,35 +69,6 @@ export const BubbleChart: FC<BubbleChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const horizontalAxis = swapAxis ? yAxis : xAxis;
-  const verticalAxis = swapAxis ? xAxis : yAxis;
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: horizontalAxis.domainKey,
-        nice: horizontalAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [horizontalAxis, isRTL]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: verticalAxis.domainKey,
-        nice: verticalAxis.nice || 0,
-      }),
-    [verticalAxis]
-  );
-  const rScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        domainKey: bubble.domainKey,
-        range: [bubble.minRadius, bubble.maxRadius],
-      }),
-    [bubble]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -108,9 +77,30 @@ export const BubbleChart: FC<BubbleChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
-        <LinearScale linearScale={rScale}>
+        <LinearScale
+          domainKey={bubble.domainKey}
+          range={[bubble.minRadius, bubble.maxRadius]}
+        >
           <Bubbles
             xDomainKey={xAxis.domainKey}
             yDomainKey={yAxis.domainKey}
@@ -118,15 +108,10 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             fill={bubble.fill}
           />
         </LinearScale>
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
         <Axis
-          {...horizontalAxis}
-          position={horizontalAxis.position || Position.BOTTOM}
-        />
-        <Axis
-          {...verticalAxis}
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
         />
       </CartesianScale>
     </Chart>

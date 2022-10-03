@@ -1,5 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
-import { ScaleLinear } from 'eazychart-core/src';
+import React, { FC, SVGAttributes } from 'react';
 import {
   RawData,
   AnimationOptions,
@@ -56,14 +55,6 @@ export const RadialChart: FC<RadialChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const rScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        range: [0, Math.PI * 2],
-        domainKey,
-      }),
-    [domainKey]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -72,7 +63,7 @@ export const RadialChart: FC<RadialChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <LinearScale linearScale={rScale}>
+      <LinearScale domainKey={domainKey} range={[0, Math.PI * 2]}>
         <ColorScale domainKey={domainKey} colors={colors}>
           <Arcs domainKey={domainKey} {...arc} />
         </ColorScale>

@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import {
   Direction,
   Position,
@@ -35,7 +35,6 @@ export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const ScatterChart: FC<ScatterChartProps> = ({
-  swapAxis = false,
   data,
   point = {
     radius: 5,
@@ -68,27 +67,6 @@ export const ScatterChart: FC<ScatterChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const horizontalAxis = swapAxis ? yAxis : xAxis;
-  const verticalAxis = swapAxis ? xAxis : yAxis;
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: horizontalAxis.domainKey,
-        nice: horizontalAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [horizontalAxis, isRTL]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: verticalAxis.domainKey,
-        nice: verticalAxis.nice || 0,
-      }),
-    [verticalAxis]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -97,7 +75,25 @@ export const ScatterChart: FC<ScatterChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <Points
           xDomainKey={xAxis.domainKey}
@@ -105,15 +101,10 @@ export const ScatterChart: FC<ScatterChartProps> = ({
           r={point.radius}
           fill={point.color}
         />
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
         <Axis
-          {...horizontalAxis}
-          position={horizontalAxis.position || Position.BOTTOM}
-        />
-        <Axis
-          {...verticalAxis}
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
         />
       </CartesianScale>
     </Chart>

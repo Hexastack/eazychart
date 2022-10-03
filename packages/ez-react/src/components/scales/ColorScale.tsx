@@ -7,7 +7,6 @@ import React, {
 } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { ScaleOrdinal } from 'eazychart-core/src';
-import { Direction } from 'eazychart-core/src/types';
 
 const ColorScaleContext = createContext<{
   colorScale: ScaleOrdinal;
@@ -38,7 +37,6 @@ export const ColorScale: FC<ColorScaleProps> = ({
 
   const colorScale = useMemo<ScaleOrdinal>(() => {
     const scale = new ScaleOrdinal({
-      direction: Direction.VERTICAL,
       domain: colorDomain,
       range: colors,
     });

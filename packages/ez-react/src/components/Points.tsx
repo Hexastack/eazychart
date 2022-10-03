@@ -4,7 +4,7 @@ import { Dimensions, PointDatum } from 'eazychart-core/src/types';
 import { Point } from '@/components/shapes/Point';
 import { useChart } from '@/lib/use-chart';
 import {
-  CartesianScaleProps,
+  ScaleLinearOrBand,
   useCartesianScales,
 } from '@/components/scales/CartesianScale';
 
@@ -19,7 +19,10 @@ export interface PointsProps extends SVGAttributes<SVGGElement> {
       dimensions,
     }: {
       shapeData: PointDatum[];
-      scales: CartesianScaleProps;
+      scales: {
+        xScale: ScaleLinearOrBand;
+        yScale: ScaleLinearOrBand;
+      };
       dimensions: Dimensions;
     }) => React.ReactChild;
   };

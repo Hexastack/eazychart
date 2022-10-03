@@ -3,8 +3,8 @@ import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import {
   dimensions,
   scaleDefinitions,
-  verticalLinearScale,
   chartData,
+  verticalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { Chart } from '@/components/Chart';
@@ -30,7 +30,7 @@ describe('IrregularArcs', () => {
             },
           }}
         >
-          <LinearScale linearScale={verticalLinearScale}>
+          <LinearScale {...verticalLinearScaleDef}>
             <IrregularArcs domainKey={'value'} donutRadius={0} />
           </LinearScale>
         </Chart>

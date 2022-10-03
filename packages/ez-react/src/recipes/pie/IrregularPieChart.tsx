@@ -1,5 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
-import { ScaleLinear } from 'eazychart-core/src';
+import React, { FC, SVGAttributes } from 'react';
 import {
   RawData,
   AnimationOptions,
@@ -57,13 +56,6 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const rScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        domainKey,
-      }),
-    [domainKey]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -72,7 +64,7 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <LinearScale linearScale={rScale}>
+      <LinearScale domainKey={domainKey}>
         <ColorScale domainKey={domainKey} colors={colors}>
           <IrregularArcs domainKey={domainKey} {...arc} />
         </ColorScale>

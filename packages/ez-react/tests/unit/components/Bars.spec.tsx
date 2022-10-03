@@ -1,12 +1,13 @@
 import React from 'react';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import {
   dimensions,
-  verticalLinearScale,
-  horizontalBandScale,
   scaleDefinitions,
   rawData,
   colors,
+  horizontalBandScaleDef,
+  verticalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { Bars } from '@/components/Bars';
 import { Chart } from '@/components/Chart';
@@ -34,8 +35,14 @@ describe('Bars', () => {
           }}
         >
           <CartesianScale
-            xScale={horizontalBandScale}
-            yScale={verticalLinearScale}
+            xScaleConfig={{
+              ScaleClass: ScaleBand,
+              definition: horizontalBandScaleDef,
+            }}
+            yScaleConfig={{
+              ScaleClass: ScaleLinear,
+              definition: verticalLinearScaleDef,
+            }}
           >
             <Bars xDomainKey={'label'} yDomainKey={'value'} />
           </CartesianScale>

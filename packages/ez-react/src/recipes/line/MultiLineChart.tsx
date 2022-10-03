@@ -95,25 +95,6 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
     () => getDomainByKeys(yAxis.domainKeys, data),
     [yAxis, data]
   );
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-        nice: xAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [isRTL, xAxis]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domain: yDomain,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis, yDomain]
-  );
   return (
     <Chart
       dimensions={dimensions}
@@ -123,7 +104,25 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <CartesianScale xScale={xScale} yScale={yScale}>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domain: yDomain,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
         <Grid directions={grid.directions} color={grid.color} />
         <ColorScale domain={yAxis.domainKeys} colors={colors}>
           {yAxis.domainKeys.map((yDomainKey) => {

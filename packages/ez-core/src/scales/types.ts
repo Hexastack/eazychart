@@ -553,7 +553,7 @@ export type D3Scales =
   | ScalePoint<StringLike>;
 
 /** All D3 contious scale functions except Identity */
-export type D3ContuniousScales =
+export type D3ContinuousScales =
   | ScaleLinear<NumberLike, number, number>
   | ScalePower<NumberLike, number, number>
   | ScaleLogarithmic<NumberLike, number, number>

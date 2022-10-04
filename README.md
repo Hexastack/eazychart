@@ -1,4 +1,3 @@
-# EazyChart
 <img align="center" width="500" alt="EazyChart logo" src="https://eazychart.com/img/logo.png"/>
 <br/>
 <a href="https://eazychart.com/">EazyChart</a> is a reactive chart library, it offers the ability to easily add charts in your React and Vue web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the <a href="https://d3js.org/">D3.js</a> library's submodules.
@@ -150,3 +149,6 @@ yarn storybook // runs storybook for both react and vue
 EazyChart is available under the MIT license.
 
 Copyright (c) 2022 Hexastack.
+
+***
+<h1 align="center">Made with ❤️ by Awesome Contributors</h1>

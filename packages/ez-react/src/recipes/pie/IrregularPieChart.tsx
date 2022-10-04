@@ -65,7 +65,7 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       scopedSlots={scopedSlots}
     >
       <LinearScale domainKey={domainKey}>
-        <ColorScale domainKey={domainKey} colors={colors}>
+        <ColorScale domainKey={domainKey} range={colors}>
           <IrregularArcs domainKey={domainKey} {...arc} />
         </ColorScale>
       </LinearScale>

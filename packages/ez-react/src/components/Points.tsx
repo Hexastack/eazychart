@@ -39,12 +39,17 @@ export const Points: FC<PointsProps> = ({
   const { xScale, yScale } = useCartesianScales();
 
   const shapeData = useMemo(() => {
-    if (!xScale || !yScale) {
+    try {
+      return scalePointData(activeData, xDomainKey, yDomainKey, xScale, yScale);
+    } catch {
       return [];
     }
-    return scalePointData(activeData, xDomainKey, yDomainKey, xScale, yScale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeData, xDomainKey, yDomainKey, xScale.scale, yScale.scale]);
+
+  if (!shapeData.length) {
+    return null;
+  }
 
   if (scopedSlots && scopedSlots.default) {
     return (

@@ -19,8 +19,9 @@ import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
-import { Segments } from '@/components/Segments';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { DomainKeyLegend } from '@/components/addons/legend/DomainKeyLegend';
+import { MultiLine } from '@/components/MultiLine';
 
 const getDomainByKeys = (domainKeys: string[], data: RawData) => {
   return domainKeys.reduce(
@@ -88,6 +89,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
   dimensions = {},
   scopedSlots = {
     TooltipComponent: Tooltip,
+    LegendComponent: DomainKeyLegend,
   },
   onResize,
 }) => {
@@ -124,17 +126,13 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domain={yAxis.domainKeys} colors={colors}>
-          {yAxis.domainKeys.map((yDomainKey) => {
-            return (
-              <Segments
-                xDomainKey={xAxis.domainKey}
-                yDomainKey={yDomainKey}
-                line={line}
-                marker={marker}
-              />
-            );
-          })}
+        <ColorScale domain={yAxis.domainKeys} range={colors}>
+          <MultiLine
+            xDomainKey={xAxis.domainKey}
+            yDomainKeys={yAxis.domainKeys}
+            line={line}
+            marker={marker}
+          />
         </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}

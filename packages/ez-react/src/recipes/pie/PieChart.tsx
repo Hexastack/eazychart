@@ -66,7 +66,7 @@ export const PieChart: FC<PieChartProps> = ({
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <ColorScale domainKey={domainKey} colors={colors}>
+      <ColorScale domainKey={domainKey} range={colors}>
         <Pie domainKey={domainKey} {...arc} />
       </ColorScale>
     </Chart>

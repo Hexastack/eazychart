@@ -8,6 +8,7 @@ import {
   Point,
   ShapeAttributes,
 } from '../types';
+import { AbstractScale, ScaleBand, ScaleLinear, ScaleOrdinal  } from '../scales';
 
 export type ChartPadding = {
   top: number;
@@ -77,12 +78,16 @@ export interface ChartContext {
   data: NormalizedData;
   dataDict: NormalizedDataDict;
   activeData: NormalizedData;
+  excludedAttributes: string[];
   toggleDatum: (
     datum: NormalizedDatum,
     newState: boolean,
     idx: number
   ) => void;
+  toggleDatumAttribute: (attribute: string) => void;
   isRTL: boolean;
+  registerScale: (scaleId: string, scale: AnyScale) => void,
+  getScale: (scaleId: string) => AnyScale | null,
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
@@ -124,3 +129,5 @@ export type AreaConfig = CurveConfig & {
 export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
+
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;

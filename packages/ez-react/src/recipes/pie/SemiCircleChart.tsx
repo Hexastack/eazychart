@@ -47,7 +47,7 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
       scopedSlots={scopedSlots}
       onResize={onResize}
     >
-      <ColorScale domainKey={domainKey} colors={colors}>
+      <ColorScale domainKey={domainKey} range={colors}>
         <Pie
           domainKey={domainKey}
           getCenter={({ width, height }) => ({ x: width / 2, y: height })}

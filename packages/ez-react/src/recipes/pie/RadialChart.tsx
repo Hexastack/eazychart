@@ -67,7 +67,7 @@ export const RadialChart: FC<RadialChartProps> = ({
       onResize={onResize}
     >
       <LinearScale domainKey={domainKey} range={[0, Math.PI * 2]}>
-        <ColorScale domainKey={domainKey} colors={colors}>
+        <ColorScale domainKey={domainKey} range={colors}>
           <Arcs domainKey={domainKey} {...arc} />
         </ColorScale>
       </LinearScale>

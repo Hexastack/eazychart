@@ -98,7 +98,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domainKey={xAxis.domainKey} colors={colors}>
+        <ColorScale domainKey={xAxis.domainKey} range={colors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
         </ColorScale>
         <Axis

@@ -61,7 +61,6 @@ export const Chart: FC<ChartProps> = ({
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
   const { dimensions: parentDimensions } = useResponsiveChart();
-  // console.log(responsiveDimensions);
   const legendRef = React.useRef<HTMLDivElement | null>(null);
 
   const chartPadding: ChartPadding = useMemo(

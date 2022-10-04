@@ -4,7 +4,6 @@ import { debounce, defaultChartDimensions } from 'eazychart-core/src';
 import { ResponsiveChartContext } from '@/lib/use-responsive-chart';
 
 export type ResponsiveChartContainerProps = {
-  dimensions?: Partial<Dimensions>;
   onResize?: (dimensions: Dimensions) => void;
 };
 

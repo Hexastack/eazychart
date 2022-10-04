@@ -37,7 +37,7 @@ const TemplateWithParentDimensions: Story<BarChartProps> = (args) => {
       }}
     >
       <ResponsiveChartContainer>
-        <BarChart {...args} dimensions={{ width: 800, height: 600 }} />
+        <BarChart {...args} />
       </ResponsiveChartContainer>
     </ChartWrapper>
   );

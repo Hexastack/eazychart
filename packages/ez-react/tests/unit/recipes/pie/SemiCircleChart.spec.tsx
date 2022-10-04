@@ -12,7 +12,7 @@ describe('SemiCircleChart', () => {
       wrapper = render(
         <SemiCircleChart
           data={rawData}
-          colors={colors}
+          range={colors}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,

@@ -7,6 +7,7 @@ import React, {
 } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { ScaleOrdinal } from 'eazychart-core/src';
+import { ScaleOrdinalDefinition } from 'eazychart-core/src/types';
 
 const ColorScaleContext = createContext<{
   colorScale: ScaleOrdinal;
@@ -18,45 +19,40 @@ export const useColorScale = () => {
   return useContext(ColorScaleContext);
 };
 
-export type ColorScaleProps = {
-  domainKey?: string;
-  domain?: string[];
-  colors: string[];
-};
-
-export const ColorScale: FC<ColorScaleProps> = ({
-  domainKey,
-  domain,
-  colors,
+export const ColorScale: FC<ScaleOrdinalDefinition> = ({
   children,
+  ...definition
 }) => {
-  const { data, dimensions } = useChart();
+  const { data, dimensions, registerScale } = useChart();
 
-  if (!domainKey && !domain) {
+  if (!definition.domainKey && !definition.domain) {
     throw new Error(
       'Either domainKey or domain prop needs to be supplied to the color scale'
     );
   }
 
-  const colorDomain = useMemo(
-    () =>
-      domainKey ? data.map((datum) => datum[domainKey] as string) : domain,
-    [data, domain, domainKey]
-  );
+  const domain = useMemo(() => {
+    const { domainKey, domain } = definition;
+    return domainKey ? data.map((datum) => datum[domainKey] as string) : domain;
+  }, [data, definition]);
 
   const colorScale = useMemo<ScaleOrdinal>(() => {
-    const scale = new ScaleOrdinal({
-      domain: colorDomain,
-      range: colors,
-    });
+    const scale = new ScaleOrdinal(definition);
     scale.computeScale(dimensions, data);
     return scale;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [colorDomain, colors]);
+  }, [domain, definition]);
 
   useEffect(() => {
     colorScale.computeScale(dimensions, data);
   }, [dimensions, data, colorScale]);
+
+  useEffect(() => {
+    // Register the color scale in the chart context.
+    // This is useful for the legend for example.
+    registerScale('colorScale', colorScale);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <ColorScaleContext.Provider value={{ colorScale }}>

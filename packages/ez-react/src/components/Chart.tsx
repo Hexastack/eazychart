@@ -12,6 +12,7 @@ import {
   Dimensions,
   RawData,
   NormalizedDatum,
+  AnyScale,
 } from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
 import { LegendProvider } from '@/components/addons/legend/LegendProvider';
@@ -52,6 +53,11 @@ export const Chart: FC<ChartProps> = ({
 }) => {
   // Data
   const [dataDict, setDataDict] = useState(normalizeData(rawData));
+  const [excludedAttributes, setExcludedAttributes] = useState<string[]>([]);
+  // Scales (scales needs to be registered to give them a global scope)
+  const [scales, setScales] = useState<{
+    [scaleId: string]: AnyScale;
+  }>({});
 
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
@@ -135,8 +141,20 @@ export const Chart: FC<ChartProps> = ({
   }, [dataDict, isRTL]);
 
   const activeData = useMemo(() => {
-    return chartData.filter(({ isActive }) => isActive);
-  }, [chartData]);
+    return (
+      chartData
+        // Return active data only
+        .filter(({ isActive }) => isActive)
+        // Omit excluded attributes
+        .map((datum) => {
+          return Object.fromEntries(
+            Object.entries(datum).filter(
+              ([attribute]) => !excludedAttributes.includes(attribute)
+            )
+          ) as NormalizedDatum;
+        })
+    );
+  }, [chartData, excludedAttributes]);
 
   const toggleDatum = useCallback(
     (datum: NormalizedDatum, newState: boolean, idx: number) => {
@@ -153,6 +171,33 @@ export const Chart: FC<ChartProps> = ({
     [dataDict, onToggleDatum]
   );
 
+  const toggleDatumAttribute = useCallback(
+    (attribute: string) => {
+      if (excludedAttributes.includes(attribute)) {
+        setExcludedAttributes(
+          excludedAttributes.filter((name) => name !== attribute)
+        );
+      } else {
+        setExcludedAttributes([...excludedAttributes, attribute]);
+      }
+    },
+    [excludedAttributes, setExcludedAttributes]
+  );
+
+  // Helpers to offer some scales a global scope. This is useful to have the legend
+  // access the color domain for example. Otherwise, we would need to add a portal
+  // which is still experimental in react + does not exist in Vue2.
+  const registerScale = (scaleId: string, scale: AnyScale) => {
+    setScales({
+      ...scales,
+      [scaleId]: scale,
+    });
+  };
+
+  const getScale = (scaleId: string): AnyScale | null => {
+    return scaleId in scales ? scales[scaleId] : null;
+  };
+
   return (
     <ChartContext.Provider
       value={{
@@ -162,8 +207,12 @@ export const Chart: FC<ChartProps> = ({
         data: chartData,
         dataDict,
         activeData,
+        excludedAttributes,
         toggleDatum,
+        toggleDatumAttribute,
         isRTL,
+        registerScale,
+        getScale,
       }}
     >
       {/*

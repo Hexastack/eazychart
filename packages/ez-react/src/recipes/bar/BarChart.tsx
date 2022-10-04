@@ -96,7 +96,7 @@ export const BarChart: FC<BarChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domainKey={yAxis.domainKey} colors={colors}>
+        <ColorScale domainKey={yAxis.domainKey} range={colors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
         </ColorScale>
         <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />

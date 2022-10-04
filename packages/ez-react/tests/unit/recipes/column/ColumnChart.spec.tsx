@@ -13,7 +13,7 @@ describe('ColumnChart', () => {
       wrapper = render(
         <ColumnChart
           data={rawData}
-          colors={colors}
+          range={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}
           xAxis={{

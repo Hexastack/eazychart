@@ -13,7 +13,7 @@ describe('BarChart', () => {
       wrapper = render(
         <BarChart
           data={rawData}
-          colors={colors}
+          range={colors}
           grid={{ directions: [] }}
           dimensions={dimensions}
           xAxis={{

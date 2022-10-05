@@ -82,7 +82,6 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
     TooltipComponent: Tooltip,
     LegendComponent: Legend,
   },
-  onResize,
 }) => {
   const { activeDomainKeys, activeDomain, toggleDomainKey } =
     useToggableDomainKey(data, yAxis.domainKeys);
@@ -94,7 +93,6 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
       onLegendClick={toggleDomainKey}
     >
       <CartesianScale

@@ -21,7 +21,6 @@ export const normalizeData = (
       return {
         ...d,
         id: d.id || index.toString(),
-        isActive: 'isActive' in d ? d.isActive : true,
         label:
           labelKey in d ? d[labelKey] : findDatumLabel(d) || index.toString(),
       } as NormalizedDatum;

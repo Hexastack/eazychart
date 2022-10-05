@@ -30,7 +30,7 @@ export const Pie: FC<PieProps> = ({
   sortValues,
   ...rest
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
   const { colorScale } = useColorScale();
   const { width, height } = dimensions;
   const center = getCenter({ width, height });
@@ -40,14 +40,14 @@ export const Pie: FC<PieProps> = ({
 
   const shapeData = useMemo(() => {
     return scalePieArcData(
-      activeData,
+      data,
       domainKey,
       colorScale,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [activeData, domainKey, colorScale, sortValues, startAngle, endAngle]);
+  }, [data, domainKey, colorScale, sortValues, startAngle, endAngle]);
 
   return (
     <g

@@ -23,18 +23,18 @@ export const LinearScale: FC<ScaleLinearDefinition> = ({
   children,
   ...definition
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
 
   const linearScale = useMemo<ScaleLinear>(() => {
     const scale = new ScaleLinear(definition);
-    scale.computeScale(dimensions, activeData);
+    scale.computeScale(dimensions, data);
     return scale;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [definition]);
 
   useEffect(() => {
-    linearScale.computeScale(dimensions, activeData);
-  }, [dimensions, activeData, linearScale]);
+    linearScale.computeScale(dimensions, data);
+  }, [dimensions, data, linearScale]);
 
   return (
     <LinearScaleContext.Provider value={{ linearScale }}>

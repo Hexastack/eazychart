@@ -12,7 +12,7 @@ describe('PieChart', () => {
       wrapper = render(
         <PieChart
           data={rawData}
-          range={colors}
+          colors={colors}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,

@@ -42,21 +42,21 @@ export const CartesianScale: FC<CartesianScaleProps> = ({
   yScaleConfig,
   children,
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
 
   const xScale = useMemo(() => {
     const { ScaleClass, definition } = xScaleConfig;
     const scale = new ScaleClass(definition);
-    scale.computeScale(dimensions, activeData);
+    scale.computeScale(dimensions, data);
     return scale;
-  }, [xScaleConfig, dimensions, activeData]);
+  }, [xScaleConfig, dimensions, data]);
 
   const yScale = useMemo(() => {
     const { ScaleClass, definition } = yScaleConfig;
     const scale = new ScaleClass(definition);
-    scale.computeScale(dimensions, activeData);
+    scale.computeScale(dimensions, data);
     return scale;
-  }, [yScaleConfig, dimensions, activeData]);
+  }, [yScaleConfig, dimensions, data]);
 
   return (
     <CartesianScaleContext.Provider value={{ xScale, yScale }}>

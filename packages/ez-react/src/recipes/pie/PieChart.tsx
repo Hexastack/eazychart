@@ -11,13 +11,15 @@ import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   arc?: PieConfig;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
@@ -40,7 +42,8 @@ export const PieChart: FC<PieChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     donutRadius: 0,
     cornerRadius: 0,
@@ -55,16 +58,22 @@ export const PieChart: FC<PieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
+  );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onLegendClick={toggleDatum}
     >
-      <ColorScale domainKey={domainKey} range={colors}>
-        <Pie domainKey={domainKey} {...arc} />
+      <ColorScale domainKey={labelDomainKey} range={activeColors}>
+        <Pie domainKey={valueDomainKey} {...arc} />
       </ColorScale>
     </Chart>
   );

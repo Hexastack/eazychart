@@ -1,6 +1,11 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { Prop, Watch, ProvideReactive } from 'vue-property-decorator';
+import {
+  Prop,
+  Watch,
+  ProvideReactive,
+  InjectReactive,
+} from 'vue-property-decorator';
 import {
   AnimationOptions,
   ChartContext,
@@ -10,7 +15,6 @@ import {
   NormalizedDatum,
 } from 'eazychart-core/src/types';
 import {
-  debounce,
   defaultChartAnimationOptions,
   defaultChartContext,
   defaultChartDimensions,
@@ -23,6 +27,9 @@ import LegendProvider from '@/components/addons/legend/LegendProvider';
 
 @Component
 export default class Chart extends Vue {
+  @InjectReactive('responsiveChart')
+  private responsiveChart!: { dimensions: Dimensions };
+
   @Prop({
     type: Object as PropType<Dimensions>,
     default() {
@@ -79,20 +86,9 @@ export default class Chart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  private resizeObserver!: ResizeObserver;
-
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-  })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
-
   private containerDimensions: Dimensions = {
-    width: this.dimensions?.width || 0,
-    height: this.dimensions?.height || 0,
+    width: 0,
+    height: 0,
   };
 
   private legendHeight = 0;
@@ -108,17 +104,12 @@ export default class Chart extends Vue {
     scales: this.scales || [],
   };
 
-  beforeDestroy() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  }
-
   created() {
     this.chart.dataDict = normalizeData(this.rawData, this.colors);
+    const parentDimensions = this.responsiveChart.dimensions;
     this.containerDimensions = {
-      width: this.dimensions?.width || defaultChartDimensions.width,
-      height: this.dimensions?.height || defaultChartDimensions.height,
+      width: this.dimensions?.width || parentDimensions.width || defaultChartDimensions.width,
+      height: this.dimensions?.height || parentDimensions.height || defaultChartDimensions.height,
     };
   }
 
@@ -128,18 +119,6 @@ export default class Chart extends Vue {
       const legendRef = this.getLegendRef();
       this.legendHeight = legendRef?.clientHeight || 0;
     });
-    // Dimensions values has not been set, we need to observe and resize
-    if (!this.dimensions?.width || !this.dimensions?.height) {
-      const observer = new ResizeObserver(
-        debounce((entries: ResizeObserverEntry[]) => {
-          this.resizeChart(entries);
-        }, 100),
-      );
-      const chartRef = this.$refs.chart as Node;
-      observer.observe(chartRef.parentNode as Element, {
-        box: 'border-box',
-      });
-    }
   }
 
   @Watch('rawData')
@@ -154,13 +133,14 @@ export default class Chart extends Vue {
   }
 
   @Watch('dimensions')
+  @Watch('responsiveChart.dimensions')
   onDimensionsChange() {
     // If dimensions prop is provided, we force the values
-    const newDimensions = {
-      width: this.dimensions?.width || this.containerDimensions.width,
-      height: this.dimensions?.height || this.containerDimensions.height,
+    const parentDimensions = this.responsiveChart.dimensions;
+    this.containerDimensions = {
+      width: this.dimensions?.width || parentDimensions.width,
+      height: this.dimensions?.height || parentDimensions.height,
     };
-    this.containerDimensions = newDimensions;
   }
 
   @Watch('containerDimensions')
@@ -192,26 +172,6 @@ export default class Chart extends Vue {
     this.$set(this.chart.dataDict, datum.id, {
       ...datum,
       isActive: newState,
-    });
-  }
-
-  resizeChart(entries: ResizeObserverEntry[]) {
-    entries.forEach((entry) => {
-      // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
-      // At last, if width / height are equal to zero we default the dimensions
-      // so that the end-user would be able to see the chart.
-      const newDimensions = {
-        width:
-          this.dimensions?.width
-          || Math.floor(entry.contentRect.width)
-          || defaultChartDimensions.width,
-        height:
-          this.dimensions?.height
-          || Math.floor(entry.contentRect.height)
-          || defaultChartDimensions.height,
-      };
-      this.containerDimensions = newDimensions;
-      this.onResize && this.onResize(newDimensions);
     });
   }
 

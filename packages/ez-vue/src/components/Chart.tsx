@@ -27,6 +27,9 @@ import LegendProvider from '@/components/addons/legend/LegendProvider';
 
 @Component
 export default class Chart extends Vue {
+  @InjectReactive('responsiveChart')
+  private responsiveChart!: { dimensions: Dimensions };
+
   @Prop({
     type: Object as PropType<Dimensions>,
     default() {
@@ -83,11 +86,6 @@ export default class Chart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  private resizeObserver!: ResizeObserver;
-
-  @InjectReactive('responsiveContainer')
-  private parentDimensions!: Dimensions;
-
   private containerDimensions: Dimensions = {
     width: 0,
     height: 0,
@@ -106,23 +104,12 @@ export default class Chart extends Vue {
     scales: this.scales || [],
   };
 
-  beforeDestroy() {
-    if (this.resizeObserver) {
-      this.resizeObserver.disconnect();
-    }
-  }
-
   created() {
     this.chart.dataDict = normalizeData(this.rawData, this.colors);
+    const parentDimensions = this.responsiveChart.dimensions;
     this.containerDimensions = {
-      width:
-        this.dimensions?.width
-        || this.parentDimensions?.width
-        || defaultChartDimensions.width,
-      height:
-        this.dimensions?.height
-        || this.parentDimensions?.height
-        || defaultChartDimensions.height,
+      width: this.dimensions?.width || parentDimensions.width || defaultChartDimensions.width,
+      height: this.dimensions?.height || parentDimensions.height || defaultChartDimensions.height,
     };
   }
 
@@ -146,13 +133,14 @@ export default class Chart extends Vue {
   }
 
   @Watch('dimensions')
+  @Watch('responsiveChart.dimensions')
   onDimensionsChange() {
     // If dimensions prop is provided, we force the values
-    const newDimensions = {
-      width: this.dimensions?.width || this.containerDimensions.width,
-      height: this.dimensions?.height || this.containerDimensions.height,
+    const parentDimensions = this.responsiveChart.dimensions;
+    this.containerDimensions = {
+      width: this.dimensions?.width || parentDimensions.width,
+      height: this.dimensions?.height || parentDimensions.height,
     };
-    this.containerDimensions = newDimensions;
   }
 
   @Watch('containerDimensions')

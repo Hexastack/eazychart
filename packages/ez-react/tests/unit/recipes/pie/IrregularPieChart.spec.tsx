@@ -12,7 +12,7 @@ describe('IrregularPieChart', () => {
       wrapper = render(
         <IrregularPieChart
           data={rawData}
-          range={colors}
+          colors={colors}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,

@@ -1,7 +1,7 @@
 import { ScaleOrdinal } from 'eazychart-core/src';
 import { pie } from 'd3-shape';
 import { ScaleBand, ScaleLinear } from '../scales';
-import { Dimensions, NormalizedData, NormalizedDatum, NumberLike } from '../types';
+import { ArrayOfTwoNumbers, Dimensions, NormalizedData, NormalizedDatum, NumberLike, RawData } from '../types';
 import { ArcDatum, PointDatum, RectangleDatum } from './types';
 
 type ComputedScale = ScaleBand | ScaleLinear | ScaleOrdinal;
@@ -208,4 +208,14 @@ export const scaleArcData = (
     return shapeData.sort((a, b) => sortValues(a.value, b.value));
   }
   return shapeData;
+};
+
+export const getDomainByKeys = (domainKeys: string[], data: RawData) => {
+  return domainKeys.reduce(
+    ([min, max], domainKey) => {
+      const values = data.map((datum) => datum[domainKey] as number);
+      return [Math.min(min, ...values), Math.max(max, ...values)];
+    },
+    [+Infinity, -Infinity] as number[]
+  ) as ArrayOfTwoNumbers;
 };

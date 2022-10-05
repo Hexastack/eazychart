@@ -1,4 +1,3 @@
-import { AbstractScale } from 'eazychart-core';
 import { AxisData } from '../axis/types';
 import {
   PointDatum,
@@ -106,10 +105,6 @@ export const defaultChartContext: ChartContext = {
   animationOptions: undefined,
   data: [],
   dataDict: {},
-  activeData: [],
-  excludedAttributes: [],
-  toggleDatum: () => {},
-  toggleDatumAttribute: () => {},
   isRTL: false,
   registerScale: () => {},
   getScale: () => null,

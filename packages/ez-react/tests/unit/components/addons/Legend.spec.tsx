@@ -6,21 +6,19 @@ import 'tests/mocks/ResizeObserver';
 
 describe('Legend', () => {
   it('renders no filters for empty data', () => {
-    const wrapper = render(<Legend data={[]} toggleDatum={jest.fn()} />);
+    const wrapper = render(<Legend onLegendClick={jest.fn()} />);
     expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 
   it('renders filters for data supplied', async () => {
-    const wrapper = render(<Legend data={chartData} toggleDatum={jest.fn()} />);
+    const wrapper = render(<Legend onLegendClick={jest.fn()} />);
 
     expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 
   it('calls toggleDatum on filter click', async () => {
     const onToggleDatum = jest.fn();
-    const wrapper = render(
-      <Legend data={chartData} toggleDatum={onToggleDatum} />
-    );
+    const wrapper = render(<Legend onLegendClick={onToggleDatum} />);
 
     const [firstLegend, secondLegend] = await wrapper.findAllByRole('button');
     fireEvent.click(firstLegend);

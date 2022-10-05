@@ -5,6 +5,7 @@ import { Pie } from '@/components/Pie';
 import { Legend } from '@/components/addons/legend/Legend';
 import { PieChartProps } from '@/recipes/pie/PieChart';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export type SemiCircleChartProps = PieChartProps;
 
@@ -22,7 +23,8 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     donutRadius: 0,
     cornerRadius: 0,
@@ -38,18 +40,24 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
   },
   onResize,
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
+  );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
+      onLegendClick={toggleDatum}
     >
-      <ColorScale domainKey={domainKey} range={colors}>
+      <ColorScale domainKey={labelDomainKey} range={activeColors}>
         <Pie
-          domainKey={domainKey}
+          domainKey={valueDomainKey}
           getCenter={({ width, height }) => ({ x: width / 2, y: height })}
           getRadius={({ width, height }) => Math.min(width, height)}
           startAngle={Math.PI / 2}

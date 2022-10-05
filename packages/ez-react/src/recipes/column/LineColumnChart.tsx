@@ -19,6 +19,7 @@ import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface LineColumnChartProps extends ColumnChartProps {
   yLineAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
@@ -73,14 +74,20 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    xAxis.domainKey,
+    colors
+  );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onLegendClick={toggleDatum}
     >
       <CartesianScale
         xScaleConfig={{
@@ -100,7 +107,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domainKey={xAxis.domainKey} range={colors}>
+        <ColorScale domainKey={xAxis.domainKey} range={activeColors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
         </ColorScale>
         <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />

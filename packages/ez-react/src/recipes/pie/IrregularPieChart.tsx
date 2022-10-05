@@ -12,13 +12,15 @@ import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   arc?: PieConfig;
   dimensions: Partial<Dimensions>;
   scopedSlots?: {
@@ -41,7 +43,8 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     donutRadius: 0,
     cornerRadius: 0,
@@ -56,17 +59,23 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
+  );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onLegendClick={toggleDatum}
     >
-      <LinearScale domainKey={domainKey}>
-        <ColorScale domainKey={domainKey} range={colors}>
-          <IrregularArcs domainKey={domainKey} {...arc} />
+      <LinearScale domainKey={valueDomainKey}>
+        <ColorScale domainKey={labelDomainKey} range={activeColors}>
+          <IrregularArcs domainKey={valueDomainKey} {...arc} />
         </ColorScale>
       </LinearScale>
     </Chart>

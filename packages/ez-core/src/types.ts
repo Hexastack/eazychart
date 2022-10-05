@@ -35,7 +35,6 @@ export type RawData = RawDatum[];
 export type NormalizedDatum = RawDatum & {
   id: string;
   label: string;
-  isActive: boolean;
 };
 
 export type NormalizedData = NormalizedDatum[];

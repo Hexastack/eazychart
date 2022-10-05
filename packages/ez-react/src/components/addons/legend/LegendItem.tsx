@@ -1,21 +1,30 @@
-import React, { DOMAttributes } from 'react';
+import React, { DOMAttributes, useState } from 'react';
 
 export interface LegendItemProps extends DOMAttributes<HTMLDivElement> {
   label: string;
   color: string;
-  isActive: boolean;
+  onToggle?: (key: string, isActive: boolean, color: string) => void;
 }
 
 export const LegendItem: React.FC<LegendItemProps> = ({
   label,
   color,
-  isActive,
+  onToggle,
   onClick,
   ...rest
 }) => {
+  const [isActive, setIsActive] = useState(true);
+
+  const handleClick = () => {
+    if (onToggle) {
+      onToggle(label, !isActive, color);
+      setIsActive(!isActive);
+    }
+  };
+
   return (
     <div
-      onClick={onClick}
+      onClick={handleClick}
       role="button"
       className={`ez-legend-key${!isActive ? ' ez-legend-disable' : ''}`}
       {...rest}

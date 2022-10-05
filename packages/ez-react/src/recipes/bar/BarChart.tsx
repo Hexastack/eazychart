@@ -18,6 +18,7 @@ import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -68,14 +69,21 @@ export const BarChart: FC<BarChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    yAxis.domainKey,
+    colors
+  );
+
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onLegendClick={toggleDatum}
     >
       <CartesianScale
         xScaleConfig={{
@@ -96,7 +104,7 @@ export const BarChart: FC<BarChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domainKey={yAxis.domainKey} range={colors}>
+        <ColorScale domainKey={yAxis.domainKey} range={activeColors}>
           <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
         </ColorScale>
         <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />

@@ -31,7 +31,7 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
   sortValues,
   ...rest
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
   const { linearScale: rScale } = useLinearScale();
   const { colorScale } = useColorScale();
 
@@ -45,14 +45,14 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
 
   const shapeData = useMemo(() => {
     return scalePieArcData(
-      activeData,
+      data,
       domainKey,
       colorScale,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [activeData, domainKey, colorScale, sortValues, startAngle, endAngle]);
+  }, [data, domainKey, colorScale, sortValues, startAngle, endAngle]);
 
   const minArcValue = useMemo(
     () =>

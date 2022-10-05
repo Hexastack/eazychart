@@ -30,7 +30,7 @@ export const Arcs: FC<ArcsProps> = ({
   spacing = 0,
   ...rest
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
   const { linearScale: angleScale } = useLinearScale();
   const { colorScale } = useColorScale();
   const { width, height } = dimensions;
@@ -39,14 +39,14 @@ export const Arcs: FC<ArcsProps> = ({
 
   const shapeData = useMemo(() => {
     return scaleArcData(
-      activeData,
+      data,
       domainKey,
       angleScale,
       colorScale,
       startAngle,
       sortValues
     );
-  }, [activeData, domainKey, angleScale, colorScale, sortValues, startAngle]);
+  }, [data, domainKey, angleScale, colorScale, sortValues, startAngle]);
 
   return (
     <g

@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import {
   defaultChartAnimationOptions,
   defaultChartDimensions,
@@ -11,7 +11,6 @@ import {
   ChartPadding,
   Dimensions,
   RawData,
-  NormalizedDatum,
   AnyScale,
 } from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
@@ -31,12 +30,7 @@ export type ChartProps = {
     TooltipComponent?: React.FC<TooltipProps>;
   };
   isRTL?: boolean;
-  // Useful props for Jest
-  onToggleDatum?: (
-    datum: NormalizedDatum,
-    newState: boolean,
-    idx: number
-  ) => void;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
   isWrapped?: boolean;
 };
 
@@ -48,12 +42,11 @@ export const Chart: FC<ChartProps> = ({
   children,
   scopedSlots = { TooltipComponent: Tooltip },
   isRTL = false,
-  onToggleDatum,
+  onLegendClick,
   isWrapped = true,
 }) => {
   // Data
   const [dataDict, setDataDict] = useState(normalizeData(rawData));
-  const [excludedAttributes, setExcludedAttributes] = useState<string[]>([]);
   // Scales (scales needs to be registered to give them a global scope)
   const [scales, setScales] = useState<{
     [scaleId: string]: AnyScale;
@@ -140,50 +133,6 @@ export const Chart: FC<ChartProps> = ({
     return isRTL ? values.reverse() : values;
   }, [dataDict, isRTL]);
 
-  const activeData = useMemo(() => {
-    return (
-      chartData
-        // Return active data only
-        .filter(({ isActive }) => isActive)
-        // Omit excluded attributes
-        .map((datum) => {
-          return Object.fromEntries(
-            Object.entries(datum).filter(
-              ([attribute]) => !excludedAttributes.includes(attribute)
-            )
-          ) as NormalizedDatum;
-        })
-    );
-  }, [chartData, excludedAttributes]);
-
-  const toggleDatum = useCallback(
-    (datum: NormalizedDatum, newState: boolean, idx: number) => {
-      onToggleDatum && onToggleDatum(datum, newState, idx);
-      const newDataDict = {
-        ...dataDict,
-        [datum.id]: {
-          ...datum,
-          isActive: newState,
-        },
-      };
-      setDataDict(newDataDict);
-    },
-    [dataDict, onToggleDatum]
-  );
-
-  const toggleDatumAttribute = useCallback(
-    (attribute: string) => {
-      if (excludedAttributes.includes(attribute)) {
-        setExcludedAttributes(
-          excludedAttributes.filter((name) => name !== attribute)
-        );
-      } else {
-        setExcludedAttributes([...excludedAttributes, attribute]);
-      }
-    },
-    [excludedAttributes, setExcludedAttributes]
-  );
-
   // Helpers to offer some scales a global scope. This is useful to have the legend
   // access the color domain for example. Otherwise, we would need to add a portal
   // which is still experimental in react + does not exist in Vue2.
@@ -206,10 +155,6 @@ export const Chart: FC<ChartProps> = ({
         animationOptions: chartAnimationOptions,
         data: chartData,
         dataDict,
-        activeData,
-        excludedAttributes,
-        toggleDatum,
-        toggleDatumAttribute,
         isRTL,
         registerScale,
         getScale,
@@ -227,8 +172,7 @@ export const Chart: FC<ChartProps> = ({
               Legend={
                 scopedSlots?.LegendComponent && (
                   <scopedSlots.LegendComponent
-                    data={chartData}
-                    toggleDatum={toggleDatum}
+                    onLegendClick={onLegendClick}
                     ref={legendRef}
                   />
                 )
@@ -251,8 +195,7 @@ export const Chart: FC<ChartProps> = ({
             Legend={
               scopedSlots?.LegendComponent && (
                 <scopedSlots.LegendComponent
-                  data={chartData}
-                  toggleDatum={toggleDatum}
+                  onLegendClick={onLegendClick}
                   ref={legendRef}
                 />
               )

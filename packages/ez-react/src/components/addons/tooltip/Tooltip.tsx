@@ -46,7 +46,7 @@ export const Tooltip: FC<TooltipProps> = ({
     [offset]
   );
 
-  const { id, color, isActive, label, ...attributes } = datum || {
+  const { id, color, label, ...attributes } = datum || {
     color: undefined,
   };
 

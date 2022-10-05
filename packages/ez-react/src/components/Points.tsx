@@ -35,17 +35,17 @@ export const Points: FC<PointsProps> = ({
   scopedSlots,
   ...rest
 }) => {
-  const { activeData, dimensions } = useChart();
+  const { data, dimensions } = useChart();
   const { xScale, yScale } = useCartesianScales();
 
   const shapeData = useMemo(() => {
     try {
-      return scalePointData(activeData, xDomainKey, yDomainKey, xScale, yScale);
+      return scalePointData(data, xDomainKey, yDomainKey, xScale, yScale);
     } catch {
       return [];
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeData, xDomainKey, yDomainKey, xScale.scale, yScale.scale]);
+  }, [data, xDomainKey, yDomainKey, xScale.scale, yScale.scale]);
 
   if (!shapeData.length) {
     return null;

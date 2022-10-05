@@ -42,9 +42,6 @@ export default class ResponsiveChartContainer extends Vue {
 
   resizeChart(entries: ResizeObserverEntry[]) {
     entries.forEach((entry) => {
-      // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
-      // At last, if width / height are equal to zero we default the dimensions
-      // so that the end-user would be able to see the chart.
       const newDimensions = {
         width:
           Math.floor(entry.contentRect.width) || defaultChartDimensions.width,

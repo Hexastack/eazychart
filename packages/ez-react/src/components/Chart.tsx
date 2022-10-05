@@ -43,7 +43,7 @@ export type ChartProps = {
 };
 
 export const Chart: FC<ChartProps> = ({
-  dimensions = defaultChartDimensions,
+  dimensions,
   padding = {},
   animationOptions,
   scales,
@@ -72,6 +72,9 @@ export const Chart: FC<ChartProps> = ({
   );
 
   const containerDimensions: Dimensions = useMemo(
+    // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
+    // At last, if width / height are equal to zero we default the dimensions
+    // so that the end-user would be able to see the chart.
     () => ({
       width:
         parentDimensions?.width ||

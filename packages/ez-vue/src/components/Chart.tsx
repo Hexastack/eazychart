@@ -107,12 +107,14 @@ export default class Chart extends Vue {
   created() {
     this.chart.dataDict = normalizeData(this.rawData, this.colors);
     const parentDimensions = this.responsiveChart?.dimensions;
+      // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
+      // At last, if width / height are equal to zero we default the dimensions
+      // so that the end-user would be able to see the chart.
     this.containerDimensions = {
       width: this.dimensions?.width || parentDimensions?.width || defaultChartDimensions.width,
       height: this.dimensions?.height || parentDimensions?.height || defaultChartDimensions.height,
     };
   }
-
   mounted() {
     // Set legend height on mount and after data is populated
     this.$nextTick(() => {

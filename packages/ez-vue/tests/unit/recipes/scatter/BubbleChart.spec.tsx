@@ -8,7 +8,6 @@ import 'tests/mocks/ResizeObserver';
 describe('BubbleChart', () => {
   it('renders a bubble chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       bubble: {
         domainKey: 'amount',

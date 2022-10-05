@@ -8,7 +8,6 @@ import 'tests/mocks/ResizeObserver';
 describe('SemiCircleChart', () => {
   it('renders a semi-circle chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       colors,
       dimensions,

@@ -106,10 +106,10 @@ export default class Chart extends Vue {
 
   created() {
     this.chart.dataDict = normalizeData(this.rawData, this.colors);
-    const parentDimensions = this.responsiveChart.dimensions;
+    const parentDimensions = this.responsiveChart?.dimensions;
     this.containerDimensions = {
-      width: this.dimensions?.width || parentDimensions.width || defaultChartDimensions.width,
-      height: this.dimensions?.height || parentDimensions.height || defaultChartDimensions.height,
+      width: this.dimensions?.width || parentDimensions?.width || defaultChartDimensions.width,
+      height: this.dimensions?.height || parentDimensions?.height || defaultChartDimensions.height,
     };
   }
 
@@ -136,10 +136,10 @@ export default class Chart extends Vue {
   @Watch('responsiveChart.dimensions')
   onDimensionsChange() {
     // If dimensions prop is provided, we force the values
-    const parentDimensions = this.responsiveChart.dimensions;
+    const parentDimensions = this.responsiveChart?.dimensions;
     this.containerDimensions = {
-      width: this.dimensions?.width || parentDimensions.width,
-      height: this.dimensions?.height || parentDimensions.height,
+      width: this.dimensions?.width || parentDimensions?.width,
+      height: this.dimensions?.height || parentDimensions?.height,
     };
   }
 

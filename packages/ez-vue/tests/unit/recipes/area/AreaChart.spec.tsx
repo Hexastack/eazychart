@@ -11,7 +11,6 @@ describe('AreaChart', () => {
   it('renders an area chart', async () => {
     const wrapper = render(AreaChart, {
       propsData: {
-        onResize: () => undefined,
         data: pointsData as unknown as RawData,
         area: {
           stroke: 'red',

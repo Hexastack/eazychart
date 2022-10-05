@@ -9,7 +9,6 @@ import 'tests/mocks/ResizeObserver';
 describe('IrregularPieChart', () => {
   it('renders a irregular pie chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       colors,
       dimensions,

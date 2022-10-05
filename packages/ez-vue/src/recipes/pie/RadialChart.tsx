@@ -91,12 +91,6 @@ export default class RadialChart extends Vue {
   })
   private readonly arc!: RadialConfig;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   private scale!: ScaleLinear;
 
   created() {
@@ -115,7 +109,6 @@ export default class RadialChart extends Vue {
       colors,
       animationOptions,
       arc,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -134,7 +127,6 @@ export default class RadialChart extends Vue {
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <Arcs
           arcScale={scale}

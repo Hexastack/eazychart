@@ -10,7 +10,6 @@ describe('BarChart', () => {
   it('renders a bar chart', async () => {
     const wrapper = render(BarChart, {
       propsData: {
-        onResize: () => undefined,
         data: rawData,
         colors,
         grid: { directions: [] },

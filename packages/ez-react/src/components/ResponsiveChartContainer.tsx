@@ -25,28 +25,14 @@ export const ResponsiveChartContainer: FC<ResponsiveChartContainerProps> = ({
       // so that the end-user would be able to see the chart.
       const newDimensions = {
         width:
-          containerDimensions?.width ||
-          Math.floor(entry.contentRect.width) ||
-          defaultChartDimensions.width,
+          Math.floor(entry.contentRect.width) || defaultChartDimensions.width,
         height:
-          containerDimensions?.height ||
-          Math.floor(entry.contentRect.height) ||
-          defaultChartDimensions.height,
+          Math.floor(entry.contentRect.height) || defaultChartDimensions.height,
       };
       setContainerDimensions(newDimensions);
       onResize && onResize(newDimensions);
     });
   };
-
-  // If dimensions prop is provided, we force the values
-  useEffect(() => {
-    const newDimensions = {
-      width: containerDimensions.width,
-      height: containerDimensions.height,
-    };
-    setContainerDimensions(newDimensions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   // Else, observe chart parent width & height
   useEffect(() => {
@@ -67,7 +53,11 @@ export const ResponsiveChartContainer: FC<ResponsiveChartContainerProps> = ({
     <ResponsiveChartContext.Provider
       value={{ dimensions: containerDimensions }}
     >
-      <div style={{ width: '100%', height: '100%' }} ref={containerRef}>
+      <div
+        className="ez-responsive-container"
+        style={{ width: '100%', height: '100%' }}
+        ref={containerRef}
+      >
         {children}
       </div>
     </ResponsiveChartContext.Provider>

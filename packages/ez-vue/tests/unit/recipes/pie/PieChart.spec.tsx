@@ -9,7 +9,6 @@ import 'tests/mocks/ResizeObserver';
 describe('PieChart', () => {
   it('renders a pie chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       colors,
       dimensions,

@@ -11,7 +11,7 @@ export interface BarsProps extends SVGAttributes<SVGGElement> {
 }
 
 export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
-  const { activeData, dimensions, isRTL } = useChart();
+  const { data, dimensions, isRTL } = useChart();
   const { xScale, yScale } = useCartesianScales();
   const { colorScale } = useColorScale();
 
@@ -20,7 +20,7 @@ export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
       return [];
     }
     return scaleRectangleData(
-      activeData,
+      data,
       xDomainKey,
       yDomainKey,
       xScale,
@@ -30,7 +30,7 @@ export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
       isRTL
     );
   }, [
-    activeData,
+    data,
     xDomainKey,
     yDomainKey,
     xScale,

@@ -4,10 +4,10 @@ import {
   Dimensions,
   NormalizedData,
   NormalizedDataDict,
-  NormalizedDatum,
   Point,
   ShapeAttributes,
 } from '../types';
+import { ScaleBand, ScaleLinear, ScaleOrdinal  } from '../scales';
 
 export type ChartPadding = {
   top: number;
@@ -76,13 +76,9 @@ export interface ChartContext {
   animationOptions?: AnimationOptions;
   data: NormalizedData;
   dataDict: NormalizedDataDict;
-  activeData: NormalizedData;
-  toggleDatum: (
-    datum: NormalizedDatum,
-    newState: boolean,
-    idx: number
-  ) => void;
   isRTL: boolean;
+  registerScale: (scaleId: string, scale: AnyScale) => void,
+  getScale: (scaleId: string) => AnyScale | null,
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
@@ -124,3 +120,5 @@ export type AreaConfig = CurveConfig & {
 export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
+
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;

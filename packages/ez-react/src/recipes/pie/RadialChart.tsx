@@ -12,13 +12,15 @@ import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Arcs } from '@/components/Arcs';
 import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   index?: number;
   arc?: RadialConfig;
   dimensions?: Partial<Dimensions>;
@@ -43,7 +45,8 @@ export const RadialChart: FC<RadialChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     cornerRadius: 0,
     stroke: '#FFF',
@@ -57,18 +60,24 @@ export const RadialChart: FC<RadialChartProps> = ({
   },
   onResize,
 }) => {
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
+  );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
+      rawData={activeData}
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
+      onLegendClick={toggleDatum}
     >
-      <LinearScale domainKey={domainKey} range={[0, Math.PI * 2]}>
-        <ColorScale domainKey={domainKey} colors={colors}>
-          <Arcs domainKey={domainKey} {...arc} />
+      <LinearScale domainKey={valueDomainKey} range={[0, Math.PI * 2]}>
+        <ColorScale domainKey={labelDomainKey} range={activeColors}>
+          <Arcs domainKey={valueDomainKey} {...arc} />
         </ColorScale>
       </LinearScale>
     </Chart>

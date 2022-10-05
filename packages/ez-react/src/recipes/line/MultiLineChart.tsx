@@ -1,4 +1,4 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
@@ -12,25 +12,16 @@ import {
   LineConfig,
   MarkerConfig,
   AxisConfigMulti,
-  ArrayOfTwoNumbers,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
-import { Segments } from '@/components/Segments';
 import { ColorScale } from '@/components/scales/ColorScale';
-
-const getDomainByKeys = (domainKeys: string[], data: RawData) => {
-  return domainKeys.reduce(
-    ([min, max], domainKey) => {
-      const values = data.map((datum) => datum[domainKey] as number);
-      return [Math.min(min, ...values), Math.max(max, ...values)];
-    },
-    [+Infinity, -Infinity] as number[]
-  ) as ArrayOfTwoNumbers;
-};
+import { Legend, LegendProps } from '@/components/addons/legend/Legend';
+import { Segments } from '@/components/Segments';
+import { useToggableDomainKey } from '@/lib/useToggableDomainKey';
 
 export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -46,6 +37,7 @@ export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
+    LegendComponent: FC<LegendProps>;
   };
   onResize?: (dimensions: Dimensions) => void;
 }
@@ -88,13 +80,13 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
   dimensions = {},
   scopedSlots = {
     TooltipComponent: Tooltip,
+    LegendComponent: Legend,
   },
   onResize,
 }) => {
-  const yDomain = useMemo(
-    () => getDomainByKeys(yAxis.domainKeys, data),
-    [yAxis, data]
-  );
+  const { activeDomainKeys, activeDomain, toggleDomainKey } =
+    useToggableDomainKey(data, yAxis.domainKeys);
+
   return (
     <Chart
       dimensions={dimensions}
@@ -103,6 +95,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       onResize={onResize}
+      onLegendClick={toggleDomainKey}
     >
       <CartesianScale
         xScaleConfig={{
@@ -118,16 +111,17 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
           ScaleClass: ScaleLinear,
           definition: {
             direction: Direction.VERTICAL,
-            domain: yDomain,
+            domain: activeDomain,
             nice: yAxis.nice || 0,
           },
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <ColorScale domain={yAxis.domainKeys} colors={colors}>
-          {yAxis.domainKeys.map((yDomainKey) => {
+        <ColorScale domain={yAxis.domainKeys} range={colors}>
+          {activeDomainKeys.map((yDomainKey) => {
             return (
               <Segments
+                key={yDomainKey}
                 xDomainKey={xAxis.domainKey}
                 yDomainKey={yDomainKey}
                 line={line}

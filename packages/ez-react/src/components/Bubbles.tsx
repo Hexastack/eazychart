@@ -23,7 +23,7 @@ export const Bubbles: FC<BubblesProps> = ({
   scopedSlots,
   ...rest
 }) => {
-  const { activeData } = useChart();
+  const { data } = useChart();
   const { xScale, yScale } = useCartesianScales();
   const { linearScale: rScale } = useLinearScale();
 
@@ -32,7 +32,7 @@ export const Bubbles: FC<BubblesProps> = ({
       return [];
     }
     return scaleBubbleData(
-      activeData,
+      data,
       xDomainKey,
       yDomainKey,
       rDomainKey,
@@ -42,7 +42,7 @@ export const Bubbles: FC<BubblesProps> = ({
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    activeData,
+    data,
     xDomainKey,
     yDomainKey,
     rDomainKey,

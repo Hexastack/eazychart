@@ -1,4 +1,4 @@
-import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import React, { FC, useEffect, useMemo, useState } from 'react';
 import {
   debounce,
   defaultChartAnimationOptions,
@@ -13,6 +13,7 @@ import {
   Dimensions,
   RawData,
   NormalizedDatum,
+  AnyScale,
 } from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
 import { LegendProvider } from '@/components/addons/legend/LegendProvider';
@@ -36,6 +37,7 @@ export type ChartProps = {
     newState: boolean,
     idx: number
   ) => void;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
   isWrapped?: boolean;
   onResize?: (dimensions: Dimensions) => void;
 };
@@ -48,12 +50,16 @@ export const Chart: FC<ChartProps> = ({
   children,
   scopedSlots = { TooltipComponent: Tooltip },
   isRTL = false,
-  onToggleDatum,
+  onLegendClick,
   isWrapped = true,
   onResize,
 }) => {
   // Data
   const [dataDict, setDataDict] = useState(normalizeData(rawData));
+  // Scales (scales needs to be registered to give them a global scope)
+  const [scales, setScales] = useState<{
+    [scaleId: string]: AnyScale;
+  }>({});
 
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
@@ -120,10 +126,6 @@ export const Chart: FC<ChartProps> = ({
     return isRTL ? values.reverse() : values;
   }, [dataDict, isRTL]);
 
-  const activeData = useMemo(() => {
-    return chartData.filter(({ isActive }) => isActive);
-  }, [chartData]);
-
   const resizeChart: Function = (entries: ResizeObserverEntry[]) => {
     entries.forEach((entry) => {
       // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
@@ -172,20 +174,19 @@ export const Chart: FC<ChartProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const toggleDatum = useCallback(
-    (datum: NormalizedDatum, newState: boolean, idx: number) => {
-      onToggleDatum && onToggleDatum(datum, newState, idx);
-      const newDataDict = {
-        ...dataDict,
-        [datum.id]: {
-          ...datum,
-          isActive: newState,
-        },
-      };
-      setDataDict(newDataDict);
-    },
-    [dataDict, onToggleDatum]
-  );
+  // Helpers to offer some scales a global scope. This is useful to have the legend
+  // access the color domain for example. Otherwise, we would need to add a portal
+  // which is still experimental in react + does not exist in Vue2.
+  const registerScale = (scaleId: string, scale: AnyScale) => {
+    setScales({
+      ...scales,
+      [scaleId]: scale,
+    });
+  };
+
+  const getScale = (scaleId: string): AnyScale | null => {
+    return scaleId in scales ? scales[scaleId] : null;
+  };
 
   return (
     <ChartContext.Provider
@@ -195,9 +196,9 @@ export const Chart: FC<ChartProps> = ({
         animationOptions: chartAnimationOptions,
         data: chartData,
         dataDict,
-        activeData,
-        toggleDatum,
         isRTL,
+        registerScale,
+        getScale,
       }}
     >
       {/*
@@ -212,8 +213,7 @@ export const Chart: FC<ChartProps> = ({
               Legend={
                 scopedSlots?.LegendComponent && (
                   <scopedSlots.LegendComponent
-                    data={chartData}
-                    toggleDatum={toggleDatum}
+                    onLegendClick={onLegendClick}
                     ref={legendRef}
                   />
                 )
@@ -236,8 +236,7 @@ export const Chart: FC<ChartProps> = ({
             Legend={
               scopedSlots?.LegendComponent && (
                 <scopedSlots.LegendComponent
-                  data={chartData}
-                  toggleDatum={toggleDatum}
+                  onLegendClick={onLegendClick}
                   ref={legendRef}
                 />
               )

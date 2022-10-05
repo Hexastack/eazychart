@@ -105,7 +105,7 @@ export const defaultChartContext: ChartContext = {
   animationOptions: undefined,
   data: [],
   dataDict: {},
-  activeData: [],
-  toggleDatum: () => {},
   isRTL: false,
+  registerScale: () => {},
+  getScale: () => null,
 };

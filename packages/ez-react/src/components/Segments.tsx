@@ -44,7 +44,7 @@ export const Segments: FC<SegmentsProps> = ({
             color,
           }));
           return (
-            <g className="ez-segment">
+            <g className="ez-segments">
               <LinePath
                 shapeData={pointData}
                 curve={line.curve}

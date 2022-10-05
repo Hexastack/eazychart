@@ -3,6 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
 import { colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
+import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
 const meta: Meta = {
   id: '3',
@@ -35,7 +36,9 @@ const TemplateWithParentDimensions: Story<BarChartProps> = (args) => {
         overflow: 'scroll',
       }}
     >
-      <BarChart {...args} />
+      <ResponsiveChartContainer>
+        <BarChart {...args} />
+      </ResponsiveChartContainer>
     </ChartWrapper>
   );
 };

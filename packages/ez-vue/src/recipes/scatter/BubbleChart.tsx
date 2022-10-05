@@ -137,9 +137,6 @@ export default class BubbleChart extends Vue {
     >,
     required: false,
   })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
 
   get horizontalAxis() {
     return this.swapAxis ? this.yAxis : this.xAxis;
@@ -188,7 +185,6 @@ export default class BubbleChart extends Vue {
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -203,7 +199,6 @@ export default class BubbleChart extends Vue {
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}

@@ -93,12 +93,6 @@ export default class IrregularPieChart extends Vue {
   })
   private readonly arc!: PieConfig;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   private aScale!: ScaleLinear;
 
   private rScale!: ScaleLinear;
@@ -123,7 +117,6 @@ export default class IrregularPieChart extends Vue {
       colors,
       animationOptions,
       arc,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -142,7 +135,6 @@ export default class IrregularPieChart extends Vue {
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <IrregularArcs
           aScale={aScale}

@@ -13,13 +13,13 @@ import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { LegendPropsWithRef } from './addons/legend/Legend';
 import {
   AbstractScale,
-  debounce,
   defaultChartAnimationOptions,
   defaultChartDimensions,
   defaultChartPadding,
   normalizeData,
   transformTranslate,
 } from 'eazychart-core/src';
+import { useResponsiveChart } from '@/lib/use-responsive-chart';
 
 export type ChartProps = {
   padding?: Partial<ChartPadding>;
@@ -40,7 +40,6 @@ export type ChartProps = {
     idx: number
   ) => void;
   isWrapped?: boolean;
-  onResize?: (dimensions: Dimensions) => void;
 };
 
 export const Chart: FC<ChartProps> = ({
@@ -55,18 +54,14 @@ export const Chart: FC<ChartProps> = ({
   isRTL = false,
   onToggleDatum,
   isWrapped = true,
-  onResize,
 }) => {
   // Data
   const [dataDict, setDataDict] = useState(normalizeData(rawData, colors));
 
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
+  const { dimensions: parentDimensions } = useResponsiveChart();
   const legendRef = React.useRef<HTMLDivElement | null>(null);
-  const [containerDimensions, setContainerDimensions] = useState<Dimensions>({
-    width: dimensions?.width || 0,
-    height: dimensions?.height || 0,
-  });
 
   const chartPadding: ChartPadding = useMemo(
     () => ({
@@ -74,6 +69,23 @@ export const Chart: FC<ChartProps> = ({
       ...padding,
     }),
     [padding]
+  );
+
+  const containerDimensions: Dimensions = useMemo(
+    // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
+    // At last, if width / height are equal to zero we default the dimensions
+    // so that the end-user would be able to see the chart.
+    () => ({
+      width:
+        parentDimensions?.width ||
+        dimensions?.width ||
+        defaultChartDimensions.width,
+      height:
+        parentDimensions?.height ||
+        dimensions?.height ||
+        defaultChartDimensions.height,
+    }),
+    [parentDimensions, dimensions]
   );
 
   const chartDimensions: Dimensions = useMemo(() => {
@@ -138,54 +150,6 @@ export const Chart: FC<ChartProps> = ({
       });
     }
   }, [activeData, chartDimensions, scales]);
-
-  const resizeChart: Function = (entries: ResizeObserverEntry[]) => {
-    entries.forEach((entry) => {
-      // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
-      // At last, if width / height are equal to zero we default the dimensions
-      // so that the end-user would be able to see the chart.
-      const newDimensions = {
-        width:
-          dimensions?.width ||
-          Math.floor(entry.contentRect.width) ||
-          defaultChartDimensions.width,
-        height:
-          dimensions?.height ||
-          Math.floor(entry.contentRect.height) ||
-          defaultChartDimensions.height,
-      };
-      setContainerDimensions(newDimensions);
-      onResize && onResize(newDimensions);
-    });
-  };
-
-  // If dimensions prop is provided, we force the values
-  useEffect(() => {
-    const newDimensions = {
-      width: dimensions?.width || containerDimensions.width,
-      height: dimensions?.height || containerDimensions.height,
-    };
-    setContainerDimensions(newDimensions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dimensions]);
-
-  // Else, observe chart parent width & height
-  useEffect(() => {
-    if (!dimensions?.width || !dimensions?.height) {
-      // Dimensions values has not been set, we need to observe and resize
-      const observer = new ResizeObserver((entries) => {
-        debounce(resizeChart(entries), 100);
-      });
-      observer.observe(chartRef.current?.parentNode as Element, {
-        box: 'border-box',
-      });
-      return () => {
-        observer.disconnect();
-      };
-    }
-    return;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const toggleDatum = useCallback(
     (datum: NormalizedDatum, newState: boolean, idx: number) => {

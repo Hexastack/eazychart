@@ -118,16 +118,6 @@ export default class BarChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-    required: false,
-  })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
-
   private xScale!: ScaleLinear;
 
   private yScale!: ScaleBand;
@@ -158,7 +148,6 @@ export default class BarChart extends Vue {
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -181,7 +170,6 @@ export default class BarChart extends Vue {
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}

@@ -25,7 +25,6 @@ export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
     LegendComponent: React.FC<LegendPropsWithRef>;
     TooltipComponent: React.FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const IrregularPieChart: FC<IrregularPieChartProps> = ({
@@ -56,7 +55,6 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const aScale = useMemo<ScaleLinear>(
     () =>
@@ -83,7 +81,6 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <IrregularArcs aScale={aScale} rScale={rScale} {...arc} />
     </Chart>

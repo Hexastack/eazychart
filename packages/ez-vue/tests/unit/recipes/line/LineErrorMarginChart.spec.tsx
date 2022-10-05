@@ -10,7 +10,6 @@ describe('LineErrorMarginChart', () => {
   it('renders a line error margin chart', async () => {
     const wrapper = render(LineErrorMarginChart, {
       propsData: {
-        onResize: () => undefined,
         data: pointsWithMarginData,
         line: {
           stroke: 'red',

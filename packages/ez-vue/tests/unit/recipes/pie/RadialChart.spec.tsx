@@ -9,7 +9,6 @@ import 'tests/mocks/ResizeObserver';
 describe('RadialChart', () => {
   it('renders a Radial chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       colors,
       dimensions,

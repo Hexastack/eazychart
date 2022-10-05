@@ -26,7 +26,6 @@ export interface RadialChartProps extends SVGAttributes<SVGGElement> {
     LegendComponent: React.FC<LegendPropsWithRef>;
     TooltipComponent: React.FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const RadialChart: FC<RadialChartProps> = ({
@@ -55,7 +54,6 @@ export const RadialChart: FC<RadialChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const scale = useMemo<ScaleLinear>(
     () =>
@@ -76,7 +74,6 @@ export const RadialChart: FC<RadialChartProps> = ({
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <Arcs arcScale={scale} {...arc} />
       </Chart>

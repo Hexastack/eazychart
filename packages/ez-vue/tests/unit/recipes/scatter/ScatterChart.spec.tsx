@@ -8,7 +8,6 @@ import 'tests/mocks/ResizeObserver';
 describe('ScatterChart', () => {
   it('renders a scatter chart', async () => {
     const propsData = {
-      onResize: () => undefined,
       data: rawData,
       point: {
         radius: 6,

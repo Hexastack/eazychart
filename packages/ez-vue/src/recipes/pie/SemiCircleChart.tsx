@@ -93,12 +93,6 @@ export default class SemiCircleChart extends Vue {
   })
   private readonly arc!: PieConfig;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   private scale!: ScaleLinear;
 
   created() {
@@ -116,7 +110,6 @@ export default class SemiCircleChart extends Vue {
       colors,
       animationOptions,
       arc,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -135,7 +128,6 @@ export default class SemiCircleChart extends Vue {
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <Pie
           getCenter={({ width, height }: Dimensions) => ({

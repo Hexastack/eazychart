@@ -129,15 +129,6 @@ export default class ScatterChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-  })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
-
   get horizontalAxis() {
     return this.swapAxis ? this.yAxis : this.xAxis;
   }
@@ -177,7 +168,6 @@ export default class ScatterChart extends Vue {
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -192,7 +182,6 @@ export default class ScatterChart extends Vue {
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}

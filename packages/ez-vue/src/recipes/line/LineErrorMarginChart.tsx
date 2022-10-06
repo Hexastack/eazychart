@@ -320,7 +320,7 @@ export default class LineErrorMarginChart extends Vue {
           titleAlign={verticalAxis.titleAlign}
           tickLength={verticalAxis.tickLength}
           tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
+          tickSize={verticalAxis.tickSize}
           tickFormat={verticalAxis.tickFormat}
         />
       </Chart>

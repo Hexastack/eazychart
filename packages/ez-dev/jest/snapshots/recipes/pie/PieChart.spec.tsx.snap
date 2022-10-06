@@ -18,7 +18,7 @@ exports[`PieChart renders a pie chart 1`] = `
               class="ez-pie"
             >
               <path
-                d="M-117.55705045849467,161.80339887498945L0,0Z"
+                d="M-196.96155060244163,-34.729635533386L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -28,6 +28,15 @@ exports[`PieChart renders a pie chart 1`] = `
               </path>
               <path
                 d="M1.2246467991473532e-14,-200L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M68.40402866513377,187.93852415718166L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -40,45 +49,6 @@ exports[`PieChart renders a pie chart 1`] = `
         </svg>
       </div>
       <div class="ez-legend">
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: red; border: 2px solid red;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Alpha
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key ez-legend-disable"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Beta
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: green; border: 2px solid green;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Gamma
-          </span>
-        </div>
       </div>
     </div>
     <div
@@ -108,7 +78,7 @@ exports[`PieChart renders a pie chart 2`] = `
               class="ez-pie"
             >
               <path
-                d="M-117.55705045849467,161.80339887498945A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
+                d="M-196.96155060244163,-34.729635533386A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -117,7 +87,16 @@ exports[`PieChart renders a pie chart 2`] = `
               >
               </path>
               <path
-                d="M1.2246467991473532e-14,-200A200,200,0,1,1,-117.55705045849467,161.80339887498945L0,0Z"
+                d="M1.2246467991473532e-14,-200A200,200,0,0,1,68.40402866513377,187.93852415718166L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M68.40402866513377,187.93852415718166A200,200,0,0,1,-196.96155060244163,-34.729635533386L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -145,11 +124,11 @@ exports[`PieChart renders a pie chart 2`] = `
         </div>
         <div
           role="button"
-          class="ez-legend-key ez-legend-disable"
+          class="ez-legend-key"
         >
           <div
             class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+            style="background-color: blue; border: 2px solid blue;"
           >
           </div>
           <span class="ez-legend-text">

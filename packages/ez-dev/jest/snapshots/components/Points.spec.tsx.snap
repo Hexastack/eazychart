@@ -3,8 +3,8 @@
 exports[`Points renders svg points with the right coordinates / path 1`] = `
 <g class="ez-points">
   <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
+    stroke="red"
+    fill="red"
     r="6"
     cx="0"
     cy="0"
@@ -14,8 +14,8 @@ exports[`Points renders svg points with the right coordinates / path 1`] = `
   >
   </circle>
   <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
+    stroke="red"
+    fill="red"
     r="6"
     cx="0"
     cy="0"
@@ -25,8 +25,8 @@ exports[`Points renders svg points with the right coordinates / path 1`] = `
   >
   </circle>
   <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
+    stroke="red"
+    fill="red"
     r="6"
     cx="0"
     cy="0"
@@ -52,8 +52,8 @@ exports[`Points renders svg points with the right coordinates / path 2`] = `
   >
   </circle>
   <circle
-    stroke="blue"
-    fill="blue"
+    stroke="red"
+    fill="red"
     r="6"
     cx="400"
     cy="0"
@@ -63,8 +63,8 @@ exports[`Points renders svg points with the right coordinates / path 2`] = `
   >
   </circle>
   <circle
-    stroke="green"
-    fill="green"
+    stroke="red"
+    fill="red"
     r="6"
     cx="800"
     cy="249.99999999999997"

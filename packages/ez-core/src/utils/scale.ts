@@ -146,13 +146,14 @@ export const scaleBubbleData = (
 
 export const scalePieArcData = (
   data: NormalizedDatum[],
-  domainKey: string,
+  valueDomainKey: string,
+  labelDomainKey: string,
   colorScale: ScaleOrdinal,
   startAngle: number = 0,
   endAngle: number = Math.PI * 2,
   sortValues?: (a: number, b: number) => number
 ): ArcDatum[] => {
-  const values = data.map(d => d[domainKey]);
+  const values = data.map(d => d[valueDomainKey]);
   const pieGenerator = pie()
     .startAngle(startAngle)
     .endAngle(endAngle);
@@ -163,7 +164,7 @@ export const scalePieArcData = (
   const pieArcs = pieGenerator(values as number[]);
   return pieArcs.map((pieArc, idx) => {
     const datum = data[idx];
-    const color = scaleDatumValue(datum, domainKey, colorScale);
+    const color = scaleDatumValue(datum, labelDomainKey, colorScale);
     const shapeDatum: ArcDatum = {
       ...pieArc,
       id: datum.id,
@@ -175,7 +176,8 @@ export const scalePieArcData = (
 
 export const scaleArcData = (
   data: NormalizedDatum[],
-  domainKey: string,
+  valueDomainKey: string,
+  labelDomainKey: string,
   angleScale: ComputedScale,
   colorScale: ScaleOrdinal,
   startAngle: number = 0,
@@ -186,9 +188,9 @@ export const scaleArcData = (
   }
   
   const shapeData = data.map((datum, idx) => {
-    const endAngle = scaleDatumValue(datum, domainKey, angleScale);
-    const color = scaleDatumValue(datum, domainKey, colorScale);
-    const value = datum[domainKey] as number;
+    const endAngle = scaleDatumValue(datum, valueDomainKey, angleScale);
+    const color = scaleDatumValue(datum, labelDomainKey, colorScale);
+    const value = datum[valueDomainKey] as number;
     const arc = {
       data: value,
       value: value,

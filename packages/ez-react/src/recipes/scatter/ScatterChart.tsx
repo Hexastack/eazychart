@@ -100,6 +100,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
           yDomainKey={yAxis.domainKey}
           r={point.radius}
           fill={point.color}
+          stroke={point.color}
         />
         <Axis
           position={xAxis.position || Position.BOTTOM}

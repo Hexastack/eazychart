@@ -17,11 +17,11 @@ exports[`Legend renders filters for data supplied 1`] = `
   </div>
   <div
     role="button"
-    class="ez-legend-key ez-legend-disable"
+    class="ez-legend-key"
   >
     <div
       class="ez-legend-box"
-      style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+      style="background-color: blue; border: 2px solid blue;"
     >
     </div>
     <span class="ez-legend-text">

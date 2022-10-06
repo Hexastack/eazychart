@@ -8,7 +8,8 @@ import { useColorScale } from './scales/ColorScale';
 export interface PieProps
   extends PieConfig,
     Omit<SVGAttributes<SVGPathElement>, 'stroke' | 'strokeWidth'> {
-  domainKey: string;
+  valueDomainKey: string;
+  labelDomainKey: string;
   getCenter?: (dimensions: Dimensions) => Point;
   getRadius?: (dimensions: Dimensions) => number;
   startAngle?: number;
@@ -16,7 +17,8 @@ export interface PieProps
 }
 
 export const Pie: FC<PieProps> = ({
-  domainKey,
+  valueDomainKey,
+  labelDomainKey,
   startAngle = 0,
   endAngle = 2 * Math.PI,
   getCenter = ({ width, height }) => ({ x: width / 2, y: height / 2 }),
@@ -41,13 +43,22 @@ export const Pie: FC<PieProps> = ({
   const shapeData = useMemo(() => {
     return scalePieArcData(
       data,
-      domainKey,
+      valueDomainKey,
+      labelDomainKey,
       colorScale,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [data, domainKey, colorScale, sortValues, startAngle, endAngle]);
+  }, [
+    data,
+    valueDomainKey,
+    labelDomainKey,
+    colorScale,
+    sortValues,
+    startAngle,
+    endAngle,
+  ]);
 
   return (
     <g

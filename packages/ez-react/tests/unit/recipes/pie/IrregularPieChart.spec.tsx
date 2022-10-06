@@ -13,6 +13,8 @@ describe('IrregularPieChart', () => {
         <IrregularPieChart
           data={rawData}
           colors={colors}
+          valueDomainKey={'value'}
+          labelDomainKey={'label'}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,

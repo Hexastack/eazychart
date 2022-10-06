@@ -18,7 +18,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
               class="ez-pie"
             >
               <path
-                d="M-123.60679774997902,-380.4226065180614L0,0Z"
+                d="M-306.4177772475912,-257.11504387461576L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -28,6 +28,15 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
               </path>
               <path
                 d="M400,0L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M69.45927106677216,-393.9231012048832L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -40,45 +49,6 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
         </svg>
       </div>
       <div class="ez-legend">
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: red; border: 2px solid red;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Alpha
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key ez-legend-disable"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Beta
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: green; border: 2px solid green;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Gamma
-          </span>
-        </div>
       </div>
     </div>
     <div
@@ -108,7 +78,7 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
               class="ez-pie"
             >
               <path
-                d="M-123.60679774997902,-380.4226065180614A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
+                d="M-306.4177772475912,-257.11504387461576A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -117,7 +87,16 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
               >
               </path>
               <path
-                d="M400,0A400,400,0,0,0,-123.60679774997902,-380.4226065180614L0,0Z"
+                d="M400,0A400,400,0,0,0,69.45927106677216,-393.9231012048832L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M69.45927106677216,-393.9231012048832A400,400,0,0,0,-306.4177772475912,-257.11504387461576L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -145,11 +124,11 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
         </div>
         <div
           role="button"
-          class="ez-legend-key ez-legend-disable"
+          class="ez-legend-key"
         >
           <div
             class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+            style="background-color: blue; border: 2px solid blue;"
           >
           </div>
           <span class="ez-legend-text">

@@ -24,6 +24,11 @@ describe('ColumnChart', () => {
             domainKey: 'value',
             position: Position.LEFT,
           }}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
       expect(wrapper.container.innerHTML).toMatchSnapshot();

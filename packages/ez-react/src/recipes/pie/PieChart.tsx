@@ -73,7 +73,11 @@ export const PieChart: FC<PieChartProps> = ({
       onLegendClick={toggleDatum}
     >
       <ColorScale domainKey={labelDomainKey} range={activeColors}>
-        <Pie domainKey={valueDomainKey} {...arc} />
+        <Pie
+          valueDomainKey={valueDomainKey}
+          labelDomainKey={labelDomainKey}
+          {...arc}
+        />
       </ColorScale>
     </Chart>
   );

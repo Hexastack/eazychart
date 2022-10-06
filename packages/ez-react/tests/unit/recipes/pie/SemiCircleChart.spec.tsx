@@ -12,6 +12,8 @@ describe('SemiCircleChart', () => {
       wrapper = render(
         <SemiCircleChart
           data={rawData}
+          valueDomainKey={'value'}
+          labelDomainKey={'label'}
           colors={colors}
           animationOptions={{
             easing: 'easeBack',

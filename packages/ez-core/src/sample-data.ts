@@ -26,21 +26,18 @@ export const rawData: RawData = [
     label: 'Alpha',
     value: 50,
     amount: 10,
-    isActive: true,
   },
   {
     id: '2',
     label: 'Beta',
     value: 100,
     amount: 20,
-    isActive: false,
   },
   {
     id: '3',
     label: 'Gamma',
     value: 75,
     amount: 30,
-    isActive: true,
   },
 ];
 
@@ -52,7 +49,6 @@ export const chartData: NormalizedData = rawData.map((d, idx) => {
     id: d.id as string,
     label: d.label as string,
     color: colors[idx],
-    isActive: d.isActive as boolean,
   };
 });
 

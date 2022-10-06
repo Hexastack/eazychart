@@ -41,12 +41,10 @@ describe('Point', () => {
       // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <Point shapeDatum={pointA} />

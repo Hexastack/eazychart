@@ -36,7 +36,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 >
                 </path>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"
@@ -47,7 +47,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"
@@ -58,7 +58,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"
@@ -141,7 +141,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 2`] = `
                 >
                 </path>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"
@@ -152,7 +152,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 2`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"
@@ -163,7 +163,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 2`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
+                  stroke="red"
                   fill="red"
                   r="2"
                   cx="0"

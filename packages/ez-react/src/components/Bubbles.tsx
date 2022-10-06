@@ -28,9 +28,6 @@ export const Bubbles: FC<BubblesProps> = ({
   const { linearScale: rScale } = useLinearScale();
 
   const shapeData = useMemo(() => {
-    if (!xScale || !yScale || !rScale) {
-      return [];
-    }
     return scaleBubbleData(
       data,
       xDomainKey,

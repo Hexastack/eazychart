@@ -8,10 +8,10 @@ Now that you installed **EazyChart**, you will have the ability to use it and ad
 
 EazyChart provides a set of ready-to-use charts that you can fully customize. In the example below, you will be adding a "Bar Chart" to a React project. First, you need to import the **BarChart** component from the library.
 
-```
-# Code for importing the bar chart component
-Import { BarChart } from 'eazychart-react'
-Import 'eazychart-css'
+```js
+// Code for importing the bar chart component
+import { BarChart } from 'eazychart-react'
+import 'eazychart-css'
 ```
 
 The above code will import the Bar chart to where you want it to show. 
@@ -26,8 +26,8 @@ Cool, now that you imported the Bar chart from the library, you are ready to use
 
 Hang on there, you still have a couple of things to do. You need to define the data that the chart should display: 
 
-```
-Const data=[
+```js
+const data=[
     { country: 'Italy', population: 65 },
     { country: 'Spain', population: 46 },
     { country: 'Australia', population: 25 },
@@ -40,8 +40,8 @@ As an example. In order to display a Bar chart into your project, you will need 
 * The data that you will be displaying (data).
 * The axes that you will use to represent the data on. Basic charts typically have two axes that are used to plot data in two dimensions (X Axis and Y Axis).
 
-```
-Const props = { data : data, 
+```js
+const props = { data : data, 
   xAxis: {
     domainKey: 'population',
     title: 'Population',
@@ -67,12 +67,11 @@ Cool, now that everything is set up in place, let’s write the JSX code to disp
 
 Your code should look like this: 
 
-```
-# Full example of Creating a Bar chart
+```jsx
+// Full example of creating a Bar chart
 import React from 'react';
 import { BarChart } from 'eazychart-react';
 import 'eazychart-css';
-
 
 export const App = () => {
  const data = [
@@ -93,20 +92,20 @@ const props = {
   data,
 };
 
-Return 
-<div>
+return (
+  <div>
     <BarChart {...props} />
-</div>
-};
+  </div>
+)};
 ```
 
 Now that everything is in order, run your project using npm or yarn, open up your browser, and you should be able to see your chart on your screen. 
 
-`Npm run start`
+`npm run start`
 
 Or 
 
-`Yarn start`
+`yarn start`
 
 ![Example of Bar Chart](link)
 

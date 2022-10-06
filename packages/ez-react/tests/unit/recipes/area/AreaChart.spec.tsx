@@ -17,7 +17,6 @@ describe('AreaChart', () => {
             strokeWidth: 2,
             fill: 'orange',
           }}
-          color={'red'}
           marker={{
             hidden: false,
             color: 'red',

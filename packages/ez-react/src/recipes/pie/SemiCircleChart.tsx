@@ -55,7 +55,8 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     >
       <ColorScale domainKey={labelDomainKey} range={activeColors}>
         <Pie
-          domainKey={valueDomainKey}
+          valueDomainKey={valueDomainKey}
+          labelDomainKey={labelDomainKey}
           getCenter={({ width, height }) => ({ x: width / 2, y: height })}
           getRadius={({ width, height }) => Math.min(width, height)}
           startAngle={Math.PI / 2}

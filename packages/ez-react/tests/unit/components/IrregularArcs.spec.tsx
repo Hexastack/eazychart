@@ -2,15 +2,16 @@ import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import {
   dimensions,
-  scaleDefinitions,
   chartData,
   verticalLinearScaleDef,
+  colors,
 } from 'eazychart-core/src/sample-data';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { LinearScale } from '@/components/scales/LinearScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
@@ -19,19 +20,22 @@ describe('IrregularArcs', () => {
       // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            rawData: chartData.map((d) => ({ ...d, isActive: true })),
-            scaleDefinitions,
-            dimensions,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          rawData={chartData.map((d) => ({ ...d, isActive: true }))}
+          dimensions={dimensions}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
-          <LinearScale {...verticalLinearScaleDef}>
-            <IrregularArcs domainKey={'value'} donutRadius={0} />
+          <LinearScale domainKey={'value'} {...verticalLinearScaleDef}>
+            <ColorScale domainKey={'label'} range={colors}>
+              <IrregularArcs
+                valueDomainKey={'value'}
+                labelDomainKey={'label'}
+                donutRadius={0}
+              />
+            </ColorScale>
           </LinearScale>
         </Chart>
       );

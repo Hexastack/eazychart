@@ -18,7 +18,7 @@ exports[`IrregularPieChart renders a irregular pie chart 1`] = `
               class="ez-irregular-arcs"
             >
               <path
-                d="M-73.47315653655917,101.1271242968684L0,0Z"
+                d="M-114.8942378514243,-20.258954061141836L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -27,7 +27,16 @@ exports[`IrregularPieChart renders a irregular pie chart 1`] = `
               >
               </path>
               <path
-                d="M1.1481063742006436e-14,-187.5L0,0Z"
+                d="M1.2246467991473532e-14,-200L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M54.15318935989757,148.78466495776883L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -40,45 +49,6 @@ exports[`IrregularPieChart renders a irregular pie chart 1`] = `
         </svg>
       </div>
       <div class="ez-legend">
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: red; border: 2px solid red;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Alpha
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key ez-legend-disable"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Beta
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: green; border: 2px solid green;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Gamma
-          </span>
-        </div>
       </div>
     </div>
     <div
@@ -108,7 +78,7 @@ exports[`IrregularPieChart renders a irregular pie chart 2`] = `
               class="ez-irregular-arcs"
             >
               <path
-                d="M-73.47315653655917,101.1271242968684A125,125,0,0,1,-2.2962127484012872e-14,-125L0,0Z"
+                d="M-114.8942378514243,-20.258954061141836A116.66666666666667,116.66666666666667,0,0,1,-2.143131898507868e-14,-116.66666666666667L0,0Z"
                 fill="red"
                 stroke="#FFF"
                 stroke-width="0"
@@ -117,7 +87,16 @@ exports[`IrregularPieChart renders a irregular pie chart 2`] = `
               >
               </path>
               <path
-                d="M1.1481063742006436e-14,-187.5A187.5,187.5,0,1,1,-110.20973480483876,151.69068644530262L0,0Z"
+                d="M1.2246467991473532e-14,-200A200,200,0,0,1,68.40402866513377,187.93852415718166L0,0Z"
+                fill="blue"
+                stroke="#FFF"
+                stroke-width="0"
+                data-testid="ez-arc"
+                class="ez-arc"
+              >
+              </path>
+              <path
+                d="M54.15318935989757,148.78466495776883A158.33333333333334,158.33333333333334,0,0,1,-155.92789422693298,-27.494294797263922L0,0Z"
                 fill="green"
                 stroke="#FFF"
                 stroke-width="0"
@@ -145,11 +124,11 @@ exports[`IrregularPieChart renders a irregular pie chart 2`] = `
         </div>
         <div
           role="button"
-          class="ez-legend-key ez-legend-disable"
+          class="ez-legend-key"
         >
           <div
             class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+            style="background-color: blue; border: 2px solid blue;"
           >
           </div>
           <span class="ez-legend-text">

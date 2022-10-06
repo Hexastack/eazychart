@@ -1,9 +1,9 @@
 import React from 'react';
+import { Position } from 'eazychart-core/src/types';
 import { colors, dimensions, rawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { LineColumnChart } from '@/recipes/column/LineColumnChart';
 import 'tests/mocks/ResizeObserver';
-import { Position } from 'eazychart-core/src/types';
 
 describe('LineColumnChart', () => {
   it('renders a line & column chart', async () => {

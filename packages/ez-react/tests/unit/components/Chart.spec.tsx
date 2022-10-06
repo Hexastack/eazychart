@@ -5,7 +5,6 @@ import {
   padding,
   animationOptions,
   rawData,
-  chartData,
 } from 'eazychart-core/src/sample-data';
 import { Chart } from '@/components/Chart';
 import 'tests/mocks/ResizeObserver';
@@ -40,7 +39,7 @@ describe('Chart', () => {
         rawData={rawData}
         scopedSlots={{ TooltipComponent: Tooltip }}
       >
-        <div>{JSON.stringify(chartData)}</div>
+        <div>{JSON.stringify(rawData)}</div>
       </Chart>
     );
 

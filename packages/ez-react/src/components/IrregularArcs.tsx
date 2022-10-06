@@ -9,7 +9,8 @@ import { useColorScale } from './scales/ColorScale';
 export interface IrregularArcsProps
   extends PieConfig,
     Omit<SVGAttributes<SVGPathElement>, 'stroke' | 'strokeWidth'> {
-  domainKey: string;
+  valueDomainKey: string;
+  labelDomainKey: string;
   getCenter?: (dimensions: Dimensions) => Point;
   getRadius?: (dimensions: Dimensions) => number;
   startAngle?: number;
@@ -19,7 +20,8 @@ export interface IrregularArcsProps
 export const IrregularArcs: FC<IrregularArcsProps> = ({
   startAngle = 0,
   endAngle = 2 * Math.PI,
-  domainKey,
+  valueDomainKey,
+  labelDomainKey,
   getCenter = ({ width, height }) => ({ x: width / 2, y: height / 2 }),
   getRadius = ({ width, height }) => Math.min(width, height) / 2,
   donutRadius = 0,
@@ -46,13 +48,22 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
   const shapeData = useMemo(() => {
     return scalePieArcData(
       data,
-      domainKey,
+      valueDomainKey,
+      labelDomainKey,
       colorScale,
       startAngle,
       endAngle,
       sortValues
     );
-  }, [data, domainKey, colorScale, sortValues, startAngle, endAngle]);
+  }, [
+    data,
+    valueDomainKey,
+    labelDomainKey,
+    colorScale,
+    sortValues,
+    startAngle,
+    endAngle,
+  ]);
 
   const minArcValue = useMemo(
     () =>

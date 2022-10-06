@@ -13,12 +13,10 @@ describe('LinePath', () => {
       // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <LinePath shapeData={pointsData} />

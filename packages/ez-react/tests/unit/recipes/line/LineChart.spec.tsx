@@ -18,7 +18,7 @@ describe('LineChart', () => {
           }}
           marker={{
             hidden: false,
-            color: 'red',
+            color: 'blue',
             radius: 2,
           }}
           grid={{ directions: [] }}

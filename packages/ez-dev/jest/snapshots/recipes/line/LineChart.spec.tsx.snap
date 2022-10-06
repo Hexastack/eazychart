@@ -14,7 +14,7 @@ exports[`LineChart renders a line chart 1`] = `
         >
           <g transform="translate(100, 100)">
             <g class="ez-points">
-              <g class="ez-line">
+              <g class="ez-segments">
                 <path
                   d
                   stroke="red"
@@ -26,8 +26,8 @@ exports[`LineChart renders a line chart 1`] = `
                 >
                 </path>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"
@@ -37,8 +37,8 @@ exports[`LineChart renders a line chart 1`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"
@@ -48,8 +48,8 @@ exports[`LineChart renders a line chart 1`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"
@@ -109,7 +109,7 @@ exports[`LineChart renders a line chart 2`] = `
         >
           <g transform="translate(100, 100)">
             <g class="ez-points">
-              <g class="ez-line">
+              <g class="ez-segments">
                 <path
                   d
                   stroke="red"
@@ -121,8 +121,8 @@ exports[`LineChart renders a line chart 2`] = `
                 >
                 </path>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"
@@ -132,8 +132,8 @@ exports[`LineChart renders a line chart 2`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"
@@ -143,8 +143,8 @@ exports[`LineChart renders a line chart 2`] = `
                 >
                 </circle>
                 <circle
-                  stroke="#1f77b4"
-                  fill="red"
+                  stroke="red"
+                  fill="blue"
                   r="2"
                   cx="0"
                   cy="0"

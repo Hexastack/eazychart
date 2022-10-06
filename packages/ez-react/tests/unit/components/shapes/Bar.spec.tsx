@@ -41,12 +41,10 @@ describe('Bar', () => {
       // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <Bar shapeDatum={rectData} />
@@ -63,12 +61,10 @@ describe('Bar', () => {
   it('show/hide the tooltip on mouse over/out', async () => {
     const wrapper = render(
       <Chart
-        {...{
-          ...baseChartProps,
-          scopedSlots: {
-            LegendComponent: () => <>{null}</>,
-            Tooltip: () => <>{null}</>,
-          },
+        {...baseChartProps}
+        scopedSlots={{
+          LegendComponent: () => <>{null}</>,
+          TooltipComponent: () => <>{null}</>,
         }}
       >
         <Bar shapeDatum={rectData} />

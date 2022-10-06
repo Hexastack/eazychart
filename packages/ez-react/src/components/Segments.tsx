@@ -29,14 +29,15 @@ export const Segments: FC<SegmentsProps> = ({
   const { colorScale } = useColorScale();
 
   const color = useMemo(
-    () => colorScale.scale(yDomainKey),
-    [colorScale, yDomainKey]
+    () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : line.stroke),
+    [colorScale, yDomainKey, line]
   );
 
   return (
     <Points
       xDomainKey={xDomainKey}
       yDomainKey={yDomainKey}
+      stroke={color}
       scopedSlots={{
         default: ({ shapeData }) => {
           const pointData: PointDatum[] = shapeData.map((pointDatum) => ({

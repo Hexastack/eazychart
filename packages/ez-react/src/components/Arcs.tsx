@@ -9,7 +9,8 @@ import { useColorScale } from './scales/ColorScale';
 export interface ArcsProps
   extends PieConfig,
     Omit<SVGAttributes<SVGPathElement>, 'stroke' | 'strokeWidth'> {
-  domainKey: string;
+  valueDomainKey: string;
+  labelDomainKey: string;
   getCenter?: (dimensions: Dimensions) => Point;
   getRadius?: (dimensions: Dimensions) => number;
   startAngle?: number;
@@ -18,7 +19,8 @@ export interface ArcsProps
 }
 
 export const Arcs: FC<ArcsProps> = ({
-  domainKey,
+  valueDomainKey,
+  labelDomainKey,
   getCenter = ({ width, height }) => ({ x: width / 2, y: height / 2 }),
   getRadius = ({ width, height }) => Math.min(width, height) / 2,
   startAngle = 0,
@@ -40,13 +42,22 @@ export const Arcs: FC<ArcsProps> = ({
   const shapeData = useMemo(() => {
     return scaleArcData(
       data,
-      domainKey,
+      valueDomainKey,
+      labelDomainKey,
       angleScale,
       colorScale,
       startAngle,
       sortValues
     );
-  }, [data, domainKey, angleScale, colorScale, sortValues, startAngle]);
+  }, [
+    data,
+    valueDomainKey,
+    labelDomainKey,
+    angleScale,
+    colorScale,
+    sortValues,
+    startAngle,
+  ]);
 
   return (
     <g

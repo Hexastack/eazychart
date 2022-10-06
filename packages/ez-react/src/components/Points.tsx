@@ -1,5 +1,9 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { defaultPointRadius, scalePointData } from 'eazychart-core/src';
+import {
+  defaultColor,
+  defaultPointRadius,
+  scalePointData,
+} from 'eazychart-core/src';
 import { Dimensions, PointDatum } from 'eazychart-core/src/types';
 import { Point } from '@/components/shapes/Point';
 import { useChart } from '@/lib/use-chart';
@@ -32,6 +36,8 @@ export const Points: FC<PointsProps> = ({
   xDomainKey,
   yDomainKey,
   r = defaultPointRadius,
+  fill = defaultColor,
+  stroke = defaultColor,
   scopedSlots,
   ...rest
 }) => {
@@ -39,9 +45,6 @@ export const Points: FC<PointsProps> = ({
   const { xScale, yScale } = useCartesianScales();
 
   const shapeData = useMemo(() => {
-    if (!xScale || !yScale) {
-      return [];
-    }
     return scalePointData(data, xDomainKey, yDomainKey, xScale, yScale);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, xDomainKey, yDomainKey, xScale.scale, yScale.scale]);
@@ -61,7 +64,15 @@ export const Points: FC<PointsProps> = ({
   return (
     <g className="ez-points" {...rest}>
       {shapeData.map((shapeDatum) => {
-        return <Point key={shapeDatum.id} shapeDatum={shapeDatum} r={r} />;
+        return (
+          <Point
+            key={shapeDatum.id}
+            shapeDatum={shapeDatum}
+            r={r}
+            fill={fill}
+            stroke={stroke}
+          />
+        );
       })}
     </g>
   );

@@ -5,8 +5,6 @@ import { Chart } from '@/components/Chart';
 import {
   dimensions,
   rawData,
-  scaleDefinitions,
-  colors,
   horizontalLinearScaleDef,
   verticalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
@@ -22,16 +20,12 @@ describe('Points', () => {
       // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            rawData: rawData.map((d) => ({ ...d, isActive: true })),
-            colors,
-            scaleDefinitions,
-            dimensions,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          rawData={rawData}
+          dimensions={dimensions}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <CartesianScale
@@ -44,7 +38,13 @@ describe('Points', () => {
               definition: verticalLinearScaleDef,
             }}
           >
-            <Points xDomainKey={'amount'} yDomainKey={'value'} r={6} />
+            <Points
+              xDomainKey={'amount'}
+              yDomainKey={'value'}
+              r={6}
+              fill={'red'}
+              stroke={'red'}
+            />
           </CartesianScale>
         </Chart>
       );

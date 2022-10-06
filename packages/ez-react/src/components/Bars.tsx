@@ -16,9 +16,6 @@ export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
   const { colorScale } = useColorScale();
 
   const scaledData = useMemo(() => {
-    if (!xScale || !yScale) {
-      return [];
-    }
     return scaleRectangleData(
       data,
       xDomainKey,

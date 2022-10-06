@@ -265,7 +265,7 @@ export default class AreaChart extends Vue {
           titleAlign={horizontalAxis.titleAlign}
           tickLength={horizontalAxis.tickLength}
           tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickLength}
+          tickSize={horizontalAxis.tickSize}
           tickFormat={horizontalAxis.tickFormat}
         />
         <Axis
@@ -278,7 +278,7 @@ export default class AreaChart extends Vue {
           titleAlign={verticalAxis.titleAlign}
           tickLength={verticalAxis.tickLength}
           tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
+          tickSize={verticalAxis.tickSize}
           tickFormat={verticalAxis.tickFormat}
         />
       </Chart>

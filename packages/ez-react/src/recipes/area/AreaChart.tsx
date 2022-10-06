@@ -168,7 +168,7 @@ export const AreaChart: FC<AreaChartProps> = ({
         titleAlign={horizontalAxis.titleAlign}
         tickLength={horizontalAxis.tickLength}
         tickCount={horizontalAxis.tickCount}
-        tickSize={horizontalAxis.tickLength}
+        tickSize={horizontalAxis.tickSize}
         tickFormat={horizontalAxis.tickFormat}
       />
       <Axis
@@ -180,7 +180,7 @@ export const AreaChart: FC<AreaChartProps> = ({
         titleAlign={verticalAxis.titleAlign}
         tickLength={verticalAxis.tickLength}
         tickCount={verticalAxis.tickCount}
-        tickSize={verticalAxis.tickLength}
+        tickSize={verticalAxis.tickSize}
         tickFormat={verticalAxis.tickFormat}
       />
     </Chart>

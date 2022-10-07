@@ -159,7 +159,8 @@ const calculateAxisTickRotation = (
   scale: D3ContuniousScales | D3CategoricalScales,
   labels: SVGGraphicsElement[],
   position: Position,
-  rotation: number | 'auto'
+  rotation: number | 'auto',
+  reverse: boolean
 ) => {
   const { maxHeight, maxWidth, labelCount } = measureAxisLabels(labels);
   const measuredSize = labelCount * maxWidth;
@@ -169,7 +170,7 @@ const calculateAxisTickRotation = (
   // The more the overlap, the more we rotate
   let rotate: number;
   if (rotation === 'auto' && typeof scale !== 'undefined') {
-    const range = scale.range()[1] as number;
+    const range = scale.range()[reverse ? 0 : 1] as number;
     rotate =
       range < measuredSize
         ? 90 * Math.min(1, (measuredSize / range - 0.8) / 2)
@@ -192,13 +193,15 @@ export const getAxisLabelAttributes = (
   scale: D3ContuniousScales | D3CategoricalScales,
   elements: SVGGraphicsElement[],
   position: Position,
-  rotation: number | 'auto'
+  rotation: number | 'auto',
+  reverse: boolean
 ) => {
   const { rotate, maxHeight, anchor } = calculateAxisTickRotation(
     scale,
     elements,
     position,
-    rotation
+    rotation,
+    reverse
   );
   const sign =
     position === Position.TOP || position === Position.LEFT ? -1 : 1;

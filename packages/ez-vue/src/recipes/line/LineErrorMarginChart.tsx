@@ -260,12 +260,12 @@ export default class LineErrorMarginChart extends Vue {
                 return {
                   x: d.x,
                   y0: yScale.scale(
-                    (datum[verticalAxis.domainKey] as number) *
-                      (1 - Number(datum[errorMargins.negative])),
+                    (datum[verticalAxis.domainKey] as number)
+                      * (1 - Number(datum[errorMargins.negative])),
                   ),
                   y1: yScale.scale(
-                    (datum[verticalAxis.domainKey] as number) *
-                      (1 + Number(datum[errorMargins.positive])),
+                    (datum[verticalAxis.domainKey] as number)
+                      * (1 + Number(datum[errorMargins.positive])),
                   ),
                 };
               });

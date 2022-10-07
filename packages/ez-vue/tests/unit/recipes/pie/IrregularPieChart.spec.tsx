@@ -8,12 +8,14 @@ import 'tests/mocks/ResizeObserver';
 
 describe('IrregularPieChart', () => {
   it('renders a irregular pie chart', async () => {
+    const propsData = {
+      data: rawData,
+      colors,
+      dimensions,
+    };
+
     const wrapper = render(IrregularPieChart, {
-      propsData: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      propsData,
     });
 
     await Vue.nextTick();
@@ -21,11 +23,7 @@ describe('IrregularPieChart', () => {
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     const wrapper2 = render(IrregularPieChart, {
-      props: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      props: propsData,
     });
 
     await wrapper2.updateProps({

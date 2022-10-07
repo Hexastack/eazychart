@@ -12,7 +12,7 @@ describe('LineChart', () => {
       // 1st render
       wrapper = render(
         <LineChart
-          rawData={pointsData as unknown as RawData}
+          data={pointsData as unknown as RawData}
           line={{
             stroke: 'red',
             strokeWidth: 2,

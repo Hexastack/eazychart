@@ -28,7 +28,7 @@ import {
 export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
   line: LineConfig;
   swapAxis?: boolean;
-  rawData: RawData;
+  data: RawData;
   area?: Partial<AreaConfig>;
   marker?: MarkerConfig;
   animationOptions?: AnimationOptions;
@@ -49,7 +49,7 @@ export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
 
 export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
   swapAxis = false,
-  rawData,
+  data,
   line = {
     stroke: '#339999',
     strokeWidth: 2,
@@ -95,15 +95,15 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
   const verticalAxis = swapAxis ? xAxis : yAxis;
 
   const [lowsestMarginValue, highestMarginValue] = useMemo(() => {
-    const dataValues = rawData.map((datum) => datum[yAxis.domainKey] as number);
-    const negativeMargins = rawData.map(
+    const dataValues = data.map((datum) => datum[yAxis.domainKey] as number);
+    const negativeMargins = data.map(
       (datum) => datum[errorMargins.negative] as number
     );
-    const positiveMargins = rawData.map(
+    const positiveMargins = data.map(
       (datum) => datum[errorMargins.positive] as number
     );
     return getDataMarginBounds(dataValues, negativeMargins, positiveMargins);
-  }, [rawData, yAxis.domainKey, errorMargins]);
+  }, [data, yAxis.domainKey, errorMargins]);
 
   const xScale = useMemo<ScaleLinear>(
     () =>
@@ -130,7 +130,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={[line.stroke]}
@@ -149,17 +149,17 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
         scopedSlots={{
           default: ({ scaledData }) => {
             const lineAreaData = scaledData.map((d, idx) => {
-              const rawDatum: RawDatum = rawData[idx];
+              const datum: RawDatum = data[idx];
               return {
                 x: d.x,
                 // @todo error margin data must be scaled
                 y0: yScale.scale(
-                  (rawDatum[yAxis.domainKey] as number) *
-                    (1 - Number(rawDatum[errorMargins.negative]))
+                  (datum[yAxis.domainKey] as number) *
+                    (1 - Number(datum[errorMargins.negative]))
                 ),
                 y1: yScale.scale(
-                  (rawDatum[yAxis.domainKey] as number) *
-                    (1 + Number(rawDatum[errorMargins.positive]))
+                  (datum[yAxis.domainKey] as number) *
+                    (1 + Number(datum[errorMargins.positive]))
                 ),
               };
             });

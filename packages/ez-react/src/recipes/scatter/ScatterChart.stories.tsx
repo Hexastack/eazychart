@@ -54,7 +54,7 @@ const defaultArguments = {
     tickFormat: (d: number) => `${d}c`,
   },
   isRTL: false,
-  rawData: correlationData,
+  data: correlationData,
 };
 
 Default.args = {

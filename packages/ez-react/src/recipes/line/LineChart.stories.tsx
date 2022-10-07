@@ -65,7 +65,7 @@ const defaultArguments = {
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },
-  rawData: evolutionData,
+  data: evolutionData,
 };
 
 Default.args = defaultArguments;

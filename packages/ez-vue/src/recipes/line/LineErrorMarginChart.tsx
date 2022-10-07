@@ -53,7 +53,7 @@ export default class LineErrorMarginChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Partial<Dimensions>>,
@@ -172,16 +172,6 @@ export default class LineErrorMarginChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-    required: false,
-  })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
-
   get horizontalAxis() {
     return this.swapAxis ? this.yAxis : this.xAxis;
   }
@@ -195,12 +185,12 @@ export default class LineErrorMarginChart extends Vue {
   private yScale!: ScaleLinear;
 
   created() {
-    const { rawData, yAxis, errorMargins } = this;
-    const dataValues = rawData.map((datum) => datum[yAxis.domainKey] as number);
-    const negativeMargins = rawData.map(
+    const { data, yAxis, errorMargins } = this;
+    const dataValues = data.map((datum) => datum[yAxis.domainKey] as number);
+    const negativeMargins = data.map(
       (datum) => datum[errorMargins.negative] as number,
     );
-    const positiveMargins = rawData.map(
+    const positiveMargins = data.map(
       (datum) => datum[errorMargins.positive] as number,
     );
     const [lowsestMarginValue, highestMarginValue] = getDataMarginBounds(
@@ -231,7 +221,7 @@ export default class LineErrorMarginChart extends Vue {
       horizontalAxis,
       verticalAxis,
       errorMargins,
-      rawData,
+      data,
       line,
       area,
       marker,
@@ -239,7 +229,6 @@ export default class LineErrorMarginChart extends Vue {
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -247,14 +236,13 @@ export default class LineErrorMarginChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale]}
         padding={padding}
         colors={[line.stroke]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}
@@ -268,16 +256,16 @@ export default class LineErrorMarginChart extends Vue {
           scopedSlots={{
             default: ({ scaledData }: { scaledData: PointDatum[] }) => {
               const lineAreaData = scaledData.map((d, idx) => {
-                const rawDatum = rawData[idx];
+                const datum = data[idx];
                 return {
                   x: d.x,
                   y0: yScale.scale(
-                    (rawDatum[verticalAxis.domainKey] as number)
-                      * (1 - Number(rawDatum[errorMargins.negative])),
+                    (datum[verticalAxis.domainKey] as number)
+                      * (1 - Number(datum[errorMargins.negative])),
                   ),
                   y1: yScale.scale(
-                    (rawDatum[verticalAxis.domainKey] as number)
-                      * (1 + Number(rawDatum[errorMargins.positive])),
+                    (datum[verticalAxis.domainKey] as number)
+                      * (1 + Number(datum[errorMargins.positive])),
                   ),
                 };
               });

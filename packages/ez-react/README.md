@@ -1,7 +1,7 @@
 # EazyChart
 <img align="center" width="500" alt="EazyChart logo" src="https://eazychart.com/img/logo.png"/>
 <br/>
-<a href="https://eazychart.com/">EazyChart</a> is a chart library, `eazychart-vue` offers the ability to easily add charts in your Vue web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the <a href="https://d3js.org/">D3.js</a> library's submodules.
+<a href="https://eazychart.com/">EazyChart</a> is a chart library, `eazychart-react` offers the ability to easily add charts in your React web applications. EazyChart does not depend on a JS chart library instead it depends only on some of the <a href="https://d3js.org/">D3.js</a> library's submodules.
 
 <br />
 <a href="https://docs.eazychart.com/">Website</a>
@@ -11,8 +11,6 @@
 <a href="https://docs.eazychart.com/?path=/story/get-started-installation--page">Installation</a>
 <br />
 <hr />
-
-> **_NOTE:_**  This library supports Vue v2.x as it hasn't been tested for v3.x. We expect to work on v3 soon.
 
 ## Motivation
 
@@ -35,47 +33,31 @@ Use one of the following commands :
 
 ```
 // Using npm
-npm install --save eazychart-vue eazychart-css
+npm install --save eazychart-react eazychart-css
 
 // Using yarn
-yarn add eazychart-vue eazychart-css
+yarn add eazychart-react eazychart-css
 ```
 
 ## Basic Usage
 
-Import the chart from the library :
+Import the chart from the library first :
 ```js
-import { PieChart } from 'eazychart-vue';
+import { PieChart } from 'eazychart-react';
 import 'eazychart-css'; // You just need to import this once.
 ```
-Use any chart component with vue component syntax :
-```vue
-<template>
-  <div id="app">
-    <pie-chart :colors="colors" domainKey="value" :data="data"/>
-  </div>
-</template>
-<script>
-import { PieChart } from 'eazychart-vue';
-import 'eazychart-css';
 
-export default {
-  name: 'App',
-  components: {
-    PieChart
-  },
-  data() {
-    return {
-      colors: ['red', 'blue', 'green'],
-      data: [
-        { label: 'Alpha', value: 10 },
-        { label: 'Beta', value: 20 },
-        { label: 'Gamma', value: 30 },
-      ],
-    };
-  },
-};
-</script>
+Use any chart component with the JSX syntax :
+```jsx
+<PieChart
+  colors={['red', 'blue', 'green']}
+  domainKey={'value'}
+  data={[
+    { label: 'Alpha', value: 10 },
+    { label: 'Beta', value: 20 },
+    { label: 'Gamma', value: 30 },
+  ]}
+/>
 ```
 
 ## Documentation

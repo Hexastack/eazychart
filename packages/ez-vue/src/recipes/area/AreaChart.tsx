@@ -53,7 +53,7 @@ export default class AreaChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -151,12 +151,6 @@ export default class AreaChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   get horizontalAxis() {
     return this.swapAxis ? this.yAxis : this.xAxis;
   }
@@ -190,14 +184,13 @@ export default class AreaChart extends Vue {
       yScale,
       horizontalAxis,
       verticalAxis,
-      rawData,
+      data,
       area,
       marker,
       padding,
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -205,14 +198,13 @@ export default class AreaChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xScale, yScale]}
         padding={padding}
         colors={[area.stroke]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}

@@ -28,7 +28,7 @@ export default class RadialChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -91,12 +91,6 @@ export default class RadialChart extends Vue {
   })
   private readonly arc!: RadialConfig;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   private scale!: ScaleLinear;
 
   created() {
@@ -110,12 +104,11 @@ export default class RadialChart extends Vue {
   render() {
     const {
       scale,
-      rawData,
+      data,
       padding,
       colors,
       animationOptions,
       arc,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -128,13 +121,12 @@ export default class RadialChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[scale]}
         padding={padding}
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <Arcs
           arcScale={scale}

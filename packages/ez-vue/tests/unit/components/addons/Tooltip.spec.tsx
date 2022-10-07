@@ -10,6 +10,7 @@ describe('Tooltip', () => {
       propsData: {
         datum: null,
         shapeDatum: null,
+        mousePosition: { x: 400, y: 300 },
         isVisible: false,
         domains: ['label', 'value'],
         animationOptions: {

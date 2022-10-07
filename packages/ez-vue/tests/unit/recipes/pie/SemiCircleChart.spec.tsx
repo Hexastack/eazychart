@@ -7,12 +7,13 @@ import 'tests/mocks/ResizeObserver';
 
 describe('SemiCircleChart', () => {
   it('renders a semi-circle chart', async () => {
+    const propsData = {
+      data: rawData,
+      colors,
+      dimensions,
+    };
     const wrapper = render(SemiCircleChart, {
-      propsData: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      propsData,
     });
 
     await Vue.nextTick();
@@ -20,11 +21,7 @@ describe('SemiCircleChart', () => {
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     const wrapper2 = render(SemiCircleChart, {
-      props: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      props: propsData,
     });
 
     await wrapper2.updateProps({

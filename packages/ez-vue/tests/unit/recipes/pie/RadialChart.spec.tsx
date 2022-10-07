@@ -8,12 +8,14 @@ import 'tests/mocks/ResizeObserver';
 
 describe('RadialChart', () => {
   it('renders a Radial chart', async () => {
+    const propsData = {
+      data: rawData,
+      colors,
+      dimensions,
+    };
+
     const wrapper = render(RadialChart, {
-      propsData: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      propsData,
     });
 
     await Vue.nextTick();
@@ -21,11 +23,7 @@ describe('RadialChart', () => {
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     const wrapper2 = render(RadialChart, {
-      props: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      props: propsData,
     });
 
     await wrapper2.updateProps({

@@ -8,12 +8,14 @@ import 'tests/mocks/ResizeObserver';
 
 describe('PieChart', () => {
   it('renders a pie chart', async () => {
+    const propsData = {
+      data: rawData,
+      colors,
+      dimensions,
+    };
+
     const wrapper = render(PieChart, {
-      propsData: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      propsData,
     });
 
     await Vue.nextTick();
@@ -21,11 +23,7 @@ describe('PieChart', () => {
     expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     const wrapper2 = render(PieChart, {
-      props: {
-        rawData,
-        colors,
-        dimensions,
-      },
+      props: propsData,
     });
 
     await wrapper2.updateProps({

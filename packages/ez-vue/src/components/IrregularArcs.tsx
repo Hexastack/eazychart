@@ -108,7 +108,10 @@ export default class IrregularArcs extends Vue {
 
   created() {
     this.rScale.appendDefinition({
-      range: [this.getRadius(this.chart.dimensions) / 2, this.getRadius(this.chart.dimensions)],
+      range: [
+        this.getRadius(this.chart.dimensions) / 2,
+        this.getRadius(this.chart.dimensions),
+      ],
     });
   }
 

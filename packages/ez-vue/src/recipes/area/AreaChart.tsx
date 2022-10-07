@@ -243,8 +243,8 @@ export default class AreaChart extends Vue {
                     stroke={area.stroke}
                     strokeWidth={area.strokeWidth}
                   />
-                  {!marker.hidden &&
-                    scaledData.map((pointDatum) => (
+                  {!marker.hidden
+                    && scaledData.map((pointDatum) => (
                       <Point
                         key={pointDatum.id}
                         shapeDatum={pointDatum}

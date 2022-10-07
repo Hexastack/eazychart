@@ -221,8 +221,8 @@ export default class LineChart extends Vue {
                   stroke={line.stroke}
                   strokeWidth={line.strokeWidth}
                 />
-                {!marker.hidden &&
-                  scaledData.map((pointDatum) => (
+                {!marker.hidden
+                  && scaledData.map((pointDatum) => (
                     <Point
                       key={pointDatum.id}
                       shapeDatum={pointDatum}

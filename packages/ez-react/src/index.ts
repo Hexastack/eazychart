@@ -24,9 +24,5 @@ export {
   ScatterChart,
   ScatterChartProps,
 } from '@/recipes/scatter/ScatterChart';
-export {
-  Legend,
-  LegendProps,
-  LegendPropsWithRef,
-} from '@/components/addons/legend/Legend';
+export { Legend, LegendProps } from '@/components/addons/legend/Legend';
 export { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';

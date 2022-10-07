@@ -221,8 +221,8 @@ export default class LineChart extends Vue {
                   stroke={line.stroke}
                   strokeWidth={line.strokeWidth}
                 />
-                {!marker.hidden
-                  && scaledData.map((pointDatum) => (
+                {!marker.hidden &&
+                  scaledData.map((pointDatum) => (
                     <Point
                       key={pointDatum.id}
                       shapeDatum={pointDatum}
@@ -236,27 +236,16 @@ export default class LineChart extends Vue {
           }}
         />
         <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
+          {...horizontalAxis}
           aScale={xScale}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickSize}
-          tickFormat={horizontalAxis.tickFormat}
+          position={horizontalAxis.position || Position.BOTTOM}
         />
         <Axis
-          position={
-            verticalAxis.position
-            || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          {...verticalAxis}
           aScale={yScale}
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickSize}
-          tickFormat={verticalAxis.tickFormat}
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
         />
       </Chart>
     );

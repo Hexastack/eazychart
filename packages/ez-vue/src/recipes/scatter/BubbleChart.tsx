@@ -132,12 +132,9 @@ export default class BubbleChart extends Vue {
   private readonly isRTL!: boolean;
 
   @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
+    type: Function as PropType<(dimensions: Dimensions) => void>,
     required: false,
   })
-
   get horizontalAxis() {
     return this.swapAxis ? this.yAxis : this.xAxis;
   }
@@ -206,33 +203,18 @@ export default class BubbleChart extends Vue {
           xScale={xScale}
           yScale={yScale}
         />
-        <Bubbles
-          xScale={xScale}
-          yScale={yScale}
-          rScale={rScale}
-        />
+        <Bubbles xScale={xScale} yScale={yScale} rScale={rScale} />
         <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
+          {...horizontalAxis}
           aScale={xScale}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickSize}
-          tickFormat={horizontalAxis.tickFormat}
+          position={horizontalAxis.position || Position.BOTTOM}
         />
         <Axis
-          position={
-            verticalAxis.position
-            || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          {...verticalAxis}
           aScale={yScale}
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickSize}
-          tickFormat={verticalAxis.tickFormat}
+          position={
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+          }
         />
       </Chart>
     );

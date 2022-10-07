@@ -160,36 +160,21 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
         }}
       />
       <Axis
+        {...xAxis}
         aScale={xColumnScale}
         position={xAxis.position || Position.BOTTOM}
-        title={xAxis.title}
-        titleAlign={xAxis.titleAlign}
-        tickCount={xAxis.tickCount}
-        tickSize={xAxis.tickSize}
-        tickLength={xAxis.tickLength}
-        tickFormat={xAxis.tickFormat}
       />
       <Axis
+        {...yAxis}
         aScale={yColumnScale}
         position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
-        title={yAxis.title}
-        titleAlign={yAxis.titleAlign}
-        tickCount={yAxis.tickCount}
-        tickSize={yAxis.tickSize}
-        tickLength={yAxis.tickLength}
-        tickFormat={yAxis.tickFormat}
       />
       <Axis
+        {...yLineAxis}
         aScale={yLineScale}
         position={
           yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT)
         }
-        title={yLineAxis.title}
-        titleAlign={yLineAxis.titleAlign}
-        tickCount={yLineAxis.tickCount}
-        tickSize={yLineAxis.tickSize}
-        tickLength={yLineAxis.tickLength}
-        tickFormat={yLineAxis.tickFormat}
       />
     </Chart>
   );

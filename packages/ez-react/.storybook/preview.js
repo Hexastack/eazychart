@@ -7,7 +7,7 @@ export const parameters = {
   options: {
     storySort: {
         method: 'alphabetical',
-        order: ['Get Started', ['Introduction', 'Installation'], 'React'],
+        order: ['Get Started', ['Introduction', 'Installation', 'Your First Chart'], 'React'],
         locales: 'en-US',
     }
   },

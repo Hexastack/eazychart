@@ -10,7 +10,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 export type SemiCircleChartProps = PieChartProps;
 
 export const SemiCircleChart: FC<SemiCircleChartProps> = ({
-  rawData,
+  data,
   colors = ['#339999', '#993399', '#333399'],
   animationOptions = {
     easing: 'easeBack',
@@ -37,7 +37,6 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const scale = useMemo<ScaleLinear>(
     () =>
@@ -50,20 +49,17 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[scale]}
       padding={padding}
       colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Pie
         aScale={scale}
         getCenter={({ width, height }) => ({ x: width / 2, y: height })}
-        getRadius={({ width, height }) =>
-          height / 2 + width ** 2 / (8 * height)
-        }
+        getRadius={({ width, height }) => Math.min(width, height)}
         startAngle={Math.PI / 2}
         endAngle={-Math.PI / 2}
         {...arc}

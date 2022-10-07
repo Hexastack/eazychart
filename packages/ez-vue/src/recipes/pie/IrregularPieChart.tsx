@@ -28,7 +28,7 @@ export default class IrregularPieChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -93,12 +93,6 @@ export default class IrregularPieChart extends Vue {
   })
   private readonly arc!: PieConfig;
 
-  @Prop({
-    type: Function as PropType<(dimensions: Dimensions) => void>,
-    required: false,
-  })
-  private readonly onResize?: (dimensions: Dimensions) => void;
-
   private aScale!: ScaleLinear;
 
   private rScale!: ScaleLinear;
@@ -118,12 +112,11 @@ export default class IrregularPieChart extends Vue {
     const {
       aScale,
       rScale,
-      rawData,
+      data,
       padding,
       colors,
       animationOptions,
       arc,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -136,13 +129,12 @@ export default class IrregularPieChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[aScale, rScale]}
         padding={padding}
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
-        onResize={onResize}
       >
         <IrregularArcs
           aScale={aScale}

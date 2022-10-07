@@ -43,7 +43,7 @@ export default class LineColumnChart extends Vue {
     type: Array as PropType<RawData>,
     required: true,
   })
-  private readonly rawData!: RawData;
+  private readonly data!: RawData;
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -162,16 +162,6 @@ export default class LineColumnChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-    required: false,
-  })
-  private readonly onResize?: (
-    dimensions: Dimensions,
-  ) => void;
-
   private xColumnScale!: ScaleBand;
 
   private yColumnScale!: ScaleLinear;
@@ -216,7 +206,7 @@ export default class LineColumnChart extends Vue {
       xAxis,
       yAxis,
       yLineAxis,
-      rawData,
+      data,
       line,
       marker,
       padding,
@@ -224,7 +214,6 @@ export default class LineColumnChart extends Vue {
       animationOptions,
       grid,
       isRTL,
-      onResize,
       $scopedSlots,
       dimensions,
     } = this;
@@ -237,14 +226,13 @@ export default class LineColumnChart extends Vue {
     return (
       <Chart
         dimensions={dimensions}
-        rawData={rawData}
+        rawData={data}
         scales={[xColumnScale, yColumnScale, xLineScale, yLineScale]}
         padding={padding}
         colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
         isRTL={isRTL}
-        onResize={onResize}
       >
         <Grid
           directions={grid.directions}

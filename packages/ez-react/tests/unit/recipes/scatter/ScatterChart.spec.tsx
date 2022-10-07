@@ -1,6 +1,6 @@
 import React from 'react';
 import { dimensions, rawData } from 'eazychart-core/src/sample-data';
-import { act, render, RenderResult } from '@testing-library/react';
+import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { ScatterChart } from '@/recipes/scatter/ScatterChart';
 import 'tests/mocks/ResizeObserver';
 
@@ -11,7 +11,7 @@ describe('ScatterChart', () => {
       // 1st render
       wrapper = render(
         <ScatterChart
-          rawData={rawData}
+          data={rawData}
           color={'red'}
           grid={{ directions: [] }}
           dimensions={dimensions}
@@ -36,8 +36,8 @@ describe('ScatterChart', () => {
     });
 
     // 2nd render
-    // await waitFor(() => {
-    //   expect(wrapper.container.innerHTML).toMatchSnapshot();
-    // });
+    await waitFor(() => {
+      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    });
   });
 });

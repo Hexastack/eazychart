@@ -51,5 +51,5 @@ Default.args = {
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },
-  rawData: evolutionData,
+  data: evolutionData,
 };

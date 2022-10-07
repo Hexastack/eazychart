@@ -5,8 +5,12 @@ import {
   ResizableChartWrapper,
 } from '@/lib/storybook-utils';
 import {
-  animationOptions, colors, dimensions, rawData,
+  animationOptions,
+  colors,
+  dimensions,
+  rawData,
 } from 'eazychart-dev/storybook/data';
+import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
 import BarChart from './BarChart';
 
 const meta: Meta = {
@@ -32,11 +36,13 @@ const DefaultTemplate: Story = (_args, { argTypes }) => ({
 
 const TemplateWithParentDimensions: Story = (_args, { argTypes }) => ({
   title: 'Withparent',
-  components: { BarChart, ResizableChartWrapper },
+  components: { BarChart, ResizableChartWrapper, ResponsiveChartContainer },
   props: Object.keys(argTypes),
   template: `
     <ResizableChartWrapper>
-      <BarChart v-bind="$props" />
+      <ResponsiveChartContainer>
+        <BarChart v-bind="$props" />
+      </ResponsiveChartContainer>
     </ResizableChartWrapper>
   `,
 });
@@ -67,7 +73,7 @@ const initialArguments = {
   },
   animationOptions,
   isRTL: false,
-  rawData,
+  data: rawData,
 };
 
 Default.args = {

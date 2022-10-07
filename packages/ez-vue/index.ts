@@ -13,7 +13,7 @@ import LineColumnChart from './src/recipes/column/LineColumnChart';
 import Legend from './src/components/addons/legend/Legend';
 import Tooltip from './src/components/addons/tooltip/Tooltip';
 
-export default {
+export {
   BarChart,
   PieChart,
   IrregularPieChart,

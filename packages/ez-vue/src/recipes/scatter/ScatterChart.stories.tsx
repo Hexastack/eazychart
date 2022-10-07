@@ -62,7 +62,7 @@ const defaultArguments = {
   padding,
   animationOptions,
   isRTL: false,
-  rawData: correlationData,
+  data: correlationData,
 };
 
 Default.args = {

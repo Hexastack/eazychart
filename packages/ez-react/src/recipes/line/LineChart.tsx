@@ -22,7 +22,7 @@ import { ScaleLinear } from 'eazychart-core/src';
 
 export interface LineChartProps extends SVGAttributes<SVGGElement> {
   swapAxis?: boolean;
-  rawData: RawData;
+  data: RawData;
   line?: LineConfig;
   marker?: MarkerConfig;
   animationOptions?: AnimationOptions;
@@ -35,12 +35,11 @@ export interface LineChartProps extends SVGAttributes<SVGGElement> {
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const LineChart: FC<LineChartProps> = ({
   swapAxis = false,
-  rawData,
+  data,
   line = {
     stroke: '#339999',
     strokeWidth: 2,
@@ -77,7 +76,6 @@ export const LineChart: FC<LineChartProps> = ({
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
-  onResize,
 }) => {
   const horizontalAxis = swapAxis ? yAxis : xAxis;
   const verticalAxis = swapAxis ? xAxis : yAxis;
@@ -103,13 +101,12 @@ export const LineChart: FC<LineChartProps> = ({
   return (
     <Chart
       dimensions={dimensions}
-      rawData={rawData}
+      rawData={data}
       scales={[xScale, yScale]}
       padding={padding}
       colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
-      onResize={onResize}
     >
       <Grid
         directions={grid.directions}

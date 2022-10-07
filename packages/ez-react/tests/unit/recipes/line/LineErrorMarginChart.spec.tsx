@@ -14,7 +14,7 @@ describe('LineErrorMarginChart', () => {
       // 1st render
       wrapper = render(
         <LineErrorMarginChart
-          rawData={pointsWithMarginData}
+          data={pointsWithMarginData}
           line={{
             stroke: 'red',
             strokeWidth: 2,

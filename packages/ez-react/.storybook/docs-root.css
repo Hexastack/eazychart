@@ -353,3 +353,8 @@ h1 {
   line-height: 60px;
   letter-spacing: -0.16px;
 }
+
+#docs-root .sbdocs .sbdocs-p > .sbdocs-img {
+  display: block;
+  margin: 0 auto;
+}

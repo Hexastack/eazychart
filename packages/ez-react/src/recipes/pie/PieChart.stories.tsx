@@ -64,7 +64,13 @@ export const Default = DefaultTemplate.bind({});
 const defaultArguments = {
   colors,
   domainKey: 'value',
-  rawData,
+  data: rawData,
+  padding: {
+    left: 150,
+    bottom: 100,
+    right: 150,
+    top: 100,
+  },
 };
 
 Default.args = defaultArguments;

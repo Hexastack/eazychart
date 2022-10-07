@@ -8,7 +8,7 @@ import {
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
-import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
@@ -24,7 +24,7 @@ export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   arc?: PieConfig;
   dimensions: Partial<Dimensions>;
   scopedSlots?: {
-    LegendComponent: React.FC<LegendPropsWithRef>;
+    LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
   };
 }

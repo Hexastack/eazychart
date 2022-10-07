@@ -106,19 +106,26 @@ export const ScatterChart: FC<ScatterChartProps> = ({
       />
       <Points xScale={xScale} yScale={yScale} r={point.radius} />
       <Axis
-        {...{
-          ...horizontalAxis,
-          aScale: xScale,
-          position: horizontalAxis.position || Position.BOTTOM,
-        }}
+        position={horizontalAxis.position || Position.BOTTOM}
+        aScale={xScale}
+        title={horizontalAxis.title}
+        titleAlign={horizontalAxis.titleAlign}
+        tickLength={horizontalAxis.tickLength}
+        tickCount={horizontalAxis.tickCount}
+        tickSize={horizontalAxis.tickSize}
+        tickFormat={horizontalAxis.tickFormat}
       />
       <Axis
-        {...{
-          ...verticalAxis,
-          aScale: yScale,
-          position:
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
-        }}
+        position={
+          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+        }
+        aScale={yScale}
+        title={verticalAxis.title}
+        titleAlign={verticalAxis.titleAlign}
+        tickLength={verticalAxis.tickLength}
+        tickCount={verticalAxis.tickCount}
+        tickSize={verticalAxis.tickSize}
+        tickFormat={verticalAxis.tickFormat}
       />
     </Chart>
   );

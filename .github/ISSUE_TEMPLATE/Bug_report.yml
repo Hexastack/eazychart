@@ -2,7 +2,7 @@ name: "🐛 Bug Report"
 description: Create a new ticket for a bug, please specify its location (react|vue|core).
 title: "🐛 [BUG] - @eazychart-[core | react | vue]- <title>"
 labels: [
-  "bug"
+  "help-needed"
 ]
 body:
   - type: textarea
@@ -10,7 +10,10 @@ body:
     attributes:
       label: "Description"
       description: Please enter an explicit description of your issue
-      placeholder: Short and explicit description of your incident...
+      placeholder: Short and explicit description of your incident. Please delete any irrelevant options
+      value: 
+      \### Screenshots
+      \### Relevant notes
     validations:
       required: true
   - type: textarea
@@ -26,16 +29,6 @@ body:
       render: bash
     validations:
       required: true
-  - type: textarea
-    id: screenshot
-    attributes:
-      label: "Screenshots"
-      description: If applicable, add screenshots to help explain your problem.
-      value: |
-        ![DESCRIPTION](LINK.png)
-      render: bash
-    validations:
-      required: false
   - type: textarea
     id: logs
     attributes:

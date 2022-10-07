@@ -80,7 +80,13 @@ export const Axis: FC<AxisProps> = ({
 
   const axisLabelTransform = useMemo(() => {
     const labels = labelsRef.current.filter((el) => !!el) as SVGTextElement[];
-    return getAxisLabelAttributes(aScale.scale, labels, position, 'auto');
+    return getAxisLabelAttributes(
+      aScale.scale,
+      labels,
+      position,
+      'auto',
+      aScale.definition.reverse
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentAxis]);
 

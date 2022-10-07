@@ -32,7 +32,7 @@ export const Legend: React.FC<LegendProps> = ({
     }
   }, [colorScale]);
 
-  const resizeChart: Function = (entries: ResizeObserverEntry[]) => {
+  const handleResize: Function = (entries: ResizeObserverEntry[]) => {
     entries.forEach((entry) => {
       const newDimensions = {
         width: Math.floor(entry.contentRect.width),
@@ -46,7 +46,7 @@ export const Legend: React.FC<LegendProps> = ({
   useEffect(() => {
     // Dimensions values has not been set, we need to observe and resize
     const observer = new ResizeObserver((entries) => {
-      debounce(resizeChart(entries), 100);
+      debounce(handleResize(entries), 100);
     });
     observer.observe(ref?.current as Element, {
       box: 'border-box',
@@ -58,19 +58,17 @@ export const Legend: React.FC<LegendProps> = ({
   }, []);
 
   return (
-    ref && (
-      <div className="ez-legend" {...rest} ref={ref}>
-        {Object.entries(keyDict).map(([key, color]) => {
-          return (
-            <LegendItem
-              key={key}
-              onToggle={onLegendClick}
-              label={key}
-              color={color}
-            />
-          );
-        })}
-      </div>
-    )
+    <div className="ez-legend" {...rest} ref={ref}>
+      {Object.entries(keyDict).map(([key, color]) => {
+        return (
+          <LegendItem
+            key={key}
+            onToggle={onLegendClick}
+            label={key}
+            color={color}
+          />
+        );
+      })}
+    </div>
   );
 };

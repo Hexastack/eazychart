@@ -11,7 +11,7 @@ body:
       label: "Description"
       description: Please enter an explicit description of your issue
       placeholder: Short and explicit description of your incident. Please delete any irrelevant options
-      value: 
+      value: |
       \### Screenshots
       \### Relevant notes
     validations:

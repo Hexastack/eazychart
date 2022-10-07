@@ -13,7 +13,7 @@ body:
       placeholder: Short and explicit description of your incident...
     validations:
       required: true
-    value: 
+    value: |
       \### Screenshots
       \### Relevant notes
   - type: textarea

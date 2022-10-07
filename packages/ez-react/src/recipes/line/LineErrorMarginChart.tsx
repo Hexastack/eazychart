@@ -196,26 +196,19 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
         }}
       />
       <Axis
-        position={horizontalAxis.position || Position.BOTTOM}
-        aScale={xScale}
-        title={horizontalAxis.title}
-        titleAlign={horizontalAxis.titleAlign}
-        tickLength={horizontalAxis.tickLength}
-        tickCount={horizontalAxis.tickCount}
-        tickSize={horizontalAxis.tickLength}
-        tickFormat={horizontalAxis.tickFormat}
+        {...{
+          ...horizontalAxis,
+          aScale: xScale,
+          position: horizontalAxis.position || Position.BOTTOM,
+        }}
       />
       <Axis
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-        aScale={yScale}
-        title={verticalAxis.title}
-        titleAlign={verticalAxis.titleAlign}
-        tickLength={verticalAxis.tickLength}
-        tickCount={verticalAxis.tickCount}
-        tickSize={verticalAxis.tickSize}
-        tickFormat={verticalAxis.tickFormat}
+        {...{
+          ...verticalAxis,
+          aScale: yScale,
+          position:
+            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+        }}
       />
     </Chart>
   );

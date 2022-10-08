@@ -120,7 +120,7 @@ export default class Axis extends Vue {
         labels,
         this.position,
         'auto',
-        this.aScale.definition.reverse,
+        this.axisScale.definition.reverse,
       );
     });
   }

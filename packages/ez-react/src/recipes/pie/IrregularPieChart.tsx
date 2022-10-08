@@ -1,6 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -10,15 +9,18 @@ import {
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from 'eazychart-core/src';
 import { IrregularArcs } from '@/components/IrregularArcs';
+import { LinearScale } from '@/components/scales/LinearScale';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   arc?: PieConfig;
   dimensions: Partial<Dimensions>;
   scopedSlots?: {
@@ -41,7 +43,8 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     donutRadius: 0,
     cornerRadius: 0,
@@ -56,33 +59,29 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const aScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
-  );
-  const rScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
   );
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
-      scales={[aScale, rScale]}
+      rawData={activeData}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onLegendClick={toggleDatum}
     >
-      <IrregularArcs aScale={aScale} rScale={rScale} {...arc} />
+      <LinearScale domainKey={valueDomainKey}>
+        <ColorScale domainKey={labelDomainKey} range={activeColors}>
+          <IrregularArcs
+            valueDomainKey={valueDomainKey}
+            labelDomainKey={labelDomainKey}
+            {...arc}
+          />
+        </ColorScale>
+      </LinearScale>
     </Chart>
   );
 };

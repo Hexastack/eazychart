@@ -1,22 +1,41 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { Bar } from './shapes/Bar';
+import { scaleRectangleData } from 'eazychart-core/src';
+import { Bar } from '@/components/shapes/Bar';
 import { useChart } from '@/lib/use-chart';
-import { ScaleBand, ScaleLinear, scaleRectangleData } from 'eazychart-core/src';
+import { useCartesianScales } from '@/components/scales/CartesianScale';
+import { useColorScale } from './scales/ColorScale';
 
 export interface BarsProps extends SVGAttributes<SVGGElement> {
-  xScale: ScaleLinear | ScaleBand;
-  yScale: ScaleLinear | ScaleBand;
+  xDomainKey: string;
+  yDomainKey: string;
 }
 
-export const Bars: FC<BarsProps> = ({ xScale, yScale, ...rest }) => {
-  const { activeData, dimensions, isRTL } = useChart();
+export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
+  const { data, dimensions, isRTL } = useChart();
+  const { xScale, yScale } = useCartesianScales();
+  const { colorScale } = useColorScale();
 
   const scaledData = useMemo(() => {
-    if (!xScale || !yScale) {
-      return [];
-    }
-    return scaleRectangleData(activeData, xScale, yScale, dimensions, isRTL);
-  }, [activeData, xScale, yScale, dimensions, isRTL]);
+    return scaleRectangleData(
+      data,
+      xDomainKey,
+      yDomainKey,
+      xScale,
+      yScale,
+      colorScale,
+      dimensions,
+      isRTL
+    );
+  }, [
+    data,
+    xDomainKey,
+    yDomainKey,
+    xScale,
+    yScale,
+    colorScale,
+    dimensions,
+    isRTL,
+  ]);
 
   return (
     <g className="ez-bars" {...rest}>

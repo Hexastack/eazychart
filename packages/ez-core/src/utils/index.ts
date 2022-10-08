@@ -2,7 +2,6 @@ export * from './defaults';
 export * from './axis';
 export * from './grid';
 export * from './data';
-export * from './legend';
 export * from './line';
 export * from './logger';
 export * from './pie';

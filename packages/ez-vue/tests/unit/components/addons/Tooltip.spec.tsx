@@ -12,7 +12,6 @@ describe('Tooltip', () => {
         shapeDatum: null,
         mousePosition: { x: 400, y: 300 },
         isVisible: false,
-        domains: ['label', 'value'],
         animationOptions: {
           ease: 'easeLinear',
           delay: 0,
@@ -40,7 +39,6 @@ describe('Tooltip', () => {
         } as ShapeDatum,
         mousePosition: { x: 50, y: 150 },
         isVisible: true,
-        domains: ['label', 'value'],
         animationOptions: {
           ease: 'easeLinear',
           delay: 0,

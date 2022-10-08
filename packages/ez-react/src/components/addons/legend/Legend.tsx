@@ -1,10 +1,9 @@
-import React, { DOMAttributes } from 'react';
-import { NormalizedData, NormalizedDatum } from 'eazychart-core/src/types';
-import { computedLegendBoxStyle } from 'eazychart-core/src';
+import React, { DOMAttributes, useEffect, useState } from 'react';
+import { useChart } from '@/lib/use-chart';
+import { LegendItem } from '@/components/addons/legend/LegendItem';
 
 export interface LegendProps extends DOMAttributes<HTMLDivElement> {
-  data: NormalizedData;
-  toggleDatum: (datum: NormalizedDatum, newState: boolean, idx: number) => void;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
 }
 
 export type LegendPropsWithRef = LegendProps &
@@ -13,29 +12,35 @@ export type LegendPropsWithRef = LegendProps &
 export const Legend: React.FC<LegendPropsWithRef> = React.forwardRef<
   HTMLDivElement,
   LegendProps
->(({ data, toggleDatum, ...rest }, ref) => {
-  const handleLegendClick = (d: NormalizedDatum, idx: number) => {
-    toggleDatum(d, !d.isActive, idx);
-  };
+>(({ onLegendClick, ...rest }, ref) => {
+  const { getScale } = useChart();
+  const colorScale = getScale('colorScale');
+  const [keyDict, setKeyDict] = useState<{
+    [key: string]: string;
+  }>({});
+
+  useEffect(() => {
+    if (colorScale) {
+      const dict = colorScale.scale.domain().reduce((map, domainKey) => {
+        return {
+          ...map,
+          [domainKey]: colorScale.scale(domainKey),
+        };
+      }, {});
+      setKeyDict(dict);
+    }
+  }, [colorScale]);
 
   return (
     <div className="ez-legend" {...rest} ref={ref}>
-      {data?.map((d: NormalizedDatum, idx: number) => {
+      {Object.entries(keyDict).map(([key, color]) => {
         return (
-          <div
-            key={d.id}
-            onClick={() => handleLegendClick(d, idx)}
-            role="button"
-            className={`ez-legend-key${
-              !d.isActive ? ' ez-legend-disable' : ''
-            }`}
-          >
-            <div
-              className="ez-legend-box"
-              style={computedLegendBoxStyle(d)}
-            ></div>
-            <span className="ez-legend-text">{d.label}</span>
-          </div>
+          <LegendItem
+            key={key}
+            onToggle={onLegendClick}
+            label={key}
+            color={color}
+          />
         );
       })}
     </div>

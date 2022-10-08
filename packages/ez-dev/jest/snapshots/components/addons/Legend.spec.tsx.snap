@@ -3,8 +3,8 @@
 exports[`Legend renders filters for data supplied 1`] = `
 <div class="ez-legend">
   <div
-    role="button"
     class="ez-legend-key"
+    role="button"
   >
     <div
       class="ez-legend-box"
@@ -16,12 +16,12 @@ exports[`Legend renders filters for data supplied 1`] = `
     </span>
   </div>
   <div
+    class="ez-legend-key"
     role="button"
-    class="ez-legend-key ez-legend-disable"
   >
     <div
       class="ez-legend-box"
-      style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+      style="background-color: blue; border: 2px solid blue;"
     >
     </div>
     <span class="ez-legend-text">
@@ -29,8 +29,8 @@ exports[`Legend renders filters for data supplied 1`] = `
     </span>
   </div>
   <div
-    role="button"
     class="ez-legend-key"
+    role="button"
   >
     <div
       class="ez-legend-box"

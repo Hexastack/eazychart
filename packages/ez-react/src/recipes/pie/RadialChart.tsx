@@ -1,6 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -10,15 +9,18 @@ import {
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from 'eazychart-core/src';
 import { Arcs } from '@/components/Arcs';
+import { LinearScale } from '@/components/scales/LinearScale';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface RadialChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   index?: number;
   arc?: RadialConfig;
   dimensions?: Partial<Dimensions>;
@@ -42,7 +44,8 @@ export const RadialChart: FC<RadialChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     cornerRadius: 0,
     stroke: '#FFF',
@@ -55,28 +58,29 @@ export const RadialChart: FC<RadialChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const scale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        range: [0, Math.PI * 2],
-        domainKey,
-      }),
-    [domainKey]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
   );
   return (
-    <>
-      <Chart
-        dimensions={dimensions}
-        rawData={data}
-        scales={[scale]}
-        padding={padding}
-        colors={colors}
-        animationOptions={animationOptions}
-        scopedSlots={scopedSlots}
-      >
-        <Arcs arcScale={scale} {...arc} />
-      </Chart>
-    </>
+    <Chart
+      dimensions={dimensions}
+      rawData={activeData}
+      padding={padding}
+      animationOptions={animationOptions}
+      scopedSlots={scopedSlots}
+      onLegendClick={toggleDatum}
+    >
+      <LinearScale domainKey={valueDomainKey} range={[0, Math.PI * 2]}>
+        <ColorScale domainKey={labelDomainKey} range={activeColors}>
+          <Arcs
+            valueDomainKey={valueDomainKey}
+            labelDomainKey={labelDomainKey}
+            {...arc}
+          />
+        </ColorScale>
+      </LinearScale>
+    </Chart>
   );
 };

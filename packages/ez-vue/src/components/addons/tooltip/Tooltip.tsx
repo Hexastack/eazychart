@@ -26,7 +26,6 @@ export interface TooltipProps {
   shapeDatum: ShapeDatum | null;
   isVisible: boolean;
   mousePosition: Point;
-  domains: string[];
 }
 
 @Component
@@ -72,14 +71,6 @@ export default class Tooltip extends mixins(AnimationMixin) {
   private readonly mousePosition!: Point;
 
   @Prop({
-    type: Array as PropType<string[]>,
-    default() {
-      return [];
-    },
-  })
-  private readonly domains!: string[];
-
-  @Prop({
     type: Object as PropType<AnimationOptions>,
     default() {
       return tooltipAnimationOptions;
@@ -91,8 +82,12 @@ export default class Tooltip extends mixins(AnimationMixin) {
 
   get targetStyle() {
     return {
-      left: `${this.mousePosition.x ? this.mousePosition.x + this.offset.x : 0}px`,
-      top: `${this.mousePosition.y ? this.mousePosition.y + this.offset.y : 0}px`,
+      left: `${
+        this.mousePosition.x ? this.mousePosition.x + this.offset.x : 0
+      }px`,
+      top: `${
+        this.mousePosition.y ? this.mousePosition.y + this.offset.y : 0
+      }px`,
       opacity: this.isVisible ? 1.0 : 0.0,
     };
   }
@@ -108,23 +103,28 @@ export default class Tooltip extends mixins(AnimationMixin) {
   }
 
   render() {
+    const { animatedStyle, datum, shapeDatum } = this;
+
     const {
-      animatedStyle,
-      datum,
-      shapeDatum,
-      domains,
-    } = this;
+      id: _id, color: _color, label: _label, ...attributes
+    } = datum || { color: undefined };
+
     return datum ? (
       <div class="ez-tooltip" style={animatedStyle}>
-        <div
-          class="ez-tooltip-color"
-          style={{ backgroundColor: shapeDatum?.color }}
-        ></div>
+        {shapeDatum?.color && (
+          <div
+            class="ez-tooltip-color"
+            style={{ backgroundColor: shapeDatum.color }}
+          ></div>
+        )}
         <div class="ez-tooltip-text">
-          {domains.map((domain, index) => (
-            <span key={index} class={`ez-tooltip-domain ${domain}`}>
-              {datum[domain] as string}
-            </span>
+          {Object.keys(attributes).map((attribute) => (
+            <div key={attribute} class={`ez-tooltip-attribute ${attribute}`}>
+              <div class="ez-tooltip-attribute--name">{attribute} :</div>
+              <div class="ez-tooltip-attribute--value">
+                {datum[attribute] as string}
+              </div>
+            </div>
           ))}
         </div>
       </div>

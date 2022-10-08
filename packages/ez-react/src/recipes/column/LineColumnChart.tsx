@@ -1,4 +1,5 @@
-import React, { FC, useMemo } from 'react';
+import React, { FC } from 'react';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AxisConfig,
   Direction,
@@ -12,11 +13,13 @@ import { Bars } from '@/components/Bars';
 import { Legend } from '@/components/addons/legend/Legend';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ColumnChartProps } from './ColumnChart';
+import { ColumnChartProps } from '@/recipes/column/ColumnChart';
 import { Points } from '@/components/Points';
 import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface LineColumnChartProps extends ColumnChartProps {
   yLineAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
@@ -71,111 +74,107 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const xColumnScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-      }),
-    [xAxis]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    xAxis.domainKey,
+    colors
   );
-  const yColumnScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis]
-  );
-  const xLineScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-        innerPadding: 0.5,
-        outerPadding: 0.1,
-        align: 1,
-      }),
-    [xAxis]
-  );
-  const yLineScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yLineAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis, yLineAxis]
-  );
-
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
-      scales={[xColumnScale, yColumnScale, xLineScale, yLineScale]}
+      rawData={activeData}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onLegendClick={toggleDatum}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xColumnScale}
-        yScale={yColumnScale}
-      />
-      <Bars xScale={xColumnScale} yScale={yColumnScale} />
-      <Points
-        xScale={xLineScale}
-        yScale={yLineScale}
-        scopedSlots={{
-          default: ({ scaledData }) => {
-            return (
-              <g className="ez-line">
-                <LinePath
-                  shapeData={scaledData}
-                  curve={line.curve}
-                  beta={line.beta}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                />
-                {!marker.hidden &&
-                  scaledData.map((pointDatum) => {
-                    return (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        stroke={marker.color}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    );
-                  })}
-              </g>
-            );
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
           },
         }}
-      />
-      <Axis
-        {...xAxis}
-        aScale={xColumnScale}
-        position={xAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...yAxis}
-        aScale={yColumnScale}
-        position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
-      />
-      <Axis
-        {...yLineAxis}
-        aScale={yLineScale}
-        position={
-          yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT)
-        }
-      />
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
+        <Grid directions={grid.directions} color={grid.color} />
+        <ColorScale domainKey={xAxis.domainKey} range={activeColors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
+        <Axis
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+        />
+      </CartesianScale>
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            innerPadding: 0.5,
+            outerPadding: 0.1,
+            align: 1,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yLineAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
+        <Points
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yLineAxis.domainKey}
+          scopedSlots={{
+            default: ({ shapeData }) => {
+              return (
+                <g className="ez-line">
+                  <LinePath
+                    shapeData={shapeData}
+                    curve={line.curve}
+                    beta={line.beta}
+                    stroke={line.stroke}
+                    strokeWidth={line.strokeWidth}
+                  />
+                  {!marker.hidden &&
+                    shapeData.map((pointDatum) => {
+                      return (
+                        <Point
+                          key={pointDatum.id}
+                          shapeDatum={pointDatum}
+                          r={marker.radius}
+                          stroke={marker.color}
+                          fill={marker.color}
+                          strokeWidth={line.strokeWidth}
+                        />
+                      );
+                    })}
+                </g>
+              );
+            },
+          }}
+        />
+        <Axis
+          {...yLineAxis}
+          position={
+            yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT)
+          }
+        />
+      </CartesianScale>
     </Chart>
   );
 };

@@ -17,6 +17,7 @@ import {
   PointDatum,
   AreaData,
   AreaCurve,
+  ScaleLinearOrBand,
 } from 'eazychart-core/src/types';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
@@ -27,6 +28,7 @@ import Points from '@/components/Points';
 import LinePath from '@/components/shapes/LinePath';
 import Point from '@/components/shapes/Point';
 import Area from '@/components/shapes/Area';
+import CartesianScale from '@/components/scales/CartesianScale';
 
 @Component({
   components: {
@@ -41,14 +43,6 @@ import Area from '@/components/shapes/Area';
   },
 })
 export default class LineErrorMarginChart extends Vue {
-  @Prop({
-    type: Boolean,
-    default() {
-      return true;
-    },
-  })
-  private readonly swapAxis!: boolean;
-
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -172,19 +166,7 @@ export default class LineErrorMarginChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  get horizontalAxis() {
-    return this.swapAxis ? this.yAxis : this.xAxis;
-  }
-
-  get verticalAxis() {
-    return this.swapAxis ? this.xAxis : this.yAxis;
-  }
-
-  private xScale!: ScaleLinear;
-
-  private yScale!: ScaleLinear;
-
-  created() {
+  get dataMarginBounds() {
     const { data, yAxis, errorMargins } = this;
     const dataValues = data.map((datum) => datum[yAxis.domainKey] as number);
     const negativeMargins = data.map(
@@ -193,33 +175,13 @@ export default class LineErrorMarginChart extends Vue {
     const positiveMargins = data.map(
       (datum) => datum[errorMargins.positive] as number,
     );
-    const [lowsestMarginValue, highestMarginValue] = getDataMarginBounds(
-      dataValues,
-      negativeMargins,
-      positiveMargins,
-    );
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.horizontalAxis.domainKey,
-      nice: this.horizontalAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.verticalAxis.domainKey,
-      nice: this.verticalAxis.nice || 0,
-      minPadding: lowsestMarginValue,
-      maxPadding: highestMarginValue,
-    });
+    return getDataMarginBounds(dataValues, negativeMargins, positiveMargins);
   }
 
   render() {
     const {
-      xScale,
-      yScale,
-      horizontalAxis,
-      verticalAxis,
+      xAxis,
+      yAxis,
       errorMargins,
       data,
       line,
@@ -232,89 +194,109 @@ export default class LineErrorMarginChart extends Vue {
       $scopedSlots,
       dimensions,
     } = this;
-
+    const [lowsestMarginValue, highestMarginValue] = this.dataMarginBounds;
     return (
       <Chart
         dimensions={dimensions}
         rawData={data}
-        scales={[xScale, yScale]}
         padding={padding}
-        colors={[line.stroke]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Points
-          xScale={xScale}
-          yScale={yScale}
-          scopedSlots={{
-            default: ({ scaledData }: { scaledData: PointDatum[] }) => {
-              const lineAreaData = scaledData.map((d, idx) => {
-                const datum = data[idx];
-                return {
-                  x: d.x,
-                  y0: yScale.scale(
-                    (datum[verticalAxis.domainKey] as number)
-                      * (1 - Number(datum[errorMargins.negative])),
-                  ),
-                  y1: yScale.scale(
-                    (datum[verticalAxis.domainKey] as number)
-                      * (1 + Number(datum[errorMargins.positive])),
-                  ),
-                };
-              });
-
-              return (
-                <g class="ez-line-error-margin">
-                  <Area
-                    shapeData={lineAreaData as AreaData}
-                    curve={line.curve as AreaCurve}
-                    beta={line.beta}
-                    fill={area.fill}
-                  />
-                  <LinePath
-                    shapeData={scaledData}
-                    curve={line.curve}
-                    beta={line.beta}
-                    stroke={line.stroke}
-                    strokeWidth={line.strokeWidth}
-                  />
-                  {!marker.hidden
-                    && scaledData.map((pointDatum) => (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    ))}
-                </g>
-              );
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
             },
           }}
-        />
-        <Axis
-          props={{
-            ...horizontalAxis,
-            aScale: xScale,
-            position: horizontalAxis.position || Position.BOTTOM,
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+              minPadding: lowsestMarginValue,
+              maxPadding: highestMarginValue,
+            },
           }}
-        />
-        <Axis
-          props={{
-            ...verticalAxis,
-            aScale: yScale,
-            position:
-              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
-          }}
-        />
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <Points
+            xDomainKey={xAxis.domainKey}
+            yDomainKey={yAxis.domainKey}
+            scopedSlots={{
+              default: ({
+                shapeData,
+                scales: { yScale },
+              }: {
+                shapeData: PointDatum[];
+                scales: { yScale: ScaleLinearOrBand };
+              }) => {
+                const lineAreaData = shapeData.map((d, idx) => {
+                  const datum = data[idx];
+                  return {
+                    x: d.x,
+                    y0: yScale.scale(
+                      (datum[yAxis.domainKey] as number)
+                        * (1 - Number(datum[errorMargins.negative])),
+                    ),
+                    y1: yScale.scale(
+                      (datum[yAxis.domainKey] as number)
+                        * (1 + Number(datum[errorMargins.positive])),
+                    ),
+                  };
+                });
+
+                return (
+                  <g class="ez-line-error-margin">
+                    <Area
+                      shapeData={lineAreaData as AreaData}
+                      curve={line.curve as AreaCurve}
+                      beta={line.beta}
+                      fill={area.fill}
+                    />
+                    <LinePath
+                      shapeData={shapeData}
+                      curve={line.curve}
+                      beta={line.beta}
+                      stroke={line.stroke}
+                      strokeWidth={line.strokeWidth}
+                    />
+                    {!marker.hidden
+                      && shapeData.map((pointDatum) => (
+                        <Point
+                          key={pointDatum.id}
+                          shapeDatum={pointDatum}
+                          r={marker.radius}
+                          fill={marker.color}
+                          stroke={line.stroke}
+                          strokeWidth={line.strokeWidth}
+                        />
+                      ))}
+                  </g>
+                );
+              },
+            }}
+          />
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

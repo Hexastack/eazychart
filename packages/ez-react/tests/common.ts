@@ -2,8 +2,6 @@ import { ChartProps } from '@/components/Chart';
 
 export const baseChartProps: ChartProps = {
   rawData: [],
-  colors: [],
-  scales: [],
   animationOptions: {
     easing: 'easeLinear',
     duration: 0,

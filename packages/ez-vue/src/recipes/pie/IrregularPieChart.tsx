@@ -1,29 +1,32 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   ChartPadding,
-  Direction,
   RawData,
   PieConfig,
   Dimensions,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import IrregularArcs from '@/components/IrregularArcs';
+import ToggleDatumMixin from '@/lib/ToggleDatumMixin';
+import LinearScale from '@/components/scales/LinearScale';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
     Chart,
     IrregularArcs,
+    LinearScale,
+    ColorScale,
     Legend,
     Tooltip,
   },
 })
-export default class IrregularPieChart extends Vue {
+export default class IrregularPieChart extends mixins(ToggleDatumMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -75,7 +78,13 @@ export default class IrregularPieChart extends Vue {
     type: String,
     default: 'value',
   })
-  private readonly domainKey!: string;
+  private readonly valueDomainKey!: string;
+
+  @Prop({
+    type: String,
+    default: 'name',
+  })
+  private readonly labelDomainKey!: string;
 
   @Prop({
     type: Object as PropType<PieConfig>,
@@ -93,60 +102,58 @@ export default class IrregularPieChart extends Vue {
   })
   private readonly arc!: PieConfig;
 
-  private aScale!: ScaleLinear;
+  getData(): RawData {
+    return this.data;
+  }
 
-  private rScale!: ScaleLinear;
+  getColors(): string[] {
+    return this.colors;
+  }
 
-  created() {
-    this.aScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.domainKey,
-    });
-    this.rScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.domainKey,
-    });
+  getDomainKey(): string {
+    return this.labelDomainKey;
   }
 
   render() {
     const {
-      aScale,
-      rScale,
-      data,
+      valueDomainKey,
+      labelDomainKey,
       padding,
-      colors,
       animationOptions,
       arc,
       $scopedSlots,
       dimensions,
+      activeData,
+      activeColors,
+      toggleDatum,
     } = this;
 
     const scopedSlots = {
-      Legend: $scopedSlots.Legend ? $scopedSlots.Legend : () => <Legend />,
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDatum }} />,
       Tooltip: $scopedSlots.Tooltip,
     };
 
     return (
       <Chart
         dimensions={dimensions}
-        rawData={data}
-        scales={[aScale, rScale]}
+        rawData={activeData}
         padding={padding}
-        colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
       >
-        <IrregularArcs
-          aScale={aScale}
-          rScale={rScale}
-          donutRadius={arc.donutRadius}
-          cornerRadius={arc.cornerRadius}
-          padAngle={arc.padAngle}
-          padRadius={arc.padRadius}
-          stroke={arc.stroke}
-          strokeWidth={arc.strokeWidth}
-          sortValues={arc.sortValues}
-        />
+        <LinearScale definition={{ domainKey: valueDomainKey }}>
+          <ColorScale definition={{ domainKey: labelDomainKey, range: activeColors }}>
+            <IrregularArcs
+              props={{
+                valueDomainKey,
+                labelDomainKey,
+                ...arc,
+              }}
+            />
+          </ColorScale>
+        </LinearScale>
       </Chart>
     );
   }

@@ -1,7 +1,6 @@
-import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
 import Vue from 'vue';
+import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { render } from '@testing-library/vue';
-import { RawData } from 'eazychart-core/src/types';
 import AreaChart from '@/recipes/area/AreaChart';
 
 // eslint-disable-next-line import/no-unresolved
@@ -11,7 +10,7 @@ describe('AreaChart', () => {
   it('renders an area chart', async () => {
     const wrapper = render(AreaChart, {
       propsData: {
-        data: pointsData as unknown as RawData,
+        data: pointsRawData,
         area: {
           stroke: 'red',
           strokeWidth: 2,
@@ -24,12 +23,13 @@ describe('AreaChart', () => {
         },
         grid: { directions: [] },
         dimensions,
+        animationOptions: {
+          easing: 'easeBack',
+          duration: 0,
+          delay: 0,
+        },
       },
     });
-
-    await Vue.nextTick();
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     await Vue.nextTick();
 

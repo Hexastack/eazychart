@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
+import { LineCurve } from 'eazychart-core/src/types';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
@@ -7,7 +8,10 @@ import {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
 } from '@/recipes/line/LineErrorMarginChart';
-import { LineCurve } from 'eazychart-core/src/types';
+import {
+  MultiLineChart,
+  MultiLineChartProps,
+} from '@/recipes/line/MultiLineChart';
 
 const meta: Meta = {
   id: '5',
@@ -25,6 +29,14 @@ const DefaultTemplate: Story<LineChartProps> = (args) => {
   return (
     <ChartWrapper>
       <LineChart {...args} />
+    </ChartWrapper>
+  );
+};
+
+const MultiLineTemplate: Story<MultiLineChartProps> = (args) => {
+  return (
+    <ChartWrapper>
+      <MultiLineChart {...args} />
     </ChartWrapper>
   );
 };
@@ -69,6 +81,17 @@ const defaultArguments = {
 };
 
 Default.args = defaultArguments;
+
+export const MultiLine = MultiLineTemplate.bind({});
+
+MultiLine.args = {
+  ...defaultArguments,
+  yAxis: {
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    title: 'Temperature',
+    tickFormat: (d: number) => `${d}°`,
+  },
+};
 
 export const LineWithErrorMargin = LineErrorMarginTemplate.bind({});
 

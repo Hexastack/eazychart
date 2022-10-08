@@ -1,29 +1,30 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   ChartPadding,
-  Direction,
   RawData,
   PieConfig,
   Dimensions,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Pie from '@/components/Pie';
+import ToggleDatumMixin from '@/lib/ToggleDatumMixin';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
     Chart,
     Pie,
+    ColorScale,
     Legend,
     Tooltip,
   },
 })
-export default class PieChart extends Vue {
+export default class PieChart extends mixins(ToggleDatumMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -75,7 +76,13 @@ export default class PieChart extends Vue {
     type: String,
     default: 'value',
   })
-  private readonly domainKey!: string;
+  private readonly valueDomainKey!: string;
+
+  @Prop({
+    type: String,
+    default: 'name',
+  })
+  private readonly labelDomainKey!: string;
 
   @Prop({
     type: Object as PropType<PieConfig>,
@@ -93,52 +100,58 @@ export default class PieChart extends Vue {
   })
   private readonly arc!: PieConfig;
 
-  private scale!: ScaleLinear;
+  getData(): RawData {
+    return this.data;
+  }
 
-  created() {
-    this.scale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.domainKey,
-    });
+  getColors(): string[] {
+    return this.colors;
+  }
+
+  getDomainKey(): string {
+    return this.labelDomainKey;
   }
 
   render() {
     const {
-      scale,
-      data,
+      valueDomainKey,
+      labelDomainKey,
       padding,
-      colors,
       animationOptions,
       arc,
       $scopedSlots,
       dimensions,
+      activeData,
+      activeColors,
+      toggleDatum,
     } = this;
 
     const scopedSlots = {
-      Legend: $scopedSlots.Legend ? $scopedSlots.Legend : () => <Legend />,
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDatum }} />,
       Tooltip: $scopedSlots.Tooltip,
     };
 
     return (
       <Chart
         dimensions={dimensions}
-        rawData={data}
-        scales={[scale]}
+        rawData={activeData}
         padding={padding}
-        colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
       >
-        <Pie
-          aScale={scale}
-          donutRadius={arc.donutRadius}
-          cornerRadius={arc.cornerRadius}
-          padAngle={arc.padAngle}
-          padRadius={arc.padRadius}
-          stroke={arc.stroke}
-          strokeWidth={arc.strokeWidth}
-          sortValues={arc.sortValues}
-        />
+        <ColorScale
+          definition={{ domainKey: labelDomainKey, range: activeColors }}
+        >
+          <Pie
+            props={{
+              valueDomainKey,
+              labelDomainKey,
+              ...arc,
+            }}
+          />
+        </ColorScale>
       </Chart>
     );
   }

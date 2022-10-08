@@ -4,10 +4,14 @@ import {
   Dimensions,
   NormalizedData,
   NormalizedDataDict,
-  NormalizedDatum,
   Point,
+  ScaleBandDefinition,
+  ScaleLinearDefinition,
   ShapeAttributes,
 } from '../types';
+import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
+
+export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
   top: number;
@@ -31,11 +35,7 @@ export type TickOptions = {
   tickFormat?: Function;
 };
 
-export type PointDatum = Point & {
-  id: string;
-  color: string;
-  xValue: number | string;
-  yValue: number | string;
+export type PointDatum = Point & ShapeAttributes & {
   radius?: number;
 };
 
@@ -53,8 +53,8 @@ export type ArcDatum = ShapeAttributes &
   PieArcDatum<
     | number
     | {
-        valueOf(): number;
-      }
+      valueOf(): number;
+    }
   >;
 
 export interface ArcConfig {
@@ -80,15 +80,10 @@ export interface ChartContext {
   animationOptions?: AnimationOptions;
   data: NormalizedData;
   dataDict: NormalizedDataDict;
-  activeData: NormalizedData;
-  toggleDatum: (
-    datum: NormalizedDatum,
-    newState: boolean,
-    idx: number
-  ) => void;
-  colors: string[];
   isRTL: boolean;
-  scales: any[];
+  registerScale: (scaleId: string, scale: AnyScale) => void,
+  getScale: (scaleId: string) => AnyScale | null,
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
@@ -130,3 +125,19 @@ export type AreaConfig = CurveConfig & {
 export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
+
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;
+
+export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
+
+
+export type ScaleConfig =
+  | {
+    ScaleClass: Class<ScaleLinear>;
+    definition: ScaleLinearDefinition;
+  }
+  | {
+    ScaleClass: Class<ScaleBand>;
+    definition: ScaleBandDefinition;
+  };
+

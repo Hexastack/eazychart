@@ -1,16 +1,16 @@
 import React, { DOMAttributes, FC, useMemo } from 'react';
 import {
+  defaultTooltipOffset,
+  initialTooltipStyle,
+  tooltipAnimationOptions,
+} from 'eazychart-core/src';
+import {
   AnimationOptions,
   NormalizedDatum,
   Point,
   ShapeDatum,
 } from 'eazychart-core/src/types';
 import { useAnimation } from '@/lib/use-animation';
-import {
-  defaultTooltipOffset,
-  initialTooltipStyle,
-  tooltipAnimationOptions,
-} from 'eazychart-core/src';
 
 export interface TooltipProps extends DOMAttributes<HTMLDivElement> {
   offset?: Point;
@@ -18,7 +18,6 @@ export interface TooltipProps extends DOMAttributes<HTMLDivElement> {
   shapeDatum: ShapeDatum | null;
   isVisible: boolean;
   mousePosition: Point;
-  domains: string[];
   animationOptions?: AnimationOptions;
 }
 
@@ -28,7 +27,6 @@ export const Tooltip: FC<TooltipProps> = ({
   shapeDatum,
   isVisible,
   mousePosition,
-  domains,
   animationOptions = tooltipAnimationOptions,
   ...rest
 }) => {
@@ -48,20 +46,34 @@ export const Tooltip: FC<TooltipProps> = ({
     [offset]
   );
 
+  const { id, color, label, ...attributes } = datum || {
+    color: undefined,
+  };
+
   return (
     <div className="ez-tooltip" style={animatedStyle} {...rest}>
       {datum ? (
         <>
-          <div
-            className="ez-tooltip-color"
-            style={{ backgroundColor: shapeDatum?.color }}
-          ></div>
+          {shapeDatum?.color && (
+            <div
+              className="ez-tooltip-color"
+              style={{ backgroundColor: shapeDatum.color }}
+            ></div>
+          )}
           <div className="ez-tooltip-text">
-            {domains.map((domain, index) => {
+            {Object.keys(attributes).map((attribute) => {
               return (
-                <span key={index} className={`ez-tooltip-domain ${domain}`}>
-                  {datum[domain] as string}
-                </span>
+                <div
+                  key={attribute}
+                  className={`ez-tooltip-attribute ${attribute}`}
+                >
+                  <div className="ez-tooltip-attribute--name">
+                    {attribute} :
+                  </div>
+                  <div className="ez-tooltip-attribute--value">
+                    {datum[attribute] as string}
+                  </div>
+                </div>
               );
             })}
           </div>

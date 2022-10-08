@@ -1,4 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
   AxisConfig,
@@ -15,7 +16,9 @@ import { Bars } from '@/components/Bars';
 import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -66,52 +69,49 @@ export const ColumnChart: FC<ColumnChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const xScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-      }),
-    [xAxis]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-        nice: yAxis.nice || 0,
-      }),
-    [yAxis]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    xAxis.domainKey,
+    colors
   );
 
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
-      scales={[xScale, yScale]}
+      rawData={activeData}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onLegendClick={toggleDatum}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Bars xScale={xScale} yScale={yScale} />
-      <Axis
-        {...xAxis}
-        aScale={xScale}
-        position={xAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...yAxis}
-        aScale={yScale}
-        position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
-      />
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
+        <Grid directions={grid.directions} color={grid.color} />
+        <ColorScale domainKey={xAxis.domainKey} range={activeColors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
+        <Axis
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+        />
+      </CartesianScale>
     </Chart>
   );
 };

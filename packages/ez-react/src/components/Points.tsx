@@ -1,57 +1,79 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
-import { Point } from '@/components/shapes/Point';
-import { useChart } from '@/lib/use-chart';
 import {
-  ScaleBand,
-  ScaleLinear,
+  defaultColor,
   defaultPointRadius,
   scalePointData,
 } from 'eazychart-core/src';
-import { Dimensions, PointDatum } from 'eazychart-core/src/types';
+import {
+  Dimensions,
+  PointDatum,
+  ScaleLinearOrBand,
+} from 'eazychart-core/src/types';
+import { Point } from '@/components/shapes/Point';
+import { useChart } from '@/lib/use-chart';
+import { useCartesianScales } from '@/components/scales/CartesianScale';
 
 export interface PointsProps extends SVGAttributes<SVGGElement> {
-  xScale: ScaleLinear | ScaleBand;
-  yScale: ScaleLinear | ScaleBand;
+  xDomainKey: string;
+  yDomainKey: string;
   r?: number;
   scopedSlots?: {
     default: ({
-      scaledData,
+      shapeData,
+      scales,
       dimensions,
     }: {
-      scaledData: PointDatum[];
+      shapeData: PointDatum[];
+      scales: {
+        xScale: ScaleLinearOrBand;
+        yScale: ScaleLinearOrBand;
+      };
       dimensions: Dimensions;
     }) => React.ReactChild;
   };
 }
 
 export const Points: FC<PointsProps> = ({
-  xScale,
-  yScale,
+  xDomainKey,
+  yDomainKey,
   r = defaultPointRadius,
+  fill = defaultColor,
+  stroke = defaultColor,
   scopedSlots,
   ...rest
 }) => {
-  const { activeData, dimensions, isRTL } = useChart();
+  const { data, dimensions } = useChart();
+  const { xScale, yScale } = useCartesianScales();
 
-  const scaledData = useMemo(() => {
-    if (!xScale || !yScale) {
-      return [];
-    }
-    return scalePointData(activeData, xScale, yScale, dimensions, isRTL);
-  }, [xScale, yScale, activeData, dimensions, isRTL]);
+  const shapeData = useMemo(() => {
+    return scalePointData(data, xDomainKey, yDomainKey, xScale, yScale);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, xDomainKey, yDomainKey, xScale.scale, yScale.scale]);
 
   if (scopedSlots && scopedSlots.default) {
     return (
       <g className="ez-points">
-        {scopedSlots.default({ scaledData, dimensions })}
+        {scopedSlots.default({
+          shapeData,
+          scales: { xScale, yScale },
+          dimensions,
+        })}
       </g>
     );
   }
 
   return (
     <g className="ez-points" {...rest}>
-      {scaledData.map((pointDatum) => {
-        return <Point key={pointDatum.id} shapeDatum={pointDatum} r={r} />;
+      {shapeData.map((shapeDatum) => {
+        return (
+          <Point
+            key={shapeDatum.id}
+            shapeDatum={shapeDatum}
+            r={r}
+            fill={fill}
+            stroke={stroke}
+          />
+        );
       })}
     </g>
   );

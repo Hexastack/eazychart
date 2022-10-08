@@ -1,29 +1,36 @@
-import Vue, { PropType } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext } from 'eazychart-core/src/types';
+import { ChartContext, ScaleLinearOrBand } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
 import {
-  defaultPointRadius, ScaleBand, ScaleLinear, scalePointData,
+  defaultColor,
+  defaultPointRadius,
+  scalePointData,
 } from 'eazychart-core/src';
 import Point from '@/components/shapes/Point';
-import LinePath from '@/components/shapes/LinePath';
 
-@Component({ components: { Point, LinePath } })
+@Component({ components: { Point } })
 export default class Points extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  @Prop({
-    type: Object as PropType<ScaleLinear | ScaleBand>,
-    required: true,
-  })
-  private readonly xScale!: ScaleLinear | ScaleBand;
+  @InjectReactive('cartesianScale')
+  private cartesianScale!: {
+    xScale: ScaleLinearOrBand;
+    yScale: ScaleLinearOrBand;
+  };
 
   @Prop({
-    type: Object as PropType<ScaleLinear | ScaleBand>,
+    type: String,
     required: true,
   })
-  private readonly yScale!: ScaleLinear | ScaleBand;
+  private readonly xDomainKey!: string;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
+  private readonly yDomainKey!: string;
 
   @Prop({
     type: Number,
@@ -31,37 +38,58 @@ export default class Points extends Vue {
   })
   private readonly r!: number;
 
-  get scaledData() {
-    if (!this.xScale || !this.yScale) {
-      return [];
-    }
+  @Prop({
+    type: String,
+    default: defaultColor,
+  })
+  private readonly fill!: string;
+
+  @Prop({
+    type: String,
+    default: defaultColor,
+  })
+  private readonly stroke!: string;
+
+  get shapeData() {
     return scalePointData(
-      this.chart.activeData,
-      this.xScale,
-      this.yScale,
-      this.chart.dimensions,
-      this.chart.isRTL,
+      this.chart.data,
+      this.xDomainKey,
+      this.yDomainKey,
+      this.cartesianScale.xScale,
+      this.cartesianScale.yScale,
     );
   }
 
   render() {
     const {
-      scaledData, $scopedSlots, r, chart,
+      shapeData,
+      $scopedSlots,
+      r,
+      fill,
+      stroke,
+      chart,
+      cartesianScale: scales,
     } = this;
-    const { scales, dimensions } = chart;
+    const { dimensions } = chart;
 
     if ($scopedSlots.default) {
       return (
         <g class="ez-points">
-          {$scopedSlots.default({ scaledData, dimensions, scales })}
+          {$scopedSlots.default({ shapeData, scales, dimensions })}
         </g>
       );
     }
 
     return (
       <g class="ez-points">
-        {scaledData.map((pointDatum) => (
-          <Point shapeDatum={pointDatum} key={pointDatum.id} r={r} />
+        {shapeData.map((pointDatum) => (
+          <Point
+            shapeDatum={pointDatum}
+            key={pointDatum.id}
+            r={r}
+            fill={fill}
+            stroke={stroke}
+          />
         ))}
       </g>
     );

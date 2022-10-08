@@ -1,4 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
+import { ScaleLinear } from 'eazychart-core/src';
 import {
   Direction,
   Position,
@@ -13,15 +14,12 @@ import {
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
-import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
-import { LinePath } from '@/components/shapes/LinePath';
-import { Point } from '@/components/shapes/Point';
-import { ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
+import { Segments } from '@/components/Segments';
 
 export interface LineChartProps extends SVGAttributes<SVGGElement> {
-  swapAxis?: boolean;
   data: RawData;
   line?: LineConfig;
   marker?: MarkerConfig;
@@ -38,7 +36,6 @@ export interface LineChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const LineChart: FC<LineChartProps> = ({
-  swapAxis = false,
   data,
   line = {
     stroke: '#339999',
@@ -77,86 +74,46 @@ export const LineChart: FC<LineChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const horizontalAxis = swapAxis ? yAxis : xAxis;
-  const verticalAxis = swapAxis ? xAxis : yAxis;
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: horizontalAxis.domainKey,
-        nice: horizontalAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [isRTL, horizontalAxis]
-  );
-  const yScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.VERTICAL,
-        domainKey: verticalAxis.domainKey,
-        nice: verticalAxis.nice || 0,
-      }),
-    [verticalAxis]
-  );
   return (
     <Chart
       dimensions={dimensions}
       rawData={data}
-      scales={[xScale, yScale]}
       padding={padding}
-      colors={[line.stroke]}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Points
-        xScale={xScale}
-        yScale={yScale}
-        scopedSlots={{
-          default: ({ scaledData }) => {
-            return (
-              <g className="ez-line">
-                <LinePath
-                  shapeData={scaledData}
-                  curve={line.curve}
-                  beta={line.beta}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                />
-                {!marker.hidden &&
-                  scaledData.map((pointDatum) => {
-                    return (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    );
-                  })}
-              </g>
-            );
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
           },
         }}
-      />
-      <Axis
-        {...horizontalAxis}
-        aScale={xScale}
-        position={horizontalAxis.position || Position.BOTTOM}
-      />
-      <Axis
-        {...verticalAxis}
-        aScale={yScale}
-        position={
-          verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-        }
-      />
+        yScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+            nice: yAxis.nice || 0,
+          },
+        }}
+      >
+        <Grid directions={grid.directions} color={grid.color} />
+        <Segments
+          xDomainKey={xAxis.domainKey}
+          yDomainKey={yAxis.domainKey}
+          line={line}
+          marker={marker}
+        />
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
+        <Axis
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+        />
+      </CartesianScale>
     </Chart>
   );
 };

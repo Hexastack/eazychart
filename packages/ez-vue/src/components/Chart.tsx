@@ -13,6 +13,7 @@ import {
   Dimensions,
   RawData,
   NormalizedDatum,
+  AnyScale,
 } from 'eazychart-core/src/types';
 import {
   defaultChartAnimationOptions,
@@ -20,7 +21,6 @@ import {
   defaultChartDimensions,
   defaultChartPadding,
   normalizeData,
-  AbstractScale,
 } from 'eazychart-core/src';
 import TooltipProvider from '@/components/addons/tooltip/TooltipProvider';
 import LegendProvider from '@/components/addons/legend/LegendProvider';
@@ -55,28 +55,12 @@ export default class Chart extends Vue {
   private readonly animationOptions!: Partial<AnimationOptions>;
 
   @Prop({
-    type: Array as PropType<AbstractScale[]>,
-    default() {
-      return [];
-    },
-  })
-  private readonly scales!: AbstractScale[];
-
-  @Prop({
     type: Array as PropType<RawData>,
     default() {
       return [];
     },
   })
   private readonly rawData!: RawData;
-
-  @Prop({
-    type: Array,
-    default() {
-      return [];
-    },
-  })
-  private readonly colors!: string[];
 
   @Prop({
     type: Boolean,
@@ -93,26 +77,36 @@ export default class Chart extends Vue {
 
   private legendHeight = 0;
 
+  private scales: {
+    [scaleId: string]: AnyScale;
+  } = {};
+
   @ProvideReactive('chart')
   private chart: ChartContext = {
     ...defaultChartContext,
     dimensions: this.chartDimensions,
     padding: this.chartPadding,
     animationOptions: this.chartAnimationOptions,
-    toggleDatum: this.toggleDatum,
     isRTL: this.isRTL,
-    scales: this.scales || [],
+    registerScale: this.registerScale,
+    getScale: this.getScale,
   };
 
   created() {
-    this.chart.dataDict = normalizeData(this.rawData, this.colors);
+    this.chart.dataDict = normalizeData(this.rawData);
     const parentDimensions = this.responsiveChart?.dimensions;
     // We set the dimensions as provided in the props. Otherwise, we set the parent dimensions.
     // At last, if width / height are equal to zero we default the dimensions
     // so that the end-user would be able to see the chart.
     this.containerDimensions = {
-      width: this.dimensions?.width || parentDimensions?.width || defaultChartDimensions.width,
-      height: this.dimensions?.height || parentDimensions?.height || defaultChartDimensions.height,
+      width:
+        this.dimensions?.width
+        || parentDimensions?.width
+        || defaultChartDimensions.width,
+      height:
+        this.dimensions?.height
+        || parentDimensions?.height
+        || defaultChartDimensions.height,
     };
   }
 
@@ -126,13 +120,12 @@ export default class Chart extends Vue {
 
   @Watch('rawData')
   onDataChange(newData: RawData) {
-    this.chart.dataDict = normalizeData(newData, this.colors, false);
+    this.chart.dataDict = normalizeData(newData);
   }
 
   @Watch('colors')
   onColorsChange() {
-    this.chart.dataDict = normalizeData(this.rawData, this.colors, true);
-    this.chart.colors = this.colors;
+    this.chart.dataDict = normalizeData(this.rawData);
   }
 
   @Watch('dimensions')
@@ -149,7 +142,6 @@ export default class Chart extends Vue {
   @Watch('containerDimensions')
   onContainerDimensionsChange() {
     this.chart.dimensions = this.chartDimensions;
-    this.computeScales();
   }
 
   @Watch('animationOptions')
@@ -161,8 +153,6 @@ export default class Chart extends Vue {
   onDataDictChange() {
     const data = Object.values(this.chart.dataDict);
     this.chart.data = this.isRTL ? data.reverse() : data;
-    this.chart.activeData = this.chart.data.filter(({ isActive }) => isActive);
-    this.computeScales();
   }
 
   @Watch('isRTL')
@@ -197,18 +187,22 @@ export default class Chart extends Vue {
     return undefined;
   }
 
-  computeScales() {
-    this.scales.forEach((scale) => {
-      scale.computeScale(this.chartDimensions, this.chart.activeData);
-    });
+  // Helpers to offer some scales a global scope. This is useful to have the legend
+  // access the color domain for example. Otherwise, we would need to add a portal
+  // which is still experimental in react + does not exist in Vue2.
+  registerScale(scaleId: string, scale: AnyScale) {
+    this.scales = {
+      ...this.scales,
+      [scaleId]: scale,
+    };
+  }
+
+  getScale(scaleId: string): AnyScale | null {
+    return scaleId in this.scales ? this.scales[scaleId] : null;
   }
 
   get chartData() {
     return Object.values(this.chart.dataDict);
-  }
-
-  get activeData() {
-    return this.chartData.filter(({ isActive }) => isActive);
   }
 
   get chartDimensions(): Dimensions {

@@ -34,9 +34,7 @@ export type RawData = RawDatum[];
 
 export type NormalizedDatum = RawDatum & {
   id: string;
-  color: string;
   label: string;
-  isActive: boolean;
 };
 
 export type NormalizedData = NormalizedDatum[];
@@ -45,9 +43,7 @@ export type NormalizedDataDict = { [id: string]: NormalizedDatum };
 
 export interface ShapeAttributes {
   id: string;
-  color: string;
-  xValue: string | number;
-  yValue: string | number;
+  color?: string;
 }
 
 export interface GridConfig {
@@ -67,12 +63,21 @@ export interface AxisTitleConfig {
   titleAlign?: Anchor;
 }
 
-export interface AxisConfig<P = Position>
+export interface AxisConfigBase<P = Position>
   extends AxisTickConfig,
     AxisTitleConfig {
-  domainKey: string;
   position?: P;
   nice?: number;
+}
+
+export interface AxisConfig<P = Position>
+  extends AxisConfigBase<P> {
+  domainKey: string;
+}
+
+export interface AxisConfigMulti<P = Position>
+  extends AxisConfigBase<P> {
+  domainKeys: string[];
 }
 
 export interface PointConfig {

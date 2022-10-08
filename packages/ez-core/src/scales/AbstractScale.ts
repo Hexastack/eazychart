@@ -85,6 +85,13 @@ abstract class AbstractScale
   ): void {
     this.scale = this.compute(dimensions, data);
   }
+
+  /**
+   * Checks if the user definition has been supplied.
+   */
+  public isDefined(): boolean {
+    return Object.keys(this.userDefinition).length > 0;
+  }
 }
 
 export default AbstractScale;

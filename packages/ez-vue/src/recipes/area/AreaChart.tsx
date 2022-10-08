@@ -20,12 +20,12 @@ import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
-import 'eazychart-css/css/style.css';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
 import LinePath from '@/components/shapes/LinePath';
 import Area from '@/components/shapes/Area';
 import Point from '@/components/shapes/Point';
+import CartesianScale from '@/components/scales/CartesianScale';
 
 @Component({
   components: {
@@ -41,14 +41,6 @@ import Point from '@/components/shapes/Point';
   },
 })
 export default class AreaChart extends Vue {
-  @Prop({
-    type: Boolean,
-    default() {
-      return true;
-    },
-  })
-  private readonly swapAxis!: boolean;
-
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -67,7 +59,7 @@ export default class AreaChart extends Vue {
     type: Object as PropType<AreaConfig>,
     default() {
       return {
-        color: '#339999',
+        fill: '#339999',
         lineWidth: 2,
         curve: 'curveLinear',
       };
@@ -151,39 +143,10 @@ export default class AreaChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  get horizontalAxis() {
-    return this.swapAxis ? this.yAxis : this.xAxis;
-  }
-
-  get verticalAxis() {
-    return this.swapAxis ? this.xAxis : this.yAxis;
-  }
-
-  private xScale!: ScaleLinear;
-
-  private yScale!: ScaleLinear;
-
-  created() {
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.horizontalAxis.domainKey,
-      nice: this.horizontalAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.verticalAxis.domainKey,
-      nice: this.verticalAxis.nice || 0,
-    });
-  }
-
   render() {
     const {
-      xScale,
-      yScale,
-      horizontalAxis,
-      verticalAxis,
+      xAxis,
+      yAxis,
       data,
       area,
       marker,
@@ -199,79 +162,91 @@ export default class AreaChart extends Vue {
       <Chart
         dimensions={dimensions}
         rawData={data}
-        scales={[xScale, yScale]}
         padding={padding}
-        colors={[area.stroke]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Points
-          xScale={xScale}
-          yScale={yScale}
-          scopedSlots={{
-            default: ({
-              scaledData,
-              dimensions: chartDimensions,
-            }: {
-              scaledData: PointDatum[];
-              dimensions: Dimensions;
-            }) => {
-              const lineAreaData: AreaData = scaledData.map((d) => ({
-                x: d.x,
-                y0: chartDimensions.height,
-                y1: d.y,
-              }));
-              return (
-                <g class="ez-area">
-                  <Area
-                    shapeData={lineAreaData}
-                    curve={area.curve}
-                    beta={area.beta}
-                    fill={area.fill}
-                  />
-                  <LinePath
-                    shapeData={scaledData}
-                    curve={area.curve}
-                    beta={area.beta}
-                    stroke={area.stroke}
-                    strokeWidth={area.strokeWidth}
-                  />
-                  {!marker.hidden
-                    && scaledData.map((pointDatum) => (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        fill={marker.color}
-                        strokeWidth={area.strokeWidth}
-                      />
-                    ))}
-                </g>
-              );
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
             },
           }}
-        />
-        <Axis
-          props={{
-            ...horizontalAxis,
-            aScale: xScale,
-            position: horizontalAxis.position || Position.BOTTOM,
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+            },
           }}
-        />
-        <Axis
-          props={{
-            ...verticalAxis,
-            aScale: yScale,
-            position: verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
-          }}
-        />
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <Points
+            xDomainKey={xAxis.domainKey}
+            yDomainKey={yAxis.domainKey}
+            scopedSlots={{
+              default: ({
+                shapeData,
+                dimensions: chartDimensions,
+              }: {
+                shapeData: PointDatum[];
+                dimensions: Dimensions;
+              }) => {
+                const lineAreaData: AreaData = shapeData.map((d) => ({
+                  x: d.x,
+                  y0: chartDimensions.height,
+                  y1: d.y,
+                }));
+                return (
+                  <g class="ez-area">
+                    <Area
+                      shapeData={lineAreaData}
+                      curve={area.curve}
+                      beta={area.beta}
+                      fill={area.fill}
+                    />
+                    <LinePath
+                      shapeData={shapeData}
+                      curve={area.curve}
+                      beta={area.beta}
+                      stroke={area.stroke}
+                      strokeWidth={area.strokeWidth}
+                    />
+                    {!marker.hidden
+                      && shapeData.map((pointDatum) => (
+                        <Point
+                          key={pointDatum.id}
+                          shapeDatum={pointDatum}
+                          r={marker.radius}
+                          fill={marker.color}
+                          stroke={area.stroke}
+                          strokeWidth={area.strokeWidth}
+                        />
+                      ))}
+                  </g>
+                );
+              },
+            }}
+          />
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position: yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

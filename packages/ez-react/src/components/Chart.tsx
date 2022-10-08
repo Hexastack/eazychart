@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react';
+import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
   defaultChartAnimationOptions,
   defaultChartDimensions,
@@ -18,7 +18,7 @@ import { LegendProvider } from '@/components/addons/legend/LegendProvider';
 import { ChartContext } from '@/lib/use-chart';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { useResponsiveChart } from '@/lib/use-responsive-chart';
-import { LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { LegendProps } from './addons/legend/Legend';
 
 export type ChartProps = {
   padding?: Partial<ChartPadding>;
@@ -26,7 +26,7 @@ export type ChartProps = {
   animationOptions?: AnimationOptions;
   rawData: RawData;
   scopedSlots?: {
-    LegendComponent?: React.FC<LegendPropsWithRef>;
+    LegendComponent?: React.FC<LegendProps>;
     TooltipComponent?: React.FC<TooltipProps>;
   };
   isRTL?: boolean;
@@ -55,8 +55,7 @@ export const Chart: FC<ChartProps> = ({
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
   const { dimensions: parentDimensions } = useResponsiveChart();
-  const legendRef = React.useRef<HTMLDivElement | null>(null);
-
+  const [legendHeight, setLegendHeight] = useState(0);
   const chartPadding: ChartPadding = useMemo(
     () => ({
       ...defaultChartPadding,
@@ -84,9 +83,6 @@ export const Chart: FC<ChartProps> = ({
 
   const chartDimensions: Dimensions = useMemo(() => {
     const { top, right, bottom, left } = chartPadding;
-    const legendHeight = legendRef.current
-      ? Math.floor(legendRef.current.clientHeight)
-      : 0;
     // It takes the container dimensions and subtracts padding and legend height
     const width = containerDimensions.width - left - right;
     const height = containerDimensions.height - top - bottom - legendHeight;
@@ -94,7 +90,7 @@ export const Chart: FC<ChartProps> = ({
       width: Math.max(width, 0),
       height: Math.max(height, 0),
     };
-  }, [containerDimensions, chartPadding]);
+  }, [chartPadding, containerDimensions, legendHeight]);
 
   const containerStyle = useMemo(() => {
     return {
@@ -104,15 +100,12 @@ export const Chart: FC<ChartProps> = ({
   }, [containerDimensions]);
 
   const svgStyle = useMemo(() => {
-    const legendHeight = legendRef.current
-      ? Math.floor(legendRef.current.clientHeight)
-      : 0;
     return {
       width: `${containerDimensions.width}px`,
       height: `${containerDimensions.height - legendHeight}px`,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerDimensions, legendRef.current]);
+  }, [containerDimensions, legendHeight]);
 
   const computedTransform = useMemo(() => {
     return transformTranslate({ x: padding.left || 0, y: padding.top || 0 });
@@ -126,6 +119,11 @@ export const Chart: FC<ChartProps> = ({
     const values = Object.values(dataDict);
     return isRTL ? values.reverse() : values;
   }, [dataDict, isRTL]);
+
+  const onLegendResize = useCallback(
+    ({ height }: Dimensions) => setLegendHeight(height),
+    [setLegendHeight]
+  );
 
   // Helpers to offer some scales a global scope. This is useful to have the legend
   // access the color domain for example. Otherwise, we would need to add a portal
@@ -167,7 +165,7 @@ export const Chart: FC<ChartProps> = ({
                 scopedSlots?.LegendComponent && (
                   <scopedSlots.LegendComponent
                     onLegendClick={onLegendClick}
-                    ref={legendRef}
+                    onResize={onLegendResize}
                   />
                 )
               }
@@ -190,7 +188,7 @@ export const Chart: FC<ChartProps> = ({
               scopedSlots?.LegendComponent && (
                 <scopedSlots.LegendComponent
                   onLegendClick={onLegendClick}
-                  ref={legendRef}
+                  onResize={onLegendResize}
                 />
               )
             }

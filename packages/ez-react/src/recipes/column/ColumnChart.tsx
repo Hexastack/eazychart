@@ -13,7 +13,7 @@ import {
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
 import { Bars } from '@/components/Bars';
-import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
@@ -31,7 +31,7 @@ export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
-    LegendComponent: React.FC<LegendPropsWithRef>;
+    LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
   };
 }

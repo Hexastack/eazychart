@@ -2,7 +2,6 @@ import { render } from '@testing-library/vue';
 import { Direction } from 'eazychart-core/src/types';
 import {
   dimensions,
-  scales,
   horizontalLinearScale,
   verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
@@ -13,14 +12,16 @@ describe('GridLines', () => {
     const wrapper = render(GridLines, {
       propsData: {
         direction: Direction.HORIZONTAL,
-        aScale: horizontalLinearScale,
         tickCount: 4,
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            scales,
             dimensions,
+          },
+          cartesianScale: {
+            xScale: horizontalLinearScale,
+            yScale: verticalLinearScale,
           },
         },
       },
@@ -32,14 +33,16 @@ describe('GridLines', () => {
     const wrapper = render(GridLines, {
       propsData: {
         direction: Direction.VERTICAL,
-        aScale: verticalLinearScale,
         tickCount: 4,
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            scales,
             dimensions,
+          },
+          cartesianScale: {
+            xScale: horizontalLinearScale,
+            yScale: verticalLinearScale,
           },
         },
       },

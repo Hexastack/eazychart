@@ -30,8 +30,6 @@ export const tooltipAnimationOptions: AnimationOptions = {
 export const defaultShapeAttributes: ShapeAttributes = {
   id: new Date().getTime().toString(),
   color: defaultColor,
-  xValue: '',
-  yValue: 0,
 };
 
 export const defaultPoint: Point = {
@@ -105,11 +103,9 @@ export const defaultChartContext: ChartContext = {
   dimensions: defaultChartDimensions,
   padding: defaultChartPadding,
   animationOptions: undefined,
-  scales: [],
   data: [],
   dataDict: {},
-  activeData: [],
-  toggleDatum: () => {},
-  colors: [],
   isRTL: false,
+  registerScale: () => {},
+  getScale: () => null,
 };

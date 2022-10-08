@@ -11,17 +11,26 @@ import {
   getTickTextAnchorByPosition,
   transformTranslate,
   animate,
-  ScaleBand,
-  ScaleLinear,
+  isVerticalPosition,
 } from 'eazychart-core/src';
 import {
-  Anchor, ChartContext, Position, AxisData,
+  Anchor,
+  ChartContext,
+  Position,
+  AxisData,
+  ScaleLinearOrBand,
 } from 'eazychart-core/src/types';
 
 @Component
 export default class Axis extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
+
+  @InjectReactive('cartesianScale')
+  private cartesianScale!: {
+    xScale: ScaleLinearOrBand;
+    yScale: ScaleLinearOrBand;
+  };
 
   @Prop({
     type: String as PropType<Position>,
@@ -30,12 +39,6 @@ export default class Axis extends Vue {
     },
   })
   private readonly position!: Position;
-
-  @Prop({
-    type: Object as PropType<ScaleBand | ScaleLinear>,
-    required: true,
-  })
-  private readonly aScale!: ScaleBand | ScaleLinear;
 
   @Prop({
     type: Number,
@@ -86,7 +89,7 @@ export default class Axis extends Vue {
     this.cancelAnimation && this.cancelAnimation();
     const axis = getAxis(
       this.position,
-      this.aScale.scale,
+      this.axisScale.scale,
       this.chart.dimensions,
       {
         tickCount: this.tickCount,
@@ -113,11 +116,11 @@ export default class Axis extends Vue {
         axisElement?.querySelectorAll('.ez-axis-tick-text'),
       ) as SVGGraphicsElement[];
       this.axisLabelTransform = getAxisLabelAttributes(
-        this.aScale.scale,
+        this.axisScale.scale,
         labels,
         this.position,
         'auto',
-        this.aScale.definition.reverse,
+        this.axisScale.definition.reverse,
       );
     });
   }
@@ -127,7 +130,7 @@ export default class Axis extends Vue {
     this.updateAxisLabelTransform();
   }
 
-  @Watch('aScale', { deep: true })
+  @Watch('axisScale', { deep: true })
   onScalesChange() {
     this.updateCurrentAxis();
   }
@@ -140,6 +143,12 @@ export default class Axis extends Vue {
   @Watch('currentAxis')
   onAxisChange() {
     this.updateAxisLabelTransform();
+  }
+
+  get axisScale() {
+    const { position, cartesianScale } = this;
+    const { xScale, yScale } = cartesianScale;
+    return isVerticalPosition(position) ? yScale : xScale;
   }
 
   get textAnchor() {
@@ -204,7 +213,7 @@ export default class Axis extends Vue {
               transform={axisLabelTransform.transform}
               class="ez-axis-tick-text"
             >
-              {tick.text.text.replace(/(\.\d{1}).*$/, (_a, c) => c)}
+              {tick.text.text.toString().replace(/(\.\d{1}).*$/, (_a, c) => c)}
             </text>
           </g>
         ))}

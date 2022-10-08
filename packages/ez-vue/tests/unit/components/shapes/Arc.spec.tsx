@@ -13,22 +13,6 @@ describe('Arc', () => {
       },
       provide: {
         __reactiveInject__: {
-          chart: {},
-        },
-        tooltip,
-      },
-    });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
-
-    const wrapper2 = render(Arc, {
-      propsData: {
-        shapeDatum: arcDatum,
-        innerRadius: 10,
-        outerRadius: 100,
-      },
-      provide: {
-        __reactiveInject__: {
           chart: {
             animationOptions: {
               easing: 'easeLinear',
@@ -43,7 +27,7 @@ describe('Arc', () => {
 
     await Vue.nextTick();
 
-    expect(wrapper2.container.innerHTML).toMatchSnapshot();
+    expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {

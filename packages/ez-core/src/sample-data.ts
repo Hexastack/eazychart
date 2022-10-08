@@ -12,11 +12,13 @@ import {
   ScaleBandDefinition,
   ScaleLinearDefinition,
   TooltipContext,
+  RawDatum,
 } from './types';
 
 import  {
   ScaleLinear,
   ScaleBand,
+  ScaleOrdinal,
 } from '.';
 
 export const rawData: RawData = [
@@ -25,21 +27,18 @@ export const rawData: RawData = [
     label: 'Alpha',
     value: 50,
     amount: 10,
-    isActive: true,
   },
   {
     id: '2',
     label: 'Beta',
     value: 100,
     amount: 20,
-    isActive: false,
   },
   {
     id: '3',
     label: 'Gamma',
     value: 75,
     amount: 30,
-    isActive: true,
   },
 ];
 
@@ -51,7 +50,6 @@ export const chartData: NormalizedData = rawData.map((d, idx) => {
     id: d.id as string,
     label: d.label as string,
     color: colors[idx],
-    isActive: d.isActive as boolean,
   };
 });
 
@@ -79,7 +77,7 @@ export const horizontalLinearScaleDef: ScaleLinearDefinition = {
   domainKey: 'amount',
 };
 
-export const RadialLinearScaleDef: ScaleLinearDefinition = {
+export const radialLinearScaleDef: ScaleLinearDefinition = {
   direction: Direction.HORIZONTAL,
   range: [0, 2 * Math.PI],
   domainKey: 'amount',
@@ -107,18 +105,23 @@ export const scaleDefinitions = {
   [verticalLinearScaleId]: verticalLinearScaleDef,
   [horizontalBandScaleId]: horizontalBandScaleDef,
   [horizontalLinearScaleId]: horizontalLinearScaleDef,
-  [RadialLinearScaleId] : RadialLinearScaleDef,
+  [RadialLinearScaleId]: radialLinearScaleDef,
 };
 
 export const verticalLinearScale = new ScaleLinear(verticalLinearScaleDef);
 export const horizontalBandScale = new ScaleBand(horizontalBandScaleDef);
 export const horizontalLinearScale = new ScaleLinear(horizontalLinearScaleDef);
-export const radialLinearScale = new ScaleLinear(RadialLinearScaleDef)
+export const radialLinearScale = new ScaleLinear(radialLinearScaleDef)
+export const colorScale = new ScaleOrdinal({
+  domainKey: 'label',
+  range: colors,
+});
 
 verticalLinearScale.computeScale(dimensions, chartData);
 horizontalBandScale.computeScale(dimensions, chartData);
 horizontalLinearScale.computeScale(dimensions, chartData);
-radialLinearScale.computeScale(dimensions, chartData)
+radialLinearScale.computeScale(dimensions, chartData);
+colorScale.computeScale(dimensions, chartData);
 
 export const scales: {[scaleName: string]: D3Scales} = {
   [verticalLinearScaleId]: verticalLinearScale.scale,
@@ -130,12 +133,10 @@ export const scales: {[scaleName: string]: D3Scales} = {
 export const rectData: RectangleDatum = {
   id: '1',
   color: 'yellow',
-  xValue: 'GDP',
-  yValue: 100,
   x: 50,
   y: 10,
   width: 20,
-  height: 100,
+  height: 100
 };
 
 export const tooltip: TooltipContext = {
@@ -144,39 +145,59 @@ export const tooltip: TooltipContext = {
   moveTooltip: jest.fn(),
 };
 
+export const datumA: RawDatum = {
+  id: 'A',
+  color: 'red',
+  xValue: 0,
+  yValue: 10,
+  zValue: 100,
+}
+
 export const pointA: PointDatum = {
+  id: 'A',
+  color: 'red',
   x: 10,
   y: 20,
   radius: 5,
-  id: 'A',
-  color: 'red',
-  xValue: 'A',
-  yValue: 10,
 };
 
+export const datumB: RawDatum = {
+  id: 'B',
+  color: 'blue',
+  xValue: 10,
+  yValue: 25,
+  zValue: 250,
+}
+
 export const pointB: PointDatum = {
+  id: 'B',
+  color: 'blue',
   x: 10,
   y: 40,
   radius: 5,
-  id: 'B',
-  color: 'blue',
-  xValue: 'B',
-  yValue: 25,
 };
 
+export const datumC: RawDatum = {
+  id: 'C',
+  color: 'yellow',
+  xValue: 15,
+  yValue: 30,
+  zValue: 300,
+}
+
 export const pointC: PointDatum = {
+  id: 'C',
+  color: 'yellow',
   x: 20,
   y: 40,
   radius: 5,
-  id: 'C',
-  color: 'yellow',
-  xValue: 'C',
-  yValue: 30,
 };
+
+export const pointsRawData: RawData = [datumA, datumB, datumC];
 
 export const pointsData: PointDatum[] = [pointA, pointB, pointC];
 
-export const pointsWithMarginData: RawData = pointsData.map((d, idx) => {
+export const pointsWithMarginData: RawData = pointsRawData.map((d, idx) => {
   return {
     ...d,
     positiveMargin: (idx + 1) / 10,
@@ -187,12 +208,10 @@ export const pointsWithMarginData: RawData = pointsData.map((d, idx) => {
 export const arcDatum: ArcDatum = {
   id: '1',
   color: 'yellow',
-  xValue: 'GDP',
-  yValue: 100,
   data: 100,
   value: 100,
   startAngle: 0,
   endAngle: 45,
   padAngle: 0,
-  index: 0
+  index: 0,
 };

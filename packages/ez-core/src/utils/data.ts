@@ -14,20 +14,13 @@ export const findDatumLabel = (datum: RawDatum) => {
 
 export const normalizeData = (
   data: RawData,
-  colors: string[],
-  forceColor = false,
   labelKey = 'label'
 ): NormalizedDataDict => {
   return data
     .map((d: RawDatum, index: number) => {
       return {
         ...d,
-        color:
-          (!forceColor && d.color) ||
-          (colors.length && colors[index % colors.length]) ||
-          '#1f77b4',
         id: d.id || index.toString(),
-        isActive: 'isActive' in d ? d.isActive : true,
         label:
           labelKey in d ? d[labelKey] : findDatumLabel(d) || index.toString(),
       } as NormalizedDatum;

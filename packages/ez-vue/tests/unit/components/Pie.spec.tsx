@@ -1,11 +1,10 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import {
-  chartData,
   dimensions,
-  scales,
   tooltip,
-  horizontalLinearScale,
+  rawData,
+  colorScale,
 } from 'eazychart-core/src/sample-data';
 import Pie from '@/components/Pie';
 
@@ -13,33 +12,14 @@ describe('Pie', () => {
   it('renders svg pie with the right coordinates / dimensions', async () => {
     const wrapper = render(Pie, {
       propsData: {
-        aScale: horizontalLinearScale,
+        valueDomainKey: 'amount',
+        labelDomainKey: 'label',
         donutRadius: 0,
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
-            dimensions,
-          },
-        },
-        tooltip,
-      },
-    });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
-
-    const wrapper2 = render(Pie, {
-      propsData: {
-        aScale: horizontalLinearScale,
-        donutRadius: 0,
-      },
-      provide: {
-        __reactiveInject__: {
-          chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
+            data: rawData,
             dimensions,
             animationOptions: {
               easing: 'easeLinear',
@@ -47,14 +27,14 @@ describe('Pie', () => {
               delay: 0,
             },
           },
+          colorScale,
         },
         tooltip,
       },
     });
 
     await Vue.nextTick();
-    await Vue.nextTick();
 
-    expect(wrapper2.container.innerHTML).toMatchSnapshot();
+    expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 });

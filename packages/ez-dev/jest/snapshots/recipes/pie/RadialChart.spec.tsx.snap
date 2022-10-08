@@ -13,36 +13,49 @@ exports[`RadialChart renders a Radial chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,200)"
-              class="ez-arcs"
-            >
-              <path
-                d="M1.2246467991473532e-14,-200L6.123233995736766e-15,-100Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M6.123233995736766e-15,-100L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
+            <g class="ez-fragment-linear-scale">
+              <g class="ez-fragment-color-scale">
+                <g
+                  class="ez-arcs"
+                  transform="translate(300,200)"
+                >
+                  <path
+                    class="ez-arc"
+                    d="M1.2246467991473532e-14,-200A200,200,0,0,1,173.20508075688772,-100L115.47005383792514,-66.66666666666666A133.33333333333331,133.33333333333331,0,0,0,8.164311994315688e-15,-133.33333333333331Z"
+                    data-testid="ez-arc"
+                    fill="red"
+                    stroke="#FFF"
+                    stroke-width="0"
+                  >
+                  </path>
+                  <path
+                    class="ez-arc"
+                    d="M8.164311994315688e-15,-133.33333333333331A133.33333333333331,133.33333333333331,0,1,1,-8.164311994315688e-15,133.33333333333331A133.33333333333331,133.33333333333331,0,1,1,8.164311994315688e-15,-133.33333333333331M-1.2246467991473527e-14,-66.66666666666664A66.66666666666664,66.66666666666664,0,1,0,1.2246467991473527e-14,66.66666666666664A66.66666666666664,66.66666666666664,0,1,0,-1.2246467991473527e-14,-66.66666666666664Z"
+                    data-testid="ez-arc"
+                    fill="blue"
+                    stroke="#FFF"
+                    stroke-width="0"
+                  >
+                  </path>
+                  <path
+                    class="ez-arc"
+                    d="M4.082155997157844e-15,-66.66666666666666A66.66666666666666,66.66666666666666,0,1,1,-33.33333333333334,57.73502691896257L7.105427357601005e-15,-1.2306961192854808e-14Z"
+                    data-testid="ez-arc"
+                    fill="green"
+                    stroke="#FFF"
+                    stroke-width="0"
+                  >
+                  </path>
+                </g>
+              </g>
             </g>
           </g>
         </svg>
       </div>
       <div class="ez-legend">
         <div
-          role="button"
           class="ez-legend-key"
+          role="button"
         >
           <div
             class="ez-legend-box"
@@ -54,12 +67,12 @@ exports[`RadialChart renders a Radial chart 1`] = `
           </span>
         </div>
         <div
+          class="ez-legend-key"
           role="button"
-          class="ez-legend-key ez-legend-disable"
         >
           <div
             class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
+            style="background-color: blue; border: 2px solid blue;"
           >
           </div>
           <span class="ez-legend-text">
@@ -67,98 +80,8 @@ exports[`RadialChart renders a Radial chart 1`] = `
           </span>
         </div>
         <div
-          role="button"
           class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: green; border: 2px solid green;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Gamma
-          </span>
-        </div>
-      </div>
-    </div>
-    <div
-      class="ez-tooltip"
-      style="left: 0px; top: 0px; opacity: 0;"
-    >
-    </div>
-  </div>
-</div>
-`;
-
-exports[`RadialChart renders a Radial chart 2`] = `
-<div
-  class="ez-viz"
-  style="width: 800px; height: 600px;"
->
-  <div class="ez-fragment-tooltip">
-    <div class="ez-fragment-filter">
-      <div class="ez-chart">
-        <svg
-          class="ez-svg"
-          style="width: 800px; height: 600px;"
-        >
-          <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,200)"
-              class="ez-arcs"
-            >
-              <path
-                d="M1.2246467991473532e-14,-200A200,200,0,0,1,200,0L100,0A100,100,0,0,0,6.123233995736766e-15,-100Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M6.123233995736766e-15,-100A100,100,0,1,1,-70.71067811865477,-70.71067811865474L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <div class="ez-legend">
-        <div
           role="button"
-          class="ez-legend-key"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: red; border: 2px solid red;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Alpha
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key ez-legend-disable"
-        >
-          <div
-            class="ez-legend-box"
-            style="background-color: rgba(255, 255, 255, 0); border: 2px solid blue;"
-          >
-          </div>
-          <span class="ez-legend-text">
-            Beta
-          </span>
-        </div>
-        <div
-          role="button"
-          class="ez-legend-key"
         >
           <div
             class="ez-legend-box"

@@ -1,8 +1,8 @@
-import Vue, { PropType } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { ChartContext, Dimensions, Point } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
-import { ScaleLinear, scaleArcData } from 'eazychart-core/src';
+import { scaleArcData, ScaleLinear, ScaleOrdinal } from 'eazychart-core/src';
 import Arc from '@/components/shapes/Arc';
 
 @Component({ components: { Arc } })
@@ -10,11 +10,23 @@ export default class Arcs extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
+  @InjectReactive('colorScale')
+  private colorScale!: ScaleOrdinal;
+
+  @InjectReactive('linearScale')
+  private linearScale!: ScaleLinear;
+
   @Prop({
-    type: Object as PropType<ScaleLinear>,
-    required: true,
+    type: String,
+    default: 0,
   })
-  private readonly arcScale!: ScaleLinear;
+  private readonly valueDomainKey!: string;
+
+  @Prop({
+    type: String,
+    default: 0,
+  })
+  private readonly labelDomainKey!: string;
 
   @Prop({
     type: Number,
@@ -74,8 +86,11 @@ export default class Arcs extends Vue {
 
   get shapeData() {
     return scaleArcData(
-      this.chart.activeData,
-      this.arcScale,
+      this.chart.data,
+      this.valueDomainKey,
+      this.labelDomainKey,
+      this.linearScale,
+      this.colorScale,
       this.startAngle,
       this.sortValues,
     );

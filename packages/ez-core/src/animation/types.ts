@@ -22,7 +22,7 @@ export type AnyAnimationEasingFn =
   | CustomEasingFn;
 
 export type AnimationOptions = {
-  duration?: number; // milliseconds
-  delay?: number; // milliseconds
-  easing?: CustomEasingFn | AnimationEasing;
+  duration: number; // milliseconds
+  delay: number; // milliseconds
+  easing: CustomEasingFn | AnimationEasing;
 };

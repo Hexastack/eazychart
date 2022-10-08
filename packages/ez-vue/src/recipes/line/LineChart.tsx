@@ -1,4 +1,5 @@
 import Vue, { PropType } from 'vue';
+import { ScaleLinear } from 'eazychart-core/src';
 import Component from 'vue-class-component';
 import {
   AnimationOptions,
@@ -7,44 +8,31 @@ import {
   Dimensions,
   Direction,
   GridConfig,
-  PointDatum,
   Position,
   RawData,
   LineConfig,
   MarkerConfig,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
-import Points from '@/components/Points';
-import LinePath from '@/components/shapes/LinePath';
-import Point from '@/components/shapes/Point';
+import CartesianScale from '@/components/scales/CartesianScale';
+import Segments from '@/components/Segments';
 
 @Component({
   components: {
     Chart,
     Grid,
-    LinePath,
-    Points,
-    Point,
+    Segments,
     Axis,
     Legend,
     Tooltip,
   },
 })
 export default class LineChart extends Vue {
-  @Prop({
-    type: Boolean,
-    default() {
-      return true;
-    },
-  })
-  private readonly swapAxis!: boolean;
-
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -147,39 +135,10 @@ export default class LineChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  get horizontalAxis() {
-    return this.swapAxis ? this.yAxis : this.xAxis;
-  }
-
-  get verticalAxis() {
-    return this.swapAxis ? this.xAxis : this.yAxis;
-  }
-
-  private xScale!: ScaleLinear;
-
-  private yScale!: ScaleLinear;
-
-  created() {
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.horizontalAxis.domainKey,
-      nice: this.horizontalAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.verticalAxis.domainKey,
-      nice: this.verticalAxis.nice || 0,
-    });
-  }
-
   render() {
     const {
-      xScale,
-      yScale,
-      horizontalAxis,
-      verticalAxis,
+      xAxis,
+      yAxis,
       data,
       line,
       marker,
@@ -195,69 +154,51 @@ export default class LineChart extends Vue {
       <Chart
         dimensions={dimensions}
         rawData={data}
-        scales={[xScale, yScale]}
         padding={padding}
-        colors={[line.stroke]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Points
-          xScale={xScale}
-          yScale={yScale}
-          scopedSlots={{
-            default: ({ scaledData }: { scaledData: PointDatum[] }) => (
-              <g class="ez-line">
-                <LinePath
-                  shapeData={scaledData}
-                  curve={line.curve}
-                  beta={line.beta}
-                  stroke={line.stroke}
-                  strokeWidth={line.strokeWidth}
-                />
-                {!marker.hidden
-                  && scaledData.map((pointDatum) => (
-                    <Point
-                      key={pointDatum.id}
-                      shapeDatum={pointDatum}
-                      r={marker.radius}
-                      fill={marker.color}
-                      strokeWidth={line.strokeWidth}
-                    />
-                  ))}
-              </g>
-            ),
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
+            },
           }}
-        />
-        <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
-          aScale={xScale}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickLength}
-          tickFormat={horizontalAxis.tickFormat}
-        />
-        <Axis
-          position={
-            verticalAxis.position
-            || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          aScale={yScale}
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
-          tickFormat={verticalAxis.tickFormat}
-        />
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+            },
+          }}
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <Segments
+            xDomainKey={xAxis.domainKey}
+            yDomainKey={yAxis.domainKey}
+            line={line}
+            marker={marker}
+          />
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

@@ -11,7 +11,6 @@ describe('LineErrorMarginChart', () => {
   it('renders a line error margin chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <LineErrorMarginChart
           data={pointsWithMarginData}
@@ -26,12 +25,15 @@ describe('LineErrorMarginChart', () => {
           }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

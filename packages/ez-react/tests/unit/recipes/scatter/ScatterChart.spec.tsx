@@ -8,7 +8,6 @@ describe('ScatterChart', () => {
   it('renders a scatter chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <ScatterChart
           data={rawData}
@@ -19,23 +18,21 @@ describe('ScatterChart', () => {
             radius: 6,
             color: 'red',
           }}
-          animationOptions={{
-            easing: 'easeBack',
-            duration: 0,
-            delay: 0,
-          }}
           xAxis={{
             domainKey: 'value',
           }}
           yAxis={{
             domainKey: 'amount',
           }}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

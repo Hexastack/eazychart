@@ -11,14 +11,18 @@ describe('LinePath', () => {
       },
       provide: {
         __reactiveInject__: {
-          chart: {},
+          chart: {
+            animationOptions: {
+              easing: 'easeLinear',
+              duration: 0,
+              delay: 0,
+            },
+          },
         },
         tooltip,
         dimensions,
       },
     });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     await Vue.nextTick();
 

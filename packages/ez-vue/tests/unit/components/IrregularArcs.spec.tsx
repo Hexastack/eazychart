@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import {
-  chartData,
+  colorScale,
   dimensions,
-  scales,
+  rawData,
   tooltip,
   verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
@@ -13,35 +13,14 @@ describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
     const wrapper = render(IrregularArcs, {
       propsData: {
-        aScale: verticalLinearScale,
-        rScale: verticalLinearScale,
+        valueDomainKey: verticalLinearScale.definition.domainKey,
+        labelDomainKey: colorScale.definition.domainKey,
         donutRadius: 0,
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
-            dimensions,
-          },
-        },
-        tooltip,
-      },
-    });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
-
-    const wrapper2 = render(IrregularArcs, {
-      propsData: {
-        aScale: verticalLinearScale,
-        rScale: verticalLinearScale,
-        donutRadius: 0,
-      },
-      provide: {
-        __reactiveInject__: {
-          chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
+            data: rawData,
             dimensions,
             animationOptions: {
               easing: 'easeLinear',
@@ -49,14 +28,15 @@ describe('IrregularArcs', () => {
               delay: 0,
             },
           },
+          linearScale: verticalLinearScale,
+          colorScale,
         },
         tooltip,
       },
     });
 
     await Vue.nextTick();
-    await Vue.nextTick();
 
-    expect(wrapper2.container.innerHTML).toMatchSnapshot();
+    expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 });

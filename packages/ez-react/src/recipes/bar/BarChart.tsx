@@ -1,4 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
+import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
   AxisConfig,
@@ -12,10 +13,12 @@ import {
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
 import { Bars } from '@/components/Bars';
-import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
+import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Grid } from '@/components/scales/grid/Grid';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { CartesianScale } from '@/components/scales/CartesianScale';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -28,7 +31,7 @@ export interface BarChartProps extends SVGAttributes<SVGGElement> {
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
-    LegendComponent?: React.FC<LegendPropsWithRef>;
+    LegendComponent?: React.FC<LegendProps>;
     TooltipComponent?: FC<TooltipProps>;
   };
 }
@@ -66,63 +69,50 @@ export const BarChart: FC<BarChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const xScale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey: xAxis.domainKey,
-        nice: xAxis.nice || 0,
-        reverse: isRTL,
-      }),
-    [isRTL, xAxis]
-  );
-  const yScale = useMemo<ScaleBand>(
-    () =>
-      new ScaleBand({
-        direction: Direction.VERTICAL,
-        domainKey: yAxis.domainKey,
-      }),
-    [yAxis]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    yAxis.domainKey,
+    colors
   );
 
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
-      scales={[xScale, yScale]}
+      rawData={activeData}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onLegendClick={toggleDatum}
     >
-      <Grid
-        directions={grid.directions}
-        color={grid.color}
-        xScale={xScale}
-        yScale={yScale}
-      />
-      <Bars xScale={xScale} yScale={yScale} />
-      <Axis
-        aScale={xScale}
-        position={xAxis.position || Position.BOTTOM}
-        title={xAxis.title}
-        titleAlign={xAxis.titleAlign}
-        tickCount={xAxis.tickCount}
-        tickSize={xAxis.tickSize}
-        tickLength={xAxis.tickLength}
-        tickFormat={xAxis.tickFormat}
-      />
-      <Axis
-        aScale={yScale}
-        position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
-        title={yAxis.title}
-        titleAlign={yAxis.titleAlign}
-        tickCount={yAxis.tickCount}
-        tickSize={yAxis.tickSize}
-        tickLength={yAxis.tickLength}
-        tickFormat={yAxis.tickFormat}
-      />
+      <CartesianScale
+        xScaleConfig={{
+          ScaleClass: ScaleLinear,
+          definition: {
+            direction: Direction.HORIZONTAL,
+            domainKey: xAxis.domainKey,
+            nice: xAxis.nice || 0,
+            reverse: isRTL,
+          },
+        }}
+        yScaleConfig={{
+          ScaleClass: ScaleBand,
+          definition: {
+            direction: Direction.VERTICAL,
+            domainKey: yAxis.domainKey,
+          },
+        }}
+      >
+        <Grid directions={grid.directions} color={grid.color} />
+        <ColorScale domainKey={yAxis.domainKey} range={activeColors}>
+          <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+        </ColorScale>
+        <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
+        <Axis
+          {...yAxis}
+          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+        />
+      </CartesianScale>
     </Chart>
   );
 };

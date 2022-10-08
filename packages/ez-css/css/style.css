@@ -1,1 +1,92 @@
-.ez-fragment-filter{height:100%;width:100%}.ez-legend{text-align:center;padding-top:1rem}.ez-legend-key{display:inline-block;cursor:pointer;margin-right:1rem}.ez-legend-box{width:1rem;height:1rem;display:inline-block;vertical-align:sub}.ez-fragment-tooltip{height:100%;width:100%}.ez-tooltip{position:fixed;display:flex;align-items:center;background-color:rgba(0,0,0,0.85);pointer-events:none;padding:1rem;white-space:nowrap;color:#FFF;border-radius:.25rem;box-shadow:1px 1px 16px rgba(0,0,0,0.25);font-size:1.125rem}.ez-tooltip-color{width:16px;height:16px;vertical-align:middle;border:1px solid #FFF}.ez-tooltip-text{margin:0 0 0 .5rem}.ez-tooltip-domain{margin:0 .25rem}.ez-axis{fill:none;stroke:#000}.ez-axis-tick-text{stroke:none;fill:#000}.ez-axis-title{font-weight:500;fill:#000;stroke:none}.ez-grid{fill:none;stroke:#a8a8a8}.ez-point:hover{filter:brightness(0.75)}.ez-line{fill:none;stroke-linejoin:round;stroke-linecap:round}.ez-viz{height:100%;width:100%}.ez-chart{display:flex}
+.ez-fragment-filter {
+  height: 100%;
+  width: 100%; }
+
+.ez-legend {
+  text-align: center;
+  padding-top: 1rem; }
+
+.ez-legend-key {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 1rem; }
+
+.ez-legend-box {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  vertical-align: sub; }
+
+.ez-fragment-tooltip {
+  height: 100%;
+  width: 100%; }
+
+.ez-tooltip {
+  position: fixed;
+  display: flex;
+  align-items: flex-start;
+  background-color: rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  padding: 1rem;
+  white-space: nowrap;
+  color: #FFF;
+  border-radius: .25rem;
+  box-shadow: 1px 1px 16px rgba(0, 0, 0, 0.25);
+  font-size: 1.125rem; }
+
+.ez-tooltip-color {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  border: 1px solid #FFF;
+  margin: .25rem; }
+
+.ez-tooltip-text {
+  margin: 0 0 0 .5rem; }
+
+.ez-tooltip-attribute {
+  margin: 0 .25rem;
+  display: table-row; }
+
+.ez-tooltip-attribute--name,
+.ez-tooltip-attribute--value {
+  display: table-cell;
+  padding: .125rem; }
+
+.ez-tooltip-attribute--name {
+  text-align: right; }
+
+.ez-tooltip-attribute--value {
+  font-weight: 700; }
+
+.ez-axis {
+  fill: none;
+  stroke: #000; }
+
+.ez-axis-tick-text {
+  stroke: none;
+  fill: #000; }
+
+.ez-axis-title {
+  font-weight: 500;
+  fill: #000;
+  stroke: none; }
+
+.ez-grid {
+  fill: none;
+  stroke: #a8a8a8; }
+
+.ez-point:hover {
+  filter: brightness(0.75); }
+
+.ez-line {
+  fill: none;
+  stroke-linejoin: round;
+  stroke-linecap: round; }
+
+.ez-viz {
+  height: 100%;
+  width: 100%; }
+
+.ez-chart {
+  display: flex; }

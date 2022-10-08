@@ -1,6 +1,5 @@
-import React, { FC, SVGAttributes, useMemo } from 'react';
+import React, { FC, SVGAttributes } from 'react';
 import {
-  Direction,
   RawData,
   AnimationOptions,
   ChartPadding,
@@ -10,19 +9,21 @@ import {
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { Pie } from '@/components/Pie';
-import { Legend, LegendPropsWithRef } from '@/components/addons/legend/Legend';
-import { ScaleLinear } from 'eazychart-core/src';
+import { Legend, LegendProps } from '@/components/addons/legend/Legend';
+import { ColorScale } from '@/components/scales/ColorScale';
+import { useToggableDatum } from '@/lib/useToggableDatum';
 
 export interface PieChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   colors?: string[];
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
-  domainKey?: string;
+  valueDomainKey?: string;
+  labelDomainKey?: string;
   arc?: PieConfig;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {
-    LegendComponent: React.FC<LegendPropsWithRef>;
+    LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
   };
 }
@@ -41,7 +42,8 @@ export const PieChart: FC<PieChartProps> = ({
     right: 100,
     top: 100,
   },
-  domainKey = 'value',
+  valueDomainKey = 'value',
+  labelDomainKey = 'name',
   arc = {
     donutRadius: 0,
     cornerRadius: 0,
@@ -56,25 +58,28 @@ export const PieChart: FC<PieChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  const scale = useMemo<ScaleLinear>(
-    () =>
-      new ScaleLinear({
-        direction: Direction.HORIZONTAL,
-        domainKey,
-      }),
-    [domainKey]
+  const { activeData, activeColors, toggleDatum } = useToggableDatum(
+    data,
+    labelDomainKey,
+    colors
   );
+
   return (
     <Chart
       dimensions={dimensions}
-      rawData={data}
-      scales={[scale]}
+      rawData={activeData}
       padding={padding}
-      colors={colors}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onLegendClick={toggleDatum}
     >
-      <Pie aScale={scale} {...arc} />
+      <ColorScale domainKey={labelDomainKey} range={activeColors}>
+        <Pie
+          valueDomainKey={valueDomainKey}
+          labelDomainKey={labelDomainKey}
+          {...arc}
+        />
+      </ColorScale>
     </Chart>
   );
 };

@@ -7,42 +7,31 @@ import 'tests/mocks/ResizeObserver';
 
 describe('ScatterChart', () => {
   it('renders a scatter chart', async () => {
-    const propsData = {
-      data: rawData,
-      point: {
-        radius: 6,
-        color: 'red',
-      },
-      grid: { directions: [] },
-      dimensions,
-      xAxis: {
-        domainKey: 'value',
-      },
-      yAxis: {
-        domainKey: 'amount',
-      },
-    };
-
     const wrapper = render(ScatterChart, {
-      propsData,
+      propsData: {
+        data: rawData,
+        point: {
+          radius: 6,
+          color: 'red',
+        },
+        grid: { directions: [] },
+        dimensions,
+        xAxis: {
+          domainKey: 'value',
+        },
+        yAxis: {
+          domainKey: 'amount',
+        },
+        animationOptions: {
+          easing: 'easeLinear',
+          duration: 0,
+          delay: 0,
+        },
+      },
     });
 
     await Vue.nextTick();
 
     expect(wrapper.container.innerHTML).toMatchSnapshot();
-
-    const wrapper2 = render(ScatterChart, {
-      propsData,
-    });
-
-    await wrapper2.updateProps({
-      animationOptions: {
-        easing: 'easeLinear',
-        duration: 0,
-        delay: 0,
-      },
-    });
-
-    expect(wrapper2.container.innerHTML).toMatchSnapshot();
   });
 });

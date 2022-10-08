@@ -1,24 +1,8 @@
 import React, { createContext, FC, useContext, useMemo } from 'react';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
-import {
-  ScaleBandDefinition,
-  ScaleLinearDefinition,
-} from 'eazychart-core/src/types';
+import { ScaleLinear } from 'eazychart-core/src';
+import { ScaleLinearOrBand, ScaleConfig } from 'eazychart-core/src/types';
 import { useChart } from '@/lib/use-chart';
-
-export type ScaleLinearOrBand = ScaleLinear | ScaleBand;
-
-type Class<T> = new (...args: any[]) => T;
-
-type ScaleProp =
-  | {
-      ScaleClass: Class<ScaleLinear>;
-      definition: ScaleLinearDefinition;
-    }
-  | {
-      ScaleClass: Class<ScaleBand>;
-      definition: ScaleBandDefinition;
-    };
+import { Fragment } from '@/lib/Fragment';
 
 const CartesianScaleContext = createContext<{
   xScale: ScaleLinearOrBand;
@@ -33,8 +17,8 @@ export const useCartesianScales = () => {
 };
 
 export type CartesianScaleProps = {
-  xScaleConfig: ScaleProp;
-  yScaleConfig: ScaleProp;
+  xScaleConfig: ScaleConfig;
+  yScaleConfig: ScaleConfig;
 };
 
 export const CartesianScale: FC<CartesianScaleProps> = ({
@@ -60,7 +44,9 @@ export const CartesianScale: FC<CartesianScaleProps> = ({
 
   return (
     <CartesianScaleContext.Provider value={{ xScale, yScale }}>
-      {children}
+      <Fragment type="g" name="cartesian-scale">
+        {children}
+      </Fragment>
     </CartesianScaleContext.Provider>
   );
 };

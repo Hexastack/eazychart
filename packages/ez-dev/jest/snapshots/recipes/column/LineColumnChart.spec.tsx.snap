@@ -13,84 +13,90 @@ exports[`LineColumnChart renders a line & column chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(150, 100)">
-            <g class="ez-bars">
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-fragment-color-scale">
+                <g class="ez-bars">
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                </g>
+              </g>
+              <g
+                text-anchor="middle"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0V0V-0.5H0V0V0"
-                class="ez-axis-path"
-              >
-              </path>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
-              >
-              </path>
-            </g>
-            <g class="ez-points">
-              <g class="ez-line">
                 <path
-                  d
-                  stroke="#339999"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
+                  d="M0,0V0V-0.5H0V0V0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
+              <g
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
+              >
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
                 >
                 </path>
               </g>
             </g>
-            <g
-              text-anchor="start"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-points">
+                <g class="ez-line">
+                  <path
+                    d
+                    stroke="#339999"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    class="ez-line"
+                  >
+                  </path>
+                </g>
+              </g>
+              <g
+                text-anchor="start"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </path>
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>
@@ -120,84 +126,90 @@ exports[`LineColumnChart renders a line & column chart 2`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(150, 100)">
-            <g class="ez-bars">
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-fragment-color-scale">
+                <g class="ez-bars">
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                </g>
+              </g>
+              <g
+                text-anchor="middle"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0V0V-0.5H0V0V0"
-                class="ez-axis-path"
-              >
-              </path>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
-              >
-              </path>
-            </g>
-            <g class="ez-points">
-              <g class="ez-line">
                 <path
-                  d
-                  stroke="#339999"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
+                  d="M0,0V0V-0.5H0V0V0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
+              <g
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
+              >
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
                 >
                 </path>
               </g>
             </g>
-            <g
-              text-anchor="start"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-points">
+                <g class="ez-line">
+                  <path
+                    d
+                    stroke="#339999"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    class="ez-line"
+                  >
+                  </path>
+                </g>
+              </g>
+              <g
+                text-anchor="start"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </path>
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>

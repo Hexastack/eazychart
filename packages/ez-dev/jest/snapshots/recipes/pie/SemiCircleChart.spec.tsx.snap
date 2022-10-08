@@ -13,37 +13,39 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,400)"
-              class="ez-pie"
-            >
-              <path
-                d="M-306.4177772475912,-257.11504387461576L0,0Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
+            <g class="ez-fragment-color-scale">
+              <g
+                transform="translate(300,400)"
+                class="ez-pie"
               >
-              </path>
-              <path
-                d="M400,0L0,0Z"
-                fill="blue"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M69.45927106677216,-393.9231012048832L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
+                <path
+                  d="M-306.4177772475912,-257.11504387461576L0,0Z"
+                  fill="red"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+                <path
+                  d="M400,0L0,0Z"
+                  fill="blue"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+                <path
+                  d="M69.45927106677216,-393.9231012048832L0,0Z"
+                  fill="green"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>
@@ -73,37 +75,39 @@ exports[`SemiCircleChart renders a semi-circle chart 2`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,400)"
-              class="ez-pie"
-            >
-              <path
-                d="M-306.4177772475912,-257.11504387461576A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
+            <g class="ez-fragment-color-scale">
+              <g
+                transform="translate(300,400)"
+                class="ez-pie"
               >
-              </path>
-              <path
-                d="M400,0A400,400,0,0,0,69.45927106677216,-393.9231012048832L0,0Z"
-                fill="blue"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M69.45927106677216,-393.9231012048832A400,400,0,0,0,-306.4177772475912,-257.11504387461576L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
+                <path
+                  d="M-306.4177772475912,-257.11504387461576A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
+                  fill="red"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+                <path
+                  d="M400,0A400,400,0,0,0,69.45927106677216,-393.9231012048832L0,0Z"
+                  fill="blue"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+                <path
+                  d="M69.45927106677216,-393.9231012048832A400,400,0,0,0,-306.4177772475912,-257.11504387461576L0,0Z"
+                  fill="green"
+                  stroke="#FFF"
+                  stroke-width="0"
+                  data-testid="ez-arc"
+                  class="ez-arc"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>

@@ -8,6 +8,7 @@ import React, {
 import { useChart } from '@/lib/use-chart';
 import { ScaleLinear } from 'eazychart-core/src';
 import { ScaleLinearDefinition } from 'eazychart-core/src/types';
+import { Fragment } from '@/lib/Fragment';
 
 const LinearScaleContext = createContext<{
   linearScale: ScaleLinear;
@@ -38,7 +39,9 @@ export const LinearScale: FC<ScaleLinearDefinition> = ({
 
   return (
     <LinearScaleContext.Provider value={{ linearScale }}>
-      {children}
+      <Fragment type="g" name="linear-scale">
+        {children}
+      </Fragment>
     </LinearScaleContext.Provider>
   );
 };

@@ -4,19 +4,20 @@ import { getDomainByKeys } from 'eazychart-core/src';
 
 export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
   // Setup a state for the domain keys to make them toggable
-  const [activeDomainKeys, setYDomainKeys] = useState<string[]>(domainKeys);
+  const [activeDomainKeys, setActiveDomainKeys] =
+    useState<string[]>(domainKeys);
   // Toggle Y axis domain keys whenever a legend key is clicked
   const toggleDomainKey = useCallback(
     (key: string, isActive: boolean, _color: string) => {
       if (isActive) {
-        setYDomainKeys([...activeDomainKeys, key]);
+        setActiveDomainKeys([...activeDomainKeys, key]);
       } else {
-        setYDomainKeys(
+        setActiveDomainKeys(
           activeDomainKeys.filter((domainKey) => domainKey !== key)
         );
       }
     },
-    [activeDomainKeys, setYDomainKeys]
+    [activeDomainKeys, setActiveDomainKeys]
   );
   // Re-scale the Y axis
   const activeDomain = useMemo(

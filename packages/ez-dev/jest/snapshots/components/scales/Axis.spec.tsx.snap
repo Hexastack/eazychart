@@ -1,115 +1,117 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Axis renders axis with four ticks 1`] = `
-<g
-  text-anchor="middle"
-  transform="translate(0, 600)"
-  class="ez-axis"
->
-  <path
-    d="M0.5,6V-6V-0.5H800.5V6V-6"
-    class="ez-axis-path"
-  >
-  </path>
+<g class="ez-fragment-cartesian-scale">
   <g
-    transform="translate(0.5, 0)"
-    class="ez-axis-tick"
+    text-anchor="middle"
+    transform="translate(0, 600)"
+    class="ez-axis"
   >
-    <line
-      x2="0"
-      y2="6"
-      class="ez-axis-tick-line"
+    <path
+      d="M0.5,6V-6V-0.5H800.5V6V-6"
+      class="ez-axis-path"
     >
-    </line>
-    <text
-      y="9"
-      dy="0.6em"
-      text-anchor="middle"
-      transform="translate(0, 0) rotate(0 0 0)"
-      class="ez-axis-tick-text"
+    </path>
+    <g
+      transform="translate(0.5, 0)"
+      class="ez-axis-tick"
     >
-      10
-    </text>
-  </g>
-  <g
-    transform="translate(200.5, 0)"
-    class="ez-axis-tick"
-  >
-    <line
-      x2="0"
-      y2="6"
-      class="ez-axis-tick-line"
+      <line
+        x2="0"
+        y2="6"
+        class="ez-axis-tick-line"
+      >
+      </line>
+      <text
+        y="9"
+        dy="0.6em"
+        text-anchor="middle"
+        transform="translate(0, 0) rotate(0 0 0)"
+        class="ez-axis-tick-text"
+      >
+        10
+      </text>
+    </g>
+    <g
+      transform="translate(200.5, 0)"
+      class="ez-axis-tick"
     >
-    </line>
-    <text
-      y="9"
-      dy="0.6em"
-      text-anchor="middle"
-      transform="translate(0, 0) rotate(0 0 0)"
-      class="ez-axis-tick-text"
+      <line
+        x2="0"
+        y2="6"
+        class="ez-axis-tick-line"
+      >
+      </line>
+      <text
+        y="9"
+        dy="0.6em"
+        text-anchor="middle"
+        transform="translate(0, 0) rotate(0 0 0)"
+        class="ez-axis-tick-text"
+      >
+        15
+      </text>
+    </g>
+    <g
+      transform="translate(400.5, 0)"
+      class="ez-axis-tick"
     >
-      15
-    </text>
-  </g>
-  <g
-    transform="translate(400.5, 0)"
-    class="ez-axis-tick"
-  >
-    <line
-      x2="0"
-      y2="6"
-      class="ez-axis-tick-line"
+      <line
+        x2="0"
+        y2="6"
+        class="ez-axis-tick-line"
+      >
+      </line>
+      <text
+        y="9"
+        dy="0.6em"
+        text-anchor="middle"
+        transform="translate(0, 0) rotate(0 0 0)"
+        class="ez-axis-tick-text"
+      >
+        20
+      </text>
+    </g>
+    <g
+      transform="translate(600.5, 0)"
+      class="ez-axis-tick"
     >
-    </line>
-    <text
-      y="9"
-      dy="0.6em"
-      text-anchor="middle"
-      transform="translate(0, 0) rotate(0 0 0)"
-      class="ez-axis-tick-text"
+      <line
+        x2="0"
+        y2="6"
+        class="ez-axis-tick-line"
+      >
+      </line>
+      <text
+        y="9"
+        dy="0.6em"
+        text-anchor="middle"
+        transform="translate(0, 0) rotate(0 0 0)"
+        class="ez-axis-tick-text"
+      >
+        25
+      </text>
+    </g>
+    <g
+      transform="translate(800.5, 0)"
+      class="ez-axis-tick"
     >
-      20
-    </text>
-  </g>
-  <g
-    transform="translate(600.5, 0)"
-    class="ez-axis-tick"
-  >
-    <line
-      x2="0"
-      y2="6"
-      class="ez-axis-tick-line"
-    >
-    </line>
-    <text
-      y="9"
-      dy="0.6em"
-      text-anchor="middle"
-      transform="translate(0, 0) rotate(0 0 0)"
-      class="ez-axis-tick-text"
-    >
-      25
-    </text>
-  </g>
-  <g
-    transform="translate(800.5, 0)"
-    class="ez-axis-tick"
-  >
-    <line
-      x2="0"
-      y2="6"
-      class="ez-axis-tick-line"
-    >
-    </line>
-    <text
-      y="9"
-      dy="0.6em"
-      text-anchor="middle"
-      transform="translate(0, 0) rotate(0 0 0)"
-      class="ez-axis-tick-text"
-    >
-      30
-    </text>
+      <line
+        x2="0"
+        y2="6"
+        class="ez-axis-tick-line"
+      >
+      </line>
+      <text
+        y="9"
+        dy="0.6em"
+        text-anchor="middle"
+        transform="translate(0, 0) rotate(0 0 0)"
+        class="ez-axis-tick-text"
+      >
+        30
+      </text>
+    </g>
   </g>
 </g>
 `;

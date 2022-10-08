@@ -13,37 +13,41 @@ exports[`IrregularPieChart renders a irregular pie chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,200)"
-              class="ez-irregular-arcs"
-            >
-              <path
-                d="M-114.8942378514243,-20.258954061141836L0,0Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M1.2246467991473532e-14,-200L0,0Z"
-                fill="blue"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M54.15318935989757,148.78466495776883L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
+            <g class="ez-fragment-linear-scale">
+              <g class="ez-fragment-color-scale">
+                <g
+                  transform="translate(300,200)"
+                  class="ez-irregular-arcs"
+                >
+                  <path
+                    d="M-114.8942378514243,-20.258954061141836L0,0Z"
+                    fill="red"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                  <path
+                    d="M1.2246467991473532e-14,-200L0,0Z"
+                    fill="blue"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                  <path
+                    d="M54.15318935989757,148.78466495776883L0,0Z"
+                    fill="green"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                </g>
+              </g>
             </g>
           </g>
         </svg>
@@ -73,37 +77,41 @@ exports[`IrregularPieChart renders a irregular pie chart 2`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g
-              transform="translate(300,200)"
-              class="ez-irregular-arcs"
-            >
-              <path
-                d="M-114.8942378514243,-20.258954061141836A116.66666666666667,116.66666666666667,0,0,1,-2.143131898507868e-14,-116.66666666666667L0,0Z"
-                fill="red"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M1.2246467991473532e-14,-200A200,200,0,0,1,68.40402866513377,187.93852415718166L0,0Z"
-                fill="blue"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
-              <path
-                d="M54.15318935989757,148.78466495776883A158.33333333333334,158.33333333333334,0,0,1,-155.92789422693298,-27.494294797263922L0,0Z"
-                fill="green"
-                stroke="#FFF"
-                stroke-width="0"
-                data-testid="ez-arc"
-                class="ez-arc"
-              >
-              </path>
+            <g class="ez-fragment-linear-scale">
+              <g class="ez-fragment-color-scale">
+                <g
+                  transform="translate(300,200)"
+                  class="ez-irregular-arcs"
+                >
+                  <path
+                    d="M-114.8942378514243,-20.258954061141836A116.66666666666667,116.66666666666667,0,0,1,-2.143131898507868e-14,-116.66666666666667L0,0Z"
+                    fill="red"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                  <path
+                    d="M1.2246467991473532e-14,-200A200,200,0,0,1,68.40402866513377,187.93852415718166L0,0Z"
+                    fill="blue"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                  <path
+                    d="M54.15318935989757,148.78466495776883A158.33333333333334,158.33333333333334,0,0,1,-155.92789422693298,-27.494294797263922L0,0Z"
+                    fill="green"
+                    stroke="#FFF"
+                    stroke-width="0"
+                    data-testid="ez-arc"
+                    class="ez-arc"
+                  >
+                  </path>
+                </g>
+              </g>
             </g>
           </g>
         </svg>

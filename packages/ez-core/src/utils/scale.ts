@@ -94,7 +94,8 @@ export const scaleRectangleData = (
       );
     });
   } else {
-    throw new Error('Bars requires two scale definitions : Linear and Band');
+    console.warn('Bars requires two scale definitions : Linear and Band');
+    return [];
   }
 };
 
@@ -186,7 +187,7 @@ export const scaleArcData = (
   if (!angleScale) {
     return [];
   }
-  
+
   const shapeData = data.map((datum, idx) => {
     const endAngle = scaleDatumValue(datum, valueDomainKey, angleScale);
     const color = scaleDatumValue(datum, labelDomainKey, colorScale);

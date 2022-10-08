@@ -5,9 +5,13 @@ import {
   NormalizedData,
   NormalizedDataDict,
   Point,
+  ScaleBandDefinition,
+  ScaleLinearDefinition,
   ShapeAttributes,
 } from '../types';
-import { ScaleBand, ScaleLinear, ScaleOrdinal  } from '../scales';
+import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
+
+export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
   top: number;
@@ -49,8 +53,8 @@ export type ArcDatum = ShapeAttributes &
   PieArcDatum<
     | number
     | {
-        valueOf(): number;
-      }
+      valueOf(): number;
+    }
   >;
 
 export interface ArcConfig {
@@ -79,6 +83,7 @@ export interface ChartContext {
   isRTL: boolean;
   registerScale: (scaleId: string, scale: AnyScale) => void,
   getScale: (scaleId: string) => AnyScale | null,
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
@@ -122,3 +127,17 @@ export type LineConfig = CurveConfig & {
 };
 
 export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;
+
+export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
+
+
+export type ScaleConfig =
+  | {
+    ScaleClass: Class<ScaleLinear>;
+    definition: ScaleLinearDefinition;
+  }
+  | {
+    ScaleClass: Class<ScaleBand>;
+    definition: ScaleBandDefinition;
+  };
+

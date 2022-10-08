@@ -13,59 +13,63 @@ exports[`BarChart renders a bar chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(150, 100)">
-            <g class="ez-bars">
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-fragment-color-scale">
+                <g class="ez-bars">
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="#1f77b4"
+                    x="0"
+                    y="0"
+                    width="0"
+                    height="0"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                </g>
+              </g>
+              <g
+                text-anchor="middle"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
+                <path
+                  d="M0,0V0V-0.5H0V0V0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
+              <g
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </rect>
-              <rect
-                fill="#1f77b4"
-                x="0"
-                y="0"
-                width="0"
-                height="0"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0V0V-0.5H0V0V0"
-                class="ez-axis-path"
-              >
-              </path>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
-              >
-              </path>
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>
@@ -95,338 +99,342 @@ exports[`BarChart renders a bar chart 2`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(150, 100)">
-            <g class="ez-bars">
-              <rect
-                fill="red"
-                x="0"
-                y="275"
-                width="0"
-                height="100.00000000000001"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-              <rect
-                fill="blue"
-                x="0"
-                y="150"
-                width="500"
-                height="100.00000000000001"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-              <rect
-                fill="green"
-                x="0"
-                y="25"
-                width="250"
-                height="100.00000000000001"
-                data-testid="ez-bar"
-                class="ez-bar"
-              >
-              </rect>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 400)"
-              class="ez-axis"
-            >
-              <path
-                d="M0.5,6V-6V-0.5H500.5V6V-6"
-                class="ez-axis-path"
-              >
-              </path>
-              <g
-                transform="translate(0.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  50
-                </text>
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-fragment-color-scale">
+                <g class="ez-bars">
+                  <rect
+                    fill="red"
+                    x="0"
+                    y="275"
+                    width="0"
+                    height="100.00000000000001"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="blue"
+                    x="0"
+                    y="150"
+                    width="500"
+                    height="100.00000000000001"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                  <rect
+                    fill="green"
+                    x="0"
+                    y="25"
+                    width="250"
+                    height="100.00000000000001"
+                    data-testid="ez-bar"
+                    class="ez-bar"
+                  >
+                  </rect>
+                </g>
               </g>
               <g
-                transform="translate(50.5, 0)"
-                class="ez-axis-tick"
+                text-anchor="middle"
+                transform="translate(0, 400)"
+                class="ez-axis"
               >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
+                <path
+                  d="M0.5,6V-6V-0.5H500.5V6V-6"
+                  class="ez-axis-path"
                 >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
+                </path>
+                <g
+                  transform="translate(0.5, 0)"
+                  class="ez-axis-tick"
                 >
-                  55
-                </text>
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    50
+                  </text>
+                </g>
+                <g
+                  transform="translate(50.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    55
+                  </text>
+                </g>
+                <g
+                  transform="translate(100.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    60
+                  </text>
+                </g>
+                <g
+                  transform="translate(150.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    65
+                  </text>
+                </g>
+                <g
+                  transform="translate(200.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    70
+                  </text>
+                </g>
+                <g
+                  transform="translate(250.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    75
+                  </text>
+                </g>
+                <g
+                  transform="translate(300.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    80
+                  </text>
+                </g>
+                <g
+                  transform="translate(350.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    85
+                  </text>
+                </g>
+                <g
+                  transform="translate(400.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    90
+                  </text>
+                </g>
+                <g
+                  transform="translate(450.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    95
+                  </text>
+                </g>
+                <g
+                  transform="translate(500.5, 0)"
+                  class="ez-axis-tick"
+                >
+                  <line
+                    x2="0"
+                    y2="6"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    y="9"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    100
+                  </text>
+                </g>
               </g>
               <g
-                transform="translate(100.5, 0)"
-                class="ez-axis-tick"
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
+                <path
+                  d="M6,400.5H-6H-0.5V0.5H6,-6"
+                  class="ez-axis-path"
                 >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
+                </path>
+                <g
+                  transform="translate(0, 325)"
+                  class="ez-axis-tick"
                 >
-                  60
-                </text>
-              </g>
-              <g
-                transform="translate(150.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
+                  <line
+                    x2="-6"
+                    y2="0"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    x="-9"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    Alpha
+                  </text>
+                </g>
+                <g
+                  transform="translate(0, 200)"
+                  class="ez-axis-tick"
                 >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
+                  <line
+                    x2="-6"
+                    y2="0"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    x="-9"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    Beta
+                  </text>
+                </g>
+                <g
+                  transform="translate(0, 75)"
+                  class="ez-axis-tick"
                 >
-                  65
-                </text>
-              </g>
-              <g
-                transform="translate(200.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  70
-                </text>
-              </g>
-              <g
-                transform="translate(250.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  75
-                </text>
-              </g>
-              <g
-                transform="translate(300.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  80
-                </text>
-              </g>
-              <g
-                transform="translate(350.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  85
-                </text>
-              </g>
-              <g
-                transform="translate(400.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  90
-                </text>
-              </g>
-              <g
-                transform="translate(450.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  95
-                </text>
-              </g>
-              <g
-                transform="translate(500.5, 0)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="0"
-                  y2="6"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  y="9"
-                  dy="0.6em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(0 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  100
-                </text>
-              </g>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M6,400.5H-6H-0.5V0.5H6,-6"
-                class="ez-axis-path"
-              >
-              </path>
-              <g
-                transform="translate(0, 325)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="-6"
-                  y2="0"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  x="-9"
-                  dy="0.3em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(-90 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  Alpha
-                </text>
-              </g>
-              <g
-                transform="translate(0, 200)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="-6"
-                  y2="0"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  x="-9"
-                  dy="0.3em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(-90 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  Beta
-                </text>
-              </g>
-              <g
-                transform="translate(0, 75)"
-                class="ez-axis-tick"
-              >
-                <line
-                  x2="-6"
-                  y2="0"
-                  class="ez-axis-tick-line"
-                >
-                </line>
-                <text
-                  x="-9"
-                  dy="0.3em"
-                  text-anchor="middle"
-                  transform="translate(0, 0) rotate(-90 0 0)"
-                  class="ez-axis-tick-text"
-                >
-                  Gamma
-                </text>
+                  <line
+                    x2="-6"
+                    y2="0"
+                    class="ez-axis-tick-line"
+                  >
+                  </line>
+                  <text
+                    x="-9"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    class="ez-axis-tick-text"
+                  >
+                    Gamma
+                  </text>
+                </g>
               </g>
             </g>
           </g>

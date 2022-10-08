@@ -13,74 +13,76 @@ exports[`LineChart renders a line chart 1`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g class="ez-points">
-              <g class="ez-segments">
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-points">
+                <g class="ez-segments">
+                  <path
+                    d
+                    stroke="red"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    class="ez-line"
+                  >
+                  </path>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                </g>
+              </g>
+              <g
+                text-anchor="middle"
+                transform="translate(0, 0)"
+                class="ez-axis"
+              >
                 <path
-                  d
-                  stroke="red"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
+                  d="M0,0V0V-0.5H0V0V0"
+                  class="ez-axis-path"
                 >
                 </path>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
               </g>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0V0V-0.5H0V0V0"
-                class="ez-axis-path"
+              <g
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </path>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
-              >
-              </path>
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>
@@ -108,74 +110,76 @@ exports[`LineChart renders a line chart 2`] = `
           style="width: 800px; height: 600px;"
         >
           <g transform="translate(100, 100)">
-            <g class="ez-points">
-              <g class="ez-segments">
+            <g class="ez-fragment-cartesian-scale">
+              <g class="ez-points">
+                <g class="ez-segments">
+                  <path
+                    d
+                    stroke="red"
+                    stroke-width="2"
+                    fill="none"
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    class="ez-line"
+                  >
+                  </path>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                  <circle
+                    stroke="red"
+                    fill="blue"
+                    r="2"
+                    cx="0"
+                    cy="0"
+                    stroke-width="2"
+                    data-testid="ez-point"
+                    class="ez-point"
+                  >
+                  </circle>
+                </g>
+              </g>
+              <g
+                text-anchor="middle"
+                transform="translate(0, 0)"
+                class="ez-axis"
+              >
                 <path
-                  d
-                  stroke="red"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                  class="ez-line"
+                  d="M0,0V0V-0.5H0V0V0"
+                  class="ez-axis-path"
                 >
                 </path>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
-                <circle
-                  stroke="red"
-                  fill="blue"
-                  r="2"
-                  cx="0"
-                  cy="0"
-                  stroke-width="2"
-                  data-testid="ez-point"
-                  class="ez-point"
-                >
-                </circle>
               </g>
-            </g>
-            <g
-              text-anchor="middle"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0V0V-0.5H0V0V0"
-                class="ez-axis-path"
+              <g
+                text-anchor="end"
+                transform="translate(0, 0)"
+                class="ez-axis"
               >
-              </path>
-            </g>
-            <g
-              text-anchor="end"
-              transform="translate(0, 0)"
-              class="ez-axis"
-            >
-              <path
-                d="M0,0H0H-0.5V0H0,0"
-                class="ez-axis-path"
-              >
-              </path>
+                <path
+                  d="M0,0H0H-0.5V0H0,0"
+                  class="ez-axis-path"
+                >
+                </path>
+              </g>
             </g>
           </g>
         </svg>

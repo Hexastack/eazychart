@@ -8,6 +8,7 @@ import React, {
 import { useChart } from '@/lib/use-chart';
 import { ScaleOrdinal } from 'eazychart-core/src';
 import { ScaleOrdinalDefinition } from 'eazychart-core/src/types';
+import { Fragment } from '@/lib/Fragment';
 
 const ColorScaleContext = createContext<{
   colorScale: ScaleOrdinal;
@@ -56,7 +57,9 @@ export const ColorScale: FC<ScaleOrdinalDefinition> = ({
 
   return (
     <ColorScaleContext.Provider value={{ colorScale }}>
-      {children}
+      <Fragment type="g" name="color-scale">
+        {children}
+      </Fragment>
     </ColorScaleContext.Provider>
   );
 };

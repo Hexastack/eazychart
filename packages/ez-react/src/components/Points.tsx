@@ -4,13 +4,14 @@ import {
   defaultPointRadius,
   scalePointData,
 } from 'eazychart-core/src';
-import { Dimensions, PointDatum } from 'eazychart-core/src/types';
+import {
+  Dimensions,
+  PointDatum,
+  ScaleLinearOrBand,
+} from 'eazychart-core/src/types';
 import { Point } from '@/components/shapes/Point';
 import { useChart } from '@/lib/use-chart';
-import {
-  ScaleLinearOrBand,
-  useCartesianScales,
-} from '@/components/scales/CartesianScale';
+import { useCartesianScales } from '@/components/scales/CartesianScale';
 
 export interface PointsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;

@@ -20,7 +20,11 @@ describe('Legend', () => {
         }}
         isWrapped={false}
       >
-        <ColorScale domainKey={'label'} range={colors}></ColorScale>
+        <ColorScale
+          domainKey={'label'}
+          range={colors}
+          isWrapped={false}
+        ></ColorScale>
       </Chart>
     );
     expect(wrapper.container.innerHTML).toMatchSnapshot();
@@ -38,7 +42,11 @@ describe('Legend', () => {
         }}
         isWrapped={false}
       >
-        <ColorScale domainKey={'label'} range={colors}></ColorScale>
+        <ColorScale
+          domainKey={'label'}
+          range={colors}
+          isWrapped={false}
+        ></ColorScale>
       </Chart>
     );
 
@@ -58,7 +66,11 @@ describe('Legend', () => {
         }}
         isWrapped={false}
       >
-        <ColorScale domainKey={'label'} range={colors}></ColorScale>
+        <ColorScale
+          domainKey={'label'}
+          range={colors}
+          isWrapped={false}
+        ></ColorScale>
       </Chart>
     );
 

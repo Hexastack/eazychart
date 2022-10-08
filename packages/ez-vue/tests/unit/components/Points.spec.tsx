@@ -1,12 +1,11 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import {
-  chartData,
   dimensions,
   verticalLinearScale,
-  scales,
   horizontalLinearScale,
   tooltip,
+  rawData,
 } from 'eazychart-core/src/sample-data';
 import Points from '@/components/Points';
 
@@ -14,23 +13,31 @@ describe('Points', () => {
   it('renders svg points with the right coordinates / path', async () => {
     const wrapper = render(Points, {
       propsData: {
-        xScale: horizontalLinearScale,
-        yScale: verticalLinearScale,
+        xDomainKey: horizontalLinearScale.definition.domainKey,
+        yDomainKey: verticalLinearScale.definition.domainKey,
         r: 6,
+        fill: 'red',
+        stroke: 'red',
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            activeData: chartData,
-            scales,
+            data: rawData,
             dimensions,
+            animationOptions: {
+              easing: 'easeLinear',
+              duration: 0,
+              delay: 0,
+            },
+          },
+          cartesianScale: {
+            xScale: horizontalLinearScale,
+            yScale: verticalLinearScale,
           },
         },
         tooltip,
       },
     });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     await Vue.nextTick();
 

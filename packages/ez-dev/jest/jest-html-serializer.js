@@ -11,7 +11,7 @@ module.exports = {
   },
   // ez-react
   serialize(val) {
-    return toDiffableHtml(val).trim();
+    return toDiffableHtml(val, { sortAttributes: (arr) => arr.sort() }).trim();
   },
   // ez-vue
   print(val) {

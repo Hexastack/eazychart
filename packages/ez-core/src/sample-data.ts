@@ -18,6 +18,7 @@ import {
 import  {
   ScaleLinear,
   ScaleBand,
+  ScaleOrdinal,
 } from '.';
 
 export const rawData: RawData = [
@@ -111,11 +112,16 @@ export const verticalLinearScale = new ScaleLinear(verticalLinearScaleDef);
 export const horizontalBandScale = new ScaleBand(horizontalBandScaleDef);
 export const horizontalLinearScale = new ScaleLinear(horizontalLinearScaleDef);
 export const radialLinearScale = new ScaleLinear(radialLinearScaleDef)
+export const colorScale = new ScaleOrdinal({
+  domainKey: 'label',
+  range: colors,
+});
 
 verticalLinearScale.computeScale(dimensions, chartData);
 horizontalBandScale.computeScale(dimensions, chartData);
 horizontalLinearScale.computeScale(dimensions, chartData);
-radialLinearScale.computeScale(dimensions, chartData)
+radialLinearScale.computeScale(dimensions, chartData);
+colorScale.computeScale(dimensions, chartData);
 
 export const scales: {[scaleName: string]: D3Scales} = {
   [verticalLinearScaleId]: verticalLinearScale.scale,
@@ -142,8 +148,9 @@ export const tooltip: TooltipContext = {
 export const datumA: RawDatum = {
   id: 'A',
   color: 'red',
-  xValue: 'A',
+  xValue: 0,
   yValue: 10,
+  zValue: 100,
 }
 
 export const pointA: PointDatum = {
@@ -157,8 +164,9 @@ export const pointA: PointDatum = {
 export const datumB: RawDatum = {
   id: 'B',
   color: 'blue',
-  xValue: 'B',
+  xValue: 10,
   yValue: 25,
+  zValue: 250,
 }
 
 export const pointB: PointDatum = {
@@ -172,8 +180,9 @@ export const pointB: PointDatum = {
 export const datumC: RawDatum = {
   id: 'C',
   color: 'yellow',
-  xValue: 'C',
+  xValue: 15,
   yValue: 30,
+  zValue: 300,
 }
 
 export const pointC: PointDatum = {

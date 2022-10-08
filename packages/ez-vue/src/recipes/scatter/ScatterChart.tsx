@@ -19,7 +19,7 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
-import 'eazychart-css/css/style.css';
+import CartesianScale from '@/components/scales/CartesianScale';
 
 @Component({
   components: {
@@ -32,14 +32,6 @@ import 'eazychart-css/css/style.css';
   },
 })
 export default class ScatterChart extends Vue {
-  @Prop({
-    type: Boolean,
-    default() {
-      return false;
-    },
-  })
-  private readonly swapAxis!: boolean;
-
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -129,39 +121,10 @@ export default class ScatterChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  get horizontalAxis() {
-    return this.swapAxis ? this.yAxis : this.xAxis;
-  }
-
-  get verticalAxis() {
-    return this.swapAxis ? this.xAxis : this.yAxis;
-  }
-
-  private xScale!: ScaleLinear;
-
-  private yScale!: ScaleLinear;
-
-  created() {
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.horizontalAxis.domainKey,
-      nice: this.horizontalAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.verticalAxis.domainKey,
-      nice: this.verticalAxis.nice || 0,
-    });
-  }
-
   render() {
     const {
-      xScale,
-      yScale,
-      horizontalAxis,
-      verticalAxis,
+      xAxis,
+      yAxis,
       data,
       padding,
       point,
@@ -176,35 +139,52 @@ export default class ScatterChart extends Vue {
       <Chart
         dimensions={dimensions}
         rawData={data}
-        scales={[xScale, yScale]}
         padding={padding}
-        colors={[point.color]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Points xScale={xScale} yScale={yScale} r={point.radius} />
-        <Axis
-          props={{
-            ...horizontalAxis,
-            aScale: xScale,
-            position: horizontalAxis.position || Position.BOTTOM,
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
+            },
           }}
-        />
-        <Axis
-          props={{
-            ...verticalAxis,
-            aScale: yScale,
-            position:
-              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+            },
           }}
-        />
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <Points
+            xDomainKey={xAxis.domainKey}
+            yDomainKey={yAxis.domainKey}
+            r={point.radius}
+            fill={point.color}
+            stroke={point.color}
+          />
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

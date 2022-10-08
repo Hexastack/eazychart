@@ -84,7 +84,7 @@ export class Animation<T extends Interpolables> {
 export const animate = <T extends Interpolables>(
   from: T,
   to: T,
-  options: AnimationOptions | undefined,
+  options: Partial<AnimationOptions> | undefined,
   onUpdate: (v: T) => void
 ) => {
   if (!options || (options.delay === 0 && options.duration === 0)) {

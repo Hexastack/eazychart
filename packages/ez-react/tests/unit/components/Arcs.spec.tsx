@@ -17,7 +17,6 @@ describe('Arcs', () => {
   it('renders svg radial with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
           {...baseChartProps}
@@ -28,17 +27,15 @@ describe('Arcs', () => {
             TooltipComponent: () => <>{null}</>,
           }}
         >
-          <LinearScale {...radialLinearScaleDef}>
-            <ColorScale domainKey={'label'} range={colors}>
+          <LinearScale {...radialLinearScaleDef} isWrapped={false}>
+            <ColorScale domainKey={'label'} range={colors} isWrapped={false}>
               <Arcs valueDomainKey={'amount'} labelDomainKey={'label'} />
             </ColorScale>
           </LinearScale>
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

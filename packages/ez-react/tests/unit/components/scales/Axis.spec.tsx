@@ -44,6 +44,7 @@ describe('Axis', () => {
             ScaleClass: ScaleLinear,
             definition: verticalLinearScaleDef,
           }}
+          isWrapped={false}
         >
           <Axis position={Position.BOTTOM} tickCount={4} />
         </CartesianScale>

@@ -1,12 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Legend renders filters for data supplied 1`] = `
-<g class="ez-fragment-color-scale">
-</g>
 <div class="ez-legend">
   <div
-    role="button"
     class="ez-legend-key"
+    role="button"
   >
     <div
       class="ez-legend-box"
@@ -18,8 +16,8 @@ exports[`Legend renders filters for data supplied 1`] = `
     </span>
   </div>
   <div
-    role="button"
     class="ez-legend-key"
+    role="button"
   >
     <div
       class="ez-legend-box"
@@ -31,8 +29,8 @@ exports[`Legend renders filters for data supplied 1`] = `
     </span>
   </div>
   <div
-    role="button"
     class="ez-legend-key"
+    role="button"
   >
     <div
       class="ez-legend-box"
@@ -47,8 +45,6 @@ exports[`Legend renders filters for data supplied 1`] = `
 `;
 
 exports[`Legend renders no filters for empty data 1`] = `
-<g class="ez-fragment-color-scale">
-</g>
 <div class="ez-legend">
 </div>
 `;

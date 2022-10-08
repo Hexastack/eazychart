@@ -8,7 +8,6 @@ describe('BubbleChart', () => {
   it('renders a bubble chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <BubbleChart
           data={rawData}
@@ -20,23 +19,21 @@ describe('BubbleChart', () => {
             maxRadius: 10,
             fill: 'blue',
           }}
-          animationOptions={{
-            easing: 'easeBack',
-            duration: 0,
-            delay: 0,
-          }}
           xAxis={{
             domainKey: 'value',
           }}
           yAxis={{
             domainKey: 'amount',
           }}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

@@ -1,5 +1,5 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   ChartPadding,
@@ -18,6 +18,9 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Bars from '@/components/Bars';
 import Grid from '@/components/scales/grid/Grid';
+import ToggleDatumMixin from '@/lib/ToggleDatumMixin';
+import ColorScale from '@/components/scales/ColorScale';
+import CartesianScale from '@/components/scales/CartesianScale';
 
 @Component({
   components: {
@@ -29,7 +32,7 @@ import Grid from '@/components/scales/grid/Grid';
     Tooltip,
   },
 })
-export default class ColumnChart extends Vue {
+export default class ColumnChart extends mixins(ToggleDatumMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -118,77 +121,86 @@ export default class ColumnChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  private xScale!: ScaleBand;
+  getData(): RawData {
+    return this.data;
+  }
 
-  private yScale!: ScaleLinear;
+  getColors(): string[] {
+    return this.colors;
+  }
 
-  created() {
-    this.xScale = new ScaleBand({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.xAxis.domainKey,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.yAxis.domainKey,
-      nice: this.yAxis.nice || 0,
-    });
+  getDomainKey(): string {
+    return this.xAxis.domainKey;
   }
 
   render() {
     const {
-      xScale,
-      yScale,
       xAxis,
       yAxis,
-      data,
       padding,
-      colors,
       animationOptions,
       grid,
       isRTL,
       $scopedSlots,
       dimensions,
+      activeData,
+      activeColors,
+      toggleDatum,
     } = this;
 
     const scopedSlots = {
-      Legend: $scopedSlots.Legend ? $scopedSlots.Legend : () => <Legend />,
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDatum }} />,
       Tooltip: $scopedSlots.Tooltip,
     };
 
     return (
       <Chart
         dimensions={dimensions}
-        rawData={data}
-        scales={[xScale, yScale]}
+        rawData={activeData}
         padding={padding}
-        colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Bars xScale={xScale} yScale={yScale} />
-        <Axis
-          props={{
-            ...xAxis,
-            aScale: xScale,
-            position: xAxis.position || Position.BOTTOM,
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleBand,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+            },
           }}
-        />
-        <Axis
-          props={{
-            ...yAxis,
-            aScale: yScale,
-            position:
-              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+            },
           }}
-        />
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <ColorScale
+            definition={{ domainKey: xAxis.domainKey, range: activeColors }}
+          >
+            <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+          </ColorScale>
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

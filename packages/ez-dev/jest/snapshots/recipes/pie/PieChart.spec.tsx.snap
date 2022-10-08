@@ -15,96 +15,34 @@ exports[`PieChart renders a pie chart 1`] = `
           <g transform="translate(100, 100)">
             <g class="ez-fragment-color-scale">
               <g
-                transform="translate(300,200)"
                 class="ez-pie"
+                transform="translate(300,200)"
               >
                 <path
-                  d="M-196.96155060244163,-34.729635533386L0,0Z"
-                  fill="red"
-                  stroke="#FFF"
-                  stroke-width="0"
-                  data-testid="ez-arc"
                   class="ez-arc"
-                >
-                </path>
-                <path
-                  d="M1.2246467991473532e-14,-200L0,0Z"
-                  fill="blue"
-                  stroke="#FFF"
-                  stroke-width="0"
-                  data-testid="ez-arc"
-                  class="ez-arc"
-                >
-                </path>
-                <path
-                  d="M68.40402866513377,187.93852415718166L0,0Z"
-                  fill="green"
-                  stroke="#FFF"
-                  stroke-width="0"
-                  data-testid="ez-arc"
-                  class="ez-arc"
-                >
-                </path>
-              </g>
-            </g>
-          </g>
-        </svg>
-      </div>
-      <div class="ez-legend">
-      </div>
-    </div>
-    <div
-      class="ez-tooltip"
-      style="left: 0px; top: 0px; opacity: 0;"
-    >
-    </div>
-  </div>
-</div>
-`;
-
-exports[`PieChart renders a pie chart 2`] = `
-<div
-  class="ez-viz"
-  style="width: 800px; height: 600px;"
->
-  <div class="ez-fragment-tooltip">
-    <div class="ez-fragment-filter">
-      <div class="ez-chart">
-        <svg
-          class="ez-svg"
-          style="width: 800px; height: 600px;"
-        >
-          <g transform="translate(100, 100)">
-            <g class="ez-fragment-color-scale">
-              <g
-                transform="translate(300,200)"
-                class="ez-pie"
-              >
-                <path
                   d="M-196.96155060244163,-34.729635533386A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
+                  data-testid="ez-arc"
                   fill="red"
                   stroke="#FFF"
                   stroke-width="0"
-                  data-testid="ez-arc"
-                  class="ez-arc"
                 >
                 </path>
                 <path
+                  class="ez-arc"
                   d="M1.2246467991473532e-14,-200A200,200,0,0,1,68.40402866513377,187.93852415718166L0,0Z"
+                  data-testid="ez-arc"
                   fill="blue"
                   stroke="#FFF"
                   stroke-width="0"
-                  data-testid="ez-arc"
-                  class="ez-arc"
                 >
                 </path>
                 <path
+                  class="ez-arc"
                   d="M68.40402866513377,187.93852415718166A200,200,0,0,1,-196.96155060244163,-34.729635533386L0,0Z"
+                  data-testid="ez-arc"
                   fill="green"
                   stroke="#FFF"
                   stroke-width="0"
-                  data-testid="ez-arc"
-                  class="ez-arc"
                 >
                 </path>
               </g>
@@ -114,8 +52,8 @@ exports[`PieChart renders a pie chart 2`] = `
       </div>
       <div class="ez-legend">
         <div
-          role="button"
           class="ez-legend-key"
+          role="button"
         >
           <div
             class="ez-legend-box"
@@ -127,8 +65,8 @@ exports[`PieChart renders a pie chart 2`] = `
           </span>
         </div>
         <div
-          role="button"
           class="ez-legend-key"
+          role="button"
         >
           <div
             class="ez-legend-box"
@@ -140,8 +78,8 @@ exports[`PieChart renders a pie chart 2`] = `
           </span>
         </div>
         <div
-          role="button"
           class="ez-legend-key"
+          role="button"
         >
           <div
             class="ez-legend-box"

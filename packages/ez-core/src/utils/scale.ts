@@ -1,6 +1,5 @@
-import { ScaleOrdinal } from 'eazychart-core/src';
 import { pie } from 'd3-shape';
-import { ScaleBand, ScaleLinear } from '../scales';
+import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
 import { ArrayOfTwoNumbers, Dimensions, NormalizedData, NormalizedDatum, NumberLike, RawData } from '../types';
 import { ArcDatum, PointDatum, RectangleDatum } from './types';
 

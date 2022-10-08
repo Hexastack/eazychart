@@ -38,7 +38,6 @@ describe('Point', () => {
   it('renders an svg circle with the right coordinates', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
           {...baseChartProps}
@@ -50,9 +49,7 @@ describe('Point', () => {
           <Point shapeDatum={pointA} />
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

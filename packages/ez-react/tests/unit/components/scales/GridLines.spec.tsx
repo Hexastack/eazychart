@@ -46,6 +46,7 @@ describe('GridLines', () => {
             ScaleClass: ScaleLinear,
             definition: verticalLinearScaleDef,
           }}
+          isWrapped={false}
         >
           <GridLines direction={Direction.HORIZONTAL} tickCount={4} />
         </CartesianScale>
@@ -72,6 +73,7 @@ describe('GridLines', () => {
             ScaleClass: ScaleLinear,
             definition: verticalLinearScaleDef,
           }}
+          isWrapped={false}
         >
           <GridLines direction={Direction.VERTICAL} tickCount={4} />
         </CartesianScale>

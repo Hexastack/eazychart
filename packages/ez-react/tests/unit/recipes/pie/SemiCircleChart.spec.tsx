@@ -8,25 +8,22 @@ describe('SemiCircleChart', () => {
   it('renders a semi-circle chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <SemiCircleChart
           data={rawData}
           valueDomainKey={'value'}
           labelDomainKey={'label'}
           colors={colors}
+          dimensions={dimensions}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,
             delay: 0,
           }}
-          dimensions={dimensions}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

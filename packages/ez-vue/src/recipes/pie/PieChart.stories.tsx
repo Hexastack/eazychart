@@ -67,7 +67,8 @@ export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
   colors,
-  domainKey: 'value',
+  valueDomainKey: 'value',
+  labelDomainKey: 'name',
   padding: {
     left: 150,
     bottom: 100,

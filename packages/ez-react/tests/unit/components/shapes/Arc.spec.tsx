@@ -38,7 +38,6 @@ describe('Arc', () => {
   it('renders an svg arc with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
           {...baseChartProps}
@@ -50,9 +49,7 @@ describe('Arc', () => {
           <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

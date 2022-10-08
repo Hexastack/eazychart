@@ -9,7 +9,6 @@ describe('BarChart', () => {
   it('renders a bar chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <BarChart
           data={rawData}
@@ -31,10 +30,8 @@ describe('BarChart', () => {
           }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

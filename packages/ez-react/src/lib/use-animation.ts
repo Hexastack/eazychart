@@ -8,7 +8,10 @@ export const useAnimation = <T extends Interpolables>(
   options: AnimationOptions = defaultChartAnimationOptions,
   deps: any[] = []
 ) => {
-  const [currentData, setCurrentData] = useState<T>(initialData);
+  const shouldAnimation = !options.delay && options.duration;
+  const [currentData, setCurrentData] = useState<T>(
+    shouldAnimation ? initialData : targetData
+  );
   const updateOnAnimate = useCallback(
     (v) => {
       if (v) {

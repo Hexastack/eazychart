@@ -23,7 +23,7 @@ import { LegendPropsWithRef } from '@/components/addons/legend/Legend';
 export type ChartProps = {
   padding?: Partial<ChartPadding>;
   dimensions?: Partial<Dimensions>;
-  animationOptions?: Partial<AnimationOptions>;
+  animationOptions?: AnimationOptions;
   rawData: RawData;
   scopedSlots?: {
     LegendComponent?: React.FC<LegendPropsWithRef>;
@@ -37,7 +37,7 @@ export type ChartProps = {
 export const Chart: FC<ChartProps> = ({
   dimensions,
   padding = {},
-  animationOptions,
+  animationOptions = defaultChartAnimationOptions,
   rawData,
   children,
   scopedSlots = { TooltipComponent: Tooltip },
@@ -114,12 +114,6 @@ export const Chart: FC<ChartProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [containerDimensions, legendRef.current]);
 
-  const chartAnimationOptions: AnimationOptions | undefined =
-    animationOptions && {
-      ...defaultChartAnimationOptions,
-      ...animationOptions,
-    };
-
   const computedTransform = useMemo(() => {
     return transformTranslate({ x: padding.left || 0, y: padding.top || 0 });
   }, [padding]);
@@ -152,7 +146,7 @@ export const Chart: FC<ChartProps> = ({
       value={{
         dimensions: chartDimensions,
         padding: chartPadding,
-        animationOptions: chartAnimationOptions,
+        animationOptions,
         data: chartData,
         dataDict,
         isRTL,

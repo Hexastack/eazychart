@@ -9,7 +9,6 @@ describe('LineColumnChart', () => {
   it('renders a line & column chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <LineColumnChart
           data={rawData}
@@ -28,12 +27,15 @@ describe('LineColumnChart', () => {
             domainKey: 'amount',
             position: Position.RIGHT,
           }}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

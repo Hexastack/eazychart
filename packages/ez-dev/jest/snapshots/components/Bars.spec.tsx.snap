@@ -1,79 +1,36 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Bars renders svg rects with the right coordinates / dimensions 1`] = `
-<g class="ez-fragment-cartesian-scale">
-  <g class="ez-fragment-color-scale">
-    <g class="ez-bars">
-      <rect
-        fill="#1f77b4"
-        x="0"
-        y="0"
-        width="0"
-        height="0"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-      <rect
-        fill="#1f77b4"
-        x="0"
-        y="0"
-        width="0"
-        height="0"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-      <rect
-        fill="#1f77b4"
-        x="0"
-        y="0"
-        width="0"
-        height="0"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-    </g>
-  </g>
-</g>
-`;
-
-exports[`Bars renders svg rects with the right coordinates / dimensions 2`] = `
-<g class="ez-fragment-cartesian-scale">
-  <g class="ez-fragment-color-scale">
-    <g class="ez-bars">
-      <rect
-        fill="red"
-        x="0"
-        y="500"
-        width="266.6666666666667"
-        height="100"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-      <rect
-        fill="blue"
-        x="266.6666666666667"
-        y="0"
-        width="266.6666666666667"
-        height="600"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-      <rect
-        fill="green"
-        x="533.3333333333334"
-        y="249.99999999999997"
-        width="266.6666666666667"
-        height="350"
-        data-testid="ez-bar"
-        class="ez-bar"
-      >
-      </rect>
-    </g>
-  </g>
+<g class="ez-bars">
+  <rect
+    class="ez-bar"
+    data-testid="ez-bar"
+    fill="red"
+    height="100"
+    width="266.6666666666667"
+    x="0"
+    y="500"
+  >
+  </rect>
+  <rect
+    class="ez-bar"
+    data-testid="ez-bar"
+    fill="blue"
+    height="600"
+    width="266.6666666666667"
+    x="266.6666666666667"
+    y="0"
+  >
+  </rect>
+  <rect
+    class="ez-bar"
+    data-testid="ez-bar"
+    fill="green"
+    height="350"
+    width="266.6666666666667"
+    x="533.3333333333334"
+    y="249.99999999999997"
+  >
+  </rect>
 </g>
 `;

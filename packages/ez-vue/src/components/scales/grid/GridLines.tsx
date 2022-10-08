@@ -7,15 +7,19 @@ import {
   getGrid,
   transformTranslate,
   animate,
-  ScaleBand,
-  ScaleLinear,
 } from 'eazychart-core/src';
 import {
-  ChartContext, Direction, AxisData, AxisTick,
+  ChartContext, Direction, AxisData, AxisTick, ScaleLinearOrBand,
 } from 'eazychart-core/src/types';
 
 @Component
 export default class GridLines extends Vue {
+  @InjectReactive('cartesianScale')
+  private cartesianScale!: {
+    xScale: ScaleLinearOrBand;
+    yScale: ScaleLinearOrBand;
+  };
+
   @InjectReactive('chart')
   private chart!: ChartContext;
 
@@ -26,12 +30,6 @@ export default class GridLines extends Vue {
     },
   })
   private readonly direction!: Direction;
-
-  @Prop({
-    type: Object as PropType<ScaleBand | ScaleLinear>,
-    required: true,
-  })
-  private readonly aScale!: ScaleBand | ScaleLinear;
 
   @Prop({
     type: Number,
@@ -61,29 +59,6 @@ export default class GridLines extends Vue {
 
   private cancelAnimation: Function | null = null;
 
-  updateCurrentGrid() {
-    this.cancelAnimation && this.cancelAnimation();
-    const axis = getGrid(
-      this.direction,
-      this.aScale.scale,
-      this.chart.dimensions,
-      {
-        tickCount: this.tickCount,
-        tickSize:
-          this.direction === Direction.HORIZONTAL
-            ? this.chart.dimensions.width
-            : this.chart.dimensions.height,
-        tickFormat: this.tickFormat,
-      },
-    );
-    this.cancelAnimation = animate(
-      this.currentGrid,
-      axis,
-      this.chart.animationOptions,
-      (v: AxisData) => (this.currentGrid = v),
-    );
-  }
-
   created() {
     this.updateCurrentGrid();
   }
@@ -96,6 +71,36 @@ export default class GridLines extends Vue {
   @Watch('direction')
   onPositionChange() {
     this.updateCurrentGrid();
+  }
+
+  updateCurrentGrid() {
+    const { dimensions, animationOptions } = this.chart;
+    this.cancelAnimation && this.cancelAnimation();
+    const axis = getGrid(
+      this.direction,
+      this.aScale.scale,
+      dimensions,
+      {
+        tickCount: this.tickCount,
+        tickSize:
+          this.direction === Direction.HORIZONTAL
+            ? dimensions.width
+            : dimensions.height,
+        tickFormat: this.tickFormat,
+      },
+    );
+    this.cancelAnimation = animate(
+      this.currentGrid,
+      axis,
+      animationOptions,
+      (v: AxisData) => (this.currentGrid = v),
+    );
+  }
+
+  get aScale() {
+    const { xScale, yScale } = this.cartesianScale;
+    const isHorizontal = this.direction === Direction.HORIZONTAL;
+    return isHorizontal ? xScale : yScale;
   }
 
   render() {

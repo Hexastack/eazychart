@@ -5,7 +5,6 @@ import {
   padding,
   animationOptions,
   rawData,
-  colors,
 } from 'eazychart-core/src/sample-data';
 import { Component, InjectReactive } from 'vue-property-decorator';
 import { ChartContext } from 'eazychart-core/src/types';
@@ -32,7 +31,6 @@ describe('Chart', () => {
         padding,
         animationOptions,
         rawData,
-        colors,
       },
       slots: {
         default: '<div>Default Slot</div>',
@@ -51,7 +49,6 @@ describe('Chart', () => {
         padding,
         animationOptions,
         rawData,
-        colors,
       },
       slots: {
         default: DataDump,

@@ -1,6 +1,8 @@
 import { Meta, Story } from '@storybook/vue';
 import LineChart from '@/recipes/line/LineChart';
 import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
+import MultiLineChart from '@/recipes/line/MultiLineChart';
+
 import {
   baseChartArgTypes,
   ChartWrapper,
@@ -41,13 +43,23 @@ const LineErrorMarginTemplate: Story = (_args, { argTypes }) => ({
   `,
 });
 
+const MultiLineTemplate: Story = (_args, { argTypes }) => ({
+  title: 'MultiLine',
+  components: { MultiLineChart, ChartWrapper },
+  props: Object.keys(argTypes),
+  template: `
+    <ChartWrapper>
+      <MultiLineChart v-bind="$props" />
+    </ChartWrapper>
+  `,
+});
+
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
-  swapAxis: false,
   line: {
     strokeWidth: 2,
     stroke: colors[1],
@@ -84,5 +96,16 @@ LineErrorMargin.args = {
   ...defaultArguments,
   area: {
     fill: `${colors[1]}b0`,
+  },
+};
+
+export const MultiLine = MultiLineTemplate.bind({});
+
+MultiLine.args = {
+  ...defaultArguments,
+  yAxis: {
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    title: 'Temperature',
+    tickFormat: (d: number) => `${d}°`,
   },
 };

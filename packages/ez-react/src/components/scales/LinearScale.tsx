@@ -20,28 +20,30 @@ export const useLinearScale = () => {
   return useContext(LinearScaleContext);
 };
 
-export const LinearScale: FC<ScaleLinearDefinition> = ({
-  children,
-  ...definition
-}) => {
-  const { data, dimensions } = useChart();
+export const LinearScale: FC<ScaleLinearDefinition & { isWrapped?: boolean }> =
+  ({ children, isWrapped = true, ...definition }) => {
+    const { data, dimensions } = useChart();
 
-  const linearScale = useMemo<ScaleLinear>(() => {
-    const scale = new ScaleLinear(definition);
-    scale.computeScale(dimensions, data);
-    return scale;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [definition]);
+    const linearScale = useMemo<ScaleLinear>(() => {
+      const scale = new ScaleLinear(definition);
+      scale.computeScale(dimensions, data);
+      return scale;
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [definition]);
 
-  useEffect(() => {
-    linearScale.computeScale(dimensions, data);
-  }, [dimensions, data, linearScale]);
+    useEffect(() => {
+      linearScale.computeScale(dimensions, data);
+    }, [dimensions, data, linearScale]);
 
-  return (
-    <LinearScaleContext.Provider value={{ linearScale }}>
-      <Fragment type="g" name="linear-scale">
-        {children}
-      </Fragment>
-    </LinearScaleContext.Provider>
-  );
-};
+    return (
+      <LinearScaleContext.Provider value={{ linearScale }}>
+        {isWrapped ? (
+          <Fragment type="g" name="linear-scale">
+            {children}
+          </Fragment>
+        ) : (
+          children
+        )}
+      </LinearScaleContext.Provider>
+    );
+  };

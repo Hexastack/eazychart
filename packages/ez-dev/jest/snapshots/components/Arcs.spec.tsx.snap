@@ -1,73 +1,33 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Arcs renders svg radial with the right coordinates / dimensions 1`] = `
-<g class="ez-fragment-linear-scale">
-  <g class="ez-fragment-color-scale">
-    <g
-      transform="translate(400,300)"
-      class="ez-arcs"
-    >
-      <path
-        d="M1.8369701987210297e-14,-300L1.2246467991473532e-14,-200Z"
-        fill="red"
-        stroke="red"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-      <path
-        d="M1.2246467991473532e-14,-200L6.123233995736766e-15,-100Z"
-        fill="blue"
-        stroke="blue"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-      <path
-        d="M6.123233995736766e-15,-100L0,0Z"
-        fill="green"
-        stroke="green"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-    </g>
-  </g>
-</g>
-`;
-
-exports[`Arcs renders svg radial with the right coordinates / dimensions 2`] = `
-<g class="ez-fragment-linear-scale">
-  <g class="ez-fragment-color-scale">
-    <g
-      transform="translate(400,300)"
-      class="ez-arcs"
-    >
-      <path
-        d="M1.8369701987210297e-14,-300A300,300,0,1,1,-1.8369701987210297e-14,300A300,300,0,1,1,1.8369701987210297e-14,-300M-3.6739403974420595e-14,-200A200,200,0,1,0,3.6739403974420595e-14,200A200,200,0,1,0,-3.6739403974420595e-14,-200Z"
-        fill="red"
-        stroke="red"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-      <path
-        d="M1.2246467991473532e-14,-200A200,200,0,1,1,1.2246467991473532e-14,200L6.123233995736766e-15,100A100,100,0,1,0,6.123233995736766e-15,-100Z"
-        fill="blue"
-        stroke="blue"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-      <path
-        d="M6.123233995736766e-15,-100A100,100,0,1,1,-6.123233995736766e-15,100A100,100,0,1,1,6.123233995736766e-15,-100Z"
-        fill="green"
-        stroke="green"
-        data-testid="ez-arc"
-        class="ez-arc"
-      >
-      </path>
-    </g>
-  </g>
+<g
+  class="ez-arcs"
+  transform="translate(400,300)"
+>
+  <path
+    class="ez-arc"
+    d="M1.8369701987210297e-14,-300A300,300,0,1,1,-1.8369701987210297e-14,300A300,300,0,1,1,1.8369701987210297e-14,-300M-3.6739403974420595e-14,-200A200,200,0,1,0,3.6739403974420595e-14,200A200,200,0,1,0,-3.6739403974420595e-14,-200Z"
+    data-testid="ez-arc"
+    fill="red"
+    stroke="red"
+  >
+  </path>
+  <path
+    class="ez-arc"
+    d="M1.2246467991473532e-14,-200A200,200,0,1,1,1.2246467991473532e-14,200L6.123233995736766e-15,100A100,100,0,1,0,6.123233995736766e-15,-100Z"
+    data-testid="ez-arc"
+    fill="blue"
+    stroke="blue"
+  >
+  </path>
+  <path
+    class="ez-arc"
+    d="M6.123233995736766e-15,-100A100,100,0,1,1,-6.123233995736766e-15,100A100,100,0,1,1,6.123233995736766e-15,-100Z"
+    data-testid="ez-arc"
+    fill="green"
+    stroke="green"
+  >
+  </path>
 </g>
 `;

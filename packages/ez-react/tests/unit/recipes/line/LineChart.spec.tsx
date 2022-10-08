@@ -8,7 +8,6 @@ describe('LineChart', () => {
   it('renders a line chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <LineChart
           data={pointsRawData}
@@ -23,12 +22,15 @@ describe('LineChart', () => {
           }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

@@ -17,7 +17,6 @@ describe('Points', () => {
   it('renders svg points with the right coordinates / path', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
           {...baseChartProps}
@@ -37,6 +36,7 @@ describe('Points', () => {
               ScaleClass: ScaleLinear,
               definition: verticalLinearScaleDef,
             }}
+            isWrapped={false}
           >
             <Points
               xDomainKey={'amount'}
@@ -48,10 +48,8 @@ describe('Points', () => {
           </CartesianScale>
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

@@ -1,117 +1,115 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Axis renders axis with four ticks 1`] = `
-<g class="ez-fragment-cartesian-scale">
-  <g
-    text-anchor="middle"
-    transform="translate(0, 600)"
-    class="ez-axis"
+<g
+  class="ez-axis"
+  text-anchor="middle"
+  transform="translate(0, 600)"
+>
+  <path
+    class="ez-axis-path"
+    d="M0.5,6V-6V-0.5H800.5V6V-6"
   >
-    <path
-      d="M0.5,6V-6V-0.5H800.5V6V-6"
-      class="ez-axis-path"
+  </path>
+  <g
+    class="ez-axis-tick"
+    transform="translate(0.5, 0)"
+  >
+    <line
+      class="ez-axis-tick-line"
+      x2="0"
+      y2="6"
     >
-    </path>
-    <g
-      transform="translate(0.5, 0)"
-      class="ez-axis-tick"
+    </line>
+    <text
+      class="ez-axis-tick-text"
+      dy="0.6em"
+      text-anchor="middle"
+      transform="translate(0, 0) rotate(0 0 0)"
+      y="9"
     >
-      <line
-        x2="0"
-        y2="6"
-        class="ez-axis-tick-line"
-      >
-      </line>
-      <text
-        y="9"
-        dy="0.6em"
-        text-anchor="middle"
-        transform="translate(0, 0) rotate(0 0 0)"
-        class="ez-axis-tick-text"
-      >
-        10
-      </text>
-    </g>
-    <g
-      transform="translate(200.5, 0)"
-      class="ez-axis-tick"
+      10
+    </text>
+  </g>
+  <g
+    class="ez-axis-tick"
+    transform="translate(200.5, 0)"
+  >
+    <line
+      class="ez-axis-tick-line"
+      x2="0"
+      y2="6"
     >
-      <line
-        x2="0"
-        y2="6"
-        class="ez-axis-tick-line"
-      >
-      </line>
-      <text
-        y="9"
-        dy="0.6em"
-        text-anchor="middle"
-        transform="translate(0, 0) rotate(0 0 0)"
-        class="ez-axis-tick-text"
-      >
-        15
-      </text>
-    </g>
-    <g
-      transform="translate(400.5, 0)"
-      class="ez-axis-tick"
+    </line>
+    <text
+      class="ez-axis-tick-text"
+      dy="0.6em"
+      text-anchor="middle"
+      transform="translate(0, 0) rotate(0 0 0)"
+      y="9"
     >
-      <line
-        x2="0"
-        y2="6"
-        class="ez-axis-tick-line"
-      >
-      </line>
-      <text
-        y="9"
-        dy="0.6em"
-        text-anchor="middle"
-        transform="translate(0, 0) rotate(0 0 0)"
-        class="ez-axis-tick-text"
-      >
-        20
-      </text>
-    </g>
-    <g
-      transform="translate(600.5, 0)"
-      class="ez-axis-tick"
+      15
+    </text>
+  </g>
+  <g
+    class="ez-axis-tick"
+    transform="translate(400.5, 0)"
+  >
+    <line
+      class="ez-axis-tick-line"
+      x2="0"
+      y2="6"
     >
-      <line
-        x2="0"
-        y2="6"
-        class="ez-axis-tick-line"
-      >
-      </line>
-      <text
-        y="9"
-        dy="0.6em"
-        text-anchor="middle"
-        transform="translate(0, 0) rotate(0 0 0)"
-        class="ez-axis-tick-text"
-      >
-        25
-      </text>
-    </g>
-    <g
-      transform="translate(800.5, 0)"
-      class="ez-axis-tick"
+    </line>
+    <text
+      class="ez-axis-tick-text"
+      dy="0.6em"
+      text-anchor="middle"
+      transform="translate(0, 0) rotate(0 0 0)"
+      y="9"
     >
-      <line
-        x2="0"
-        y2="6"
-        class="ez-axis-tick-line"
-      >
-      </line>
-      <text
-        y="9"
-        dy="0.6em"
-        text-anchor="middle"
-        transform="translate(0, 0) rotate(0 0 0)"
-        class="ez-axis-tick-text"
-      >
-        30
-      </text>
-    </g>
+      20
+    </text>
+  </g>
+  <g
+    class="ez-axis-tick"
+    transform="translate(600.5, 0)"
+  >
+    <line
+      class="ez-axis-tick-line"
+      x2="0"
+      y2="6"
+    >
+    </line>
+    <text
+      class="ez-axis-tick-text"
+      dy="0.6em"
+      text-anchor="middle"
+      transform="translate(0, 0) rotate(0 0 0)"
+      y="9"
+    >
+      25
+    </text>
+  </g>
+  <g
+    class="ez-axis-tick"
+    transform="translate(800.5, 0)"
+  >
+    <line
+      class="ez-axis-tick-line"
+      x2="0"
+      y2="6"
+    >
+    </line>
+    <text
+      class="ez-axis-tick-text"
+      dy="0.6em"
+      text-anchor="middle"
+      transform="translate(0, 0) rotate(0 0 0)"
+      y="9"
+    >
+      30
+    </text>
   </g>
 </g>
 `;

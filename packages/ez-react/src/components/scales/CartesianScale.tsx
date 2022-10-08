@@ -19,11 +19,13 @@ export const useCartesianScales = () => {
 export type CartesianScaleProps = {
   xScaleConfig: ScaleConfig;
   yScaleConfig: ScaleConfig;
+  isWrapped?: boolean;
 };
 
 export const CartesianScale: FC<CartesianScaleProps> = ({
   xScaleConfig,
   yScaleConfig,
+  isWrapped = true,
   children,
 }) => {
   const { data, dimensions } = useChart();
@@ -44,9 +46,13 @@ export const CartesianScale: FC<CartesianScaleProps> = ({
 
   return (
     <CartesianScaleContext.Provider value={{ xScale, yScale }}>
-      <Fragment type="g" name="cartesian-scale">
-        {children}
-      </Fragment>
+      {isWrapped ? (
+        <Fragment type="g" name="cartesian-scale">
+          {children}
+        </Fragment>
+      ) : (
+        children
+      )}
     </CartesianScaleContext.Provider>
   );
 };

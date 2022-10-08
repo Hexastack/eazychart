@@ -1,29 +1,32 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   ChartPadding,
-  Direction,
   RawData,
   RadialConfig,
   Dimensions,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Arcs from '@/components/Arcs';
+import ToggleDatumMixin from '@/lib/ToggleDatumMixin';
+import LinearScale from '@/components/scales/LinearScale';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
     Chart,
     Arcs,
+    LinearScale,
+    ColorScale,
     Legend,
     Tooltip,
   },
 })
-export default class RadialChart extends Vue {
+export default class RadialChart extends mixins(ToggleDatumMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -75,7 +78,13 @@ export default class RadialChart extends Vue {
     type: String,
     default: 'value',
   })
-  private readonly domainKey!: string;
+  private readonly valueDomainKey!: string;
+
+  @Prop({
+    type: String,
+    default: 'name',
+  })
+  private readonly labelDomainKey!: string;
 
   @Prop({
     type: Object as PropType<RadialConfig>,
@@ -91,50 +100,62 @@ export default class RadialChart extends Vue {
   })
   private readonly arc!: RadialConfig;
 
-  private scale!: ScaleLinear;
+  getData(): RawData {
+    return this.data;
+  }
 
-  created() {
-    this.scale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.domainKey,
-      range: [0, 2 * Math.PI],
-    });
+  getColors(): string[] {
+    return this.colors;
+  }
+
+  getDomainKey(): string {
+    return this.labelDomainKey;
   }
 
   render() {
     const {
-      scale,
-      data,
+      valueDomainKey,
+      labelDomainKey,
       padding,
-      colors,
       animationOptions,
       arc,
       $scopedSlots,
       dimensions,
+      activeData,
+      activeColors,
+      toggleDatum,
     } = this;
 
     const scopedSlots = {
-      Legend: $scopedSlots.Legend ? $scopedSlots.Legend : () => <Legend />,
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDatum }} />,
       Tooltip: $scopedSlots.Tooltip,
     };
 
     return (
       <Chart
         dimensions={dimensions}
-        rawData={data}
-        scales={[scale]}
+        rawData={activeData}
         padding={padding}
-        colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
       >
-        <Arcs
-          arcScale={scale}
-          cornerRadius={arc.cornerRadius}
-          stroke={arc.stroke}
-          strokeWidth={arc.strokeWidth}
-          spacing={arc.spacing}
-        />
+        <LinearScale
+          definition={{ domainKey: valueDomainKey, range: [0, Math.PI * 2] }}
+        >
+          <ColorScale
+            definition={{ domainKey: labelDomainKey, range: activeColors }}
+          >
+            <Arcs
+              props={{
+                valueDomainKey,
+                labelDomainKey,
+                ...arc,
+              }}
+            />
+          </ColorScale>
+        </LinearScale>
       </Chart>
     );
   }

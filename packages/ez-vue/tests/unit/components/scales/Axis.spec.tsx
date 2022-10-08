@@ -2,9 +2,9 @@ import { render } from '@testing-library/vue';
 import { Position } from 'eazychart-core/src/types';
 import {
   dimensions,
-  scales,
   horizontalLinearScale,
   padding,
+  verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
 import Axis from '@/components/scales/Axis';
 
@@ -16,15 +16,17 @@ describe('Axis', () => {
     const wrapper = render(Axis, {
       propsData: {
         position: Position.BOTTOM,
-        aScale: horizontalLinearScale,
         tickCount: 4,
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            scales,
             dimensions,
             padding,
+          },
+          cartesianScale: {
+            xScale: horizontalLinearScale,
+            yScale: verticalLinearScale,
           },
         },
       },

@@ -8,7 +8,6 @@ describe('AreaChart', () => {
   it('renders an area chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <AreaChart
           data={pointsRawData}
@@ -24,12 +23,14 @@ describe('AreaChart', () => {
           }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

@@ -270,9 +270,11 @@ export default class LineColumnChart extends Vue {
           }}
         />
         <Axis
-          {...xAxis}
-          aScale={xColumnScale}
-          position={xAxis.position || Position.BOTTOM}
+          props={{
+            ...xAxis,
+            aScale: xColumnScale,
+            position: xAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
           props={{

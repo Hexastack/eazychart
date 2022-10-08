@@ -242,12 +242,12 @@ export default class LineErrorMarginChart extends Vue {
                   return {
                     x: d.x,
                     y0: yScale.scale(
-                      (datum[yAxis.domainKey] as number) *
-                        (1 - Number(datum[errorMargins.negative])),
+                      (datum[yAxis.domainKey] as number)
+                        * (1 - Number(datum[errorMargins.negative])),
                     ),
                     y1: yScale.scale(
-                      (datum[yAxis.domainKey] as number) *
-                        (1 + Number(datum[errorMargins.positive])),
+                      (datum[yAxis.domainKey] as number)
+                        * (1 + Number(datum[errorMargins.positive])),
                     ),
                   };
                 });
@@ -267,8 +267,8 @@ export default class LineErrorMarginChart extends Vue {
                       stroke={line.stroke}
                       strokeWidth={line.strokeWidth}
                     />
-                    {!marker.hidden &&
-                      shapeData.map((pointDatum) => (
+                    {!marker.hidden
+                      && shapeData.map((pointDatum) => (
                         <Point
                           key={pointDatum.id}
                           shapeDatum={pointDatum}

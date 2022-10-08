@@ -105,7 +105,9 @@ export default class Tooltip extends mixins(AnimationMixin) {
   render() {
     const { animatedStyle, datum, shapeDatum } = this;
 
-    const { id: _id, color: _color, label: _label, ...attributes } = datum || { color: undefined };
+    const {
+      id: _id, color: _color, label: _label, ...attributes
+    } = datum || { color: undefined };
 
     return datum ? (
       <div class="ez-tooltip" style={animatedStyle}>

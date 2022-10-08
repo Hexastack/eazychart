@@ -13,7 +13,8 @@ type ComputedScale = ScaleBand | ScaleLinear;
 
 export const scaleDatumValue = (
   datum: NormalizedDatum,
-  computedScale: ComputedScale
+  computedScale: ComputedScale,
+  scaledValueDiff?: number
 ): ScaledDatumValue => {
   if (computedScale instanceof ScaleLinear) {
     let value = 0;
@@ -52,7 +53,7 @@ export const scaleDatumValue = (
       }
     }
     return {
-      scaledValue: computedScale.scale(value) || 0,
+      scaledValue:  (computedScale.scale(value) || 0) + (scaledValueDiff || 0),
       value,
     };
   } else {
@@ -134,9 +135,14 @@ export const scalePointDatum = (
   xScale: ComputedScale,
   yScale: ComputedScale,
   _dimensions: Dimensions,
-  _isRTL: boolean
+  _isRTL: boolean,
+  xScaledPointDiff?: number
 ): PointDatum => {
-  const { scaledValue: x, value: xValue } = scaleDatumValue(datum, xScale);
+  const { scaledValue: x, value: xValue } = scaleDatumValue(
+    datum,
+    xScale,
+    xScaledPointDiff
+  );
   const { scaledValue: y, value: yValue } = scaleDatumValue(datum, yScale);
   return {
     id: datum.id,
@@ -153,10 +159,11 @@ export const scalePointData = (
   xScale: ComputedScale,
   yScale: ComputedScale,
   dimensions: Dimensions,
-  isRTL: boolean
+  isRTL: boolean,
+  xScaledPointDiff?: number
 ): PointDatum[] => {
   return data.map(datum => {
-    return scalePointDatum(datum, xScale, yScale, dimensions, isRTL);
+    return scalePointDatum(datum, xScale, yScale, dimensions, isRTL, xScaledPointDiff);
   });
 };
 
@@ -171,7 +178,7 @@ export const scaleBubbleData = (
   return data.map(datum => {
     const v =
       typeof rScale.definition.domainKey === 'string' &&
-      rScale.definition.domainKey in datum
+        rScale.definition.domainKey in datum
         ? datum[rScale.definition.domainKey]
         : 0;
     return {

@@ -185,9 +185,6 @@ export default class LineColumnChart extends Vue {
     this.xLineScale = new ScaleBand({
       direction: Direction.HORIZONTAL,
       domainKey: this.xAxis.domainKey,
-      innerPadding: 0.5,
-      outerPadding: 0.1,
-      align: 1,
     });
 
     this.yLineScale = new ScaleLinear({
@@ -245,6 +242,7 @@ export default class LineColumnChart extends Vue {
           yScale={yColumnScale}
         />
         <Points
+          xColumnScale={xColumnScale}
           xScale={xLineScale}
           yScale={yLineScale}
           scopedSlots={{

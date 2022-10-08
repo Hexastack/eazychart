@@ -26,12 +26,20 @@ export default class Points extends Vue {
   private readonly yScale!: ScaleLinear | ScaleBand;
 
   @Prop({
+    type: Object as PropType<ScaleBand>,
+  })
+  private readonly xColumnScale!: ScaleBand;
+
+  @Prop({
     type: Number,
     default: defaultPointRadius,
   })
   private readonly r!: number;
 
   get scaledData() {
+    const xColumnScaleWidth = this.xColumnScale?.scale?.bandwidth() || 0;
+    const xScaledPointDiff = xColumnScaleWidth / 2;
+
     if (!this.xScale || !this.yScale) {
       return [];
     }
@@ -41,6 +49,7 @@ export default class Points extends Vue {
       this.yScale,
       this.chart.dimensions,
       this.chart.isRTL,
+      xScaledPointDiff,
     );
   }
 

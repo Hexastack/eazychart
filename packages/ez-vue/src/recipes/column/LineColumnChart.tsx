@@ -275,16 +275,20 @@ export default class LineColumnChart extends Vue {
           position={xAxis.position || Position.BOTTOM}
         />
         <Axis
-          {...yAxis}
-          aScale={yColumnScale}
-          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+          props={{
+            ...yAxis,
+            aScale: yColumnScale,
+            position:
+              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
         <Axis
-          {...yLineAxis}
-          aScale={yLineScale}
-          position={
-            yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT)
-          }
+          props={{
+            ...yLineAxis,
+            aScale: yLineScale,
+            position:
+              yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT),
+          }}
         />
       </Chart>
     );

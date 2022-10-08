@@ -177,14 +177,19 @@ export default class BarChart extends Vue {
         />
         <Bars xScale={xScale} yScale={yScale} />
         <Axis
-          {...xAxis}
-          aScale={xScale}
-          position={xAxis.position || Position.BOTTOM}
+          props={{
+            ...xAxis,
+            aScale: xScale,
+            position: xAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          {...yAxis}
-          aScale={yScale}
-          position={yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)}
+          props={{
+            ...yAxis,
+            aScale: yScale,
+            position:
+              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

@@ -205,16 +205,19 @@ export default class BubbleChart extends Vue {
         />
         <Bubbles xScale={xScale} yScale={yScale} rScale={rScale} />
         <Axis
-          {...horizontalAxis}
-          aScale={xScale}
-          position={horizontalAxis.position || Position.BOTTOM}
+          props={{
+            ...horizontalAxis,
+            aScale: xScale,
+            position: horizontalAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          {...verticalAxis}
-          aScale={yScale}
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          props={{
+            ...verticalAxis,
+            aScale: yScale,
+            position:
+              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

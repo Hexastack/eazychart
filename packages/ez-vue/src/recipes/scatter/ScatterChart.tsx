@@ -191,16 +191,19 @@ export default class ScatterChart extends Vue {
         />
         <Points xScale={xScale} yScale={yScale} r={point.radius} />
         <Axis
-          {...horizontalAxis}
-          aScale={xScale}
-          position={horizontalAxis.position || Position.BOTTOM}
+          props={{
+            ...horizontalAxis,
+            aScale: xScale,
+            position: horizontalAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          {...verticalAxis}
-          aScale={yScale}
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          props={{
+            ...verticalAxis,
+            aScale: yScale,
+            position:
+              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

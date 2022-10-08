@@ -236,16 +236,19 @@ export default class LineChart extends Vue {
           }}
         />
         <Axis
-          {...horizontalAxis}
-          aScale={xScale}
-          position={horizontalAxis.position || Position.BOTTOM}
+          props={{
+            ...horizontalAxis,
+            aScale: xScale,
+            position: horizontalAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          {...verticalAxis}
-          aScale={yScale}
-          position={
-            verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
+          props={{
+            ...verticalAxis,
+            aScale: yScale,
+            position:
+              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

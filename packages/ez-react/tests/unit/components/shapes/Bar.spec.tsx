@@ -38,23 +38,18 @@ describe('Bar', () => {
   it('renders an svg rect with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <Bar shapeDatum={rectData} />
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
@@ -63,12 +58,10 @@ describe('Bar', () => {
   it('show/hide the tooltip on mouse over/out', async () => {
     const wrapper = render(
       <Chart
-        {...{
-          ...baseChartProps,
-          scopedSlots: {
-            LegendComponent: () => <>{null}</>,
-            Tooltip: () => <>{null}</>,
-          },
+        {...baseChartProps}
+        scopedSlots={{
+          LegendComponent: () => <>{null}</>,
+          TooltipComponent: () => <>{null}</>,
         }}
       >
         <Bar shapeDatum={rectData} />

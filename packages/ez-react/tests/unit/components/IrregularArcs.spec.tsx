@@ -1,45 +1,49 @@
 import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
-import { IrregularArcs } from '@/components/IrregularArcs';
-import { Chart } from '@/components/Chart';
 import {
   dimensions,
-  scaleDefinitions,
-  verticalLinearScale,
-  chartData,
+  verticalLinearScaleDef,
+  colors,
+  rawData,
 } from 'eazychart-core/src/sample-data';
+import { IrregularArcs } from '@/components/IrregularArcs';
+import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { LinearScale } from '@/components/scales/LinearScale';
+import { ColorScale } from '@/components/scales/ColorScale';
 
 describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            rawData: chartData.map((d) => ({ ...d, isActive: true })),
-            scaleDefinitions,
-            dimensions,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          rawData={rawData}
+          dimensions={dimensions}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
-          <IrregularArcs
-            aScale={verticalLinearScale}
-            rScale={verticalLinearScale}
-            donutRadius={0}
-          />
+          <LinearScale
+            domainKey={'value'}
+            {...verticalLinearScaleDef}
+            isWrapped={false}
+          >
+            <ColorScale domainKey={'label'} range={colors} isWrapped={false}>
+              <IrregularArcs
+                valueDomainKey={'value'}
+                labelDomainKey={'label'}
+                donutRadius={0}
+              />
+            </ColorScale>
+          </LinearScale>
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

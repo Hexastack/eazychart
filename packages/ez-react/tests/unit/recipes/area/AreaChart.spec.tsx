@@ -1,24 +1,21 @@
 import React from 'react';
-import { dimensions, pointsData } from 'eazychart-core/src/sample-data';
+import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
 import { AreaChart } from '@/recipes/area/AreaChart';
-import { RawData } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
 describe('AreaChart', () => {
   it('renders an area chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <AreaChart
-          data={pointsData as unknown as RawData}
+          data={pointsRawData}
           area={{
             stroke: 'red',
             strokeWidth: 2,
             fill: 'orange',
           }}
-          color={'red'}
           marker={{
             hidden: false,
             color: 'red',
@@ -26,12 +23,14 @@ describe('AreaChart', () => {
           }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          animationOptions={{
+            easing: 'easeBack',
+            duration: 0,
+            delay: 0,
+          }}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

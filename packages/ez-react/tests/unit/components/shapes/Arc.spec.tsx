@@ -38,23 +38,18 @@ describe('Arc', () => {
   it('renders an svg arc with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <Chart
-          {...{
-            ...baseChartProps,
-            scopedSlots: {
-              LegendComponent: () => <>{null}</>,
-              Tooltip: () => <>{null}</>,
-            },
+          {...baseChartProps}
+          scopedSlots={{
+            LegendComponent: () => <>{null}</>,
+            TooltipComponent: () => <>{null}</>,
           }}
         >
           <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
         </Chart>
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
@@ -63,12 +58,10 @@ describe('Arc', () => {
   it('show/hide the tooltip on mouse over/out', async () => {
     const wrapper = render(
       <Chart
-        {...{
-          ...baseChartProps,
-          scopedSlots: {
-            LegendComponent: () => <>{null}</>,
-            Tooltip: () => <>{null}</>,
-          },
+        {...baseChartProps}
+        scopedSlots={{
+          LegendComponent: () => <>{null}</>,
+          TooltipComponent: () => <>{null}</>,
         }}
       >
         <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />

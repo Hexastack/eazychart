@@ -3,74 +3,36 @@
 exports[`Points renders svg points with the right coordinates / path 1`] = `
 <g class="ez-points">
   <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
-    r="6"
-    cx="0"
-    cy="0"
-    stroke-width="1"
-    data-testid="ez-point"
     class="ez-point"
-  >
-  </circle>
-  <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
-    r="6"
-    cx="0"
-    cy="0"
-    stroke-width="1"
-    data-testid="ez-point"
-    class="ez-point"
-  >
-  </circle>
-  <circle
-    stroke="#1f77b4"
-    fill="#1f77b4"
-    r="6"
-    cx="0"
-    cy="0"
-    stroke-width="1"
-    data-testid="ez-point"
-    class="ez-point"
-  >
-  </circle>
-</g>
-`;
-
-exports[`Points renders svg points with the right coordinates / path 2`] = `
-<g class="ez-points">
-  <circle
-    stroke="red"
-    fill="red"
-    r="6"
     cx="0"
     cy="500"
-    stroke-width="1"
     data-testid="ez-point"
-    class="ez-point"
+    fill="red"
+    r="6"
+    stroke="red"
+    stroke-width="1"
   >
   </circle>
   <circle
-    stroke="blue"
-    fill="blue"
-    r="6"
+    class="ez-point"
     cx="400"
     cy="0"
-    stroke-width="1"
     data-testid="ez-point"
-    class="ez-point"
+    fill="red"
+    r="6"
+    stroke="red"
+    stroke-width="1"
   >
   </circle>
   <circle
-    stroke="green"
-    fill="green"
-    r="6"
+    class="ez-point"
     cx="800"
     cy="249.99999999999997"
-    stroke-width="1"
     data-testid="ez-point"
-    class="ez-point"
+    fill="red"
+    r="6"
+    stroke="red"
+    stroke-width="1"
   >
   </circle>
 </g>

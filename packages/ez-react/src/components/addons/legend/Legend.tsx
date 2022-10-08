@@ -1,43 +1,74 @@
-import React, { DOMAttributes } from 'react';
-import { NormalizedData, NormalizedDatum } from 'eazychart-core/src/types';
-import { computedLegendBoxStyle } from 'eazychart-core/src';
+import React, { DOMAttributes, useEffect, useRef, useState } from 'react';
+import { useChart } from '@/lib/use-chart';
+import { LegendItem } from '@/components/addons/legend/LegendItem';
+import { debounce } from 'eazychart-core/src';
 
 export interface LegendProps extends DOMAttributes<HTMLDivElement> {
-  data: NormalizedData;
-  toggleDatum: (datum: NormalizedDatum, newState: boolean, idx: number) => void;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
+  onResize?: ({ width, height }: { width: number; height: number }) => void;
 }
 
-export type LegendPropsWithRef = LegendProps &
-  React.RefAttributes<HTMLDivElement>;
+export const Legend: React.FC<LegendProps> = ({
+  onLegendClick,
+  onResize,
+  ...rest
+}) => {
+  const { getScale } = useChart();
+  const colorScale = getScale('colorScale');
+  const [keyDict, setKeyDict] = useState<{
+    [key: string]: string;
+  }>({});
+  const ref = useRef<HTMLDivElement>(null);
 
-export const Legend: React.FC<LegendPropsWithRef> = React.forwardRef<
-  HTMLDivElement,
-  LegendProps
->(({ data, toggleDatum, ...rest }, ref) => {
-  const handleLegendClick = (d: NormalizedDatum, idx: number) => {
-    toggleDatum(d, !d.isActive, idx);
+  useEffect(() => {
+    if (colorScale) {
+      const dict = colorScale.scale.domain().reduce((map, domainKey) => {
+        return {
+          ...map,
+          [domainKey]: colorScale.scale(domainKey),
+        };
+      }, {});
+      setKeyDict(dict);
+    }
+  }, [colorScale]);
+
+  const handleResize: Function = (entries: ResizeObserverEntry[]) => {
+    entries.forEach((entry) => {
+      const newDimensions = {
+        width: Math.floor(entry.contentRect.width),
+        height: Math.floor(entry.contentRect.height),
+      };
+      onResize && onResize(newDimensions);
+    });
   };
+
+  // Else, observe chart parent width & height
+  useEffect(() => {
+    // Dimensions values has not been set, we need to observe and resize
+    const observer = new ResizeObserver((entries) => {
+      debounce(handleResize(entries), 100);
+    });
+    observer.observe(ref?.current as Element, {
+      box: 'border-box',
+    });
+    return () => {
+      observer.disconnect();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="ez-legend" {...rest} ref={ref}>
-      {data?.map((d: NormalizedDatum, idx: number) => {
+      {Object.entries(keyDict).map(([key, color]) => {
         return (
-          <div
-            key={d.id}
-            onClick={() => handleLegendClick(d, idx)}
-            role="button"
-            className={`ez-legend-key${
-              !d.isActive ? ' ez-legend-disable' : ''
-            }`}
-          >
-            <div
-              className="ez-legend-box"
-              style={computedLegendBoxStyle(d)}
-            ></div>
-            <span className="ez-legend-text">{d.label}</span>
-          </div>
+          <LegendItem
+            key={key}
+            onToggle={onLegendClick}
+            label={key}
+            color={color}
+          />
         );
       })}
     </div>
   );
-});
+};

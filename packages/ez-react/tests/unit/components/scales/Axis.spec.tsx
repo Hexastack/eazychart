@@ -1,17 +1,20 @@
 import React from 'react';
 import { act, render } from '@testing-library/react';
-import { Axis } from '@/components/scales/Axis';
-import { Chart } from '@/components/Chart';
+import { ScaleLinear } from 'eazychart-core/src';
 import { Position } from 'eazychart-core/src/types';
 import {
   colors,
   dimensions,
   rawData,
   scaleDefinitions,
-  horizontalLinearScale,
+  verticalLinearScaleDef,
+  horizontalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
+import { Axis } from '@/components/scales/Axis';
+import { Chart } from '@/components/Chart';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
+import { CartesianScale } from '@/components/scales/CartesianScale';
 
 describe('Axis', () => {
   it('renders axis with four ticks', async () => {
@@ -32,11 +35,19 @@ describe('Axis', () => {
           },
         }}
       >
-        <Axis
-          position={Position.BOTTOM}
-          aScale={horizontalLinearScale}
-          tickCount={4}
-        />
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: horizontalLinearScaleDef,
+          }}
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: verticalLinearScaleDef,
+          }}
+          isWrapped={false}
+        >
+          <Axis position={Position.BOTTOM} tickCount={4} />
+        </CartesianScale>
       </Chart>
     );
     const wrapper = render(axisChart);

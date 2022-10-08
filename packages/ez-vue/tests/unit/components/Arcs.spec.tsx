@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import {
-  chartData,
   dimensions,
-  scales,
   tooltip,
+  rawData,
   radialLinearScale,
+  colorScale,
 } from 'eazychart-core/src/sample-data';
 import Arcs from '@/components/Arcs';
 
@@ -13,31 +13,13 @@ describe('Arcs', () => {
   it('renders svg radial with the right coordinates / dimensions', async () => {
     const wrapper = render(Arcs, {
       propsData: {
-        arcScale: radialLinearScale,
+        valueDomainKey: 'amount',
+        labelDomainKey: 'label',
       },
       provide: {
         __reactiveInject__: {
           chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
-            dimensions,
-          },
-        },
-        tooltip,
-      },
-    });
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
-
-    const wrapper2 = render(Arcs, {
-      propsData: {
-        arcScale: radialLinearScale,
-      },
-      provide: {
-        __reactiveInject__: {
-          chart: {
-            activeData: chartData.map((d) => ({ ...d, isActive: true })),
-            scales,
+            data: rawData,
             dimensions,
             animationOptions: {
               easing: 'easeLinear',
@@ -45,14 +27,15 @@ describe('Arcs', () => {
               delay: 0,
             },
           },
+          linearScale: radialLinearScale,
+          colorScale,
         },
         tooltip,
       },
     });
 
     await Vue.nextTick();
-    await Vue.nextTick();
 
-    expect(wrapper2.container.innerHTML).toMatchSnapshot();
+    expect(wrapper.container.innerHTML).toMatchSnapshot();
   });
 });

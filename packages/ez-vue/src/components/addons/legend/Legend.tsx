@@ -1,32 +1,63 @@
-import Vue from 'vue';
+import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
-import { ChartContext, NormalizedDatum } from 'eazychart-core/src/types';
-import { InjectReactive } from 'vue-property-decorator';
-import { computedLegendBoxStyle } from 'eazychart-core/src';
+import { ChartContext } from 'eazychart-core/src/types';
+import { InjectReactive, Prop, Watch } from 'vue-property-decorator';
+import LegendItem from './LegendItem';
 
 @Component
 export default class Legend extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  handleLegendClick(d: NormalizedDatum, idx: number) {
-    this.chart.toggleDatum(d, !d.isActive, idx);
+  @Prop({
+    type: Function as PropType<
+      (key: string, isActive: boolean, color: string) => void
+    >,
+    required: false,
+  })
+  private readonly onToggle!: (
+    key: string,
+    isActive: boolean,
+    color: string,
+  ) => void;
+
+  private keyDict: { [key: string]: string } = {};
+
+  @Watch('colorScale')
+  updateColorMap() {
+    this.computeKeyColorMap();
+  }
+
+  mounted() {
+    this.computeKeyColorMap();
+  }
+
+  computeKeyColorMap() {
+    if (this.colorScale) {
+      this.keyDict = this.colorScale.scale
+        .domain()
+        .reduce((map, domainKey) => ({
+          ...map,
+          [domainKey]: this.colorScale?.scale(domainKey),
+        }), {});
+    }
+  }
+
+  get colorScale() {
+    return this.chart.getScale('colorScale');
   }
 
   render() {
-    const { chart, handleLegendClick } = this;
+    const { keyDict, onToggle } = this;
     return (
       <div class="ez-legend">
-        {chart.data.map((d, idx) => (
-          <div
-            class={{ 'ez-legend-key': true, 'ez-legend-disable': !d.isActive }}
-            key={d.id}
-            onClick={() => handleLegendClick(d, idx)}
-            role="button"
-          >
-            <div class="ez-legend-box" style={computedLegendBoxStyle(d)}></div>
-            <span class="ez-legend-text">{d.label}</span>
-          </div>
+        {Object.entries(keyDict).map(([key, color]) => (
+            <LegendItem
+              key={key}
+              onToggle={onToggle}
+              label={key}
+              color={color}
+            />
         ))}
       </div>
     );

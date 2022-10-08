@@ -1,8 +1,8 @@
-import Vue, { PropType } from 'vue';
+import Vue from 'vue';
 import Component from 'vue-class-component';
 import { ChartContext, Dimensions, Point } from 'eazychart-core/src/types';
 import { InjectReactive, Prop, Watch } from 'vue-property-decorator';
-import { ScaleLinear, scalePieArcData } from 'eazychart-core/src';
+import { ScaleLinear, ScaleOrdinal, scalePieArcData } from 'eazychart-core/src';
 import Arc from '@/components/shapes/Arc';
 
 @Component({ components: { Arc } })
@@ -10,17 +10,23 @@ export default class IrregularArcs extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  @Prop({
-    type: Object as PropType<ScaleLinear>,
-    required: true,
-  })
-  private readonly aScale!: ScaleLinear;
+  @InjectReactive('colorScale')
+  private colorScale!: ScaleOrdinal;
+
+  @InjectReactive('linearScale')
+  private linearScale!: ScaleLinear;
 
   @Prop({
-    type: Object as PropType<ScaleLinear>,
-    required: true,
+    type: String,
+    default: 0,
   })
-  private readonly rScale!: ScaleLinear;
+  private readonly valueDomainKey!: string;
+
+  @Prop({
+    type: String,
+    default: 0,
+  })
+  private readonly labelDomainKey!: string;
 
   @Prop({
     type: Number,
@@ -98,8 +104,10 @@ export default class IrregularArcs extends Vue {
 
   get shapeData() {
     return scalePieArcData(
-      this.chart.activeData,
-      this.aScale,
+      this.chart.data,
+      this.valueDomainKey,
+      this.labelDomainKey,
+      this.colorScale,
       this.startAngle,
       this.endAngle,
       this.sortValues,
@@ -107,17 +115,14 @@ export default class IrregularArcs extends Vue {
   }
 
   created() {
-    this.rScale.appendDefinition({
-      range: [
-        this.getRadius(this.chart.dimensions) / 2,
-        this.getRadius(this.chart.dimensions),
-      ],
+    this.linearScale.appendDefinition({
+      range: [this.getRadius(this.chart.dimensions) / 2, this.getRadius(this.chart.dimensions)],
     });
   }
 
   @Watch('radius')
   onRadiusChange() {
-    this.rScale.appendDefinition({ range: [this.radius / 2, this.radius] });
+    this.linearScale.appendDefinition({ range: [this.radius / 2, this.radius] });
   }
 
   render() {
@@ -131,7 +136,7 @@ export default class IrregularArcs extends Vue {
       strokeWidth,
     } = this;
 
-    const minArcValue = this.rScale.scale(
+    const minArcValue = this.linearScale.scale(
       Math.min(...shapeData.map((shapeDatum) => shapeDatum.value)),
     );
 
@@ -141,7 +146,7 @@ export default class IrregularArcs extends Vue {
         class="ez-irregular-arcs"
       >
         {shapeData.map((shapeDatum) => {
-          const outerRadius = this.rScale.scale(shapeDatum.value);
+          const outerRadius = this.linearScale.scale(shapeDatum.value);
           const innerRadius = minArcValue * this.donutRadius;
           return (
             <Arc

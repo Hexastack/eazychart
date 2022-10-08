@@ -8,23 +8,22 @@ describe('PieChart', () => {
   it('renders a pie chart', async () => {
     let wrapper: RenderResult;
     act(() => {
-      // 1st render
       wrapper = render(
         <PieChart
           data={rawData}
           colors={colors}
+          valueDomainKey={'value'}
+          labelDomainKey={'label'}
+          dimensions={dimensions}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,
             delay: 0,
           }}
-          dimensions={dimensions}
         />
       );
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
     });
 
-    // 2nd render
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

@@ -1,5 +1,5 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   ChartPadding,
@@ -18,6 +18,9 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Bars from '@/components/Bars';
 import Grid from '@/components/scales/grid/Grid';
+import ToggleDatumMixin from '@/lib/ToggleDatumMixin';
+import CartesianScale from '@/components/scales/CartesianScale';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
@@ -29,7 +32,7 @@ import Grid from '@/components/scales/grid/Grid';
     Tooltip,
   },
 })
-export default class BarChart extends Vue {
+export default class BarChart extends mixins(ToggleDatumMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -118,88 +121,87 @@ export default class BarChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  private xScale!: ScaleLinear;
+  getData(): RawData {
+    return this.data;
+  }
 
-  private yScale!: ScaleBand;
+  getColors(): string[] {
+    return this.colors;
+  }
 
-  created() {
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.xAxis.domainKey,
-      nice: this.xAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleBand({
-      direction: Direction.VERTICAL,
-      domainKey: this.yAxis.domainKey,
-    });
+  getDomainKey(): string {
+    return this.yAxis.domainKey;
   }
 
   render() {
     const {
-      xScale,
-      yScale,
       xAxis,
       yAxis,
-      data,
       padding,
-      colors,
       animationOptions,
       grid,
       isRTL,
       $scopedSlots,
       dimensions,
+      activeData,
+      activeColors,
+      toggleDatum,
     } = this;
 
-    const defaultLegend = (props: {}) => (
-      <Legend ref="legend" props={props} />
-    );
     const scopedSlots = {
-      Legend: $scopedSlots.Legend ? $scopedSlots.Legend : defaultLegend,
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDatum }} />,
       Tooltip: $scopedSlots.Tooltip,
     };
 
     return (
       <Chart
         dimensions={dimensions}
-        rawData={data}
-        scales={[xScale, yScale]}
+        rawData={activeData}
         padding={padding}
-        colors={colors}
         animationOptions={animationOptions}
         scopedSlots={scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Bars xScale={xScale} yScale={yScale} />
-        <Axis
-          aScale={xScale}
-          position={xAxis.position || Position.BOTTOM}
-          title={xAxis.title}
-          titleAlign={xAxis.titleAlign}
-          tickCount={xAxis.tickCount}
-          tickSize={xAxis.tickSize}
-          tickLength={xAxis.tickLength}
-          tickFormat={xAxis.tickFormat}
-        />
-        <Axis
-          aScale={yScale}
-          position={
-            yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          title={yAxis.title}
-          titleAlign={yAxis.titleAlign}
-          tickCount={yAxis.tickCount}
-          tickSize={yAxis.tickSize}
-          tickLength={yAxis.tickLength}
-          tickFormat={yAxis.tickFormat}
-        />
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
+            },
+          }}
+          yScaleConfig={{
+            ScaleClass: ScaleBand,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+            },
+          }}
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <ColorScale
+            definition={{ domainKey: yAxis.domainKey, range: activeColors }}
+          >
+            <Bars xDomainKey={xAxis.domainKey} yDomainKey={yAxis.domainKey} />
+          </ColorScale>
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

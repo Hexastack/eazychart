@@ -41,12 +41,6 @@ export default class TooltipProvider extends Vue {
     };
   }
 
-  get domains() {
-    return this.chart.scales
-      .filter(({ definition }) => typeof definition.domainKey === 'string')
-      .map(({ definition }) => definition.domainKey);
-  }
-
   showTooltip(shapeDatum: ShapeDatum) {
     const d = shapeDatum.id in this.chart.dataDict
       ? this.chart.dataDict[shapeDatum.id]
@@ -70,7 +64,6 @@ export default class TooltipProvider extends Vue {
       shapeDatum: this.shapeDatum,
       isVisible: this.isVisible,
       mousePosition: this.mousePosition,
-      domains: this.domains,
     };
     const DefaultSlot = this.$scopedSlots.default
       ? this.$scopedSlots.default({})

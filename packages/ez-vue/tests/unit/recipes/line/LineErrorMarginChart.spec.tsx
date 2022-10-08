@@ -22,12 +22,13 @@ describe('LineErrorMarginChart', () => {
         },
         grid: { directions: [] },
         dimensions,
+        animationOptions: {
+          easing: 'easeBack',
+          duration: 0,
+          delay: 0,
+        },
       },
     });
-
-    await Vue.nextTick();
-
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
 
     await Vue.nextTick();
 

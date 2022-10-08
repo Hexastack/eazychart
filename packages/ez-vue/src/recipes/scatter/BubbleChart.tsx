@@ -19,7 +19,8 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
 import Bubbles from '@/components/Bubbles';
-import 'eazychart-css/css/style.css';
+import CartesianScale from '@/components/scales/CartesianScale';
+import LinearScale from '@/components/scales/LinearScale';
 
 @Component({
   components: {
@@ -32,14 +33,6 @@ import 'eazychart-css/css/style.css';
   },
 })
 export default class BubbleChart extends Vue {
-  @Prop({
-    type: Boolean,
-    default() {
-      return false;
-    },
-  })
-  private readonly swapAxis!: boolean;
-
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
@@ -131,54 +124,10 @@ export default class BubbleChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
-  @Prop({
-    type: Function as PropType<
-      (dimensions: Dimensions) => void
-    >,
-    required: false,
-  })
-
-  get horizontalAxis() {
-    return this.swapAxis ? this.yAxis : this.xAxis;
-  }
-
-  get verticalAxis() {
-    return this.swapAxis ? this.xAxis : this.yAxis;
-  }
-
-  private xScale!: ScaleLinear;
-
-  private yScale!: ScaleLinear;
-
-  private rScale!: ScaleLinear;
-
-  created() {
-    this.xScale = new ScaleLinear({
-      direction: Direction.HORIZONTAL,
-      domainKey: this.horizontalAxis.domainKey,
-      nice: this.horizontalAxis.nice || 0,
-      reverse: this.isRTL,
-    });
-
-    this.yScale = new ScaleLinear({
-      direction: Direction.VERTICAL,
-      domainKey: this.verticalAxis.domainKey,
-      nice: this.verticalAxis.nice || 0,
-    });
-
-    this.rScale = new ScaleLinear({
-      domainKey: this.bubble.domainKey,
-      range: [this.bubble.minRadius, this.bubble.maxRadius],
-    });
-  }
-
   render() {
     const {
-      xScale,
-      yScale,
-      rScale,
-      horizontalAxis,
-      verticalAxis,
+      xAxis,
+      yAxis,
       data,
       bubble,
       padding,
@@ -193,47 +142,58 @@ export default class BubbleChart extends Vue {
       <Chart
         dimensions={dimensions}
         rawData={data}
-        scales={[xScale, yScale, rScale]}
         padding={padding}
-        colors={[bubble.fill]}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >
-        <Grid
-          directions={grid.directions}
-          color={grid.color}
-          xScale={xScale}
-          yScale={yScale}
-        />
-        <Bubbles
-          xScale={xScale}
-          yScale={yScale}
-          rScale={rScale}
-        />
-        <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
-          aScale={xScale}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickLength}
-          tickFormat={horizontalAxis.tickFormat}
-        />
-        <Axis
-          position={
-            verticalAxis.position
-            || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          aScale={yScale}
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
-          tickFormat={verticalAxis.tickFormat}
-        />
+        <CartesianScale
+          xScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.HORIZONTAL,
+              domainKey: xAxis.domainKey,
+              nice: xAxis.nice || 0,
+              reverse: isRTL,
+            },
+          }}
+          yScaleConfig={{
+            ScaleClass: ScaleLinear,
+            definition: {
+              direction: Direction.VERTICAL,
+              domainKey: yAxis.domainKey,
+              nice: yAxis.nice || 0,
+            },
+          }}
+        >
+          <Grid directions={grid.directions} color={grid.color} />
+          <LinearScale
+            definition={{
+              domainKey: bubble.domainKey,
+              range: [bubble.minRadius, bubble.maxRadius],
+            }}
+          >
+            <Bubbles
+              xDomainKey={xAxis.domainKey}
+              yDomainKey={yAxis.domainKey}
+              rDomainKey={bubble.domainKey}
+              fill={bubble.fill}
+            />
+          </LinearScale>
+          <Axis
+            props={{
+              ...xAxis,
+              position: xAxis.position || Position.BOTTOM,
+            }}
+          />
+          <Axis
+            props={{
+              ...yAxis,
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+            }}
+          />
+        </CartesianScale>
       </Chart>
     );
   }

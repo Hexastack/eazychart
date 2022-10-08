@@ -29,7 +29,6 @@ const Template: Story<AreaChartProps> = (args) => {
 export const Default = Template.bind({});
 
 Default.args = {
-  swapAxis: false,
   area: {
     stroke: colors[0],
     strokeWidth: 2,

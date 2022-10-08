@@ -1,68 +1,61 @@
 import React, { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import {
-  AnimationOptions,
-  ChartPadding,
-  Dimensions,
-  RawData,
-  NormalizedDatum,
-} from 'eazychart-core/src/types';
-import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
-import { LegendProvider } from './addons/legend/LegendProvider';
-import { ChartContext } from '@/lib/use-chart';
-import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
-import { LegendPropsWithRef } from './addons/legend/Legend';
-import {
-  AbstractScale,
   defaultChartAnimationOptions,
   defaultChartDimensions,
   defaultChartPadding,
   normalizeData,
   transformTranslate,
 } from 'eazychart-core/src';
+import {
+  AnimationOptions,
+  ChartPadding,
+  Dimensions,
+  RawData,
+  AnyScale,
+} from 'eazychart-core/src/types';
+import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
+import { LegendProvider } from '@/components/addons/legend/LegendProvider';
+import { ChartContext } from '@/lib/use-chart';
+import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { useResponsiveChart } from '@/lib/use-responsive-chart';
+import { LegendProps } from './addons/legend/Legend';
 
 export type ChartProps = {
   padding?: Partial<ChartPadding>;
   dimensions?: Partial<Dimensions>;
-  animationOptions?: Partial<AnimationOptions>;
-  scales: AbstractScale[];
+  animationOptions?: AnimationOptions;
   rawData: RawData;
-  colors: string[];
   scopedSlots?: {
-    LegendComponent?: React.FC<LegendPropsWithRef>;
+    LegendComponent?: React.FC<LegendProps>;
     TooltipComponent?: React.FC<TooltipProps>;
   };
   isRTL?: boolean;
-  // Useful props for Jest
-  onToggleDatum?: (
-    datum: NormalizedDatum,
-    newState: boolean,
-    idx: number
-  ) => void;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
   isWrapped?: boolean;
 };
 
 export const Chart: FC<ChartProps> = ({
   dimensions,
   padding = {},
-  animationOptions,
-  scales,
+  animationOptions = defaultChartAnimationOptions,
   rawData,
-  colors,
   children,
   scopedSlots = { TooltipComponent: Tooltip },
   isRTL = false,
-  onToggleDatum,
+  onLegendClick,
   isWrapped = true,
 }) => {
   // Data
-  const [dataDict, setDataDict] = useState(normalizeData(rawData, colors));
+  const [dataDict, setDataDict] = useState(normalizeData(rawData));
+  // Scales (scales needs to be registered to give them a global scope)
+  const [scales, setScales] = useState<{
+    [scaleId: string]: AnyScale;
+  }>({});
 
   // Dimensions
   const chartRef = React.createRef<HTMLDivElement>();
   const { dimensions: parentDimensions } = useResponsiveChart();
-  const legendRef = React.useRef<HTMLDivElement | null>(null);
-
+  const [legendHeight, setLegendHeight] = useState(0);
   const chartPadding: ChartPadding = useMemo(
     () => ({
       ...defaultChartPadding,
@@ -90,9 +83,6 @@ export const Chart: FC<ChartProps> = ({
 
   const chartDimensions: Dimensions = useMemo(() => {
     const { top, right, bottom, left } = chartPadding;
-    const legendHeight = legendRef.current
-      ? Math.floor(legendRef.current.clientHeight)
-      : 0;
     // It takes the container dimensions and subtracts padding and legend height
     const width = containerDimensions.width - left - right;
     const height = containerDimensions.height - top - bottom - legendHeight;
@@ -100,7 +90,7 @@ export const Chart: FC<ChartProps> = ({
       width: Math.max(width, 0),
       height: Math.max(height, 0),
     };
-  }, [containerDimensions, chartPadding]);
+  }, [chartPadding, containerDimensions, legendHeight]);
 
   const containerStyle = useMemo(() => {
     return {
@@ -110,75 +100,56 @@ export const Chart: FC<ChartProps> = ({
   }, [containerDimensions]);
 
   const svgStyle = useMemo(() => {
-    const legendHeight = legendRef.current
-      ? Math.floor(legendRef.current.clientHeight)
-      : 0;
     return {
       width: `${containerDimensions.width}px`,
       height: `${containerDimensions.height - legendHeight}px`,
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [containerDimensions, legendRef.current]);
-
-  const chartAnimationOptions: AnimationOptions | undefined =
-    animationOptions && {
-      ...defaultChartAnimationOptions,
-      ...animationOptions,
-    };
+  }, [containerDimensions, legendHeight]);
 
   const computedTransform = useMemo(() => {
     return transformTranslate({ x: padding.left || 0, y: padding.top || 0 });
   }, [padding]);
 
   useEffect(() => {
-    setDataDict(normalizeData(rawData, colors));
-  }, [rawData, colors]);
+    setDataDict(normalizeData(rawData));
+  }, [rawData]);
 
   const chartData = useMemo(() => {
     const values = Object.values(dataDict);
     return isRTL ? values.reverse() : values;
   }, [dataDict, isRTL]);
 
-  const activeData = useMemo(() => {
-    return chartData.filter(({ isActive }) => isActive);
-  }, [chartData]);
-
-  useMemo(() => {
-    if (scales !== undefined) {
-      scales.forEach((scale) => {
-        scale.computeScale(chartDimensions, activeData);
-      });
-    }
-  }, [activeData, chartDimensions, scales]);
-
-  const toggleDatum = useCallback(
-    (datum: NormalizedDatum, newState: boolean, idx: number) => {
-      onToggleDatum && onToggleDatum(datum, newState, idx);
-      const newDataDict = {
-        ...dataDict,
-        [datum.id]: {
-          ...datum,
-          isActive: newState,
-        },
-      };
-      setDataDict(newDataDict);
-    },
-    [dataDict, onToggleDatum]
+  const onLegendResize = useCallback(
+    ({ height }: Dimensions) => setLegendHeight(height),
+    [setLegendHeight]
   );
+
+  // Helpers to offer some scales a global scope. This is useful to have the legend
+  // access the color domain for example. Otherwise, we would need to add a portal
+  // which is still experimental in react + does not exist in Vue2.
+  const registerScale = (scaleId: string, scale: AnyScale) => {
+    setScales({
+      ...scales,
+      [scaleId]: scale,
+    });
+  };
+
+  const getScale = (scaleId: string): AnyScale | null => {
+    return scaleId in scales ? scales[scaleId] : null;
+  };
 
   return (
     <ChartContext.Provider
       value={{
         dimensions: chartDimensions,
         padding: chartPadding,
-        animationOptions: chartAnimationOptions,
-        scales,
+        animationOptions,
         data: chartData,
         dataDict,
-        activeData,
-        toggleDatum,
-        colors,
         isRTL,
+        registerScale,
+        getScale,
       }}
     >
       {/*
@@ -193,9 +164,8 @@ export const Chart: FC<ChartProps> = ({
               Legend={
                 scopedSlots?.LegendComponent && (
                   <scopedSlots.LegendComponent
-                    data={chartData}
-                    toggleDatum={toggleDatum}
-                    ref={legendRef}
+                    onLegendClick={onLegendClick}
+                    onResize={onLegendResize}
                   />
                 )
               }
@@ -217,9 +187,8 @@ export const Chart: FC<ChartProps> = ({
             Legend={
               scopedSlots?.LegendComponent && (
                 <scopedSlots.LegendComponent
-                  data={chartData}
-                  toggleDatum={toggleDatum}
-                  ref={legendRef}
+                  onLegendClick={onLegendClick}
+                  onResize={onLegendResize}
                 />
               )
             }

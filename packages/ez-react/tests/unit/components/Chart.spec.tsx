@@ -1,17 +1,12 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { Chart } from '@/components/Chart';
 import {
   dimensions,
   padding,
   animationOptions,
   rawData,
-  colors,
-  chartData,
-  verticalLinearScale,
-  horizontalBandScale,
-  horizontalLinearScale,
 } from 'eazychart-core/src/sample-data';
+import { Chart } from '@/components/Chart';
 import 'tests/mocks/ResizeObserver';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 
@@ -23,12 +18,6 @@ describe('Chart', () => {
         padding={padding}
         animationOptions={animationOptions}
         rawData={rawData}
-        colors={colors}
-        scales={[
-          verticalLinearScale,
-          horizontalBandScale,
-          horizontalLinearScale,
-        ]}
         scopedSlots={{
           LegendComponent: () => <div>Legend Slot</div>,
           TooltipComponent: () => <div>Tooltip Slot</div>,
@@ -48,15 +37,9 @@ describe('Chart', () => {
         padding={padding}
         animationOptions={animationOptions}
         rawData={rawData}
-        colors={colors}
-        scales={[
-          verticalLinearScale,
-          horizontalBandScale,
-          horizontalLinearScale,
-        ]}
         scopedSlots={{ TooltipComponent: Tooltip }}
       >
-        <div>{JSON.stringify(chartData)}</div>
+        <div>{JSON.stringify(rawData)}</div>
       </Chart>
     );
 

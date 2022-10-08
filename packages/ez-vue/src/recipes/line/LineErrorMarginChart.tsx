@@ -301,27 +301,19 @@ export default class LineErrorMarginChart extends Vue {
           }}
         />
         <Axis
-          position={horizontalAxis.position || Position.BOTTOM}
-          aScale={xScale}
-          title={horizontalAxis.title}
-          titleAlign={horizontalAxis.titleAlign}
-          tickLength={horizontalAxis.tickLength}
-          tickCount={horizontalAxis.tickCount}
-          tickSize={horizontalAxis.tickLength}
-          tickFormat={horizontalAxis.tickFormat}
+          props={{
+            ...horizontalAxis,
+            aScale: xScale,
+            position: horizontalAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          position={
-            verticalAxis.position
-            || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          aScale={yScale}
-          title={verticalAxis.title}
-          titleAlign={verticalAxis.titleAlign}
-          tickLength={verticalAxis.tickLength}
-          tickCount={verticalAxis.tickCount}
-          tickSize={verticalAxis.tickLength}
-          tickFormat={verticalAxis.tickFormat}
+          props={{
+            ...verticalAxis,
+            aScale: yScale,
+            position:
+              verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

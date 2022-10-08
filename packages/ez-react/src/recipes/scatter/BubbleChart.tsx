@@ -116,26 +116,16 @@ export const BubbleChart: FC<BubbleChartProps> = ({
       />
       <Bubbles xScale={xScale} yScale={yScale} rScale={rScale} />
       <Axis
-        position={horizontalAxis.position || Position.BOTTOM}
+        {...horizontalAxis}
         aScale={xScale}
-        title={horizontalAxis.title}
-        titleAlign={horizontalAxis.titleAlign}
-        tickLength={horizontalAxis.tickLength}
-        tickCount={horizontalAxis.tickCount}
-        tickSize={horizontalAxis.tickLength}
-        tickFormat={horizontalAxis.tickFormat}
+        position={horizontalAxis.position || Position.BOTTOM}
       />
       <Axis
+        {...verticalAxis}
+        aScale={yScale}
         position={
           verticalAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
         }
-        aScale={yScale}
-        title={verticalAxis.title}
-        titleAlign={verticalAxis.titleAlign}
-        tickLength={verticalAxis.tickLength}
-        tickCount={verticalAxis.tickCount}
-        tickSize={verticalAxis.tickLength}
-        tickFormat={verticalAxis.tickFormat}
       />
     </Chart>
   );

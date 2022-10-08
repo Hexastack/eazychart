@@ -240,10 +240,7 @@ export default class LineColumnChart extends Vue {
           xScale={xColumnScale}
           yScale={yColumnScale}
         />
-        <Bars
-          xScale={xColumnScale}
-          yScale={yColumnScale}
-        />
+        <Bars xScale={xColumnScale} yScale={yColumnScale} />
         <Points
           xScale={xLineScale}
           yScale={yLineScale}
@@ -273,38 +270,27 @@ export default class LineColumnChart extends Vue {
           }}
         />
         <Axis
-          aScale={xColumnScale}
-          position={xAxis.position || Position.BOTTOM}
-          title={xAxis.title}
-          titleAlign={xAxis.titleAlign}
-          tickCount={xAxis.tickCount}
-          tickSize={xAxis.tickSize}
-          tickLength={xAxis.tickLength}
-          tickFormat={xAxis.tickFormat}
+          props={{
+            ...xAxis,
+            aScale: xColumnScale,
+            position: xAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          aScale={yColumnScale}
-          position={
-            yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          title={yAxis.title}
-          titleAlign={yAxis.titleAlign}
-          tickCount={yAxis.tickCount}
-          tickSize={yAxis.tickSize}
-          tickLength={yAxis.tickLength}
-          tickFormat={yAxis.tickFormat}
+          props={{
+            ...yAxis,
+            aScale: yColumnScale,
+            position:
+              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
         <Axis
-          aScale={yLineScale}
-          position={
-            yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT)
-          }
-          title={yLineAxis.title}
-          titleAlign={yLineAxis.titleAlign}
-          tickCount={yLineAxis.tickCount}
-          tickSize={yLineAxis.tickSize}
-          tickLength={yLineAxis.tickLength}
-          tickFormat={yLineAxis.tickFormat}
+          props={{
+            ...yLineAxis,
+            aScale: yLineScale,
+            position:
+              yLineAxis.position || (isRTL ? Position.LEFT : Position.RIGHT),
+          }}
         />
       </Chart>
     );

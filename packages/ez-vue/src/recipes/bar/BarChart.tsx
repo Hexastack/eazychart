@@ -152,9 +152,7 @@ export default class BarChart extends Vue {
       dimensions,
     } = this;
 
-    const defaultLegend = (props: {}) => (
-      <Legend ref="legend" props={props} />
-    );
+    const defaultLegend = (props: {}) => <Legend ref="legend" props={props} />;
     const scopedSlots = {
       Legend: $scopedSlots.Legend ? $scopedSlots.Legend : defaultLegend,
       Tooltip: $scopedSlots.Tooltip,
@@ -179,26 +177,19 @@ export default class BarChart extends Vue {
         />
         <Bars xScale={xScale} yScale={yScale} />
         <Axis
-          aScale={xScale}
-          position={xAxis.position || Position.BOTTOM}
-          title={xAxis.title}
-          titleAlign={xAxis.titleAlign}
-          tickCount={xAxis.tickCount}
-          tickSize={xAxis.tickSize}
-          tickLength={xAxis.tickLength}
-          tickFormat={xAxis.tickFormat}
+          props={{
+            ...xAxis,
+            aScale: xScale,
+            position: xAxis.position || Position.BOTTOM,
+          }}
         />
         <Axis
-          aScale={yScale}
-          position={
-            yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
-          }
-          title={yAxis.title}
-          titleAlign={yAxis.titleAlign}
-          tickCount={yAxis.tickCount}
-          tickSize={yAxis.tickSize}
-          tickLength={yAxis.tickLength}
-          tickFormat={yAxis.tickFormat}
+          props={{
+            ...yAxis,
+            aScale: yScale,
+            position:
+              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+          }}
         />
       </Chart>
     );

@@ -26,3 +26,7 @@ export {
 } from '@/recipes/scatter/ScatterChart';
 export { Legend, LegendProps } from '@/components/addons/legend/Legend';
 export { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
+export {
+  MultiLineChart,
+  MultiLineChartProps,
+} from '@/recipes/line/MultiLineChart';

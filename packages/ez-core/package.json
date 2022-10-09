@@ -1,6 +1,6 @@
 {
   "name": "eazychart-core",
-  "version": "0.1.15-alpha.0",
+  "version": "0.2.0-alpha.0",
   "description": "EazyChart core lib that is used by both React and Vue libraries.",
   "keywords": [
     "chart",

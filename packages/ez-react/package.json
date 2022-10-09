@@ -1,6 +1,6 @@
 {
   "name": "eazychart-react",
-  "version": "0.2.0-alpha.0",
+  "version": "0.2.1-alpha.0",
   "description": "React version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -75,7 +75,7 @@
     "@typescript-eslint/parser": "^5.30.5",
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.2.3",
-    "eazychart-css": "^0.2.0-alpha.0",
+    "eazychart-css": "^0.2.1-alpha.0",
     "eazychart-dev": "^0.2.0-alpha.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",

@@ -1,6 +1,6 @@
 {
   "name": "eazychart-vue",
-  "version": "0.2.0-alpha.0",
+  "version": "0.2.1-alpha.0",
   "description": "Vue version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -80,7 +80,7 @@
     "@vue/eslint-config-typescript": "^7.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-loader": "^8.2.3",
-    "eazychart-css": "^0.2.0-alpha.0",
+    "eazychart-css": "^0.2.1-alpha.0",
     "eazychart-dev": "^0.2.0-alpha.0",
     "eslint": "^6.7.2",
     "eslint-import-resolver-typescript": "^3.5.1",

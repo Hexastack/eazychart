@@ -22,8 +22,8 @@ So use it to import the chart inside the parent component.
 
 A quick note, to get the appropriate styles for your chart, you’ll have to import the `eazychart-css` package.
 
-> **NOTE** `!` 
-> **You can import it once into your app main file, and it won't be systematic with every chart import.**
+> **NOTE** `!`
+> **You should import it once into your app main file, and it won't be systematic with every chart import.**
 
 Cool, now that you imported the Bar chart from the library, you are ready to use it in your project.
 
@@ -85,22 +85,22 @@ export const App = () => {
     { country: 'Spain', population: 46 },
     { country: 'Australia', population: 25 },
   ];
-  const props = {
-    data: data,
-    xAxis: {
-      domainKey: 'population',
-      title: 'Population',
-      nice: 2,
-    },
-    yAxis: {
-      domainKey: 'country',
-      title: 'Country',
-    },
-  };
+  const props = ;
 
   return (
     <div>
-      <BarChart {...props} />
+      <BarChart
+        data={data}
+        xAxis={{
+          domainKey: 'population',
+          title: 'Population',
+          nice: 2,
+        }}
+        yAxis={{
+          domainKey: 'country',
+          title: 'Country',
+        }}
+      />
     </div>
   );
 };
@@ -108,11 +108,15 @@ export const App = () => {
 
 Now that everything is in order, run your project using npm or yarn, open up your browser, and you should be able to see your chart on your screen.
 
-`npm run start`
+```sh
+npm run start
+```
 
 Or
 
-`yarn start`
+```sh
+yarn start
+```
 
 ![Example of Bar Chart](https://docs.eazychart.com/images/barchart.png)
 

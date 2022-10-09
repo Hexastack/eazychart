@@ -51,7 +51,8 @@ Use any chart component with the JSX syntax :
 ```jsx
 <PieChart
   colors={['red', 'blue', 'green']}
-  domainKey={'value'}
+  valueDomainKey={'value'}
+  labelDomainKey={'label'}
   data={[
     { label: 'Alpha', value: 10 },
     { label: 'Beta', value: 20 },

@@ -67,7 +67,8 @@ Use the chart component with the help of the JSX syntax :
 ```jsx
 <PieChart
   colors={['red', 'blue', 'green']}
-  domainKey={'value'}
+  valueDomainKey={'value'}
+  labelDomainKey={'label'}
   data={[
     { label: 'Alpha', value: 10 },
     { label: 'Beta', value: 20 },
@@ -86,7 +87,7 @@ Use the chart component :
 ```vue
 <template>
   <div id="app">
-    <pie-chart :colors="colors" domainKey="value" :data="data"/>
+    <pie-chart :colors="colors" valueDomainKey="value" labelDomainKey="label" :data="data"/>
   </div>
 </template>
 <script>

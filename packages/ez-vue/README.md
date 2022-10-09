@@ -52,7 +52,7 @@ Use any chart component with vue component syntax :
 ```vue
 <template>
   <div id="app">
-    <pie-chart :colors="colors" domainKey="value" :data="data"/>
+    <pie-chart :colors="colors" valueDomainKey="value" labelDomainKey="label" :data="data"/>
   </div>
 </template>
 <script>

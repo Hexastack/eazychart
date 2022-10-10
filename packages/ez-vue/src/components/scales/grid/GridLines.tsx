@@ -4,7 +4,7 @@ import { InjectReactive, Prop, Watch } from 'vue-property-decorator';
 import {
   defaultAxis,
   getAxisTickByCoordinate,
-  getGrid,
+  getGridLines,
   transformTranslate,
   animate,
 } from 'eazychart-core/src';
@@ -44,12 +44,6 @@ export default class GridLines extends Vue {
   private readonly tickCount!: number;
 
   @Prop({
-    type: Function,
-    default: null,
-  })
-  private readonly tickFormat!: Function;
-
-  @Prop({
     type: String,
     default: '#a8a8a8',
   })
@@ -63,7 +57,7 @@ export default class GridLines extends Vue {
     this.updateCurrentGrid();
   }
 
-  @Watch('aScale', { deep: true })
+  @Watch('axisScale', { deep: true })
   onScalesChange() {
     this.updateCurrentGrid();
   }
@@ -76,28 +70,21 @@ export default class GridLines extends Vue {
   updateCurrentGrid() {
     const { dimensions, animationOptions } = this.chart;
     this.cancelAnimation && this.cancelAnimation();
-    const axis = getGrid(
+    const targetGrid = getGridLines(
       this.direction,
-      this.aScale.scale,
+      this.axisScale.scale,
       dimensions,
-      {
-        tickCount: this.tickCount,
-        tickSize:
-          this.direction === Direction.HORIZONTAL
-            ? dimensions.width
-            : dimensions.height,
-        tickFormat: this.tickFormat,
-      },
+      this.tickCount,
     );
     this.cancelAnimation = animate(
       this.currentGrid,
-      axis,
+      targetGrid,
       animationOptions,
       (v: AxisData) => (this.currentGrid = v),
     );
   }
 
-  get aScale() {
+  get axisScale() {
     const { xScale, yScale } = this.cartesianScale;
     const isHorizontal = this.direction === Direction.HORIZONTAL;
     return isHorizontal ? xScale : yScale;
@@ -116,7 +103,7 @@ export default class GridLines extends Vue {
           <line
             key={index}
             transform={transformTranslate(tick.transform)}
-            x2={getAxisTickByCoordinate(-(tick.line.x2 || 0), tickLength)}
+            x2={getAxisTickByCoordinate(-1 * (tick.line.x2 || 0), tickLength)}
             y2={getAxisTickByCoordinate(tick.line.y2 || 0, tickLength)}
             stroke={color}
             class="ez-grid-line"

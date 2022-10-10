@@ -101,17 +101,22 @@ export const getAxis = (
   return axisData;
 };
 
-export const getGrid = (
+export const getGridLines = (
   direction: Direction,
   scale: D3Scales,
   dimensions: Dimensions,
-  options?: TickOptions
+  tickCount = 10
 ) => {
+  const isHorizontal = direction === Direction.HORIZONTAL;
+  const position = isHorizontal ? Position.BOTTOM : Position.LEFT;
   return getAxis(
-    direction === Direction.HORIZONTAL ? Position.LEFT : Position.BOTTOM,
+    position,
     scale,
     dimensions,
-    options
+    {
+      tickCount,
+      tickSize: isHorizontal ? dimensions.height : dimensions.width
+    }
   );
 };
 

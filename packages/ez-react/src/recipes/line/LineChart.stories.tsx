@@ -54,7 +54,6 @@ const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = (args) => {
 export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
-  swapAxis: false,
   line: {
     strokeWidth: 2,
     stroke: colors[1],

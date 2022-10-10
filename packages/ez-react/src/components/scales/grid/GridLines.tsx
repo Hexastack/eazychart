@@ -1,7 +1,7 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { Direction, AxisTick, AxisData } from 'eazychart-core/src/types';
 import {
-  getGrid,
+  getGridLines,
   getAxisTickByCoordinate,
   transformTranslate,
   defaultAxis,
@@ -14,7 +14,6 @@ export interface GridLinesProps extends SVGAttributes<SVGRectElement> {
   direction?: Direction;
   tickLength?: number;
   tickCount?: number;
-  tickFormat?: Function;
   color?: string;
 }
 
@@ -22,22 +21,16 @@ export const GridLines: FC<GridLinesProps> = ({
   direction = Direction.HORIZONTAL,
   tickLength = 1,
   tickCount = 10,
-  tickFormat,
   color = '#a8a8a8',
 }) => {
   const { dimensions, animationOptions } = useChart();
   const { xScale, yScale } = useCartesianScales();
   const isHorizontal = direction === Direction.HORIZONTAL;
-  const lineScale = isHorizontal ? xScale : yScale;
+  const axisScale = isHorizontal ? xScale : yScale;
 
   const targetGrid = useMemo(() => {
-    return getGrid(direction, lineScale.scale, dimensions, {
-      tickCount,
-      // @todo should we leave it as it is, or pass on a prop ?
-      tickSize: isHorizontal ? dimensions.width : dimensions.height,
-      tickFormat,
-    });
-  }, [direction, isHorizontal, dimensions, lineScale, tickCount, tickFormat]);
+    return getGridLines(direction, axisScale.scale, dimensions, tickCount);
+  }, [direction, dimensions, axisScale.scale, tickCount]);
 
   const currentGrid = useAnimation<AxisData>(
     targetGrid,
@@ -56,7 +49,7 @@ export const GridLines: FC<GridLinesProps> = ({
           <line
             key={index}
             transform={transformTranslate(tick.transform)}
-            x2={getAxisTickByCoordinate(-(tick.line.x2 || 0), tickLength)}
+            x2={getAxisTickByCoordinate(-1 * (tick.line.x2 || 0), tickLength)}
             y2={getAxisTickByCoordinate(tick.line.y2 || 0, tickLength)}
             stroke={color}
             className="ez-grid-line"

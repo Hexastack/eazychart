@@ -41,7 +41,6 @@ const BubbleTemplate: Story<BubbleChartProps> = (args) => {
 export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
-  swapAxis: false,
   grid: { directions: [] },
   xAxis: {
     domainKey: 'xValue',

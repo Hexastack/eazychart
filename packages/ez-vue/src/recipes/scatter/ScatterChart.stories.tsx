@@ -47,7 +47,6 @@ const BubbleTemplate: Story = (_args, { argTypes }) => ({
 export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
-  swapAxis: false,
   grid: { directions: [] },
   xAxis: {
     domainKey: 'xValue',

@@ -19,7 +19,6 @@ import { ScaleLinear } from 'eazychart-core/src';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
-  swapAxis?: boolean;
   data: RawData;
   point?: PointConfig;
   animationOptions?: AnimationOptions;

@@ -122,9 +122,6 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
           definition: {
             direction: Direction.HORIZONTAL,
             domainKey: xAxis.domainKey,
-            innerPadding: 0.5,
-            outerPadding: 0.1,
-            align: 1,
           },
         }}
         yScaleConfig={{
@@ -140,29 +137,32 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
           xDomainKey={xAxis.domainKey}
           yDomainKey={yLineAxis.domainKey}
           scopedSlots={{
-            default: ({ shapeData }) => {
+            default: ({ shapeData, scales: { xScale } }) => {
+              const bandwidth = (xScale as ScaleBand).scale.bandwidth();
+              const centeredShapeData = shapeData.map((shapeDatum) => ({
+                ...shapeDatum,
+                x: shapeDatum.x + bandwidth / 2,
+              }));
               return (
                 <g className="ez-line">
                   <LinePath
-                    shapeData={shapeData}
+                    shapeData={centeredShapeData}
                     curve={line.curve}
                     beta={line.beta}
                     stroke={line.stroke}
                     strokeWidth={line.strokeWidth}
                   />
                   {!marker.hidden &&
-                    shapeData.map((pointDatum) => {
-                      return (
-                        <Point
-                          key={pointDatum.id}
-                          shapeDatum={pointDatum}
-                          r={marker.radius}
-                          stroke={marker.color}
-                          fill={marker.color}
-                          strokeWidth={line.strokeWidth}
-                        />
-                      );
-                    })}
+                    centeredShapeData.map((pointDatum) => (
+                      <Point
+                        key={pointDatum.id}
+                        shapeDatum={pointDatum}
+                        r={marker.radius}
+                        stroke={marker.color}
+                        fill={marker.color}
+                        strokeWidth={line.strokeWidth}
+                      />
+                    ))}
                 </g>
               );
             },

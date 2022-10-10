@@ -356,7 +356,7 @@ exports[`LineColumnChart renders a line & column chart 1`] = `
                 <g class="ez-line">
                   <path
                     class="ez-line"
-                    d="M37.03703703703707,400L222.22222222222223,200L407.4074074074074,0"
+                    d="M93.75,400L250,200L406.25,0"
                     fill="none"
                     stroke="#339999"
                     stroke-linecap="round"

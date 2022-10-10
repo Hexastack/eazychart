@@ -12,6 +12,7 @@ import {
   PointDatum,
   LineConfig,
   MarkerConfig,
+  ScaleLinearOrBand,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
@@ -254,9 +255,6 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
             definition: {
               direction: Direction.HORIZONTAL,
               domainKey: xAxis.domainKey,
-              innerPadding: 0.5,
-              outerPadding: 0.1,
-              align: 1,
             },
           }}
           yScaleConfig={{
@@ -272,28 +270,43 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
             xDomainKey={xAxis.domainKey}
             yDomainKey={yLineAxis.domainKey}
             scopedSlots={{
-              default: ({ shapeData }: { shapeData: PointDatum[] }) => (
-                <g class="ez-line">
-                  <LinePath
-                    shapeData={shapeData}
-                    curve={line.curve}
-                    beta={line.beta}
-                    stroke={line.stroke}
-                    strokeWidth={line.strokeWidth}
-                  />
-                  {!marker.hidden
-                    && shapeData.map((pointDatum) => (
-                      <Point
-                        key={pointDatum.id}
-                        shapeDatum={pointDatum}
-                        r={marker.radius}
-                        stroke={marker.color}
-                        fill={marker.color}
-                        strokeWidth={line.strokeWidth}
-                      />
-                    ))}
-                </g>
-              ),
+              default: ({
+                shapeData,
+                scales: { xScale },
+              }: {
+                shapeData: PointDatum[];
+                scales: {
+                  xScale: ScaleLinearOrBand;
+                };
+              }) => {
+                const bandwidth = (xScale as ScaleBand).scale.bandwidth();
+                const centeredShapeData = shapeData.map((shapeDatum) => ({
+                  ...shapeDatum,
+                  x: shapeDatum.x + bandwidth / 2,
+                }));
+                return (
+                  <g class="ez-line">
+                    <LinePath
+                      shapeData={centeredShapeData}
+                      curve={line.curve}
+                      beta={line.beta}
+                      stroke={line.stroke}
+                      strokeWidth={line.strokeWidth}
+                    />
+                    {!marker.hidden
+                      && centeredShapeData.map((pointDatum) => (
+                        <Point
+                          key={pointDatum.id}
+                          shapeDatum={pointDatum}
+                          r={marker.radius}
+                          stroke={marker.color}
+                          fill={marker.color}
+                          strokeWidth={line.strokeWidth}
+                        />
+                      ))}
+                  </g>
+                );
+              },
             }}
           />
           <Axis

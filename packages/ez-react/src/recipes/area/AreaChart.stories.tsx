@@ -1,7 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
-import { baseChartArgTypes, ChartWrapper } from '../../lib/storybook-utils';
+import {
+  baseChartArgTypes,
+  ChartWrapper,
+  flattenArgs,
+  unFlattenArgs,
+} from '../../lib/storybook-utils';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 
 const meta: Meta = {
@@ -17,9 +22,11 @@ const meta: Meta = {
 export default meta;
 
 const Template: Story<AreaChartProps> = (args) => {
+  const extended = unFlattenArgs(args);
+
   return (
     <ChartWrapper>
-      <AreaChart {...args} />
+      <AreaChart {...extended} />
     </ChartWrapper>
   );
 };
@@ -28,7 +35,7 @@ const Template: Story<AreaChartProps> = (args) => {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = Template.bind({});
 
-Default.args = {
+const Args = flattenArgs({
   swapAxis: false,
   area: {
     stroke: colors[0],
@@ -52,4 +59,6 @@ Default.args = {
     tickFormat: (d: number) => `${d}°`,
   },
   data: evolutionData,
-};
+});
+
+Default.args = Args;

@@ -11,15 +11,19 @@ export class ChartWrapper extends Vue {
 @Component
 export class ResizableChartWrapper extends Vue {
   render(h: Function) {
-    return h('div', {
-      style: {
-        width: '100%',
-        height: '100vh',
-        border: '2px solid #ccc',
-        resize: 'auto',
-        overflow: 'scroll',
+    return h(
+      'div',
+      {
+        style: {
+          width: '100%',
+          height: '100vh',
+          border: '2px solid #ccc',
+          resize: 'auto',
+          overflow: 'scroll',
+        },
       },
-    }, this.$slots.default);
+      this.$slots.default,
+    );
   }
 }
 

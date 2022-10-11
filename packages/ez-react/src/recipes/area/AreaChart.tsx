@@ -11,17 +11,13 @@ import {
   Dimensions,
   AreaConfig,
   MarkerConfig,
-  AreaData,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
-import { Points } from '@/components/Points';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
-import { LinePath } from '@/components/shapes/LinePath';
-import { Point } from '@/components/shapes/Point';
-import { Area } from '@/components/shapes/Area';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { Areas } from '@/components/Areas';
 
 export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -107,50 +103,11 @@ export const AreaChart: FC<AreaChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <Points
+        <Areas
           xDomainKey={xAxis.domainKey}
           yDomainKey={yAxis.domainKey}
-          scopedSlots={{
-            default: ({ shapeData, dimensions: chartDimensions }) => {
-              const lineAreaData: AreaData = shapeData.map((d) => {
-                return {
-                  x: d.x,
-                  y0: chartDimensions.height,
-                  y1: d.y,
-                };
-              });
-              return (
-                <g className="ez-area">
-                  <Area
-                    shapeData={lineAreaData}
-                    curve={area.curve}
-                    beta={area.beta}
-                    fill={area.fill}
-                  />
-                  <LinePath
-                    shapeData={shapeData}
-                    curve={area.curve}
-                    beta={area.beta}
-                    stroke={area.stroke}
-                    strokeWidth={area.strokeWidth}
-                  />
-                  {!marker.hidden &&
-                    shapeData.map((shapeDatum) => {
-                      return (
-                        <Point
-                          key={shapeDatum.id}
-                          shapeDatum={shapeDatum}
-                          r={marker.radius}
-                          fill={marker.color}
-                          stroke={area.stroke}
-                          strokeWidth={area.strokeWidth}
-                        />
-                      );
-                    })}
-                </g>
-              );
-            },
-          }}
+          area={area}
+          marker={marker}
         />
         <Axis {...xAxis} position={xAxis.position || Position.BOTTOM} />
         <Axis

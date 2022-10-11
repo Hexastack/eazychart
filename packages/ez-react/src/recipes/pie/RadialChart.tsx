@@ -78,6 +78,7 @@ export const RadialChart: FC<RadialChartProps> = ({
             valueDomainKey={valueDomainKey}
             labelDomainKey={labelDomainKey}
             {...arc}
+            sortValues={(a, b) => b - a}
           />
         </ColorScale>
       </LinearScale>

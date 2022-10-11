@@ -152,6 +152,7 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
                 valueDomainKey,
                 labelDomainKey,
                 ...arc,
+                sortValues: (a: number, b: number) => b - a,
               }}
             />
           </ColorScale>

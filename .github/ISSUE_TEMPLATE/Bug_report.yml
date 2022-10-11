@@ -1,6 +1,6 @@
 name: "🐛 Bug Report"
 description: Create a new ticket for a bug, please specify its location (react|vue|core).
-title: "🐛 [BUG] - @eazychart-[core | react | vue]- <title>"
+title: "🐛 [BUG] eazychart-[css | core | react | vue] - <title>"
 labels: [
   "bug"
 ]
@@ -10,14 +10,14 @@ body:
     attributes:
       label: "Description"
       description: Please enter an explicit description of your issue
-      placeholder: Short and explicit description of your incident...
+      placeholder: Short and explicit description of your incident. Please delete any irrelevant options
     validations:
       required: true
   - type: textarea
     id: reprod
     attributes:
       label: "Reproduction steps"
-      description: Please enter an explicit description of your issue
+      description: Please enter an explicit description of your issue. Use Screenshot if you can.
       value: |
         1. Go to '...'
         2. Click on '....'
@@ -26,16 +26,6 @@ body:
       render: bash
     validations:
       required: true
-  - type: textarea
-    id: screenshot
-    attributes:
-      label: "Screenshots"
-      description: If applicable, add screenshots to help explain your problem.
-      value: |
-        ![DESCRIPTION](LINK.png)
-      render: bash
-    validations:
-      required: false
   - type: textarea
     id: logs
     attributes:

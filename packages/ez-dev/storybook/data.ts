@@ -51,7 +51,7 @@ export const correlationData: RawData = [...Array(100).keys()].map(() => {
   };
 });
 
-export const evolutionData: RawData = [...Array(23).keys()].map((_v, idx) => {
+export const evolutionData: RawData = [...Array(2).keys()].map((_v, idx) => {
   const x = idx;
   const y = Math.random() * 50 + x * 10;
   return {

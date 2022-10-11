@@ -1,8 +1,8 @@
 name: "🤔 Issue Report"
 description: Create a new ticket for you Issue.
-title: "🤔 [ISSUE] - @eazychart-[core | react | vue]- <title>"
+title: "🤔 [ISSUE] - eazychart-[css | core | react | vue]- <title>"
 labels: [
-  "bug"
+  "help-needed"
 ]
 body:
   - type: textarea

@@ -1,8 +1,8 @@
 name: "🐛 Bug Report"
 description: Create a new ticket for a bug, please specify its location (react|vue|core).
-title: "🐛 [BUG] - @eazychart-[core | react | vue]- <title>"
+title: "🐛 [BUG] eazychart-[css | core | react | vue] - <title>"
 labels: [
-  "help-needed"
+  "bug"
 ]
 body:
   - type: textarea

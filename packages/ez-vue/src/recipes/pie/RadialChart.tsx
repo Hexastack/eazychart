@@ -93,8 +93,8 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
         cornerRadius: 0,
         stroke: '#FFF',
         strokeWidth: 0,
-        sortValues: null,
-        spacing: 0,
+        spacing: 0.5,
+        sortValues: (a: number, b: number) => b - a,
       };
     },
   })
@@ -152,7 +152,6 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
                 valueDomainKey,
                 labelDomainKey,
                 ...arc,
-                sortValues: (a: number, b: number) => b - a,
               }}
             />
           </ColorScale>

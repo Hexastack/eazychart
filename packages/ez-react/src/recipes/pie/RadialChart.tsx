@@ -50,7 +50,8 @@ export const RadialChart: FC<RadialChartProps> = ({
     cornerRadius: 0,
     stroke: '#FFF',
     strokeWidth: 0,
-    spacing: 0,
+    spacing: 0.5,
+    sortValues: (a, b) => b - a,
   },
   dimensions = {},
   scopedSlots = {
@@ -78,7 +79,6 @@ export const RadialChart: FC<RadialChartProps> = ({
             valueDomainKey={valueDomainKey}
             labelDomainKey={labelDomainKey}
             {...arc}
-            sortValues={(a, b) => b - a}
           />
         </ColorScale>
       </LinearScale>

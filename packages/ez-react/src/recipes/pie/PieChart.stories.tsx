@@ -83,7 +83,7 @@ export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
   ...defaultArguments,
-  arc: { spacing: 0.5 },
+  arc: undefined,
 };
 
 export const Irregular = IrregularTemplate.bind({});

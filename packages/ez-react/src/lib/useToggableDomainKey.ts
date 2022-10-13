@@ -8,7 +8,8 @@ export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
     useState<string[]>(domainKeys);
 
   const sortDomainKeys = useCallback(
-    (domainkeys: string[]) => {
+    (keys?: string[]) => {
+      const domainkeys = keys ? [...keys] : [...activeDomainKeys];
       const maxValues = domainkeys.reduce((acc, curr: string, index) => {
         const values = data.map((datum) => datum[curr] as number);
         acc.push([Math.max(...values), index] as never);
@@ -21,19 +22,18 @@ export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
         acc.push(domainkeys[curr[1]] as never);
         return acc;
       }, []);
-      // console.log('sortedDomains', sortedDomains);
       setActiveDomainKeys(sortedDomains);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     },
-    [data, setActiveDomainKeys]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [data]
   );
 
   // Toggle Y axis domain keys whenever a legend key is clicked
   const toggleDomainKey = useCallback(
     (key: string, isActive: boolean, _color: string) => {
       if (isActive) {
-        setActiveDomainKeys([...activeDomainKeys, key]);
-        sortDomainKeys(activeDomainKeys);
+        const newActiveDomains = [...activeDomainKeys, key];
+        sortDomainKeys(newActiveDomains);
       } else {
         setActiveDomainKeys(
           activeDomainKeys.filter((domainKey) => domainKey !== key)
@@ -43,7 +43,7 @@ export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
     [activeDomainKeys, setActiveDomainKeys, sortDomainKeys]
   );
   useEffect(() => {
-    sortDomainKeys(activeDomainKeys);
+    sortDomainKeys();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortDomainKeys]);
 

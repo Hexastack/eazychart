@@ -33,7 +33,6 @@ export const Areas: FC<AreasProps> = ({
     () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : area.stroke),
     [area.stroke, colorScale, yDomainKey]
   );
-
   return (
     <Points
       xDomainKey={xDomainKey}
@@ -48,7 +47,7 @@ export const Areas: FC<AreasProps> = ({
             };
           });
           return (
-            <g className="ez-areas">
+            <g className="ez-area">
               <Area
                 shapeData={lineAreaData}
                 curve={area.curve}

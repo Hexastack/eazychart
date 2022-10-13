@@ -30,8 +30,8 @@ export const Areas: FC<AreasProps> = ({
   const { colorScale } = useColorScale();
 
   const color = useMemo(
-    () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : area.stroke),
-    [area.stroke, colorScale, yDomainKey]
+    () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : area.fill),
+    [area.fill, colorScale, yDomainKey]
   );
   return (
     <Points

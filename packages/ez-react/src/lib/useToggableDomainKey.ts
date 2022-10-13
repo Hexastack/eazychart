@@ -32,8 +32,7 @@ export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
   const toggleDomainKey = useCallback(
     (key: string, isActive: boolean, _color: string) => {
       if (isActive) {
-        const newActiveDomains = [...activeDomainKeys, key];
-        sortDomainKeys(newActiveDomains);
+        sortDomainKeys([...activeDomainKeys, key]);
       } else {
         setActiveDomainKeys(
           activeDomainKeys.filter((domainKey) => domainKey !== key)

@@ -55,8 +55,8 @@ export const Arcs: FC<ArcsProps> = ({
     labelDomainKey,
     angleScale,
     colorScale,
-    sortValues,
     startAngle,
+    sortValues,
   ]);
 
   return (

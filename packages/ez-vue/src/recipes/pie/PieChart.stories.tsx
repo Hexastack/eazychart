@@ -1,5 +1,5 @@
 import { Meta, Story } from '@storybook/vue';
-import { animationOptions, colors, rawData } from 'eazychart-dev/storybook/data';
+import { colors, rawData } from 'eazychart-dev/storybook/data';
 import { ChartWrapper } from '@/lib/storybook-utils';
 import PieChart from './PieChart';
 import SemiCircleChart from './SemiCircleChart';
@@ -67,25 +67,14 @@ export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
   colors,
-  valueDomainKey: 'value',
-  labelDomainKey: 'name',
+  domainKey: 'value',
+  data: rawData,
   padding: {
     left: 150,
     bottom: 100,
     right: 150,
     top: 100,
   },
-  animationOptions,
-  arc: {
-    donutRadius: 0,
-    cornerRadius: 0,
-    padAngle: 0,
-    padRadius: 0,
-    stroke: '#FFF',
-    strokeWidth: 0,
-    sortValues: null,
-  },
-  data: rawData,
 };
 
 Default.args = defaultArguments;
@@ -95,10 +84,12 @@ export const SemiCircle = SemiCircleTemplate.bind({});
 SemiCircle.args = defaultArguments;
 
 export const Radial = RadialTemplate.bind({});
+
 Radial.args = {
   ...defaultArguments,
-  arc: { ...defaultArguments.arc, spacing: 0.5 },
+  arc: undefined,
 };
 
 export const Irregular = IrregularTemplate.bind({});
+
 Irregular.args = defaultArguments;

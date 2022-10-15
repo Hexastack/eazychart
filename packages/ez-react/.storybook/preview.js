@@ -6,9 +6,9 @@ export const parameters = {
   actions: { argTypesRegex: '^on.*' },
   options: {
     storySort: {
-        method: 'alphabetical',
-        order: ['Get Started', ['Introduction', 'Installation', 'Your First Chart'], 'React'],
+      method: 'alphabetical',
+        order: ['Get Started', ['Introduction', 'Installation', 'Your First Chart', 'Essentials'], 'React'],
         locales: 'en-US',
-    }
+    },
   },
 };

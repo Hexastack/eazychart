@@ -11,7 +11,7 @@ import {
   Dimensions,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { getDomainByKeys, ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
@@ -155,6 +155,8 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
       Tooltip: $scopedSlots.Tooltip,
     };
 
+    const [, yAxisDomainMaxValue] = getDomainByKeys([yAxis.domainKey], activeData);
+
     return (
       <Chart
         dimensions={dimensions}
@@ -178,6 +180,7 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
               direction: Direction.VERTICAL,
               domainKey: yAxis.domainKey,
               nice: yAxis.nice || 0,
+              domain: [0, yAxisDomainMaxValue],
             },
           }}
         >

@@ -1,8 +1,6 @@
 import { Meta, Story } from '@storybook/vue';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
-import {
-  animationOptions, colors, padding, rawData,
-} from 'eazychart-dev/storybook/data';
+import { colors, rawData } from 'eazychart-dev/storybook/data';
 import ColumnChart from './ColumnChart';
 import LineColumnChart from './LineColumnChart';
 
@@ -53,11 +51,7 @@ const defaultArguments = {
   yAxis: {
     domainKey: 'value',
     title: 'Count',
-    nice: 2,
   },
-  padding,
-  animationOptions,
-  isRTL: false,
   data: rawData,
 };
 
@@ -79,7 +73,6 @@ const lineColumnArguments = {
   yLineAxis: {
     domainKey: 'v',
     title: 'Value',
-    nice: 2,
   },
 };
 

@@ -155,7 +155,7 @@ export default class BarChart extends mixins(ToggleDatumMixin) {
       Tooltip: $scopedSlots.Tooltip,
     };
 
-    const [, domainMaxValue] = getDomainByKeys([xAxis.domainKey], activeData);
+    const [, xAxisDomainMaxValue] = getDomainByKeys([xAxis.domainKey], activeData);
 
     return (
       <Chart
@@ -174,7 +174,7 @@ export default class BarChart extends mixins(ToggleDatumMixin) {
               domainKey: xAxis.domainKey,
               nice: xAxis.nice || 0,
               reverse: isRTL,
-              domain: [0, domainMaxValue],
+              domain: [0, xAxisDomainMaxValue],
             },
           }}
           yScaleConfig={{

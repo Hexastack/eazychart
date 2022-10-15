@@ -76,7 +76,10 @@ export const BarChart: FC<BarChartProps> = ({
     colors
   );
 
-  const [, domainMaxValue] = getDomainByKeys([xAxis.domainKey], activeData);
+  const [, xAxisDomainMaxValue] = getDomainByKeys(
+    [xAxis.domainKey],
+    activeData
+  );
 
   return (
     <Chart
@@ -96,7 +99,7 @@ export const BarChart: FC<BarChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: [0, domainMaxValue],
+            domain: [0, xAxisDomainMaxValue],
           },
         }}
         yScaleConfig={{

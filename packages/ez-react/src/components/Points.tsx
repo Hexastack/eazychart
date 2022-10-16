@@ -52,7 +52,7 @@ export const Points: FC<PointsProps> = ({
 
   if (scopedSlots && scopedSlots.default) {
     return (
-      <g className="ez-points">
+      <g className="ez-points" data-testid="ez-points">
         {scopedSlots.default({
           shapeData,
           scales: { xScale, yScale },
@@ -63,7 +63,7 @@ export const Points: FC<PointsProps> = ({
   }
 
   return (
-    <g className="ez-points" {...rest}>
+    <g className="ez-points" data-testid="ez-points" {...rest}>
       {shapeData.map((shapeDatum) => {
         return (
           <Point

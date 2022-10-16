@@ -53,7 +53,7 @@ export const Bubbles: FC<BubblesProps> = ({
   }
 
   return (
-    <g className="ez-bubbles" {...rest}>
+    <g className="ez-bubbles" data-testid="ez-bubbles" {...rest}>
       {shapeData.map((shapeDatum) => {
         return (
           <Bubble shapeDatum={shapeDatum} key={shapeDatum.id} fill={fill} />

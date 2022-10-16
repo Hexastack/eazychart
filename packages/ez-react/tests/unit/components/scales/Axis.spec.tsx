@@ -12,7 +12,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
@@ -46,7 +46,9 @@ describe('Axis', () => {
           }}
           isWrapped={false}
         >
-          <Axis position={Position.BOTTOM} tickCount={4} />
+          <svg>
+            <Axis position={Position.BOTTOM} tickCount={4} />
+          </svg>
         </CartesianScale>
       </Chart>
     );
@@ -56,6 +58,6 @@ describe('Axis', () => {
       wrapper.rerender(axisChart);
     });
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-axis', wrapper)).toMatchSnapshot();
   });
 });

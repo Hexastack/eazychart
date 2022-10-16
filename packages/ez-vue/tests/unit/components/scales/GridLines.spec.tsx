@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import { Direction } from 'eazychart-core/src/types';
 import {
@@ -6,6 +7,7 @@ import {
   verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
 import GridLines from '@/components/scales/grid/GridLines';
+import svgWrapper from '../../../common';
 
 describe('GridLines', () => {
   it('renders horizontal grid lines with four ticks', async () => {
@@ -26,7 +28,9 @@ describe('GridLines', () => {
         },
       },
     });
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await Vue.nextTick();
+
+    expect(await svgWrapper('ez-grid-lines', wrapper)).toMatchSnapshot();
   });
 
   it('renders vertical grid lines with four ticks', async () => {
@@ -47,6 +51,8 @@ describe('GridLines', () => {
         },
       },
     });
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await Vue.nextTick();
+
+    expect(await svgWrapper('ez-grid-lines', wrapper)).toMatchSnapshot();
   });
 });

@@ -11,6 +11,7 @@ import {
   colorScale,
 } from 'eazychart-core/src/sample-data';
 import Bars from '@/components/Bars';
+import svgWrapper from '../../common';
 
 describe('Bars', () => {
   it('renders svg rects with the right coordinates / dimensions', async () => {
@@ -39,9 +40,8 @@ describe('Bars', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-bars', wrapper)).toMatchSnapshot();
   });
 });

@@ -64,6 +64,7 @@ export const Arcs: FC<ArcsProps> = ({
       transform={`translate(${center.x},${center.y})`}
       {...rest}
       className="ez-arcs"
+      data-testid="ez-arcs"
     >
       {shapeData.map((shapeDatum, index) => {
         const arcWidth = radius / shapeData.length;

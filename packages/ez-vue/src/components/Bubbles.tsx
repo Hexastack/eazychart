@@ -56,11 +56,12 @@ export default class Bubbles extends Vue {
     const { shapeData, $scopedSlots, fill } = this;
 
     if ($scopedSlots.default) {
-      return <g class="ez-bubbles">{$scopedSlots.default({ shapeData })}</g>;
+      return <g class="ez-bubbles" data-testid="ez-bubbles"
+      >{$scopedSlots.default({ shapeData })}</g>;
     }
 
     return (
-      <g class="ez-bubbles">
+      <g class="ez-bubbles" data-testid="ez-bubbles">
         {shapeData.map((pointDatum) => (
           <Bubble shapeDatum={pointDatum} key={pointDatum.id} fill={fill} />
         ))}

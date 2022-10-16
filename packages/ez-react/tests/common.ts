@@ -1,4 +1,5 @@
 import { ChartProps } from '@/components/Chart';
+import { RenderResult } from '@testing-library/react';
 
 export const baseChartProps: ChartProps = {
   rawData: [],
@@ -15,4 +16,14 @@ export const baseChartProps: ChartProps = {
   },
   scopedSlots: {},
   isWrapped: false,
+};
+
+export const svgWrapper = async (
+  chartTestId: string,
+  wrapper: RenderResult
+) => {
+  const elementFindedByTestId = await wrapper.findByTestId(chartTestId);
+  const svgWrapper = document.createElement('svg');
+  svgWrapper.appendChild(elementFindedByTestId);
+  return svgWrapper;
 };

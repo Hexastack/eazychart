@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
 import { tooltip, pointA, dimensions } from 'eazychart-core/src/sample-data';
 import Point from '@/components/shapes/Point';
+import svgWrapper from '../../../common';
 
 describe('Point', () => {
   it('renders an svg circle with the right coordinates', async () => {
@@ -23,10 +24,9 @@ describe('Point', () => {
         dimensions,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-point', wrapper)).toMatchSnapshot();
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
@@ -47,8 +47,8 @@ describe('Point', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
+
     const circleShape = await wrapper.findByTestId('ez-point');
     expect(tooltip.showTooltip).not.toHaveBeenCalled();
     expect(tooltip.hideTooltip).not.toHaveBeenCalled();

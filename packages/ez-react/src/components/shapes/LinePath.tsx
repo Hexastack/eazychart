@@ -35,6 +35,7 @@ export const LinePath: FC<LinePathProps> = ({
       strokeLinecap={'round'}
       {...rest}
       className="ez-line"
+      data-testid="ez-line"
     />
   );
 };

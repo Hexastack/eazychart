@@ -129,7 +129,7 @@ export default class Pie extends Vue {
     const { outerRadius, innerRadius } = radius;
 
     return (
-      <g transform={`translate(${center.x},${center.y})`} class="ez-pie">
+      <g transform={`translate(${center.x},${center.y})`} class="ez-pie" data-testid="ez-pie">
         {shapeData.map((shapeDatum) => (
           <Arc
             key={shapeDatum.id}

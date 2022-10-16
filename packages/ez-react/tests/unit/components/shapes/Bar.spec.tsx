@@ -9,7 +9,7 @@ import {
 import { Bar } from '@/components/shapes/Bar';
 import { Chart } from '@/components/Chart';
 import { rectData } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import { act } from 'react-dom/test-utils';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
@@ -39,19 +39,15 @@ describe('Bar', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
-          <Bar shapeDatum={rectData} />
+        <Chart {...baseChartProps}>
+          <svg>
+            <Bar shapeDatum={rectData} />
+          </svg>
         </Chart>
       );
     });
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-bar', wrapper)).toMatchSnapshot();
     });
   });
 
@@ -64,7 +60,9 @@ describe('Bar', () => {
           TooltipComponent: () => <>{null}</>,
         }}
       >
-        <Bar shapeDatum={rectData} />
+        <svg>
+          <Bar shapeDatum={rectData} />
+        </svg>
       </Chart>
     );
 

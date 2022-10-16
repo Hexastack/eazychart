@@ -144,6 +144,7 @@ export default class IrregularArcs extends Vue {
       <g
         transform={`translate(${center.x},${center.y})`}
         class="ez-irregular-arcs"
+        data-testid="ez-irregular-arcs"
       >
         {shapeData.map((shapeDatum) => {
           const outerRadius = this.linearScale.scale(shapeDatum.value);

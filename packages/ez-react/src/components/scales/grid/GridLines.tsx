@@ -43,7 +43,7 @@ export const GridLines: FC<GridLinesProps> = ({
   }
 
   return (
-    <g className="ez-grid-lines">
+    <g className="ez-grid-lines" data-testid="ez-grid-lines">
       {currentGrid.ticks.map((tick: AxisTick, index: number) => {
         return (
           <line

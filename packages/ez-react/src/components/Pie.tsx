@@ -65,6 +65,7 @@ export const Pie: FC<PieProps> = ({
       transform={`translate(${center.x},${center.y})`}
       {...rest}
       className="ez-pie"
+      data-testid="ez-pie"
     >
       {shapeData.map((shapeDatum) => {
         return (

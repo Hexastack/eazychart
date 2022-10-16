@@ -70,6 +70,7 @@ export default class LinePath extends mixins(AnimationMixin) {
       stroke-linejoin={'round'}
       stroke-linecap={'round'}
       class="ez-line"
+      data-testid="ez-line"
     />;
   }
 }

@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import { Position } from 'eazychart-core/src/types';
 import {
@@ -10,9 +11,10 @@ import Axis from '@/components/scales/Axis';
 
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
+import svgWrapper from '../../../common';
 
 describe('Axis', () => {
-  it('renders axis with four ticks', () => {
+  it('renders axis with four ticks', async () => {
     const wrapper = render(Axis, {
       propsData: {
         position: Position.BOTTOM,
@@ -31,6 +33,8 @@ describe('Axis', () => {
         },
       },
     });
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await Vue.nextTick();
+
+    expect(await svgWrapper('ez-axis', wrapper)).toMatchSnapshot();
   });
 });

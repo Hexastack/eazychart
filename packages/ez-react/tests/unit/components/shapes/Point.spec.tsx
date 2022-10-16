@@ -10,7 +10,7 @@ import {
 import { Point } from '@/components/shapes/Point';
 import { Chart } from '@/components/Chart';
 import { pointA } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
@@ -39,26 +39,24 @@ describe('Point', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
-          <Point shapeDatum={pointA} />
+        <Chart {...baseChartProps}>
+          <svg>
+            <Point shapeDatum={pointA} />
+          </svg>
         </Chart>
       );
     });
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-point', wrapper)).toMatchSnapshot();
     });
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
     const wrapper = render(
       <Chart {...baseChartProps}>
-        <Point shapeDatum={pointA} />
+        <svg>
+          <Point shapeDatum={pointA} />
+        </svg>
       </Chart>
     );
 

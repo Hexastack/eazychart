@@ -10,7 +10,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { Bars } from '@/components/Bars';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
@@ -20,15 +20,7 @@ describe('Bars', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          rawData={rawData}
-          dimensions={dimensions}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
+        <Chart {...baseChartProps} rawData={rawData} dimensions={dimensions}>
           <CartesianScale
             xScaleConfig={{
               ScaleClass: ScaleBand,
@@ -41,15 +33,17 @@ describe('Bars', () => {
             isWrapped={false}
           >
             <ColorScale domainKey={'label'} range={colors} isWrapped={false}>
-              <Bars xDomainKey={'label'} yDomainKey={'value'} />
+              <svg>
+                <Bars xDomainKey={'label'} yDomainKey={'value'} />
+              </svg>
             </ColorScale>
           </CartesianScale>
         </Chart>
       );
     });
 
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-bars', wrapper)).toMatchSnapshot();
     });
   });
 });

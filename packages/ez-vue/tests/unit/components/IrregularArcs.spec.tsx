@@ -8,6 +8,7 @@ import {
   verticalLinearScale,
 } from 'eazychart-core/src/sample-data';
 import IrregularArcs from '@/components/IrregularArcs';
+import svgWrapper from '../../common';
 
 describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
@@ -34,9 +35,8 @@ describe('IrregularArcs', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-irregular-arcs', wrapper)).toMatchSnapshot();
   });
 });

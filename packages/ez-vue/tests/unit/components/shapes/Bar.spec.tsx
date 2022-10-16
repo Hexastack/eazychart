@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
 import { dimensions, rectData, tooltip } from 'eazychart-core/src/sample-data';
 import Bar from '@/components/shapes/Bar';
+import svgWrapper from '../../../common';
 
 describe('Bar', () => {
   it('renders an svg rect with the right coordinates / dimensions', async () => {
@@ -23,9 +24,9 @@ describe('Bar', () => {
         dimensions,
       },
     });
-
     await Vue.nextTick();
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+
+    expect(await svgWrapper('ez-bar', wrapper)).toMatchSnapshot();
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
@@ -46,8 +47,8 @@ describe('Bar', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
+
     const rectShape = await wrapper.findByTestId('ez-bar');
     expect(tooltip.showTooltip).not.toHaveBeenCalled();
     expect(tooltip.hideTooltip).not.toHaveBeenCalled();

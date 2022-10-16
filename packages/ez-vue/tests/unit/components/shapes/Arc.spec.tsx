@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { render, fireEvent } from '@testing-library/vue';
 import { dimensions, arcDatum, tooltip } from 'eazychart-core/src/sample-data';
 import Arc from '@/components/shapes/Arc';
+import svgWrapper from '../../../common';
 
 describe('Arc', () => {
   it('renders an svg arc with the right coordinates / dimensions', async () => {
@@ -14,20 +15,28 @@ describe('Arc', () => {
       provide: {
         __reactiveInject__: {
           chart: {
+            rawData: [],
             animationOptions: {
               easing: 'easeLinear',
               duration: 0,
               delay: 0,
             },
+            padding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0,
+            },
+            scopedSlots: {},
+            isWrapped: false,
           },
         },
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-arc', wrapper)).toMatchSnapshot();
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
@@ -45,8 +54,8 @@ describe('Arc', () => {
         dimensions,
       },
     });
-
     await Vue.nextTick();
+
     const rectShape = await wrapper.findByTestId('ez-arc');
     expect(tooltip.showTooltip).not.toHaveBeenCalled();
     expect(tooltip.hideTooltip).not.toHaveBeenCalled();

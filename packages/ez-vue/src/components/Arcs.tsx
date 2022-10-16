@@ -108,7 +108,11 @@ export default class Arcs extends Vue {
     } = this;
 
     return (
-      <g transform={`translate(${center.x},${center.y})`} class="ez-arcs">
+      <g
+        transform={`translate(${center.x},${center.y})`}
+        class="ez-arcs"
+        data-testid="ez-arcs"
+      >
         {shapeData.map((shapeDatum, index) => {
           const arcWidth = radius / shapeData.length;
           const outerRadius = radius - index * arcWidth;

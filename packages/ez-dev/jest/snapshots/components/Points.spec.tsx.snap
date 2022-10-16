@@ -1,39 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Points renders svg points with the right coordinates / path 1`] = `
-<g class="ez-points">
-  <circle
-    class="ez-point"
-    cx="0"
-    cy="500"
-    data-testid="ez-point"
-    fill="red"
-    r="6"
-    stroke="red"
-    stroke-width="1"
+<svg>
+  <g
+    class="ez-points"
+    data-testid="ez-points"
   >
-  </circle>
-  <circle
-    class="ez-point"
-    cx="400"
-    cy="0"
-    data-testid="ez-point"
-    fill="red"
-    r="6"
-    stroke="red"
-    stroke-width="1"
-  >
-  </circle>
-  <circle
-    class="ez-point"
-    cx="800"
-    cy="249.99999999999997"
-    data-testid="ez-point"
-    fill="red"
-    r="6"
-    stroke="red"
-    stroke-width="1"
-  >
-  </circle>
-</g>
+    <circle
+      class="ez-point"
+      cx="0"
+      cy="500"
+      data-testid="ez-point"
+      fill="red"
+      r="6"
+      stroke="red"
+      stroke-width="1"
+    />
+    <circle
+      class="ez-point"
+      cx="400"
+      cy="0"
+      data-testid="ez-point"
+      fill="red"
+      r="6"
+      stroke="red"
+      stroke-width="1"
+    />
+    <circle
+      class="ez-point"
+      cx="800"
+      cy="249.99999999999997"
+      data-testid="ez-point"
+      fill="red"
+      r="6"
+      stroke="red"
+      stroke-width="1"
+    />
+  </g>
+</svg>
 `;

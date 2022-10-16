@@ -10,7 +10,7 @@ import {
   verticalLinearScaleDef,
   radialLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { LinearScale } from '@/components/scales/LinearScale';
@@ -20,15 +20,7 @@ describe('Bubbles', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          rawData={rawData}
-          dimensions={dimensions}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
+        <Chart {...baseChartProps} rawData={rawData} dimensions={dimensions}>
           <CartesianScale
             xScaleConfig={{
               ScaleClass: ScaleLinear,
@@ -41,20 +33,22 @@ describe('Bubbles', () => {
             isWrapped={false}
           >
             <LinearScale {...radialLinearScaleDef} isWrapped={false}>
-              <Bubbles
-                xDomainKey={'amount'}
-                yDomainKey={'value'}
-                rDomainKey={'amount'}
-                fill={'blue'}
-              />
+              <svg>
+                <Bubbles
+                  xDomainKey={'amount'}
+                  yDomainKey={'value'}
+                  rDomainKey={'amount'}
+                  fill={'blue'}
+                />
+              </svg>
             </LinearScale>
           </CartesianScale>
         </Chart>
       );
     });
 
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-bubbles', wrapper)).toMatchSnapshot();
     });
   });
 });

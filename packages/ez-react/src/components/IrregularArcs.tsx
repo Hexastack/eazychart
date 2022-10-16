@@ -78,6 +78,7 @@ export const IrregularArcs: FC<IrregularArcsProps> = ({
       transform={`translate(${center.x},${center.y})`}
       {...rest}
       className="ez-irregular-arcs"
+      data-testid="ez-irregular-arcs"
     >
       {shapeData.map((shapeDatum) => {
         const outerRadius = radiusScale.scale(shapeDatum.value);

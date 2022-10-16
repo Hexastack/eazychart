@@ -9,6 +9,7 @@ import {
   radialLinearScale,
 } from 'eazychart-core/src/sample-data';
 import Bubbles from '@/components/Bubbles';
+import svgWrapper from '../../common';
 
 describe('Bubbles', () => {
   it('renders svg bubbles with the right coordinates / path', async () => {
@@ -39,9 +40,8 @@ describe('Bubbles', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-bubbles', wrapper)).toMatchSnapshot();
   });
 });

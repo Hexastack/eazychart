@@ -8,6 +8,7 @@ import {
   colorScale,
 } from 'eazychart-core/src/sample-data';
 import Arcs from '@/components/Arcs';
+import svgWrapper from '../../common';
 
 describe('Arcs', () => {
   it('renders svg radial with the right coordinates / dimensions', async () => {
@@ -33,9 +34,8 @@ describe('Arcs', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-arcs', wrapper)).toMatchSnapshot();
   });
 });

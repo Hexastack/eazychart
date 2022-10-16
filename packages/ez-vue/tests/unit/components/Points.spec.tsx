@@ -8,6 +8,7 @@ import {
   rawData,
 } from 'eazychart-core/src/sample-data';
 import Points from '@/components/Points';
+import svgWrapper from '../../common';
 
 describe('Points', () => {
   it('renders svg points with the right coordinates / path', async () => {
@@ -38,9 +39,8 @@ describe('Points', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-points', wrapper)).toMatchSnapshot();
   });
 });

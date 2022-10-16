@@ -17,6 +17,7 @@ exports[`IrregularPieChart renders a irregular pie chart 1`] = `
               <g class="ez-fragment-color-scale">
                 <g
                   class="ez-irregular-arcs"
+                  data-testid="ez-irregular-arcs"
                   transform="translate(300,200)"
                 >
                   <path

@@ -7,7 +7,7 @@ import {
   radialLinearScaleDef,
   rawData,
 } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { Arcs } from '@/components/Arcs';
 import { LinearScale } from '@/components/scales/LinearScale';
@@ -18,26 +18,20 @@ describe('Arcs', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          rawData={rawData}
-          dimensions={dimensions}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
+        <Chart {...baseChartProps} rawData={rawData} dimensions={dimensions}>
           <LinearScale {...radialLinearScaleDef} isWrapped={false}>
             <ColorScale domainKey={'label'} range={colors} isWrapped={false}>
-              <Arcs valueDomainKey={'amount'} labelDomainKey={'label'} />
+              <svg>
+                <Arcs valueDomainKey={'amount'} labelDomainKey={'label'} />
+              </svg>
             </ColorScale>
           </LinearScale>
         </Chart>
       );
     });
 
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-arcs', wrapper)).toMatchSnapshot();
     });
   });
 });

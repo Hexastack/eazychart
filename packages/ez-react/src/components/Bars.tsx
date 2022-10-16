@@ -38,7 +38,7 @@ export const Bars: FC<BarsProps> = ({ xDomainKey, yDomainKey, ...rest }) => {
   ]);
 
   return (
-    <g className="ez-bars" {...rest}>
+    <g className="ez-bars" data-testid="ez-bars" {...rest}>
       {scaledData.map((rectDatum) => {
         return <Bar key={rectDatum.id} shapeDatum={rectDatum} />;
       })}

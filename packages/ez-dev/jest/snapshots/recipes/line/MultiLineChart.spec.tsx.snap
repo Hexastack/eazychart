@@ -15,11 +15,15 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
           <g transform="translate(100, 100)">
             <g class="ez-fragment-cartesian-scale">
               <g class="ez-fragment-color-scale">
-                <g class="ez-points">
+                <g
+                  class="ez-points"
+                  data-testid="ez-points"
+                >
                   <g class="ez-segments">
                     <path
                       class="ez-line"
                       d="M0,400L400,379.3103448275862L600,372.41379310344826"
+                      data-testid="ez-line"
                       fill="none"
                       stroke="#339999"
                       stroke-linecap="round"
@@ -62,11 +66,15 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     </circle>
                   </g>
                 </g>
-                <g class="ez-points">
+                <g
+                  class="ez-points"
+                  data-testid="ez-points"
+                >
                   <g class="ez-segments">
                     <path
                       class="ez-line"
                       d="M0,275.86206896551727L400,68.96551724137932L600,0"
+                      data-testid="ez-line"
                       fill="none"
                       stroke="#993399"
                       stroke-linecap="round"
@@ -112,6 +120,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="middle"
                 transform="translate(0, 400)"
               >
@@ -283,6 +292,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="end"
                 transform="translate(0, 0)"
               >

@@ -98,7 +98,7 @@ export default class GridLines extends Vue {
     }
 
     return (
-      <g class="ez-grid-lines">
+      <g class="ez-grid-lines" data-testid="ez-grid-lines">
         {currentGrid.ticks.map((tick: AxisTick, index: number) => (
           <line
             key={index}

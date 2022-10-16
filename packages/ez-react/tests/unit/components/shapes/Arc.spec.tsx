@@ -9,7 +9,7 @@ import {
 import { Arc } from '@/components/shapes/Arc';
 import { Chart } from '@/components/Chart';
 import { arcDatum } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import { act } from 'react-dom/test-utils';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
@@ -37,21 +37,19 @@ describe('Arc', () => {
 
   it('renders an svg arc with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
+
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
-          <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
+        <Chart {...baseChartProps}>
+          <svg>
+            <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
+          </svg>
         </Chart>
       );
     });
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-arc', wrapper)).toMatchSnapshot();
     });
   });
 
@@ -64,7 +62,9 @@ describe('Arc', () => {
           TooltipComponent: () => <>{null}</>,
         }}
       >
-        <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
+        <svg>
+          <Arc shapeDatum={arcDatum} innerRadius={10} outerRadius={100} />
+        </svg>
       </Chart>
     );
 

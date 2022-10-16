@@ -11,7 +11,7 @@ import {
   horizontalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { Chart, ChartProps } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import { GridLines } from '@/components/scales/grid/GridLines';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
@@ -48,7 +48,9 @@ describe('GridLines', () => {
           }}
           isWrapped={false}
         >
-          <GridLines direction={Direction.HORIZONTAL} tickCount={4} />
+          <svg>
+            <GridLines direction={Direction.HORIZONTAL} tickCount={4} />
+          </svg>
         </CartesianScale>
       </Chart>
     );
@@ -58,7 +60,7 @@ describe('GridLines', () => {
       wrapper.rerender(gridChart);
     });
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-grid-lines', wrapper)).toMatchSnapshot();
   });
 
   it('renders vertical grid lines with four ticks', async () => {
@@ -75,7 +77,9 @@ describe('GridLines', () => {
           }}
           isWrapped={false}
         >
-          <GridLines direction={Direction.VERTICAL} tickCount={4} />
+          <svg>
+            <GridLines direction={Direction.VERTICAL} tickCount={4} />
+          </svg>
         </CartesianScale>
       </Chart>
     );
@@ -85,6 +89,6 @@ describe('GridLines', () => {
       wrapper.rerender(gridChart);
     });
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-grid-lines', wrapper)).toMatchSnapshot();
   });
 });

@@ -14,11 +14,15 @@ exports[`LineChart renders a line chart 1`] = `
         >
           <g transform="translate(100, 100)">
             <g class="ez-fragment-cartesian-scale">
-              <g class="ez-points">
+              <g
+                class="ez-points"
+                data-testid="ez-points"
+              >
                 <g class="ez-segments">
                   <path
                     class="ez-line"
                     d="M0,400L400,100L600,0"
+                    data-testid="ez-line"
                     fill="none"
                     stroke="red"
                     stroke-linecap="round"
@@ -63,6 +67,7 @@ exports[`LineChart renders a line chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="middle"
                 transform="translate(0, 400)"
               >
@@ -234,6 +239,7 @@ exports[`LineChart renders a line chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="end"
                 transform="translate(0, 0)"
               >

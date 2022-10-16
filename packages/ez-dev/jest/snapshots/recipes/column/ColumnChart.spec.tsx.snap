@@ -15,7 +15,10 @@ exports[`ColumnChart renders a column chart 1`] = `
           <g transform="translate(150, 100)">
             <g class="ez-fragment-cartesian-scale">
               <g class="ez-fragment-color-scale">
-                <g class="ez-bars">
+                <g
+                  class="ez-bars"
+                  data-testid="ez-bars"
+                >
                   <rect
                     class="ez-bar"
                     data-testid="ez-bar"
@@ -50,6 +53,7 @@ exports[`ColumnChart renders a column chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="middle"
                 transform="translate(0, 400)"
               >
@@ -121,6 +125,7 @@ exports[`ColumnChart renders a column chart 1`] = `
               </g>
               <g
                 class="ez-axis"
+                data-testid="ez-axis"
                 text-anchor="end"
                 transform="translate(0, 0)"
               >

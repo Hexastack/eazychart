@@ -17,6 +17,7 @@ exports[`RadialChart renders a Radial chart 1`] = `
               <g class="ez-fragment-color-scale">
                 <g
                   class="ez-arcs"
+                  data-testid="ez-arcs"
                   transform="translate(300,200)"
                 >
                   <path

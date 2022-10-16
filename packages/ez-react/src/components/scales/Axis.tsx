@@ -99,6 +99,7 @@ export const Axis: FC<AxisProps> = ({
       textAnchor={textAnchor}
       transform={currentAxisTransform}
       className="ez-axis"
+      data-testid="ez-axis"
     >
       <path d={axisPath} className="ez-axis-path"></path>
       {currentAxis.ticks

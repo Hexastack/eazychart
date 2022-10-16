@@ -16,6 +16,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
             <g class="ez-fragment-color-scale">
               <g
                 class="ez-pie"
+                data-testid="ez-pie"
                 transform="translate(300,400)"
               >
                 <path

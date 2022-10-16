@@ -74,14 +74,14 @@ export default class Points extends Vue {
 
     if ($scopedSlots.default) {
       return (
-        <g class="ez-points">
+        <g class="ez-points" data-testid="ez-points">
           {$scopedSlots.default({ shapeData, scales, dimensions })}
         </g>
       );
     }
 
     return (
-      <g class="ez-points">
+      <g class="ez-points" data-testid="ez-points">
         {shapeData.map((pointDatum) => (
           <Point
             shapeDatum={pointDatum}

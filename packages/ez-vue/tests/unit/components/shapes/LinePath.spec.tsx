@@ -2,6 +2,7 @@ import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import { dimensions, pointsData, tooltip } from 'eazychart-core/src/sample-data';
 import LinePath from '@/components/shapes/LinePath';
+import svgWrapper from '../../../common';
 
 describe('LinePath', () => {
   it('renders an svg path with the right coordinates / path', async () => {
@@ -23,9 +24,8 @@ describe('LinePath', () => {
         dimensions,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-line', wrapper)).toMatchSnapshot();
   });
 });

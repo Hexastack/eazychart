@@ -192,6 +192,7 @@ export default class Axis extends Vue {
         text-anchor={textAnchor}
         transform={currentAxisTransform}
         ref="axis"
+        data-testid="ez-axis"
       >
         <path class="ez-axis-path" d={axisPath}></path>
         {currentAxis.ticks.map((tick, index) => (

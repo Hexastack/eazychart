@@ -8,7 +8,7 @@ import {
   horizontalLinearScaleDef,
   verticalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, svgWrapper } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ScaleLinear } from 'eazychart-core/src';
@@ -18,15 +18,7 @@ describe('Points', () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <Chart
-          {...baseChartProps}
-          rawData={rawData}
-          dimensions={dimensions}
-          scopedSlots={{
-            LegendComponent: () => <>{null}</>,
-            TooltipComponent: () => <>{null}</>,
-          }}
-        >
+        <Chart {...baseChartProps} rawData={rawData} dimensions={dimensions}>
           <CartesianScale
             xScaleConfig={{
               ScaleClass: ScaleLinear,
@@ -38,20 +30,22 @@ describe('Points', () => {
             }}
             isWrapped={false}
           >
-            <Points
-              xDomainKey={'amount'}
-              yDomainKey={'value'}
-              r={6}
-              fill={'red'}
-              stroke={'red'}
-            />
+            <svg>
+              <Points
+                xDomainKey={'amount'}
+                yDomainKey={'value'}
+                r={6}
+                fill={'red'}
+                stroke={'red'}
+              />
+            </svg>
           </CartesianScale>
         </Chart>
       );
     });
 
-    await waitFor(() => {
-      expect(wrapper.container.innerHTML).toMatchSnapshot();
+    await waitFor(async () => {
+      expect(await svgWrapper('ez-points', wrapper)).toMatchSnapshot();
     });
   });
 });

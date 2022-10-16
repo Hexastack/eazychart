@@ -1,36 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Bubbles renders svg bubbles with the right coordinates / path 1`] = `
-<g class="ez-bubbles">
-  <circle
-    class="ez-point"
-    cx="0"
-    cy="500"
-    data-testid="ez-point"
-    fill="blue"
-    r="0"
-    stroke-width="1"
+<svg>
+  <g
+    class="ez-bubbles"
+    data-testid="ez-bubbles"
   >
-  </circle>
-  <circle
-    class="ez-point"
-    cx="400"
-    cy="0"
-    data-testid="ez-point"
-    fill="blue"
-    r="3.141592653589793"
-    stroke-width="1"
-  >
-  </circle>
-  <circle
-    class="ez-point"
-    cx="800"
-    cy="249.99999999999997"
-    data-testid="ez-point"
-    fill="blue"
-    r="6.283185307179586"
-    stroke-width="1"
-  >
-  </circle>
-</g>
+    <circle
+      class="ez-point"
+      cx="0"
+      cy="500"
+      data-testid="ez-point"
+      fill="blue"
+      r="0"
+      stroke-width="1"
+    />
+    <circle
+      class="ez-point"
+      cx="400"
+      cy="0"
+      data-testid="ez-point"
+      fill="blue"
+      r="3.141592653589793"
+      stroke-width="1"
+    />
+    <circle
+      class="ez-point"
+      cx="800"
+      cy="249.99999999999997"
+      data-testid="ez-point"
+      fill="blue"
+      r="6.283185307179586"
+      stroke-width="1"
+    />
+  </g>
+</svg>
 `;

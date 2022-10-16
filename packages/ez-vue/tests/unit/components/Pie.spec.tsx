@@ -7,6 +7,7 @@ import {
   colorScale,
 } from 'eazychart-core/src/sample-data';
 import Pie from '@/components/Pie';
+import svgWrapper from '../../common';
 
 describe('Pie', () => {
   it('renders svg pie with the right coordinates / dimensions', async () => {
@@ -32,9 +33,8 @@ describe('Pie', () => {
         tooltip,
       },
     });
-
     await Vue.nextTick();
 
-    expect(wrapper.container.innerHTML).toMatchSnapshot();
+    expect(await svgWrapper('ez-pie', wrapper)).toMatchSnapshot();
   });
 });

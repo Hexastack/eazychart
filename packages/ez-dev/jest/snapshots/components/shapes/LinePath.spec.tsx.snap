@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LinePath renders an svg path with the right coordinates / path 1`] = `
-<path
-  class="ez-line"
-  d="M10,20L10,40L20,40"
-  fill="none"
-  stroke="#1f77b4"
-  stroke-linecap="round"
-  stroke-linejoin="round"
-  stroke-width="1"
->
-</path>
+<svg>
+  <path
+    class="ez-line"
+    d="M10,20L10,40L20,40"
+    data-testid="ez-line"
+    fill="none"
+    stroke="#1f77b4"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="1"
+  />
+</svg>
 `;

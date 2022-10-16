@@ -44,7 +44,7 @@ export default class Bars extends Vue {
   render() {
     const { shapeData } = this;
     return (
-      <g class="ez-bars">
+      <g class="ez-bars" data-testid="ez-bars">
         {shapeData.map((rectDatum) => (
           <Bar shapeDatum={rectDatum} key={rectDatum.id} />
         ))}

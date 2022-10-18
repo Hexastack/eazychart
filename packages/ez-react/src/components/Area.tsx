@@ -3,17 +3,17 @@ import { AreaConfig, AreaData, MarkerConfig } from 'eazychart-core/src/types';
 import { Point } from '@/components/shapes/Point';
 import { Points } from '@/components/Points';
 import { useColorScale } from '@/components/scales/ColorScale';
-import { Area } from './shapes/Area';
+import { AreaPath } from './shapes/Area';
 import { LinePath } from './shapes/LinePath';
 
-export interface AreasProps extends SVGAttributes<SVGGElement> {
+export interface AreaProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
   yDomainKey: string;
   area?: AreaConfig;
   marker?: MarkerConfig;
 }
 
-export const Areas: FC<AreasProps> = ({
+export const Area: FC<AreaProps> = ({
   xDomainKey,
   yDomainKey,
   area = {
@@ -48,17 +48,18 @@ export const Areas: FC<AreasProps> = ({
           });
           return (
             <g className="ez-area">
-              <Area
+              <AreaPath
                 shapeData={lineAreaData}
                 curve={area.curve}
                 beta={area.beta}
                 fill={color}
+                opacity={area.opacity}
               />
               <LinePath
                 shapeData={shapeData}
                 curve={area.curve}
                 beta={area.beta}
-                stroke={area.stroke}
+                stroke={color}
                 strokeWidth={area.strokeWidth}
               />
               {!marker.hidden &&

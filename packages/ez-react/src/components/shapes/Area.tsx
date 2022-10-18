@@ -4,13 +4,13 @@ import { defaultColor, generateAreaPath } from 'eazychart-core/src';
 import { useAnimation } from '../../lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 
-export interface AreaProps extends SVGAttributes<SVGPathElement> {
+export interface AreaPathProps extends SVGAttributes<SVGPathElement> {
   shapeData?: AreaData;
   curve?: AreaCurve;
   beta?: number;
 }
 
-export const Area: FC<AreaProps> = ({
+export const AreaPath: FC<AreaPathProps> = ({
   shapeData = [],
   curve = 'curveLinear',
   beta,

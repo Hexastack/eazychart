@@ -1,6 +1,6 @@
 import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
-import { Areas } from '@/components/Areas';
+import { Area } from '@/components/Area';
 import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { CartesianScale } from '@/components/scales/CartesianScale';
@@ -117,11 +117,14 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
         <ColorScale domain={yAxis.domainKeys} range={colors}>
           {activeDomainKeys.map((yDomainKey) => {
             return (
-              <Areas
+              <Area
                 key={yDomainKey}
                 xDomainKey={xAxis.domainKey}
                 yDomainKey={yDomainKey}
-                area={area}
+                area={{
+                  ...area,
+                  opacity: 1 / activeDomainKeys.length,
+                }}
                 marker={marker}
               />
             );

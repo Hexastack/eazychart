@@ -17,7 +17,7 @@ import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
-import { Areas } from '@/components/Areas';
+import { Area } from '@/components/Area';
 
 export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -103,7 +103,7 @@ export const AreaChart: FC<AreaChartProps> = ({
         }}
       >
         <Grid directions={grid.directions} color={grid.color} />
-        <Areas
+        <Area
           xDomainKey={xAxis.domainKey}
           yDomainKey={yAxis.domainKey}
           area={area}

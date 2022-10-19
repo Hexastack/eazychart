@@ -6,7 +6,7 @@ import {
   LineColumnChartProps,
 } from '@/recipes/column/LineColumnChart';
 import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
-import { colors, evolutionData, rawData } from 'eazychart-dev/storybook/data';
+import { colors, rawData } from 'eazychart-dev/storybook/data';
 import {
   StackedColumnChart,
   StackedColumnChartProps,
@@ -95,10 +95,8 @@ export const StackedColumn = StackedColumnTemplate.bind({});
 
 const StackedColumnArguments = {
   ...defaultArguments,
-  colors: ['#339999', '#993399', '#333399'],
-  data: evolutionData,
   yAxis: {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    domainKeys: ['value', 'value1'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },

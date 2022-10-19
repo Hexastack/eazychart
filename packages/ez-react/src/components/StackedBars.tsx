@@ -4,6 +4,7 @@ import { Bar } from '@/components/shapes/Bar';
 import { useChart } from '@/lib/use-chart';
 import { useCartesianScales } from '@/components/scales/CartesianScale';
 import { useColorScale } from './scales/ColorScale';
+import { RectangleDatum } from 'eazychart-core/src/types';
 
 export interface StackedBarsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -20,30 +21,63 @@ export const StackedBars: FC<StackedBarsProps> = ({
   const { colorScale } = useColorScale();
 
   const scaledData = useMemo(() => {
-    return yDomainKeys.reduce((acc, yDomainKey) => {
-      // @ts-ignore
-      acc[yDomainKey] = scaleRectangleData(
-        data,
-        'id',
-        yDomainKey,
-        xScale,
-        yScale,
-        colorScale,
-        dimensions,
-        isRTL
-      );
-      return acc;
+    return yDomainKeys.reduce((acc, yDomainKey, index) => {
+      if (index === 0) {
+        // @ts-ignore
+        acc[yDomainKey] = scaleRectangleData(
+          data,
+          xDomainKey,
+          yDomainKey,
+          xScale,
+          yScale,
+          colorScale,
+          dimensions,
+          isRTL
+        );
+        return acc;
+      } else {
+        // @ts-ignore
+        acc[yDomainKey] = scaleRectangleData(
+          data,
+          xDomainKey,
+          yDomainKey,
+          xScale,
+          yScale,
+          colorScale,
+          dimensions,
+          isRTL
+        ).map((datum, id) => {
+          // @ts-ignore
+          const height0 = acc[yDomainKeys[index - 1]][id].height;
+          return datum.height > height0
+            ? { ...datum, height: datum.height - height0 }
+            : datum;
+        });
+        return acc;
+      }
     }, {});
-  }, [yDomainKeys, data, xScale, yScale, colorScale, dimensions, isRTL]);
+  }, [
+    data,
+    yDomainKeys,
+    xDomainKey,
+    xScale,
+    yScale,
+    colorScale,
+    dimensions,
+    isRTL,
+  ]);
 
   return (
     <g {...rest}>
-      {data.forEach((_datum, index) => {
-        return yDomainKeys.map((yDomainKey) => {
+      {yDomainKeys.map((yDomainKey) => {
+        // @ts-ignore
+        const shapeData = scaledData[yDomainKey] as RectangleDatum[];
+        const color = colorScale.scale(yDomainKey);
+        return shapeData.map((shapeDatum: RectangleDatum, index: number) => {
           return (
             <Bar
               key={`${yDomainKey}${index}`}
-              shapeDatum={scaledData[yDomainKey as never][index]}
+              shapeDatum={{ ...shapeDatum, color }}
             />
           );
         });

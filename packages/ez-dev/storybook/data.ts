@@ -9,30 +9,35 @@ export const dimensions = {
 export const rawData: RawData = [
   {
     value: 9,
+    value1: 20, 
     name: 'Alpha',
     id: '1',
     v: 2,
   },
   {
     value: 45,
+    value1: 20, 
     name: 'Beta',
     id: '2',
     v: 5,
   },
   {
     value: 29,
+    value1: 20, 
     name: 'Gamma',
     id: '3',
     v: 10,
   },
   {
     value: 30,
+    value1: 20, 
     name: 'Delta',
     id: '4',
     v: 4,
   },
   {
     value: 50,
+    value1: 20, 
     name: 'Epsilon',
     id: '5',
     v: 8,

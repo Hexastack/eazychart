@@ -49,15 +49,15 @@ export const StackedColumnChart: FC<StackedColumnChartProps> = ({
     top: 100,
   },
   xAxis = {
-    domainKey: 'xValue',
+    domainKey: 'name',
     position: Position.BOTTOM,
   },
   yAxis = {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    domainKeys: ['value', 'value1'],
     position: Position.LEFT,
   },
   isRTL = false,
-  dimensions = { height: 800, width: 1200 },
+  dimensions = {},
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -79,7 +79,7 @@ export const StackedColumnChart: FC<StackedColumnChartProps> = ({
         xScaleConfig={{
           ScaleClass: ScaleBand,
           definition: {
-            domainKey: 'id',
+            domainKey: xAxis.domainKey,
             direction: Direction.HORIZONTAL,
           },
         }}

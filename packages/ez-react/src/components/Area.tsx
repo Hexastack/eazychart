@@ -3,7 +3,7 @@ import { AreaConfig, AreaData, MarkerConfig } from 'eazychart-core/src/types';
 import { Point } from '@/components/shapes/Point';
 import { Points } from '@/components/Points';
 import { useColorScale } from '@/components/scales/ColorScale';
-import { AreaPath } from './shapes/Area';
+import { AreaPath } from './shapes/AreaPath';
 import { LinePath } from './shapes/LinePath';
 
 export interface AreaProps extends SVGAttributes<SVGGElement> {

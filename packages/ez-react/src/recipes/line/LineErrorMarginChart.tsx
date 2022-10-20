@@ -23,7 +23,7 @@ import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
-import { AreaPath } from '@/components/shapes/Area';
+import { AreaPath } from '@/components/shapes/AreaPath';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
 export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {

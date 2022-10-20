@@ -59,7 +59,7 @@ export const Area: FC<AreaProps> = ({
                 shapeData={shapeData}
                 curve={area.curve}
                 beta={area.beta}
-                stroke={color}
+                stroke={area.stroke}
                 strokeWidth={area.strokeWidth}
               />
               {!marker.hidden &&

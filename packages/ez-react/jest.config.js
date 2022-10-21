@@ -6,5 +6,4 @@ module.exports = {
     '@/(.*)': '<rootDir>/src/$1',
     'tests/(.*)': '<rootDir>/tests/$1',
   },
-  setupFilesAfterEnv: ['<rootDir>/tests/ignoreSvgTags.ts'],
 };

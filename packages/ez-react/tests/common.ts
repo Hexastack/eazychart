@@ -1,4 +1,5 @@
 import { ChartProps } from '@/components/Chart';
+import { RenderResult, RenderOptions, render } from '@testing-library/react';
 
 export const baseChartProps: ChartProps = {
   rawData: [],
@@ -15,4 +16,15 @@ export const baseChartProps: ChartProps = {
   },
   scopedSlots: {},
   isWrapped: false,
+};
+
+export const renderSVG = (
+  ui: React.ReactElement,
+  options?: Omit<RenderOptions, 'queries'>
+): RenderResult => {
+  const container = document.createElementNS(
+    'http://www.w3.org/2000/svg',
+    'svg'
+  );
+  return render(ui, { ...options, container });
 };

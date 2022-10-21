@@ -2,14 +2,13 @@ import React from 'react';
 import {
   createEvent,
   fireEvent,
-  render,
   RenderResult,
   waitFor,
 } from '@testing-library/react';
 import { Bar } from '@/components/shapes/Bar';
 import { Chart } from '@/components/Chart';
 import { rectData } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import { act } from 'react-dom/test-utils';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
@@ -38,7 +37,7 @@ describe('Bar', () => {
   it('renders an svg rect with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           scopedSlots={{
@@ -56,7 +55,7 @@ describe('Bar', () => {
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
-    const wrapper = render(
+    const wrapper = renderSVG(
       <Chart
         {...baseChartProps}
         scopedSlots={{

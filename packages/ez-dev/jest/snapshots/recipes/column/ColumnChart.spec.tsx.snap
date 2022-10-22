@@ -68,6 +68,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    Alpha
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -88,6 +91,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    Beta
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -108,6 +114,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    Gamma
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -139,6 +148,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    50
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -159,6 +171,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    55
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -179,6 +194,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    60
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -199,6 +217,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    65
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -219,6 +240,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    70
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -239,6 +263,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    75
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -259,6 +286,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    80
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -279,6 +309,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    85
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -299,6 +332,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    90
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -319,6 +355,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    95
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -339,6 +378,9 @@ exports[`ColumnChart renders a column chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    100
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"

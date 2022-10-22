@@ -87,7 +87,7 @@ export default class LineChart extends Vue {
     type: Object as PropType<ChartPadding>,
     default() {
       return {
-        left: 100,
+        left: 150,
         bottom: 100,
         right: 100,
         top: 100,

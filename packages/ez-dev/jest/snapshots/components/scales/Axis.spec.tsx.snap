@@ -21,6 +21,9 @@ exports[`Axis renders axis with four ticks 1`] = `
       y2="6"
     >
     </line>
+    <title>
+      10
+    </title>
     <text
       class="ez-axis-tick-text"
       dy="0.6em"
@@ -41,6 +44,9 @@ exports[`Axis renders axis with four ticks 1`] = `
       y2="6"
     >
     </line>
+    <title>
+      15
+    </title>
     <text
       class="ez-axis-tick-text"
       dy="0.6em"
@@ -61,6 +67,9 @@ exports[`Axis renders axis with four ticks 1`] = `
       y2="6"
     >
     </line>
+    <title>
+      20
+    </title>
     <text
       class="ez-axis-tick-text"
       dy="0.6em"
@@ -81,6 +90,9 @@ exports[`Axis renders axis with four ticks 1`] = `
       y2="6"
     >
     </line>
+    <title>
+      25
+    </title>
     <text
       class="ez-axis-tick-text"
       dy="0.6em"
@@ -101,6 +113,9 @@ exports[`Axis renders axis with four ticks 1`] = `
       y2="6"
     >
     </line>
+    <title>
+      30
+    </title>
     <text
       class="ez-axis-tick-text"
       dy="0.6em"

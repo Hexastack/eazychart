@@ -12,13 +12,13 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
           class="ez-svg"
           style="width: 800px; height: 600px;"
         >
-          <g transform="translate(100, 100)">
+          <g transform="translate(150, 100)">
             <g class="ez-fragment-cartesian-scale">
               <g class="ez-points">
                 <g class="ez-line-error-margin">
                   <path
                     class="ez-area"
-                    d="M0,361.2903225806451L400,116.1290322580645L600,0L600,348.38709677419354L400,309.6774193548387L0,400Z"
+                    d="M0,361.2903225806451L366.66666666666663,116.1290322580645L550,0L550,348.38709677419354L366.66666666666663,309.6774193548387L0,400Z"
                     fill="#ef476f80"
                     stroke="none"
                     stroke-linecap="round"
@@ -28,7 +28,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                   </path>
                   <path
                     class="ez-line"
-                    d="M0,374.1935483870968L400,180.6451612903226L600,116.1290322580645"
+                    d="M0,374.1935483870968L366.66666666666663,180.6451612903226L550,116.1290322580645"
                     fill="none"
                     stroke="red"
                     stroke-linecap="round"
@@ -49,7 +49,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                   </circle>
                   <circle
                     class="ez-point"
-                    cx="400"
+                    cx="366.66666666666663"
                     cy="180.6451612903226"
                     data-testid="ez-point"
                     fill="red"
@@ -60,7 +60,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                   </circle>
                   <circle
                     class="ez-point"
-                    cx="600"
+                    cx="550"
                     cy="116.1290322580645"
                     data-testid="ez-point"
                     fill="red"
@@ -78,7 +78,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
               >
                 <path
                   class="ez-axis-path"
-                  d="M0.5,6V-6V-0.5H600.5V6V-6"
+                  d="M0.5,6V-6V-0.5H550.5V6V-6"
                 >
                 </path>
                 <g
@@ -91,6 +91,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    0
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -103,7 +106,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(80.5, 0)"
+                  transform="translate(73.83333333333333, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -111,6 +114,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    2
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -123,7 +129,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(160.5, 0)"
+                  transform="translate(147.16666666666666, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -131,6 +137,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    4
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -143,7 +152,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(240.5, 0)"
+                  transform="translate(220.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -151,6 +160,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    6
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -163,7 +175,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(320.5, 0)"
+                  transform="translate(293.8333333333333, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -171,6 +183,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    8
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -183,7 +198,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(400.5, 0)"
+                  transform="translate(367.16666666666663, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -191,6 +206,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    10
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -203,7 +221,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(480.5, 0)"
+                  transform="translate(440.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -211,6 +229,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    12
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -223,7 +244,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(560.5, 0)"
+                  transform="translate(513.8333333333334, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -231,6 +252,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    14
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -262,6 +286,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    8
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -282,6 +309,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    10
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -302,6 +332,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    12
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -322,6 +355,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    14
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -342,6 +378,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    16
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -362,6 +401,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    18
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -382,6 +424,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    20
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -402,6 +447,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    22
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -422,6 +470,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    24
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -442,6 +493,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    26
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -462,6 +516,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    28
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -482,6 +539,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    30
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -502,6 +562,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    32
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -522,6 +585,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    34
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -542,6 +608,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    36
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -562,6 +631,9 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    38
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"

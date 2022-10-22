@@ -58,7 +58,7 @@ export const AreaChart: FC<AreaChartProps> = ({
     delay: 0,
   },
   padding = {
-    left: 100,
+    left: 150,
     bottom: 100,
     right: 100,
     top: 100,

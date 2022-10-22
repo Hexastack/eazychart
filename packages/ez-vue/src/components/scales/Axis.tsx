@@ -83,6 +83,7 @@ export default class Axis extends Vue {
   private axisLabelTransform = {
     textAnchor: Anchor.MIDDLE,
     transform: 'translate(0, 0) rotate(0 0 0)',
+    maxWidth: 0,
   };
 
   updateCurrentAxis() {
@@ -167,11 +168,13 @@ export default class Axis extends Vue {
   }
 
   get titleProps() {
+    const { maxWidth } = this.axisLabelTransform;
     return getAxisTitleProps(
       this.position,
       this.chart.dimensions,
       this.chart.padding,
       this.titleAlign,
+      maxWidth,
     );
   }
 
@@ -205,6 +208,9 @@ export default class Axis extends Vue {
               x2={getTick(tick.line.x2)}
               y2={getTick(tick.line.y2)}
             />
+            <title>
+              {tick.text.text.replace(/(\.\d{1}).*$/, (_a, c) => c)}
+            </title>
             <text
               x={tick.text.x}
               y={tick.text.y}
@@ -213,7 +219,10 @@ export default class Axis extends Vue {
               transform={axisLabelTransform.transform}
               class="ez-axis-tick-text"
             >
-              {tick.text.text.toString().replace(/(\.\d{1}).*$/, (_a, c) => c)}
+              {tick.text.text
+                .replace(/(\.\d{1}).*$/, (_a, c) => c)
+                .substring(0, 7)}
+              {tick.text.text.length > 7 ? '...' : ''}
             </text>
           </g>
         ))}

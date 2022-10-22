@@ -15,13 +15,14 @@ export const useAnimation = <T extends Interpolables>(
   const updateOnAnimate = useCallback(
     (v) => {
       if (v) {
-        setCurrentData(
-          typeof v === 'object'
-            ? {
-                ...v,
-              }
-            : v
-        );
+        const newVal = Array.isArray(v)
+          ? [...v]
+          : typeof v === 'object'
+          ? {
+              ...v,
+            }
+          : v;
+        setCurrentData(newVal);
       }
     },
     [setCurrentData]

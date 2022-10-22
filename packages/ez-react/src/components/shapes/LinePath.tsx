@@ -1,8 +1,6 @@
 import React, { FC, SVGAttributes, useMemo } from 'react';
 import { LineData, LineCurve } from 'eazychart-core/src/types';
 import { defaultColor, generateLinePath } from 'eazychart-core/src';
-import { useAnimation } from '@/lib/use-animation';
-import { useChart } from '@/lib/use-chart';
 
 export interface LinePathProps extends SVGAttributes<SVGPathElement> {
   shapeData?: LineData;
@@ -18,23 +16,35 @@ export const LinePath: FC<LinePathProps> = ({
   strokeWidth = 1,
   ...rest
 }) => {
-  const { animationOptions } = useChart();
   const dataPath = useMemo(
     () => generateLinePath(shapeData, curve, beta),
     [shapeData, curve, beta]
   );
-  const currentData =
-    useAnimation(dataPath, '', animationOptions, [curve]) || '';
   return (
     <path
-      d={currentData}
+      d={dataPath}
       stroke={stroke}
       strokeWidth={strokeWidth}
       fill="none"
       strokeLinejoin={'round'}
       strokeLinecap={'round'}
+      strokeDasharray={1000}
       {...rest}
       className="ez-line"
-    />
+    >
+      <animate
+        attributeName="stroke-dashoffset"
+        attributeType="CSS"
+        from={1000}
+        to={0}
+        dur={'1s'}
+      />
+      <animate
+        attributeName="stroke-dasharray"
+        attributeType="CSS"
+        to={1000}
+        dur={'2s'}
+      />
+    </path>
   );
 };

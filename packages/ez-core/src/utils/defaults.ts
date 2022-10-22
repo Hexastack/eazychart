@@ -102,7 +102,11 @@ export const defaultTooltipContext: TooltipContext = {
 export const defaultChartContext: ChartContext = {
   dimensions: defaultChartDimensions,
   padding: defaultChartPadding,
-  animationOptions: undefined,
+  animationOptions: {
+    duration: 0,
+    delay: 0,
+    easing: 'easeLinear',
+  },
   data: [],
   dataDict: {},
   isRTL: false,

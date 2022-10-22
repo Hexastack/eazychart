@@ -134,3 +134,34 @@ const MyApp = (props) => {
 ```
 
 ## Common Props 
+
+In this section, we will cover properties that most of the charts have in common. 
+These so-called props are responsible for the display and behavior of your chart. 
+
+### Data
+
+When adding a chart to your web project, 
+or creating a new chart recipe, We need to think about the fuel that we will use to fill up our engine, which is data.
+**EazyChart** handles it through its chart wrapper. 
+
+So if you are creating some sort of visualization for your web project, 
+you don’t have to worry about the data processing phase. 
+If you are creating a new chart recipe, 
+EazyChart has a couple of built-in functions that you can use to preprocess your data and make it presentable on your chart.
+
+```js
+const data = [
+  {
+	gdp: 19.485,
+	country: 'United States',
+  },
+  {
+	gdp: 12.238,
+	country: 'China',
+  },
+  {
+	gdp: 4.872,
+	country: 'Japan',
+  },
+];
+```

@@ -13,6 +13,7 @@ import LineColumnChart from './src/recipes/column/LineColumnChart';
 import Legend from './src/components/addons/legend/Legend';
 import Tooltip from './src/components/addons/tooltip/Tooltip';
 import MultiLineChart from './src/recipes/line/MultiLineChart';
+import ResponsiveChartContainer from './src/components/ResponsiveChartContainer';
 
 export {
   BarChart,
@@ -30,4 +31,5 @@ export {
   Legend,
   Tooltip,
   MultiLineChart,
+  ResponsiveChartContainer,
 };

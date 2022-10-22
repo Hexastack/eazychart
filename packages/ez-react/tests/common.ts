@@ -22,9 +22,9 @@ export const renderSVG = (
   ui: React.ReactElement,
   options?: Omit<RenderOptions, 'queries'>
 ): RenderResult => {
-  const container = document.createElementNS(
-    'http://www.w3.org/2000/svg',
-    'svg'
-  );
-  return render(ui, { ...options, container });
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  return render(ui, {
+    ...options,
+    container: svg as Element as HTMLElement,
+  });
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { ScaleLinear } from 'eazychart-core/src';
 import { Position } from 'eazychart-core/src/types';
 import {
@@ -12,7 +12,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 
@@ -50,7 +50,7 @@ describe('Axis', () => {
         </CartesianScale>
       </Chart>
     );
-    const wrapper = render(axisChart);
+    const wrapper = renderSVG(axisChart);
 
     await act(async () => {
       wrapper.rerender(axisChart);

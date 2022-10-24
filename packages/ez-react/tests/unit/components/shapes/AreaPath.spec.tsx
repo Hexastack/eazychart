@@ -6,7 +6,7 @@ import { areaData } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 
-describe('Area', () => {
+describe('AreaPath', () => {
   it('renders an svg path with the right coordinates / path', async () => {
     let wrapper: RenderResult;
     await act(async () => {

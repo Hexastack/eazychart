@@ -170,6 +170,7 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
             definition: {
               direction: Direction.HORIZONTAL,
               domainKey: xAxis.domainKey,
+              reverse: isRTL,
             },
           }}
           yScaleConfig={{

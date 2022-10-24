@@ -117,8 +117,8 @@ export const Chart: FC<ChartProps> = ({
 
   const chartData = useMemo(() => {
     const values = Object.values(dataDict);
-    return isRTL ? values.reverse() : values;
-  }, [dataDict, isRTL]);
+    return values;
+  }, [dataDict]);
 
   const onLegendResize = useCallback(
     ({ height }: Dimensions) => setLegendHeight(height),

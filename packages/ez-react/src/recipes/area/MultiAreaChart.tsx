@@ -49,6 +49,7 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
     stroke: '#339999',
     strokeWidth: 2,
     curve: 'curveLinear',
+    opacity: 0.5,
   },
   marker = {
     hidden: true,
@@ -121,10 +122,7 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
                 key={yDomainKey}
                 xDomainKey={xAxis.domainKey}
                 yDomainKey={yDomainKey}
-                area={{
-                  ...area,
-                  opacity: 1 / activeDomainKeys.length,
-                }}
+                area={area}
                 marker={marker}
               />
             );

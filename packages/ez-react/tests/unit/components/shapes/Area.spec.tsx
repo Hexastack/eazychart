@@ -1,6 +1,6 @@
 import React from 'react';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
-import { Area } from '@/components/shapes/Area';
+import { AreaPath } from '@/components/shapes/AreaPath';
 import { Chart } from '@/components/Chart';
 import { areaData } from 'eazychart-core/src/sample-data';
 import { baseChartProps } from 'tests/common';
@@ -18,7 +18,7 @@ describe('Area', () => {
             TooltipComponent: () => <>{null}</>,
           }}
         >
-          <Area shapeData={areaData} />
+          <AreaPath shapeData={areaData} />
         </Chart>
       );
     });

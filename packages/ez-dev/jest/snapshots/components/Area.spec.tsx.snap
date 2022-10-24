@@ -4,7 +4,7 @@ exports[`Area renders svg area with the right coordinates / dimensions 1`] = `
 <g class="ez-points">
   <g class="ez-area">
     <path
-      class="ez-area"
+      class="ez-area-path"
       d="M0,500L400,0L800,249.99999999999997L800,600L400,600L0,600Z"
       fill="#1f77b4"
       stroke="none"

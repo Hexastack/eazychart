@@ -17,7 +17,7 @@ exports[`AreaChart renders an area chart 1`] = `
               <g class="ez-points">
                 <g class="ez-area">
                   <path
-                    class="ez-area"
+                    class="ez-area-path"
                     d="M0,400L400,100L600,0L600,400L400,400L0,400Z"
                     fill="orange"
                     stroke="none"

@@ -33,7 +33,7 @@ export const AreaPath: FC<AreaPathProps> = ({
       strokeLinejoin={'round'}
       strokeLinecap={'round'}
       {...rest}
-      className="ez-area"
+      className="ez-area-path"
     />
   );
 };

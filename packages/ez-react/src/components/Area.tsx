@@ -59,7 +59,7 @@ export const Area: FC<AreaProps> = ({
                 shapeData={shapeData}
                 curve={area.curve}
                 beta={area.beta}
-                stroke={area.stroke}
+                stroke={color}
                 strokeWidth={area.strokeWidth}
               />
               {!marker.hidden &&
@@ -70,7 +70,7 @@ export const Area: FC<AreaProps> = ({
                       shapeDatum={shapeDatum}
                       r={marker.radius}
                       fill={marker.color}
-                      stroke={area.stroke}
+                      stroke={color}
                       strokeWidth={area.strokeWidth}
                     />
                   );

@@ -20,6 +20,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     class="ez-area"
                     d="M0,361.2903225806451L400,116.1290322580645L600,0L600,348.38709677419354L400,309.6774193548387L0,400Z"
                     fill="#ef476f80"
+                    opacity="1"
                     stroke="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"

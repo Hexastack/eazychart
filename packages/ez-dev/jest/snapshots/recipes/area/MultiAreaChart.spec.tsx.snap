@@ -32,7 +32,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       class="ez-line"
                       d="M0,400L400,379.3103448275862L600,372.41379310344826"
                       fill="none"
-                      stroke="red"
+                      stroke="#339999"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
@@ -45,7 +45,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#339999"
                       stroke-width="2"
                     >
                     </circle>
@@ -56,7 +56,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#339999"
                       stroke-width="2"
                     >
                     </circle>
@@ -67,7 +67,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#339999"
                       stroke-width="2"
                     >
                     </circle>
@@ -90,7 +90,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       class="ez-line"
                       d="M0,275.86206896551727L400,68.96551724137932L600,0"
                       fill="none"
-                      stroke="red"
+                      stroke="#993399"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
@@ -103,7 +103,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#993399"
                       stroke-width="2"
                     >
                     </circle>
@@ -114,7 +114,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#993399"
                       stroke-width="2"
                     >
                     </circle>
@@ -125,7 +125,7 @@ exports[`MultiAreaChart renders a multiarea chart 1`] = `
                       data-testid="ez-point"
                       fill="blue"
                       r="2"
-                      stroke="red"
+                      stroke="#993399"
                       stroke-width="2"
                     >
                     </circle>

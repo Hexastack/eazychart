@@ -15,6 +15,7 @@ export const AreaPath: FC<AreaPathProps> = ({
   curve = 'curveLinear',
   beta,
   fill = defaultColor,
+  opacity = 1,
   ...rest
 }) => {
   const { animationOptions } = useChart();
@@ -30,6 +31,7 @@ export const AreaPath: FC<AreaPathProps> = ({
       stroke={'none'}
       strokeWidth={0}
       fill={fill}
+      opacity={opacity}
       strokeLinejoin={'round'}
       strokeLinecap={'round'}
       {...rest}

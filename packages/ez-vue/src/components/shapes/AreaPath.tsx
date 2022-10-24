@@ -6,7 +6,7 @@ import { defaultColor, generateAreaPath } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
-export default class Area extends mixins(AnimationMixin) {
+export default class AreaPath extends mixins(AnimationMixin) {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
@@ -39,6 +39,14 @@ export default class Area extends mixins(AnimationMixin) {
   })
   private readonly fill!: string;
 
+  @Prop({
+    type: String,
+    default() {
+      return 1;
+    },
+  })
+  private readonly opacity!: string;
+
   private currentShapeData = '';
 
   get animationArguments() {
@@ -47,21 +55,24 @@ export default class Area extends mixins(AnimationMixin) {
       from: this.currentShapeData,
       to: path,
       options: this.chart.animationOptions,
-      onUpdate: (v: string) => this.currentShapeData = v,
+      onUpdate: (v: string) => (this.currentShapeData = v),
       dependencies: ['shapeData', 'curve', 'beta'],
     };
   }
 
   render() {
-    const { currentShapeData, fill } = this;
-    return <path
-      d={currentShapeData}
-      stroke={'none'}
-      stroke-width={0}
-      fill={fill}
-      stroke-linejoin={'round'}
-      stroke-linecap={'round'}
-      class="ez-area"
-    />;
+    const { currentShapeData, fill, opacity } = this;
+    return (
+      <path
+        d={currentShapeData}
+        stroke={'none'}
+        stroke-width={0}
+        fill={fill}
+        opacity={opacity}
+        stroke-linejoin={'round'}
+        stroke-linecap={'round'}
+        class="ez-area-path"
+      />
+    );
   }
 }

@@ -20,6 +20,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     class="ez-area"
                     d="M0,400L400,100L600,0L600,400L400,400L0,400Z"
                     fill="orange"
+                    opacity="1"
                     stroke="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -30,7 +31,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     class="ez-line"
                     d="M0,400L400,100L600,0"
                     fill="none"
-                    stroke="red"
+                    stroke="orange"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
@@ -43,7 +44,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     data-testid="ez-point"
                     fill="red"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>
@@ -54,7 +55,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     data-testid="ez-point"
                     fill="red"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>
@@ -65,7 +66,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     data-testid="ez-point"
                     fill="red"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>

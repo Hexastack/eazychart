@@ -1,6 +1,6 @@
 import React from 'react';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
-import { act, render, RenderResult, waitFor } from '@testing-library/react';
+import { act, RenderResult, waitFor } from '@testing-library/react';
 import {
   dimensions,
   rawData,
@@ -10,7 +10,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { Bars } from '@/components/Bars';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
@@ -19,7 +19,7 @@ describe('Bars', () => {
   it('renders svg rects with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           rawData={rawData}

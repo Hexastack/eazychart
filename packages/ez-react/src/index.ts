@@ -30,3 +30,7 @@ export {
   MultiLineChart,
   MultiLineChartProps,
 } from '@/recipes/line/MultiLineChart';
+export {
+  ResponsiveChartContainer,
+  ResponsiveChartContainerProps,
+} from '@/components/ResponsiveChartContainer';

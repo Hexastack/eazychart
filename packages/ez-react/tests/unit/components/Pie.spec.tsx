@@ -1,9 +1,9 @@
 import React from 'react';
-import { act, render, RenderResult, waitFor } from '@testing-library/react';
+import { act, RenderResult, waitFor } from '@testing-library/react';
 import { dimensions, colors, rawData } from 'eazychart-core/src/sample-data';
 import { Pie } from '@/components/Pie';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { ColorScale } from '@/components/scales/ColorScale';
 
@@ -11,7 +11,7 @@ describe('Pie', () => {
   it('renders svg pie with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           rawData={rawData}

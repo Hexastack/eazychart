@@ -27,7 +27,7 @@ import Grid from '@/components/scales/grid/Grid';
 import Points from '@/components/Points';
 import LinePath from '@/components/shapes/LinePath';
 import Point from '@/components/shapes/Point';
-import Area from '@/components/shapes/Area';
+import AreaPath from '@/components/shapes/AreaPath';
 import CartesianScale from '@/components/scales/CartesianScale';
 
 @Component({
@@ -40,6 +40,7 @@ import CartesianScale from '@/components/scales/CartesianScale';
     Axis,
     Legend,
     Tooltip,
+    AreaPath,
   },
 })
 export default class LineErrorMarginChart extends Vue {
@@ -254,7 +255,7 @@ export default class LineErrorMarginChart extends Vue {
 
                 return (
                   <g class="ez-line-error-margin">
-                    <Area
+                    <AreaPath
                       shapeData={lineAreaData as AreaData}
                       curve={line.curve as AreaCurve}
                       beta={line.beta}

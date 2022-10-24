@@ -214,7 +214,6 @@ export const getAxisLabelAttributes = (
     rotation,
     reverse
   );
-  console.log({ reverse });
   const sign = position === Position.TOP || position === Position.LEFT ? -1 : 1;
   const offset = sign * Math.floor(maxHeight / 2);
   const offsetTransform = isVerticalPosition(position)

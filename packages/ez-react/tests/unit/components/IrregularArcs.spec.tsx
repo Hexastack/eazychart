@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, RenderResult, waitFor } from '@testing-library/react';
+import { act, RenderResult, waitFor } from '@testing-library/react';
 import {
   dimensions,
   verticalLinearScaleDef,
@@ -8,7 +8,7 @@ import {
 } from 'eazychart-core/src/sample-data';
 import { IrregularArcs } from '@/components/IrregularArcs';
 import { Chart } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { LinearScale } from '@/components/scales/LinearScale';
 import { ColorScale } from '@/components/scales/ColorScale';
@@ -17,7 +17,7 @@ describe('IrregularArcs', () => {
   it('renders svg irregular arcs with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           rawData={rawData}

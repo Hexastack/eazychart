@@ -42,10 +42,10 @@ export default class AreaPath extends mixins(AnimationMixin) {
   @Prop({
     type: String,
     default() {
-      return 1;
+      return '1';
     },
   })
-  private readonly opacity!: string;
+  private readonly opacity!: number;
 
   private currentShapeData = '';
 

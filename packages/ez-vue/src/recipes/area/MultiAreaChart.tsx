@@ -90,6 +90,7 @@ export default class MultiAreaChart extends mixins(ToggleDomainKeyMixin) {
         easing: 'easeBack',
         duration: 400,
         delay: 0,
+        opacity: 0.5,
       };
     },
   })

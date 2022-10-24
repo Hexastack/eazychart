@@ -43,7 +43,15 @@ export const getAxisTitleProps = (
 ) => {
   // sets the Y axis title position
   if (position === Position.LEFT || position === Position.RIGHT) {
-    const x = maxTickWidth > 60 ? -60 : -maxTickWidth / 2;
+    const x =
+      position === Position.RIGHT
+        ? maxTickWidth > 60
+          ? 60
+          : +maxTickWidth / 2
+        : maxTickWidth > 60
+        ? -60
+        : -maxTickWidth / 2;
+
     const dy =
       (position === Position.RIGHT ? padding.right : -padding.left) / 2;
     let y = dimensions.height / 2;
@@ -206,6 +214,7 @@ export const getAxisLabelAttributes = (
     rotation,
     reverse
   );
+  console.log({ reverse });
   const sign = position === Position.TOP || position === Position.LEFT ? -1 : 1;
   const offset = sign * Math.floor(maxHeight / 2);
   const offsetTransform = isVerticalPosition(position)

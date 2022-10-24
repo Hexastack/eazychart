@@ -75,7 +75,7 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
     domainKey: 'xValue',
   },
   yAxis = {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    domainKeys: ['yValue2', 'yValue1', 'yValue'],
   },
   isRTL = false,
   dimensions = {},

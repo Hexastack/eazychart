@@ -87,7 +87,7 @@ MultiArea.args = {
     opacity: 0.5,
   },
   yAxis: {
-    domainKeys: ['yValue1', 'yValue2'],
+    domainKeys: ['yValue2', 'yValue1', 'yValue'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },

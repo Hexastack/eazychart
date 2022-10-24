@@ -216,10 +216,7 @@ export default class MultiAreaChart extends mixins(ToggleDomainKeyMixin) {
               <Area
                 xDomainKey={xAxis.domainKey}
                 yDomainKey={yDomainKey}
-                area={{
-                  ...area,
-                  opacity: 1 / activeDomainKeys.length,
-                }}
+                area={area}
                 marker={marker}
               />
             ))}

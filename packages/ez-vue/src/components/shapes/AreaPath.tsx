@@ -40,9 +40,9 @@ export default class AreaPath extends mixins(AnimationMixin) {
   private readonly fill!: string;
 
   @Prop({
-    type: String,
+    type: Number,
     default() {
-      return '1';
+      return 1;
     },
   })
   private readonly opacity!: number;

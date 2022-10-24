@@ -12,7 +12,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
           class="ez-svg"
           style="width: 800px; height: 600px;"
         >
-          <g transform="translate(100, 100)">
+          <g transform="translate(150, 100)">
             <g class="ez-fragment-cartesian-scale">
               <g class="ez-points">
                 <circle
@@ -28,7 +28,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </circle>
                 <circle
                   class="ez-point"
-                  cx="600"
+                  cx="550"
                   cy="200"
                   data-testid="ez-point"
                   fill="red"
@@ -39,7 +39,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </circle>
                 <circle
                   class="ez-point"
-                  cx="300"
+                  cx="275"
                   cy="0"
                   data-testid="ez-point"
                   fill="red"
@@ -56,7 +56,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
               >
                 <path
                   class="ez-axis-path"
-                  d="M0.5,6V-6V-0.5H600.5V6V-6"
+                  d="M0.5,6V-6V-0.5H550.5V6V-6"
                 >
                 </path>
                 <g
@@ -69,6 +69,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    50
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -81,7 +84,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(60.5, 0)"
+                  transform="translate(55.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -89,6 +92,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    55
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -101,7 +107,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(120.5, 0)"
+                  transform="translate(110.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -109,6 +115,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    60
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -121,7 +130,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(180.5, 0)"
+                  transform="translate(165.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -129,6 +138,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    65
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -141,7 +153,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(240.5, 0)"
+                  transform="translate(220.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -149,6 +161,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    70
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -161,7 +176,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(300.5, 0)"
+                  transform="translate(275.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -169,6 +184,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    75
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -181,7 +199,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(360.5, 0)"
+                  transform="translate(330.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -189,6 +207,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    80
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -201,7 +222,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(420.5, 0)"
+                  transform="translate(385.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -209,6 +230,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    85
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -221,7 +245,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(480.5, 0)"
+                  transform="translate(440.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -229,6 +253,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    90
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -241,7 +268,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(540.5, 0)"
+                  transform="translate(495.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -249,6 +276,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    95
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -261,7 +291,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(600.5, 0)"
+                  transform="translate(550.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -269,6 +299,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    100
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -300,6 +333,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    10
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -320,6 +356,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    12
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -340,6 +379,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    14
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -360,6 +402,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    16
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -380,6 +425,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    18
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -400,6 +448,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    20
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -420,6 +471,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    22
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -440,6 +494,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    24
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -460,6 +517,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    26
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -480,6 +540,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    28
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -500,6 +563,9 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    30
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"

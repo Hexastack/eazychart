@@ -12,14 +12,14 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
           class="ez-svg"
           style="width: 800px; height: 600px;"
         >
-          <g transform="translate(100, 100)">
+          <g transform="translate(150, 100)">
             <g class="ez-fragment-cartesian-scale">
               <g class="ez-fragment-color-scale">
                 <g class="ez-points">
                   <g class="ez-segments">
                     <path
                       class="ez-line"
-                      d="M0,400L400,379.3103448275862L600,372.41379310344826"
+                      d="M0,400L366.66666666666663,379.3103448275862L550,372.41379310344826"
                       fill="none"
                       stroke="#339999"
                       stroke-linecap="round"
@@ -40,7 +40,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     </circle>
                     <circle
                       class="ez-point"
-                      cx="400"
+                      cx="366.66666666666663"
                       cy="379.3103448275862"
                       data-testid="ez-point"
                       fill="blue"
@@ -51,7 +51,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     </circle>
                     <circle
                       class="ez-point"
-                      cx="600"
+                      cx="550"
                       cy="372.41379310344826"
                       data-testid="ez-point"
                       fill="blue"
@@ -66,7 +66,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                   <g class="ez-segments">
                     <path
                       class="ez-line"
-                      d="M0,275.86206896551727L400,68.96551724137932L600,0"
+                      d="M0,275.86206896551727L366.66666666666663,68.96551724137932L550,0"
                       fill="none"
                       stroke="#993399"
                       stroke-linecap="round"
@@ -87,7 +87,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     </circle>
                     <circle
                       class="ez-point"
-                      cx="400"
+                      cx="366.66666666666663"
                       cy="68.96551724137932"
                       data-testid="ez-point"
                       fill="blue"
@@ -98,7 +98,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     </circle>
                     <circle
                       class="ez-point"
-                      cx="600"
+                      cx="550"
                       cy="0"
                       data-testid="ez-point"
                       fill="blue"
@@ -117,7 +117,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
               >
                 <path
                   class="ez-axis-path"
-                  d="M0.5,6V-6V-0.5H600.5V6V-6"
+                  d="M0.5,6V-6V-0.5H550.5V6V-6"
                 >
                 </path>
                 <g
@@ -130,6 +130,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    0
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -142,7 +145,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(80.5, 0)"
+                  transform="translate(73.83333333333333, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -150,6 +153,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    2
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -162,7 +168,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(160.5, 0)"
+                  transform="translate(147.16666666666666, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -170,6 +176,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    4
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -182,7 +191,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(240.5, 0)"
+                  transform="translate(220.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -190,6 +199,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    6
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -202,7 +214,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(320.5, 0)"
+                  transform="translate(293.8333333333333, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -210,6 +222,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    8
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -222,7 +237,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(400.5, 0)"
+                  transform="translate(367.16666666666663, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -230,6 +245,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    10
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -242,7 +260,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(480.5, 0)"
+                  transform="translate(440.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -250,6 +268,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    12
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -262,7 +283,7 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(560.5, 0)"
+                  transform="translate(513.8333333333334, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -270,6 +291,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="6"
                   >
                   </line>
+                  <title>
+                    14
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.6em"
@@ -301,6 +325,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    20
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -321,6 +348,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    40
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -341,6 +371,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    60
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -361,6 +394,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    80
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -381,6 +417,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    100
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -401,6 +440,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    120
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -421,6 +463,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    140
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -441,6 +486,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    160
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -461,6 +509,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    180
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -481,6 +532,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    200
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -501,6 +555,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    220
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -521,6 +578,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    240
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -541,6 +601,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    260
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -561,6 +624,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    280
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"
@@ -581,6 +647,9 @@ exports[`MultiLineChart renders a multiline chart 1`] = `
                     y2="0"
                   >
                   </line>
+                  <title>
+                    300
+                  </title>
                   <text
                     class="ez-axis-tick-text"
                     dy="0.3em"

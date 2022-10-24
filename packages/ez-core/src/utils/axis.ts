@@ -38,10 +38,20 @@ export const getAxisTitleProps = (
   position: Position,
   dimensions: Dimensions,
   padding: ChartPadding,
-  titleAlign: Anchor
+  titleAlign: Anchor,
+  maxTickWidth: Number
 ) => {
+  // sets the Y axis title position
   if (position === Position.LEFT || position === Position.RIGHT) {
-    const x = 0;
+    const x =
+      position === Position.RIGHT
+        ? maxTickWidth > 60
+          ? 60
+          : +maxTickWidth / 2
+        : maxTickWidth > 60
+        ? -60
+        : -maxTickWidth / 2;
+
     const dy =
       (position === Position.RIGHT ? padding.right : -padding.left) / 2;
     let y = dimensions.height / 2;
@@ -55,7 +65,9 @@ export const getAxisTitleProps = (
       transform: `translate(${x},${y}) rotate(-90)`,
       dy,
     };
-  } else {
+  }
+  // sets the X axis title position
+  else {
     let x = dimensions.width / 2;
     const y = 0;
     const dy =
@@ -109,15 +121,10 @@ export const getGridLines = (
 ) => {
   const isHorizontal = direction === Direction.HORIZONTAL;
   const position = isHorizontal ? Position.BOTTOM : Position.LEFT;
-  return getAxis(
-    position,
-    scale,
-    dimensions,
-    {
-      tickCount,
-      tickSize: isHorizontal ? dimensions.height : dimensions.width
-    }
-  );
+  return getAxis(position, scale, dimensions, {
+    tickCount,
+    tickSize: isHorizontal ? dimensions.height : dimensions.width,
+  });
 };
 
 export const getAxisTickByCoordinate = (
@@ -136,13 +143,13 @@ const measureAxisLabels = (labels: SVGGraphicsElement[]) => {
     };
   }
 
-  const boundingBoxes = labels.map((l) => {
+  const boundingBoxes = labels.map(l => {
     return typeof l.getBBox === 'function'
       ? l.getBBox()
       : { width: 0, height: 0 };
   });
-  const maxHeight = Math.max(...boundingBoxes.map((b) => b.height));
-  const maxWidth = Math.max(...boundingBoxes.map((b) => b.width));
+  const maxHeight = Math.max(...boundingBoxes.map(b => b.height));
+  const maxWidth = Math.max(...boundingBoxes.map(b => b.width));
   return {
     maxHeight,
     maxWidth,
@@ -169,8 +176,7 @@ const calculateAxisTickRotation = (
 ) => {
   const { maxHeight, maxWidth, labelCount } = measureAxisLabels(labels);
   const measuredSize = labelCount * maxWidth;
-  const sign =
-    position === Position.TOP || position === Position.LEFT ? -1 : 1;
+  const sign = position === Position.TOP || position === Position.LEFT ? -1 : 1;
 
   // The more the overlap, the more we rotate
   let rotate: number;
@@ -201,20 +207,20 @@ export const getAxisLabelAttributes = (
   rotation: number | 'auto',
   reverse: boolean
 ) => {
-  const { rotate, maxHeight, anchor } = calculateAxisTickRotation(
+  const { rotate, maxHeight, maxWidth, anchor } = calculateAxisTickRotation(
     scale,
     elements,
     position,
     rotation,
     reverse
   );
-  const sign =
-    position === Position.TOP || position === Position.LEFT ? -1 : 1;
+  const sign = position === Position.TOP || position === Position.LEFT ? -1 : 1;
   const offset = sign * Math.floor(maxHeight / 2);
   const offsetTransform = isVerticalPosition(position)
     ? `translate(${offset}, 0)`
     : `translate(0, ${offset})`;
   return {
+    maxWidth,
     textAnchor: anchor,
     transform: `${offsetTransform} rotate(${rotate} 0 0)`,
   };

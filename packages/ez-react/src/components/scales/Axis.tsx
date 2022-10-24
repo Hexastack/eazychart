@@ -91,8 +91,17 @@ export const Axis: FC<AxisProps> = ({
   }, [currentAxis]);
 
   const titleProps = useMemo(() => {
-    return getAxisTitleProps(position, dimensions, padding, titleAlign);
-  }, [position, dimensions, padding, titleAlign]);
+    // using the tick text max width to help set the distance between the Y axis title and the ticks
+    const { maxWidth } = axisLabelTransform;
+    return getAxisTitleProps(
+      position,
+      dimensions,
+      padding,
+      titleAlign,
+      maxWidth
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentAxis, position, dimensions, padding, titleAlign]);
 
   return (
     <g
@@ -115,6 +124,9 @@ export const Axis: FC<AxisProps> = ({
                 y2={getTick(tick.line.y2 || 0)}
                 className="ez-axis-tick-line"
               />
+              <title>
+                {tick.text.text.replace(/(\.\d{1}).*$/, (_a, c) => c)}
+              </title>
               <text
                 x={tick.text.x}
                 y={tick.text.y}
@@ -124,7 +136,10 @@ export const Axis: FC<AxisProps> = ({
                 className="ez-axis-tick-text"
                 ref={(el) => (labelsRef.current[index] = el)}
               >
-                {tick.text.text.replace(/(\.\d{1}).*$/, (_a, c) => c)}
+                {tick.text.text
+                  .replace(/(\.\d{1}).*$/, (_a, c) => c)
+                  .substring(0, 7)}
+                {tick.text.text.length > 7 ? '...' : ''}
               </text>
             </g>
           );

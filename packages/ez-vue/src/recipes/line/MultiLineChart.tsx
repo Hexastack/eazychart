@@ -98,7 +98,7 @@ export default class MultiLineChart extends mixins(ToggleDomainKeyMixin) {
     type: Object as PropType<ChartPadding>,
     default() {
       return {
-        left: 100,
+        left: 150,
         bottom: 100,
         right: 100,
         top: 100,
@@ -211,12 +211,12 @@ export default class MultiLineChart extends mixins(ToggleDomainKeyMixin) {
           <Grid directions={grid.directions} color={grid.color} />
           <ColorScale definition={{ domain: yAxis.domainKeys, range: colors }}>
             {activeDomainKeys.map((yDomainKey) => (
-                <Segments
-                  xDomainKey={xAxis.domainKey}
-                  yDomainKey={yDomainKey}
-                  line={line}
-                  marker={marker}
-                />
+              <Segments
+                xDomainKey={xAxis.domainKey}
+                yDomainKey={yDomainKey}
+                line={line}
+                marker={marker}
+              />
             ))}
           </ColorScale>
           <Axis

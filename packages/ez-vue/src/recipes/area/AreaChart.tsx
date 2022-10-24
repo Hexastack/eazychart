@@ -95,7 +95,7 @@ export default class AreaChart extends Vue {
     type: Object as PropType<ChartPadding>,
     default() {
       return {
-        left: 100,
+        left: 150,
         bottom: 100,
         right: 100,
         top: 100,
@@ -243,7 +243,8 @@ export default class AreaChart extends Vue {
           <Axis
             props={{
               ...yAxis,
-              position: yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
+              position:
+                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
             }}
           />
         </CartesianScale>

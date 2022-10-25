@@ -19,17 +19,17 @@ exports[`Tooltip renders the tooltip when a shape is hovered 1`] = `
   >
   </div>
   <div class="ez-tooltip-text">
-    <div class="ez-tooltip-attribute value0">
+    <div class="ez-tooltip-attribute value">
       <div class="ez-tooltip-attribute--name">
-        value0 :
+        value :
       </div>
       <div class="ez-tooltip-attribute--value">
         35
       </div>
     </div>
-    <div class="ez-tooltip-attribute value">
+    <div class="ez-tooltip-attribute value1">
       <div class="ez-tooltip-attribute--name">
-        value :
+        value1 :
       </div>
       <div class="ez-tooltip-attribute--value">
         50

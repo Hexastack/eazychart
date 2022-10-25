@@ -20,7 +20,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
               >
                 <path
                   class="ez-arc"
-                  d="M-306.4177772475912,-257.11504387461576A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
+                  d="M-323.6067977499789,-235.1141009169893A400,400,0,0,0,-400,-4.898587196589413e-14L0,0Z"
                   data-testid="ez-arc"
                   fill="red"
                   stroke="#FFF"
@@ -29,7 +29,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
                 </path>
                 <path
                   class="ez-arc"
-                  d="M400,0A400,400,0,0,0,69.45927106677216,-393.9231012048832L0,0Z"
+                  d="M400,0A400,400,0,0,0,53.69330632706222,-396.37990470717386L0,0Z"
                   data-testid="ez-arc"
                   fill="blue"
                   stroke="#FFF"
@@ -38,7 +38,7 @@ exports[`SemiCircleChart renders a semi-circle chart 1`] = `
                 </path>
                 <path
                   class="ez-arc"
-                  d="M69.45927106677216,-393.9231012048832A400,400,0,0,0,-306.4177772475912,-257.11504387461576L0,0Z"
+                  d="M53.69330632706222,-396.37990470717386A400,400,0,0,0,-323.6067977499789,-235.1141009169893L0,0Z"
                   data-testid="ez-arc"
                   fill="green"
                   stroke="#FFF"

@@ -5,7 +5,7 @@ exports[`Points renders svg points with the right coordinates / path 1`] = `
   <circle
     class="ez-point"
     cx="0"
-    cy="500"
+    cy="450"
     data-testid="ez-point"
     fill="red"
     r="6"
@@ -27,7 +27,7 @@ exports[`Points renders svg points with the right coordinates / path 1`] = `
   <circle
     class="ez-point"
     cx="800"
-    cy="249.99999999999997"
+    cy="200.00000000000003"
     data-testid="ez-point"
     fill="red"
     r="6"

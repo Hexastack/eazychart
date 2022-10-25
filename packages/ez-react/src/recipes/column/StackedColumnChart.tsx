@@ -1,11 +1,10 @@
 import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
-import { Bars } from '@/components/Bars';
 import { Chart } from '@/components/Chart';
 import { Axis } from '@/components/scales/Axis';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
-import { Bar } from '@/components/shapes/Bar';
+import { StackedBars } from '@/components/StackedBars';
 import { useToggableDomainKey } from '@/lib/useToggableDomainKey';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src/scales';
 import {
@@ -17,7 +16,6 @@ import {
   Dimensions,
   Direction,
   AxisConfigMulti,
-  RectangleDatum,
 } from 'eazychart-core/src/types';
 import React, { FC, SVGAttributes } from 'react';
 
@@ -67,7 +65,6 @@ export const StackedColumnChart: FC<StackedColumnChartProps> = ({
 }) => {
   const { activeDomainKeys, activeDomain, toggleDomainKey } =
     useToggableDomainKey(data, yAxis.domainKeys);
-  let previousShapeData: RectangleDatum[] = [];
 
   return (
     <Chart
@@ -96,37 +93,11 @@ export const StackedColumnChart: FC<StackedColumnChartProps> = ({
         }}
       >
         <ColorScale domain={yAxis.domainKeys} range={colors}>
-          {activeDomainKeys.map((activeDomaiKey) => {
-            return (
-              // we need to find a way to sort the the data columns so that it shows bars in the corret manner
-              <Bars
-                xDomainKey={xAxis.domainKey}
-                yDomainKey={activeDomaiKey}
-                scopedSlots={{
-                  default: ({ shapeData, scales: { colorScale } }) => {
-                    const color = colorScale.scale(activeDomaiKey);
-                    const newShapeData = shapeData.map((shapeDatum, index) =>
-                      previousShapeData[index]
-                        ? {
-                            ...shapeDatum,
-                            height:
-                              shapeDatum.height >
-                              previousShapeData[index].height
-                                ? shapeDatum.height -
-                                  previousShapeData[index].height
-                                : shapeDatum.height,
-                          }
-                        : shapeDatum
-                    );
-                    previousShapeData = [...shapeData];
-                    return newShapeData.map((shapeDatum) => (
-                      <Bar shapeDatum={{ ...shapeDatum, color }} />
-                    ));
-                  },
-                }}
-              />
-            );
-          })}
+          <StackedBars
+            singleDomainKey={xAxis.domainKey}
+            multiDomainKeys={activeDomainKeys}
+            direction={Direction.VERTICAL}
+          />
         </ColorScale>
         <Axis
           position={xAxis.position || Position.BOTTOM}

@@ -96,7 +96,7 @@ export const StackedColumn = StackedColumnTemplate.bind({});
 const StackedColumnArguments = {
   ...defaultArguments,
   yAxis: {
-    domainKeys: ['value1', 'value', 'value2'],
+    domainKeys: ['value', 'value1', 'value2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },

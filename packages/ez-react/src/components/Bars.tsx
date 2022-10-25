@@ -62,7 +62,15 @@ export const Bars: FC<BarsProps> = ({
     isRTL,
   ]);
 
-  return (
+  return scopedSlots && scopedSlots.default ? (
+    <g className="ez-stacked-bars" {...rest}>
+      {scopedSlots.default({
+        shapeData: scaledData,
+        scales: { xScale, yScale, colorScale },
+        dimensions,
+      })}
+    </g>
+  ) : (
     <g className="ez-bars" {...rest}>
       {scopedSlots && scopedSlots.default
         ? scopedSlots.default({

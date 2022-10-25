@@ -461,7 +461,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
           >
           </div>
           <span class="ez-legend-text">
-            value0
+            value
           </span>
         </div>
         <div
@@ -474,7 +474,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
           >
           </div>
           <span class="ez-legend-text">
-            value
+            value1
           </span>
         </div>
       </div>

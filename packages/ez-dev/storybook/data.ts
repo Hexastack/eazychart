@@ -1,5 +1,8 @@
-import { AnimationOptions, ChartPadding, RawData } from 'eazychart-core/src/types';
-
+import {
+  AnimationOptions,
+  ChartPadding,
+  RawData,
+} from 'eazychart-core/src/types';
 
 export const dimensions = {
   width: 800,
@@ -8,40 +11,40 @@ export const dimensions = {
 
 export const rawData: RawData = [
   {
+    value: 5,
     value1: 9,
-    value: 5, 
-    value2: 15, 
+    value2: 15,
     name: 'Alpha',
     id: '1',
     v: 2,
   },
   {
+    value: 20,
     value1: 45,
-    value: 20, 
     value2: 56,
     name: 'Beta',
     id: '2',
     v: 5,
   },
   {
+    value: 15,
     value1: 29,
-    value: 15, 
     value2: 33,
     name: 'Gamma',
     id: '3',
     v: 10,
   },
   {
+    value: 18,
     value1: 30,
-    value: 18, 
     value2: 40,
     name: 'Delta',
     id: '4',
     v: 4,
   },
   {
+    value: 30,
     value1: 50,
-    value: 30, 
     value2: 70,
     name: 'Epsilon',
     id: '5',

@@ -39,7 +39,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </circle>
                 <circle
                   class="ez-point"
-                  cx="300"
+                  cx="333.33333333333337"
                   cy="0"
                   data-testid="ez-point"
                   fill="red"
@@ -76,12 +76,72 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     transform="translate(0, 0) rotate(0 0 0)"
                     y="9"
                   >
+                    35
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(67.16666666666666, 0)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="0"
+                    y2="6"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    y="9"
+                  >
+                    40
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(133.83333333333331, 0)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="0"
+                    y2="6"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    y="9"
+                  >
+                    45
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(200.5, 0)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="0"
+                    y2="6"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.6em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(0 0 0)"
+                    y="9"
+                  >
                     50
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(60.5, 0)"
+                  transform="translate(267.16666666666663, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -101,7 +161,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(120.5, 0)"
+                  transform="translate(333.83333333333337, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -121,7 +181,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(180.5, 0)"
+                  transform="translate(400.5, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -141,7 +201,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(240.5, 0)"
+                  transform="translate(467.1666666666667, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -161,7 +221,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(300.5, 0)"
+                  transform="translate(533.8333333333333, 0)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -181,86 +241,6 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(360.5, 0)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="0"
-                    y2="6"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.6em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(0 0 0)"
-                    y="9"
-                  >
-                    80
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(420.5, 0)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="0"
-                    y2="6"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.6em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(0 0 0)"
-                    y="9"
-                  >
-                    85
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(480.5, 0)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="0"
-                    y2="6"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.6em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(0 0 0)"
-                    y="9"
-                  >
-                    90
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(540.5, 0)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="0"
-                    y2="6"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.6em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(0 0 0)"
-                    y="9"
-                  >
-                    95
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
                   transform="translate(600.5, 0)"
                 >
                   <line
@@ -276,7 +256,7 @@ exports[`ScatterChart renders a scatter chart 1`] = `
                     transform="translate(0, 0) rotate(0 0 0)"
                     y="9"
                   >
-                    100
+                    80
                   </text>
                 </g>
               </g>

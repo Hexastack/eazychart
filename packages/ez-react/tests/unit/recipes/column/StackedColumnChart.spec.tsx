@@ -16,7 +16,7 @@ describe('StackedColumnChart', () => {
             domainKey: 'label',
           }}
           yAxis={{
-            domainKeys: ['value0', 'value'],
+            domainKeys: ['value', 'value1'],
           }}
           animationOptions={{
             easing: 'easeBack',

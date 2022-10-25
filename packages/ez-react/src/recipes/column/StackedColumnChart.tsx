@@ -94,8 +94,8 @@ export const StackedColumnChart: FC<StackedColumnChartProps> = ({
       >
         <ColorScale domain={yAxis.domainKeys} range={colors}>
           <StackedBars
-            singleDomainKey={xAxis.domainKey}
-            multiDomainKeys={activeDomainKeys}
+            domainKey={xAxis.domainKey}
+            stackDomainKeys={activeDomainKeys}
             direction={Direction.VERTICAL}
           />
         </ColorScale>

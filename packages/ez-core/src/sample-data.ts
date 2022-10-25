@@ -22,22 +22,22 @@ export const rawData: RawData = [
   {
     id: '1',
     label: 'Alpha',
-    value0: 35,
-    value: 50,
+    value: 35,
+    value1: 50,
     amount: 10,
   },
   {
     id: '2',
     label: 'Beta',
-    value0: 80,
-    value: 100,
+    value: 80,
+    value1: 100,
     amount: 20,
   },
   {
     id: '3',
     label: 'Gamma',
-    value0: 60,
-    value: 75,
+    value: 60,
+    value1: 75,
     amount: 30,
   },
 ];

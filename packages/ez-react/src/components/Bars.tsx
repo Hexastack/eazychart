@@ -62,19 +62,17 @@ export const Bars: FC<BarsProps> = ({
     isRTL,
   ]);
 
-  return scopedSlots && scopedSlots.default ? (
-    <g className="ez-stacked-bars" {...rest}>
-      {scopedSlots.default({
-        shapeData: scaledData,
-        scales: { xScale, yScale, colorScale },
-        dimensions,
-      })}
-    </g>
-  ) : (
+  return (
     <g className="ez-bars" {...rest}>
-      {scaledData.map((rectDatum) => {
-        return <Bar key={rectDatum.id} shapeDatum={rectDatum} />;
-      })}
+      {scopedSlots && scopedSlots.default
+        ? scopedSlots.default({
+            shapeData: scaledData,
+            scales: { xScale, yScale, colorScale },
+            dimensions,
+          })
+        : scaledData.map((rectDatum) => {
+            return <Bar key={rectDatum.id} shapeDatum={rectDatum} />;
+          })}
     </g>
   );
 };

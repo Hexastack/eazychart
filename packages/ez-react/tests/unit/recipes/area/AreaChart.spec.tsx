@@ -12,15 +12,17 @@ describe('AreaChart', () => {
         <AreaChart
           data={pointsRawData}
           area={{
-            stroke: 'red',
+            stroke: 'orange',
             strokeWidth: 2,
             fill: 'orange',
           }}
           marker={{
             hidden: false,
-            color: 'red',
+            color: 'orange',
             radius: 2,
           }}
+          xAxis={{ domainKey: 'xValue' }}
+          yAxis={{ domainKey: 'yValue' }}
           grid={{ directions: [] }}
           dimensions={dimensions}
           animationOptions={{

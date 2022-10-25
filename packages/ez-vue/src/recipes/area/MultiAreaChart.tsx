@@ -134,7 +134,7 @@ export default class MultiAreaChart extends mixins(ToggleDomainKeyMixin) {
     type: Object as PropType<AxisConfig<Position.LEFT | Position.RIGHT>>,
     default() {
       return {
-        domainKeys: ['yValue1', 'yValue2'],
+        domainKeys: ['yValue', 'yValue1', 'yValue2'],
       };
     },
   })

@@ -23,6 +23,7 @@ describe('MultiAreaChart', () => {
           }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          xAxis={{ domainKey: 'xValue' }}
           yAxis={{
             domainKeys: ['yValue', 'zValue'],
           }}

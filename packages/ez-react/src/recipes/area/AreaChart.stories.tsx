@@ -70,7 +70,7 @@ MultiArea.args = {
   ...defaultArguments,
   area: { ...defaultArguments.area, opacity: 0.5 },
   yAxis: {
-    domainKeys: ['yValue2', 'yValue1', 'yValue'],
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },

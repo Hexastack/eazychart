@@ -42,12 +42,22 @@ export default class Bars extends Vue {
   }
 
   render() {
-    const { shapeData } = this;
+    const {
+      shapeData, chart, $scopedSlots, cartesianScale, colorScale,
+    } = this;
+    const { dimensions } = chart;
+
     return (
       <g class="ez-bars">
-        {shapeData.map((rectDatum) => (
-          <Bar shapeDatum={rectDatum} key={rectDatum.id} />
-        ))}
+        {$scopedSlots.default
+          ? $scopedSlots.default({
+            shapeData,
+            scales: { ...cartesianScale, colorScale },
+            dimensions,
+          })
+          : shapeData.map((rectDatum) => (
+              <Bar shapeDatum={rectDatum} key={rectDatum.id} />
+          ))}
       </g>
     );
   }

@@ -1,5 +1,6 @@
-import Vue, { PropType } from 'vue';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import { ScaleLinear } from 'eazychart-core/src';
+import Component, { mixins } from 'vue-class-component';
 import {
   AnimationOptions,
   AxisConfig,
@@ -9,41 +10,46 @@ import {
   GridConfig,
   Position,
   RawData,
-  AreaConfig,
+  LineConfig,
   MarkerConfig,
+  AxisConfigMulti,
+  AreaConfig,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
-import { ScaleLinear } from 'eazychart-core/src';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
-import Points from '@/components/Points';
-import LinePath from '@/components/shapes/LinePath';
-import Area from '@/components/Area';
-import Point from '@/components/shapes/Point';
 import CartesianScale from '@/components/scales/CartesianScale';
+import Area from '@/components/Area';
+import ToggleDomainKeyMixin from '@/lib/ToggleDomainKeyMixin';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
     Chart,
     Grid,
     Area,
-    LinePath,
-    Points,
-    Point,
     Axis,
     Legend,
     Tooltip,
   },
 })
-export default class AreaChart extends Vue {
+export default class MultiAreaChart extends mixins(ToggleDomainKeyMixin) {
   @Prop({
     type: Array as PropType<RawData>,
     required: true,
   })
   private readonly data!: RawData;
+
+  @Prop({
+    type: Array,
+    default() {
+      return ['#339999', '#993399', '#333399'];
+    },
+  })
+  private readonly colors!: string[];
 
   @Prop({
     type: Object as PropType<Dimensions>,
@@ -57,13 +63,13 @@ export default class AreaChart extends Vue {
     type: Object as PropType<AreaConfig>,
     default() {
       return {
-        fill: '#339999',
-        lineWidth: 2,
+        stroke: '#339999',
+        strokeWidth: 2,
         curve: 'curveLinear',
       };
     },
   })
-  private readonly area!: AreaConfig;
+  private readonly area!: LineConfig;
 
   @Prop({
     type: Object as PropType<MarkerConfig>,
@@ -84,6 +90,7 @@ export default class AreaChart extends Vue {
         easing: 'easeBack',
         duration: 400,
         delay: 0,
+        opacity: 0.5,
       };
     },
   })
@@ -127,11 +134,11 @@ export default class AreaChart extends Vue {
     type: Object as PropType<AxisConfig<Position.LEFT | Position.RIGHT>>,
     default() {
       return {
-        domainKey: 'yValue',
+        domainKeys: ['yValue', 'yValue1', 'yValue2'],
       };
     },
   })
-  private readonly yAxis!: AxisConfig<Position.LEFT | Position.RIGHT>;
+  private readonly yAxis!: AxisConfigMulti<Position.LEFT | Position.RIGHT>;
 
   @Prop({
     type: Boolean,
@@ -141,11 +148,20 @@ export default class AreaChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
+  getData(): RawData {
+    return this.data;
+  }
+
+  getDomainKeys(): string[] {
+    return this.yAxis.domainKeys;
+  }
+
   render() {
     const {
       xAxis,
       yAxis,
       data,
+      colors,
       area,
       marker,
       padding,
@@ -154,7 +170,17 @@ export default class AreaChart extends Vue {
       isRTL,
       $scopedSlots,
       dimensions,
+      activeDomain,
+      activeDomainKeys,
+      toggleDomainKey,
     } = this;
+
+    const scopedSlots = {
+      Legend: $scopedSlots.Legend
+        ? $scopedSlots.Legend
+        : () => <Legend props={{ onToggle: toggleDomainKey }} />,
+      Tooltip: $scopedSlots.Tooltip,
+    };
 
     return (
       <Chart
@@ -162,7 +188,7 @@ export default class AreaChart extends Vue {
         rawData={data}
         padding={padding}
         animationOptions={animationOptions}
-        scopedSlots={$scopedSlots}
+        scopedSlots={scopedSlots}
         isRTL={isRTL}
       >
         <CartesianScale
@@ -179,30 +205,41 @@ export default class AreaChart extends Vue {
             ScaleClass: ScaleLinear,
             definition: {
               direction: Direction.VERTICAL,
-              domainKey: yAxis.domainKey,
+              domain: activeDomain,
               nice: yAxis.nice || 0,
             },
           }}
         >
           <Grid directions={grid.directions} color={grid.color} />
-          <Area
-            xDomainKey={xAxis.domainKey}
-            yDomainKey={yAxis.domainKey}
-            area={area}
-            marker={marker}
+          <ColorScale definition={{ domain: yAxis.domainKeys, range: colors }}>
+            {activeDomainKeys.map((yDomainKey) => (
+              <Area
+                xDomainKey={xAxis.domainKey}
+                yDomainKey={yDomainKey}
+                area={area}
+                marker={marker}
+              />
+            ))}
+          </ColorScale>
+          <Axis
+            position={xAxis.position || Position.BOTTOM}
+            title={xAxis.title}
+            titleAlign={xAxis.titleAlign}
+            tickLength={xAxis.tickLength}
+            tickCount={xAxis.tickCount}
+            tickSize={xAxis.tickLength}
+            tickFormat={xAxis.tickFormat}
           />
           <Axis
-            props={{
-              ...xAxis,
-              position: xAxis.position || Position.BOTTOM,
-            }}
-          />
-          <Axis
-            props={{
-              ...yAxis,
-              position:
-                yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT),
-            }}
+            position={
+              yAxis.position || (isRTL ? Position.RIGHT : Position.LEFT)
+            }
+            title={yAxis.title}
+            titleAlign={yAxis.titleAlign}
+            tickLength={yAxis.tickLength}
+            tickCount={yAxis.tickCount}
+            tickSize={yAxis.tickLength}
+            tickFormat={yAxis.tickFormat}
           />
         </CartesianScale>
       </Chart>

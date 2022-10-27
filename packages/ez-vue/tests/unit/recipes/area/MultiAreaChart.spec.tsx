@@ -1,30 +1,32 @@
 import Vue from 'vue';
 import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { render } from '@testing-library/vue';
-import AreaChart from '@/recipes/area/AreaChart';
+import MultiAreaChart from '@/recipes/area/MultiAreaChart';
 
 // eslint-disable-next-line import/no-unresolved
 import 'tests/mocks/ResizeObserver';
 
-describe('AreaChart', () => {
-  it('renders an area chart', async () => {
-    const wrapper = render(AreaChart, {
+describe('MultiAreaChart', () => {
+  it('renders a multiarea chart', async () => {
+    const wrapper = render(MultiAreaChart, {
       propsData: {
         data: pointsRawData,
         area: {
-          stroke: 'orange',
+          stroke: 'red',
           strokeWidth: 2,
-          fill: 'orange',
+          opacity: 0.5,
         },
         marker: {
           hidden: false,
-          color: 'orange',
+          color: 'blue',
           radius: 2,
         },
-        xAxis: { domainKey: 'xValue' },
-        yAxis: { domainKey: 'yValue' },
         grid: { directions: [] },
         dimensions,
+        xAxis: { domainKey: 'xValue' },
+        yAxis: {
+          domainKeys: ['yValue', 'zValue'],
+        },
         animationOptions: {
           easing: 'easeBack',
           duration: 0,

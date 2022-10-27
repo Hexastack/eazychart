@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
 import { dimensions, areaData, tooltip } from 'eazychart-core/src/sample-data';
-import Area from '@/components/shapes/Area';
+import AreaPath from '@/components/shapes/AreaPath';
 
-describe('Area', () => {
+describe('AreaPath', () => {
   it('renders an svg path with the right coordinates / path', async () => {
-    const wrapper = render(Area, {
+    const wrapper = render(AreaPath, {
       propsData: {
         shapeData: areaData,
       },

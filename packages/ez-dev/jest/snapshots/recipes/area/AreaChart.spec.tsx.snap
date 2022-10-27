@@ -17,9 +17,10 @@ exports[`AreaChart renders an area chart 1`] = `
               <g class="ez-points">
                 <g class="ez-area">
                   <path
-                    class="ez-area"
+                    class="ez-area-path"
                     d="M0,400L400,100L600,0L600,400L400,400L0,400Z"
                     fill="orange"
+                    opacity="1"
                     stroke="none"
                     stroke-linecap="round"
                     stroke-linejoin="round"
@@ -30,7 +31,7 @@ exports[`AreaChart renders an area chart 1`] = `
                     class="ez-line"
                     d="M0,400L400,100L600,0"
                     fill="none"
-                    stroke="red"
+                    stroke="orange"
                     stroke-linecap="round"
                     stroke-linejoin="round"
                     stroke-width="2"
@@ -41,9 +42,9 @@ exports[`AreaChart renders an area chart 1`] = `
                     cx="0"
                     cy="400"
                     data-testid="ez-point"
-                    fill="red"
+                    fill="orange"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>
@@ -52,9 +53,9 @@ exports[`AreaChart renders an area chart 1`] = `
                     cx="400"
                     cy="100"
                     data-testid="ez-point"
-                    fill="red"
+                    fill="orange"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>
@@ -63,9 +64,9 @@ exports[`AreaChart renders an area chart 1`] = `
                     cx="600"
                     cy="0"
                     data-testid="ez-point"
-                    fill="red"
+                    fill="orange"
                     r="2"
-                    stroke="red"
+                    stroke="orange"
                     stroke-width="2"
                   >
                   </circle>

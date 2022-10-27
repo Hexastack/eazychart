@@ -44,6 +44,7 @@ export default class Legend extends Vue {
   }
 
   get colorScale() {
+    // console.log('sayabna 3aad', this.chart.getScale('colorScale')?.scale.domain())
     return this.chart.getScale('colorScale');
   }
 

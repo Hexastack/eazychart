@@ -191,7 +191,6 @@ export default class Chart extends Vue {
   // access the color domain for example. Otherwise, we would need to add a portal
   // which is still experimental in react + does not exist in Vue2.
   registerScale(scaleId: string, scale: AnyScale) {
-    // console.log('hanii lennaa', scale.scale.domain());
     this.scales = {
       ...this.scales,
       [scaleId]: scale,

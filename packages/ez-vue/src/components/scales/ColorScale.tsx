@@ -27,10 +27,12 @@ export default class ColorScale extends Vue {
   created() {
     this.colorScale = this.defineScale();
     this.chart.registerScale('colorScale', this.colorScale);
+    // console.log('mounted', this.colorScale?.scale.domain());
   }
 
   updated() {
     this.colorScale = this.defineScale();
+    // console.log('hohaa', this.colorScale.scale.domain());
   }
 
   @Watch('chart.dimensions')
@@ -38,6 +40,7 @@ export default class ColorScale extends Vue {
   recomputeScale() {
     const { dimensions, data } = this.chart;
     this.colorScale.computeScale(dimensions, data);
+    // console.log('hehe', this.colorScale.scale.domain());
   }
 
   defineScale() {

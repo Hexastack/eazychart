@@ -49,7 +49,7 @@ export const LineChart: FC<LineChartProps> = ({
   },
   animationOptions = {
     easing: 'easeBack',
-    duration: 400,
+    duration: 2000,
     delay: 0,
   },
   padding = {

@@ -4,6 +4,7 @@ import { Point } from '@/components/shapes/Point';
 import { Points } from '@/components/Points';
 import { LinePath } from '@/components/shapes/LinePath';
 import { useColorScale } from '@/components/scales/ColorScale';
+import { useChart } from '@/lib/use-chart';
 
 export interface SegmentsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -26,6 +27,9 @@ export const Segments: FC<SegmentsProps> = ({
     color: '#FFF',
   },
 }) => {
+  const {
+    animationOptions: { duration },
+  } = useChart();
   const { colorScale } = useColorScale();
 
   const color = useMemo(
@@ -54,7 +58,9 @@ export const Segments: FC<SegmentsProps> = ({
                 strokeWidth={line.strokeWidth}
               />
               {!marker.hidden &&
-                pointData.map((pointDatum) => {
+                pointData.map((pointDatum, idx) => {
+                  const dur = duration / pointData.length;
+                  const delay = dur * (idx + 1);
                   return (
                     <Point
                       key={pointDatum.id}
@@ -63,7 +69,25 @@ export const Segments: FC<SegmentsProps> = ({
                       fill={marker.color}
                       stroke={color}
                       strokeWidth={line.strokeWidth}
-                    />
+                      opacity={0}
+                    >
+                      <animate
+                        attributeName="opacity"
+                        attributeType="CSS"
+                        from={0}
+                        to={1}
+                        begin={`${delay}ms`}
+                        dur={`${dur}ms`}
+                        fill={'freeze'}
+                      />
+                      <animate
+                        attributeName="r"
+                        from={0}
+                        to={marker.radius}
+                        begin={`${delay}ms`}
+                        dur={`${dur}ms`}
+                      />
+                    </Point>
                   );
                 })}
             </g>

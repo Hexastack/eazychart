@@ -38,7 +38,7 @@ export const generateLinePath = (
   shapeData: LineData,
   curve: LineCurve,
   beta?: number
-) => {
+): string => {
   const lineGenerator = line();
   if (curve) {
     const curves = {
@@ -50,7 +50,7 @@ export const generateLinePath = (
   }
   const data = shapeData.map((d) => [d.x, d.y]);
   // @ts-ignore <-- remove this when TS version is fix
-  return lineGenerator(data);
+  return lineGenerator(data) || '';
 };
 
 /**

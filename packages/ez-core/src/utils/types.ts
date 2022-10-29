@@ -77,7 +77,7 @@ export interface RadialConfig extends PieConfig {
 export interface ChartContext {
   dimensions: Dimensions;
   padding: ChartPadding;
-  animationOptions?: AnimationOptions;
+  animationOptions: AnimationOptions;
   data: NormalizedData;
   dataDict: NormalizedDataDict;
   isRTL: boolean;

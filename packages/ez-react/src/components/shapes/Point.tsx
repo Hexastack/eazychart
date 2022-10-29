@@ -1,7 +1,6 @@
 import React, { FC, MouseEventHandler, SVGAttributes } from 'react';
 import { PointDatum } from 'eazychart-core/src/types';
 import { defaultPointDatum, defaultPointRadius } from 'eazychart-core/src';
-import { useAnimation } from '@/lib/use-animation';
 import { useTooltip } from '@/components/addons/tooltip/use-tooltip';
 import { useChart } from '@/lib/use-chart';
 
@@ -15,17 +14,14 @@ export const Point: FC<PointProps> = ({
   fill,
   stroke,
   strokeWidth = 1,
+  children,
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
-  const { animationOptions } = useChart();
-  const currentShapeDatum = useAnimation(
-    shapeDatum,
-    defaultPointDatum,
-    animationOptions
-  );
-
-  const { x, y, color } = currentShapeDatum;
+  const {
+    animationOptions: { duration },
+  } = useChart();
+  const { x, y, color } = shapeDatum;
 
   const handleMouseOver: MouseEventHandler<SVGCircleElement> = (event) => {
     showTooltip(shapeDatum, event as any as MouseEvent);
@@ -53,6 +49,12 @@ export const Point: FC<PointProps> = ({
       strokeWidth={strokeWidth}
       data-testid="ez-point"
       className="ez-point"
-    />
+    >
+      {children ? (
+        children
+      ) : (
+        <animate attributeName="r" from={0} to={r} dur={`${duration}ms`} />
+      )}
+    </circle>
   );
 };

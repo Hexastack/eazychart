@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Area renders svg area with the right coordinates / dimensions 1`] = `
+<g class="ez-points">
+  <g class="ez-area">
+    <path
+      class="ez-area-path"
+      d="M0,500L400,0L800,249.99999999999997L800,600L400,600L0,600Z"
+      fill="#1f77b4"
+      opacity="1"
+      stroke="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="0"
+    >
+    </path>
+    <path
+      class="ez-line"
+      d="M0,500L400,0L800,249.99999999999997"
+      fill="none"
+      stroke="#1f77b4"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+    >
+    </path>
+  </g>
+</g>
+`;

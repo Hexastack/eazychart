@@ -120,6 +120,7 @@ type CurveConfig = {
 export type AreaConfig = CurveConfig & {
   curve?: AreaCurve;
   fill?: string;
+  opacity?: number;
 };
 
 export type LineConfig = CurveConfig & {

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
+exports[`MultiAreaChart renders a multiarea chart 1`] = `
 <div
   class="ez-viz"
   style="width: 800px; height: 600px;"
@@ -14,62 +14,122 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
         >
           <g transform="translate(100, 100)">
             <g class="ez-fragment-cartesian-scale">
-              <g class="ez-points">
-                <g class="ez-line-error-margin">
-                  <path
-                    class="ez-area-path"
-                    d="M0,361.2903225806451L400,116.1290322580645L600,0L600,348.38709677419354L400,309.6774193548387L0,400Z"
-                    fill="#ef476f80"
-                    opacity="1"
-                    stroke="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="0"
-                  >
-                  </path>
-                  <path
-                    class="ez-line"
-                    d="M0,374.1935483870968L400,180.6451612903226L600,116.1290322580645"
-                    fill="none"
-                    stroke="red"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                  >
-                  </path>
-                  <circle
-                    class="ez-point"
-                    cx="0"
-                    cy="374.1935483870968"
-                    data-testid="ez-point"
-                    fill="red"
-                    r="2"
-                    stroke="red"
-                    stroke-width="2"
-                  >
-                  </circle>
-                  <circle
-                    class="ez-point"
-                    cx="400"
-                    cy="180.6451612903226"
-                    data-testid="ez-point"
-                    fill="red"
-                    r="2"
-                    stroke="red"
-                    stroke-width="2"
-                  >
-                  </circle>
-                  <circle
-                    class="ez-point"
-                    cx="600"
-                    cy="116.1290322580645"
-                    data-testid="ez-point"
-                    fill="red"
-                    r="2"
-                    stroke="red"
-                    stroke-width="2"
-                  >
-                  </circle>
+              <g class="ez-fragment-color-scale">
+                <g class="ez-points">
+                  <g class="ez-area">
+                    <path
+                      class="ez-area-path"
+                      d="M0,400L400,379.3103448275862L600,372.41379310344826L600,400L400,400L0,400Z"
+                      fill="#339999"
+                      opacity="0.5"
+                      stroke="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0"
+                    >
+                    </path>
+                    <path
+                      class="ez-line"
+                      d="M0,400L400,379.3103448275862L600,372.41379310344826"
+                      fill="none"
+                      stroke="#339999"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                    </path>
+                    <circle
+                      class="ez-point"
+                      cx="0"
+                      cy="400"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#339999"
+                      stroke-width="2"
+                    >
+                    </circle>
+                    <circle
+                      class="ez-point"
+                      cx="400"
+                      cy="379.3103448275862"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#339999"
+                      stroke-width="2"
+                    >
+                    </circle>
+                    <circle
+                      class="ez-point"
+                      cx="600"
+                      cy="372.41379310344826"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#339999"
+                      stroke-width="2"
+                    >
+                    </circle>
+                  </g>
+                </g>
+                <g class="ez-points">
+                  <g class="ez-area">
+                    <path
+                      class="ez-area-path"
+                      d="M0,275.86206896551727L400,68.96551724137932L600,0L600,400L400,400L0,400Z"
+                      fill="#993399"
+                      opacity="0.5"
+                      stroke="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="0"
+                    >
+                    </path>
+                    <path
+                      class="ez-line"
+                      d="M0,275.86206896551727L400,68.96551724137932L600,0"
+                      fill="none"
+                      stroke="#993399"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                    >
+                    </path>
+                    <circle
+                      class="ez-point"
+                      cx="0"
+                      cy="275.86206896551727"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#993399"
+                      stroke-width="2"
+                    >
+                    </circle>
+                    <circle
+                      class="ez-point"
+                      cx="400"
+                      cy="68.96551724137932"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#993399"
+                      stroke-width="2"
+                    >
+                    </circle>
+                    <circle
+                      class="ez-point"
+                      cx="600"
+                      cy="0"
+                      data-testid="ez-point"
+                      fill="blue"
+                      r="2"
+                      stroke="#993399"
+                      stroke-width="2"
+                    >
+                    </circle>
+                  </g>
                 </g>
               </g>
               <g
@@ -255,127 +315,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </path>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 400.5)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    8
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 374.6935483870968)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    10
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 348.88709677419354)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    12
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 323.0806451612903)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    14
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 297.2741935483871)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    16
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 271.4677419354839)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    18
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 245.66129032258064)"
+                  transform="translate(0, 386.7068965517241)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -395,7 +335,7 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 219.8548387096774)"
+                  transform="translate(0, 359.12068965517244)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -410,12 +350,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    22
+                    40
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 194.0483870967742)"
+                  transform="translate(0, 331.5344827586207)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -430,12 +370,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    24
+                    60
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 168.24193548387095)"
+                  transform="translate(0, 303.94827586206895)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -450,12 +390,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    26
+                    80
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 142.43548387096774)"
+                  transform="translate(0, 276.36206896551727)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -470,12 +410,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    28
+                    100
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 116.6290322580645)"
+                  transform="translate(0, 248.77586206896552)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -490,12 +430,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    30
+                    120
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 90.8225806451613)"
+                  transform="translate(0, 221.18965517241378)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -510,12 +450,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    32
+                    140
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 65.01612903225805)"
+                  transform="translate(0, 193.60344827586206)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -530,12 +470,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    34
+                    160
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 39.20967741935485)"
+                  transform="translate(0, 166.01724137931038)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -550,12 +490,12 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    36
+                    180
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 13.403225806451601)"
+                  transform="translate(0, 138.43103448275863)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -570,13 +510,141 @@ exports[`LineErrorMarginChart renders a line error margin chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    38
+                    200
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 110.84482758620689)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    220
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 83.25862068965516)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    240
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 55.67241379310347)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    260
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 28.086206896551737)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    280
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 0.5)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    300
                   </text>
                 </g>
               </g>
             </g>
           </g>
         </svg>
+      </div>
+      <div class="ez-legend">
+        <div
+          class="ez-legend-key"
+          role="button"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: rgb(51, 153, 153); border: 2px solid #339999;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            yValue
+          </span>
+        </div>
+        <div
+          class="ez-legend-key"
+          role="button"
+        >
+          <div
+            class="ez-legend-box"
+            style="background-color: rgb(153, 51, 153); border: 2px solid #993399;"
+          >
+          </div>
+          <span class="ez-legend-text">
+            zValue
+          </span>
+        </div>
       </div>
     </div>
     <div

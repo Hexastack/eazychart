@@ -43,15 +43,17 @@ const TemplateWithParentDimensions: Story<BarChartProps> = (args) => {
   );
 };
 
-// By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
-// https://storybook.js.org/docs/react/workflows/unit-testing
+// By passing using the Args format for exported stories,
+// you can control the props for a component for reuse in a test
+// https://storybook.js.org/docs/vue/workflows/unit-testing
+export const Resizable = TemplateWithParentDimensions.bind({});
+
 const initialArguments = {
   colors,
   grid: { directions: [] },
   xAxis: {
     domainKey: 'value',
     title: 'Count',
-    nice: 2,
   },
   yAxis: {
     domainKey: 'name',
@@ -66,5 +68,4 @@ Default.args = {
   dimensions,
 };
 
-export const Resizable = TemplateWithParentDimensions.bind({});
 Resizable.args = initialArguments;

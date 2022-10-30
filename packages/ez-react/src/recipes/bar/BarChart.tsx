@@ -10,6 +10,7 @@ import {
   Position,
   RawData,
 } from 'eazychart-core/src/types';
+import { getDomainByKeys } from 'eazychart-core/src/utils';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
 import { Bars } from '@/components/Bars';
@@ -75,6 +76,11 @@ export const BarChart: FC<BarChartProps> = ({
     colors
   );
 
+  const [, xAxisDomainMaxValue] = getDomainByKeys(
+    [xAxis.domainKey],
+    activeData
+  );
+
   return (
     <Chart
       dimensions={dimensions}
@@ -93,6 +99,7 @@ export const BarChart: FC<BarChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
+            domain: [0, xAxisDomainMaxValue],
           },
         }}
         yScaleConfig={{

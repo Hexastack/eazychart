@@ -5,7 +5,6 @@ import {
   ResizableChartWrapper,
 } from '@/lib/storybook-utils';
 import {
-  animationOptions,
   colors,
   dimensions,
   rawData,
@@ -50,7 +49,6 @@ const TemplateWithParentDimensions: Story = (_args, { argTypes }) => ({
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
 export const Resizable = TemplateWithParentDimensions.bind({});
 
 const initialArguments = {
@@ -59,23 +57,15 @@ const initialArguments = {
   xAxis: {
     domainKey: 'value',
     title: 'Count',
-    nice: 2,
   },
   yAxis: {
     domainKey: 'name',
     title: 'Letter',
   },
-  padding: {
-    left: 150,
-    bottom: 100,
-    right: 150,
-    top: 100,
-  },
-  animationOptions,
-  isRTL: false,
   data: rawData,
 };
 
+export const Default = DefaultTemplate.bind({});
 Default.args = {
   ...initialArguments,
   dimensions,

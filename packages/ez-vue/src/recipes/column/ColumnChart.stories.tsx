@@ -5,6 +5,7 @@ import {
 } from 'eazychart-dev/storybook/data';
 import ColumnChart from './ColumnChart';
 import LineColumnChart from './LineColumnChart';
+import StackedColumnChart from './StackedColumnChart';
 
 const meta: Meta = {
   title: 'Vue/Column Chart',
@@ -34,6 +35,17 @@ const LineColumnTemplate: Story = (_args, { argTypes }) => ({
   template: `
     <ChartWrapper>
       <LineColumnChart v-bind="$props" />
+    </ChartWrapper>
+  `,
+});
+
+const StackedColumnTemplate: Story = (_args, { argTypes }) => ({
+  title: 'StackedColumn',
+  components: { StackedColumnChart, ChartWrapper },
+  props: Object.keys(argTypes),
+  template: `
+    <ChartWrapper>
+      <StackedColumnChart v-bind="$props" />
     </ChartWrapper>
   `,
 });
@@ -84,3 +96,16 @@ const lineColumnArguments = {
 };
 
 LineColumn.args = lineColumnArguments;
+
+export const StackedColumn = StackedColumnTemplate.bind({});
+
+const StackedColumnArguments = {
+  ...defaultArguments,
+  yAxis: {
+    domainKeys: ['value', 'value1', 'value2'],
+    title: 'Temperature',
+    tickFormat: (d: number) => `${d}°`,
+  },
+};
+
+StackedColumn.args = StackedColumnArguments;

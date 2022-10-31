@@ -24,7 +24,7 @@ export default class ColorScale extends Vue {
   })
   private readonly definition!: ScaleOrdinalDefinition;
 
-  mounted() {
+  created() {
     this.colorScale = this.defineScale();
     this.chart.registerScale('colorScale', this.colorScale);
   }

@@ -31,10 +31,10 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                       class="ez-bar"
                       data-testid="ez-bar"
                       fill="#993399"
-                      height="92.30769230769232"
+                      height="85.71428571428572"
                       width="125"
                       x="31.25"
-                      y="307.6923076923077"
+                      y="314.2857142857143"
                     >
                     </rect>
                   </g>
@@ -43,17 +43,17 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                       class="ez-bar"
                       data-testid="ez-bar"
                       fill="#339999"
-                      height="276.9230769230769"
+                      height="285.7142857142857"
                       width="125"
                       x="187.5"
-                      y="123.07692307692308"
+                      y="114.28571428571428"
                     >
                     </rect>
                     <rect
                       class="ez-bar"
                       data-testid="ez-bar"
                       fill="#993399"
-                      height="123.0769230769231"
+                      height="114.28571428571428"
                       width="125"
                       x="187.5"
                       y="0"
@@ -65,20 +65,20 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                       class="ez-bar"
                       data-testid="ez-bar"
                       fill="#339999"
-                      height="153.84615384615384"
+                      height="142.8571428571429"
                       width="125"
                       x="343.75"
-                      y="246.15384615384616"
+                      y="257.1428571428571"
                     >
                     </rect>
                     <rect
                       class="ez-bar"
                       data-testid="ez-bar"
                       fill="#993399"
-                      height="92.30769230769232"
+                      height="85.71428571428567"
                       width="125"
                       x="343.75"
-                      y="153.84615384615384"
+                      y="171.42857142857144"
                     >
                     </rect>
                   </g>
@@ -182,72 +182,12 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                     transform="translate(0, 0) rotate(-90 0 0)"
                     x="-9"
                   >
-                    35
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 369.7307692307692)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    40
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 338.96153846153845)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
-                    45
-                  </text>
-                </g>
-                <g
-                  class="ez-axis-tick"
-                  transform="translate(0, 308.1923076923077)"
-                >
-                  <line
-                    class="ez-axis-tick-line"
-                    x2="-6"
-                    y2="0"
-                  >
-                  </line>
-                  <text
-                    class="ez-axis-tick-text"
-                    dy="0.3em"
-                    text-anchor="middle"
-                    transform="translate(0, 0) rotate(-90 0 0)"
-                    x="-9"
-                  >
                     50
                   </text>
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 277.4230769230769)"
+                  transform="translate(0, 371.92857142857144)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -267,7 +207,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 246.65384615384616)"
+                  transform="translate(0, 343.3571428571429)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -287,7 +227,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 215.8846153846154)"
+                  transform="translate(0, 314.7857142857143)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -307,7 +247,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 185.1153846153846)"
+                  transform="translate(0, 286.2142857142857)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -327,7 +267,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 154.34615384615384)"
+                  transform="translate(0, 257.6428571428571)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -347,7 +287,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 123.57692307692308)"
+                  transform="translate(0, 229.07142857142856)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -367,7 +307,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 92.80769230769229)"
+                  transform="translate(0, 200.5)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -387,7 +327,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 62.03846153846154)"
+                  transform="translate(0, 171.92857142857144)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -407,7 +347,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 31.26923076923075)"
+                  transform="translate(0, 143.35714285714283)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -427,7 +367,7 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                 </g>
                 <g
                   class="ez-axis-tick"
-                  transform="translate(0, 0.5)"
+                  transform="translate(0, 114.78571428571428)"
                 >
                   <line
                     class="ez-axis-tick-line"
@@ -443,6 +383,86 @@ exports[`StackedColumnChart renders a stacked column chart 1`] = `
                     x="-9"
                   >
                     100
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 86.21428571428572)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    105
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 57.64285714285716)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    110
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 29.07142857142856)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    115
+                  </text>
+                </g>
+                <g
+                  class="ez-axis-tick"
+                  transform="translate(0, 0.5)"
+                >
+                  <line
+                    class="ez-axis-tick-line"
+                    x2="-6"
+                    y2="0"
+                  >
+                  </line>
+                  <text
+                    class="ez-axis-tick-text"
+                    dy="0.3em"
+                    text-anchor="middle"
+                    transform="translate(0, 0) rotate(-90 0 0)"
+                    x="-9"
+                  >
+                    120
                   </text>
                 </g>
               </g>

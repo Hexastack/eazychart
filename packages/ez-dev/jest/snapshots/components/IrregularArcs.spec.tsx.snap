@@ -7,7 +7,7 @@ exports[`IrregularArcs renders svg irregular arcs with the right coordinates / d
 >
   <path
     class="ez-arc"
-    d="M-178.32309680534132,-57.94068644530262A187.5,187.5,0,0,1,-3.4443191226019305e-14,-187.5L0,0Z"
+    d="M-172.3413567771364,-30.388431091712754A175,175,0,0,1,-3.214697847761802e-14,-175L0,0Z"
     data-testid="ez-arc"
     fill="red"
     stroke="red"
@@ -15,7 +15,7 @@ exports[`IrregularArcs renders svg irregular arcs with the right coordinates / d
   </path>
   <path
     class="ez-arc"
-    d="M1.8369701987210297e-14,-300A300,300,0,0,1,79.81105367000255,289.18885820875596L0,0Z"
+    d="M1.8369701987210297e-14,-300A300,300,0,0,1,102.60604299770064,281.9077862357725L0,0Z"
     data-testid="ez-arc"
     fill="blue"
     stroke="blue"
@@ -23,7 +23,7 @@ exports[`IrregularArcs renders svg irregular arcs with the right coordinates / d
   </path>
   <path
     class="ez-arc"
-    d="M66.5092113916688,240.9907151739633A250,250,0,0,1,-237.7641290737884,-77.25424859373682L0,0Z"
+    d="M81.22978403984635,223.17699743665324A237.5,237.5,0,0,1,-233.89184134039942,-41.24144219589588L0,0Z"
     data-testid="ez-arc"
     fill="green"
     stroke="green"

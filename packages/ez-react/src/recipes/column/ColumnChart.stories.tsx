@@ -5,9 +5,27 @@ import {
   LineColumnChart,
   LineColumnChartProps,
 } from '@/recipes/column/LineColumnChart';
-import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
+import {
+  baseChartArgTypes,
+  ChartWrapper,
+  flattenArgs,
+  unFlattenArgs,
+} from '@/lib/storybook-utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 
+const columnChartArgTypes = {
+  'yAxis.nice': {
+    control: { type: 'number' },
+    table: { category: 'Axis Options', defaultValue: { summary: '2' } },
+    description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
+  },
+  yAxis: {
+    table: {
+      disable: true,
+    },
+  },
+  ...baseChartArgTypes,
+};
 const meta: Meta = {
   id: '4',
   title: 'React/Column Chart',
@@ -15,23 +33,27 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: columnChartArgTypes,
 };
 
 export default meta;
 
 const DefaultTemplate: Story<ColumnChartProps> = (args) => {
+  const expandedArgs = unFlattenArgs(args);
+
   return (
     <ChartWrapper>
-      <ColumnChart {...args} />
+      <ColumnChart {...expandedArgs} />
     </ChartWrapper>
   );
 };
 
 const LineColumnTemplate: Story<LineColumnChartProps> = (args) => {
+  const expandedArgs = unFlattenArgs(args);
+
   return (
     <ChartWrapper>
-      <LineColumnChart {...args} />
+      <LineColumnChart {...expandedArgs} />
     </ChartWrapper>
   );
 };
@@ -40,8 +62,22 @@ const LineColumnTemplate: Story<LineColumnChartProps> = (args) => {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
+const defaultArguments = flattenArgs({
   colors,
+  isRTL: false,
+
+  animationOptions: {
+    easing: 'easeBack',
+    duration: 400,
+    delay: 0,
+  },
+  padding: {
+    left: 100,
+    bottom: 100,
+    right: 100,
+    top: 100,
+  },
+  dimensions: { width: 800, height: 600 },
   grid: { directions: [] },
   xAxis: {
     domainKey: 'name',
@@ -53,7 +89,7 @@ const defaultArguments = {
     nice: 2,
   },
   data: rawData,
-};
+});
 
 Default.args = defaultArguments;
 

@@ -1,61 +1,67 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import {
-  ScatterChart,
-  ScatterChartProps,
-} from '@/recipes/scatter/ScatterChart';
+import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 import {
   ChartWrapper,
   unFlattenArgs,
   flattenArgs,
   baseChartArgTypes,
 } from '@/lib/storybook-utils';
-import { colors, correlationData } from 'eazychart-dev/storybook/data';
-
-const scatterChartArgTypes = {
-  ...baseChartArgTypes,
-  'point.radius': {
+import { correlationData } from 'eazychart-dev/storybook/data';
+const bubbleChartArgTypes = {
+  'bubble.minRadius': {
     control: { type: 'number' },
-    table: { category: 'point props', defaultValue: { summary: '5px' } },
-    description: 'Sets the point radius',
+    table: { category: 'Bubble props', defaultValue: { summary: '1px' } },
+    description: 'Sets the minimum bubble radius',
   },
-  'point.color': {
+  'bubble.domainKey': {
+    table: { category: 'Bubble props', defaultValue: { summary: 'rValue' } },
+    description: 'Sets the domain key',
+  },
+  'bubble.maxRadius': {
+    control: { type: 'number' },
+    table: { category: 'Bubble props', defaultValue: { summary: '25px' } },
+    description: 'Sets the max bubble radius',
+  },
+  'bubble.fill': {
     control: { type: 'color' },
-    table: { category: 'point props', defaultValue: { summary: '#FF3366' } },
-    description: 'Sets the point color',
+    table: { category: 'Bubble props', defaultValue: { summary: 'Color' } },
+    description: 'Sets the bubble color',
   },
+
   yAxis: {
     table: {
       disable: true,
     },
   },
+  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
-  id: '7',
-  title: 'React/Scatter Chart',
-  component: ScatterChart,
+  id: '8',
+  title: 'React/Bubble Chart',
+  component: BubbleChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: scatterChartArgTypes,
+  argTypes: bubbleChartArgTypes,
 };
 
 export default meta;
 
-const DefaultTemplate: Story<ScatterChartProps> = (args) => {
+const bubbleTemplate: Story<BubbleChartProps> = (args) => {
   const extendedArgs = unFlattenArgs(args);
 
   return (
     <ChartWrapper>
-      <ScatterChart {...extendedArgs} />
+      <BubbleChart {...extendedArgs} />
     </ChartWrapper>
   );
 };
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const Default = bubbleTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   grid: { directions: [] },
@@ -83,12 +89,14 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
   },
   data: correlationData,
+  bubble: {
+    domainKey: 'rValue',
+    minRadius: 1,
+    maxRadius: 25,
+    fill: 'rgba(209, 46, 84, 0.5)',
+  },
 });
 
 Default.args = {
   ...defaultArguments,
-  point: {
-    color: colors[1],
-    radius: 5,
-  },
 };

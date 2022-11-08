@@ -3,7 +3,13 @@ import { Meta, Story } from '@storybook/react';
 import { LineCurve } from 'eazychart-core/src/types';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
-import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
+import {
+  ChartWrapper,
+  unFlattenArgs,
+  flattenArgs,
+  baseChartArgTypes,
+  markerArgTypesOptions,
+} from '@/lib/storybook-utils';
 import {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
@@ -13,6 +19,58 @@ import {
   MultiLineChartProps,
 } from '@/recipes/line/MultiLineChart';
 
+const lineChartArgTypes = {
+  'line.strokeWidth': {
+    defaultValue: 2,
+    description: 'Sets the line stroke width',
+    control: { type: 'number' },
+    table: { category: 'Line props', defaultValue: { summary: '2px' } },
+  },
+  'line.stroke': {
+    control: { type: 'color' },
+    table: { category: 'Line props', defaultValue: { summary: '#ef476f' } },
+    description: 'Sets the line color',
+    if: { arg: 'yAxis', truthy: false },
+  },
+  'line.curve': {
+    control: {
+      type: 'select',
+      options: [
+        'curveLinear',
+        'curveBasis',
+        'curveBumpX',
+        'curveBumpY',
+        'curveBundle',
+        'curveCardinal',
+        'curveNatural',
+        'curveStep',
+        'curveStepAfter',
+        'curveStepBefore',
+      ],
+    },
+    table: { category: 'Line props', defaultValue: { summary: 'curveLinear' } },
+    description: 'Sets the type of line curve ',
+  },
+  'line.beta': {
+    control: { type: 'range', min: 0, max: 1, step: 0.1 },
+    table: { category: 'Line props', defaultValue: { summary: '0' } },
+    description: 'Determines the straigthness of the spline',
+  },
+  ...markerArgTypesOptions,
+  ...baseChartArgTypes,
+  yAxis: {
+    control: { type: 'object' },
+    table: {
+      category: 'Multi chart Y Axis Options',
+      defaultValue: { summary: 'yValues' },
+    },
+    description: 'Sets the Y axis domain keys and title for multi chart',
+    if: { arg: 'yAxis', truthy: true },
+  },
+
+  // area: { control: { type: 'color' } },
+};
+
 const meta: Meta = {
   id: '5',
   title: 'React/Line Chart',
@@ -20,31 +78,35 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: lineChartArgTypes,
 };
 
 export default meta;
 
 const DefaultTemplate: Story<LineChartProps> = (args) => {
+  const extendedArgs = unFlattenArgs(args);
   return (
     <ChartWrapper>
-      <LineChart {...args} />
+      <LineChart {...extendedArgs} />
     </ChartWrapper>
   );
 };
 
 const MultiLineTemplate: Story<MultiLineChartProps> = (args) => {
+  const extendedArgs = unFlattenArgs(args);
   return (
     <ChartWrapper>
-      <MultiLineChart {...args} />
+      <MultiLineChart {...extendedArgs} />
     </ChartWrapper>
   );
 };
 
 const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = (args) => {
+  const extendedArgs = unFlattenArgs(args);
+
   return (
     <ChartWrapper>
-      <LineErrorMarginChart {...args} />
+      <LineErrorMarginChart {...extendedArgs} />
     </ChartWrapper>
   );
 };
@@ -53,13 +115,26 @@ const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = (args) => {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
+const defaultArguments = flattenArgs({
   line: {
     strokeWidth: 2,
     stroke: colors[1],
     curve: 'curveLinear' as LineCurve,
     beta: 0,
   },
+  animationOptions: {
+    easing: 'easeBack',
+    duration: 400,
+    delay: 0,
+  },
+  isRTL: false,
+  padding: {
+    left: 100,
+    bottom: 100,
+    right: 100,
+    top: 100,
+  },
+  dimensions: { width: 800, height: 600 },
   marker: {
     hidden: false,
     radius: 5,
@@ -77,7 +152,7 @@ const defaultArguments = {
     tickFormat: (d: number) => `${d}°`,
   },
   data: evolutionData,
-};
+});
 
 Default.args = defaultArguments;
 

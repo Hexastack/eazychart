@@ -1,5 +1,5 @@
 import React, { FC, SVGAttributes } from 'react';
-import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
+import { getDomainByKeys, ScaleBand, ScaleLinear } from 'eazychart-core/src';
 import {
   AnimationOptions,
   AxisConfig,
@@ -74,6 +74,10 @@ export const ColumnChart: FC<ColumnChartProps> = ({
     xAxis.domainKey,
     colors
   );
+  const [, yAxisDomainMaxValue] = getDomainByKeys(
+    [yAxis.domainKey],
+    activeData
+  );
 
   return (
     <Chart
@@ -99,6 +103,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
+            domain: [0, yAxisDomainMaxValue],
           },
         }}
       >

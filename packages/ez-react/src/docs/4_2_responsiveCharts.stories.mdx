@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs';
+import Tabs from './Tabs';
+
+<Meta
+  title="Get Started/Essentials/Responsive Charts"
+  parameters={{ options: { isToolshown: false }, id: 5 }}
+/>
+
+# Responsive Charts
+
+All chart recipes in **EazyChart** comes with fixed width,
+by default the chart comes with a `800x600` dimensions which can be overwritten if you wish to have a certain chart dimensions.
+
+Although, the chart recipes can have a responsive behavior.
+To do so, wrap your chart recipe with the `ResponsiveChartContainer`.
+This container will let your chart have the dimensions of the outer container where you are putting it.
+
+For React Web app:
+
+<Tabs
+tabbedClassName="story-tabbed-code-block-middle"
+showTabs={true}
+>
+  <Tab 
+    title="React"
+    language="jsx"
+    code={
+`import { ResponsiveChartContainer } from 'eazychart-react';
+// imports\n
+const MyApp = (props) => {
+  // your component logic
+  return (
+    <ResponsiveChartContainer>
+      // your chart recipe
+    </ResponsiveChartContainer>
+  );
+};`}
+    >
+  </Tab>
+  <Tab 
+    title="Vue"
+    language="markup"
+    code={
+`<template>
+  <ResponsiveChartContainer> // your chart recipe </ResponsiveChartContainer>
+</template>
+
+<script>
+  import {ResponsiveChartContainer} from 'eazychart-vue' // other imports //
+  component logic
+</script>
+
+<style>
+  // your styles
+</style>`}>
+
+  </Tab>
+</Tabs>

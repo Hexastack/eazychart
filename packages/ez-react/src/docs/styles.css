@@ -1,0 +1,103 @@
+.story-tabbed-code-container {
+    margin: 5px
+}
+
+.story-tabbed-code-list {
+    display: flex;
+    list-style: none;
+    padding-left: 5px;
+}
+
+.story-tabbed-list-item {
+    background-color: transparent;
+}
+
+.story-tabbed-list-item:hover {
+    background-color: #00000005;
+}
+
+.story-tabbed-list-button {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    padding: 10px 20px;
+}
+
+.story-tabbed-list-button-selected {
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    border-bottom: 4px #71C4FD solid;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+.story-tabbed-code-block-container {
+    position: relative;
+}
+
+.story-tabbed-code-block {
+    box-shadow: rgb(0 0 0 / 10%) 0 1px 3px 0;
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 20px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+}
+
+.story-tabbed-code-block-very-small {
+    min-height: 50px;
+    max-height: 50px;
+    overflow-y: auto;
+}
+
+.story-tabbed-code-block-small {
+    min-height: 150px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.story-tabbed-code-block-middle {
+    min-height: 300px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.story-tabbed-code-block-big {
+    min-height: 500px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.story-copy-code {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 100%;
+    display: flex;
+    background: #FFFFFF;
+    z-index: 1;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+    border-right: 1px solid rgba(0, 0, 0, .1);
+}
+
+.story-copy-code-button {
+    margin: 0;
+    border: 0 none;
+    padding: 4px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    color: #333333;
+    background: #FFFFFF;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+    border-top: 1px solid rgba(0, 0, 0, .1);
+    border-left: 1px solid rgba(0, 0, 0, .1);
+    margin-left: -1px;
+    border-radius: 4px 0 0 0;
+    border-bottom: 4px transparent solid;
+}
+
+.story-copy-code-button:hover {
+    border-bottom: 4px #71C4FD solid;
+}

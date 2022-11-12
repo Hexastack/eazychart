@@ -220,8 +220,7 @@ export const baseChartArgTypes = {
   },
   data: {
     control: { type: 'object' },
-    table: { defaultValue: { summary: 'Object' } },
-    collapsed: true, // I want to find out if there is something like this
+    table: { defaultValue: { summary: 'Object' }, category: 'Data' },
   },
 };
 
@@ -255,19 +254,65 @@ export const flattenArgs = (args: Object) => {
  * @returns
  */
 export const unFlattenArgs = (args: Object) => {
-  const deconstructedArgs = {} as any;
-
+  let deconstructedArgs = {} as any;
+  let colors = [] as any;
   for (const [key, value] of Object.entries(args)) {
     const values = value as any;
     const parsedKeys = key.split('.');
-
-    if (parsedKeys.length === 1) {
-      deconstructedArgs[key] = values;
+    if (parsedKeys[0] === 'colors') {
+      colors = deconstructArgs(colors, key, values, []);
     } else {
-      const [parentKey, prop] = parsedKeys;
-      deconstructedArgs[parentKey] = deconstructedArgs[parentKey] ?? {};
-      deconstructedArgs[parentKey][prop] = values;
+      deconstructedArgs = deconstructArgs(deconstructedArgs, key, values, {});
     }
   }
+  return { ...deconstructedArgs, ...colors };
+};
+
+/**
+ * @params deconstructedArgs, key,values,defaultArg
+ * @returns deconstructedArgs{ chartArgs} |  [chartColors]
+ */
+export const deconstructArgs = (
+  deconstructedArgs: any,
+  key: string,
+  values: any,
+  defaultArg: any
+) => {
+  const parsedKeys = key.split('.');
+  if (parsedKeys.length === 1) {
+    deconstructedArgs[key] = values;
+  } else {
+    const [parentKey, prop] = parsedKeys;
+    deconstructedArgs[parentKey] = deconstructedArgs[parentKey] ?? defaultArg;
+    deconstructedArgs[parentKey][prop] = values;
+  }
   return deconstructedArgs;
+};
+// Flattens colors table
+export const flattenColors = (args: Array<string>) => {
+  let constructedArgs = {} as any;
+  for (let i = 0; i < args.length; i++) {
+    constructedArgs[`colors.${i}`] = args[i];
+  }
+  return constructedArgs;
+};
+
+// sets colorArgtypes
+export const setColorArgs = (colors: string[]) => {
+  let colorArgs = {};
+
+  for (let i = 0; i < colors.length; i++) {
+    const a = {
+      [`colors.${i}`]: {
+        control: { type: 'color' },
+        table: {
+          category: 'Chart colors',
+          defaultValue: { summary: 'HexColor' },
+        },
+        description: 'Sets corresponding chart color',
+      },
+    };
+    colorArgs = { ...colorArgs, ...a };
+  }
+  return colorArgs;
 };

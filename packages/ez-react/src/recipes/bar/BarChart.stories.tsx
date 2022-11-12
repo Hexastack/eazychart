@@ -6,11 +6,18 @@ import {
   ChartWrapper,
   flattenArgs,
   unFlattenArgs,
+  flattenColors,
+  setColorArgs,
 } from '@/lib/storybook-utils';
 import { colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
 import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
 const barChartArgTypes = {
+  colors: {
+    table: {
+      disable: true,
+    },
+  },
   'xAxis.nice': {
     control: { type: 'number' },
     table: { category: 'Axis Options', defaultValue: { summary: '2' } },
@@ -22,6 +29,7 @@ const barChartArgTypes = {
     },
   },
   ...baseChartArgTypes,
+  ...setColorArgs(colors),
 };
 const meta: Meta = {
   id: '3',
@@ -66,33 +74,35 @@ const TemplateWithParentDimensions: Story<BarChartProps> = (args) => {
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-const initialArguments = flattenArgs({
-  colors,
-  grid: { directions: [] },
-  xAxis: {
-    domainKey: 'value',
-    title: 'Count',
-    nice: 2,
-  },
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
-  isRTL: false,
-  padding: {
-    left: 100,
-    bottom: 100,
-    right: 100,
-    top: 100,
-  },
-  dimensions: { width: 800, height: 600 },
-  yAxis: {
-    domainKey: 'name',
-    title: 'Letter',
-  },
-  data: rawData,
-});
+const initialArguments = {
+  ...flattenArgs({
+    grid: { directions: [] },
+    xAxis: {
+      domainKey: 'value',
+      title: 'Count',
+      nice: 2,
+    },
+    animationOptions: {
+      easing: 'easeBack',
+      duration: 400,
+      delay: 0,
+    },
+    isRTL: false,
+    padding: {
+      left: 100,
+      bottom: 100,
+      right: 100,
+      top: 100,
+    },
+    dimensions: { width: 800, height: 600 },
+    yAxis: {
+      domainKey: 'name',
+      title: 'Letter',
+    },
+    data: rawData,
+  }),
+  ...flattenColors(colors),
+};
 
 export const Default = DefaultTemplate.bind({});
 Default.args = {

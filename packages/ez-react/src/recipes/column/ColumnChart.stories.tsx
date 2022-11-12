@@ -10,10 +10,17 @@ import {
   ChartWrapper,
   flattenArgs,
   unFlattenArgs,
+  flattenColors,
+  setColorArgs,
 } from '@/lib/storybook-utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 
 const columnChartArgTypes = {
+  colors: {
+    table: {
+      disable: true,
+    },
+  },
   'yAxis.nice': {
     control: { type: 'number' },
     table: { category: 'Axis Options', defaultValue: { summary: '2' } },
@@ -24,6 +31,7 @@ const columnChartArgTypes = {
       disable: true,
     },
   },
+  ...setColorArgs(colors),
   ...baseChartArgTypes,
 };
 const meta: Meta = {
@@ -62,34 +70,35 @@ const LineColumnTemplate: Story<LineColumnChartProps> = (args) => {
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = flattenArgs({
-  colors,
-  isRTL: false,
-
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
-  padding: {
-    left: 100,
-    bottom: 100,
-    right: 100,
-    top: 100,
-  },
-  dimensions: { width: 800, height: 600 },
-  grid: { directions: [] },
-  xAxis: {
-    domainKey: 'name',
-    title: 'Letter',
-  },
-  yAxis: {
-    domainKey: 'value',
-    title: 'Count',
-    nice: 2,
-  },
-  data: rawData,
-});
+const defaultArguments = {
+  ...flattenArgs({
+    isRTL: false,
+    animationOptions: {
+      easing: 'easeBack',
+      duration: 400,
+      delay: 0,
+    },
+    padding: {
+      left: 100,
+      bottom: 100,
+      right: 100,
+      top: 100,
+    },
+    dimensions: { width: 800, height: 600 },
+    grid: { directions: [] },
+    xAxis: {
+      domainKey: 'name',
+      title: 'Letter',
+    },
+    yAxis: {
+      domainKey: 'value',
+      title: 'Count',
+      nice: 2,
+    },
+    data: rawData,
+  }),
+  ...flattenColors(colors),
+};
 
 Default.args = defaultArguments;
 

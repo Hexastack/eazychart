@@ -13,6 +13,8 @@ import {
   animationArgTypesOptions,
   paddingArgTypesOptions,
   dimensionArgTypesOptions,
+  flattenColors,
+  setColorArgs,
 } from '@/lib/storybook-utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 import {
@@ -21,6 +23,11 @@ import {
 } from '@/recipes/pie/IrregularPieChart';
 
 const pieChartArgTypes = {
+  colors: {
+    table: {
+      disable: true,
+    },
+  },
   scopedSlots: {
     table: {
       disable: true,
@@ -44,6 +51,7 @@ const pieChartArgTypes = {
   domainKey: {
     control: { type: 'object' },
   },
+  ...setColorArgs(colors),
   'arc.donutRadius': {
     control: { type: 'range', min: 0, max: 1, step: 0.05 },
     table: { category: 'Arc properties', defaultValue: { summary: '0' } },
@@ -81,7 +89,12 @@ const pieChartArgTypes = {
   ...paddingArgTypesOptions,
   ...animationArgTypesOptions,
   ...dimensionArgTypesOptions,
+  data: {
+    control: { type: 'object' },
+    table: { defaultValue: { summary: 'Object' }, category: 'Data' },
+  },
 };
+
 const meta: Meta = {
   id: '6',
   title: 'React/Pie Chart',
@@ -96,16 +109,16 @@ export default meta;
 
 const DefaultTemplate: Story<PieChartProps> = (args) => {
   const expandedArgs = unFlattenArgs(args);
+  const ex = { ...expandedArgs };
   return (
     <ChartWrapper>
-      <PieChart {...expandedArgs} />
+      <PieChart {...ex} />
     </ChartWrapper>
   );
 };
 
 const SemiCircleTemplate: Story<SemiCircleChartProps> = (args) => {
   const expandedArgs = unFlattenArgs(args);
-
   return (
     <ChartWrapper>
       <SemiCircleChart {...expandedArgs} />
@@ -136,32 +149,36 @@ const IrregularTemplate: Story<IrregularPieChartProps> = (args) => {
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
-const defaultArguments = flattenArgs({
-  colors,
-  domainKey: 'value',
-  data: rawData,
-  dimensions: { width: 800, height: 600 },
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
-  padding: {
-    left: 150,
-    bottom: 100,
-    right: 150,
-    top: 100,
-  },
-  arc: {
-    donutRadius: 0,
-    cornerRadius: 0,
-    padAngle: 0,
-    padRadius: 0,
-    strokeWidth: 0,
-  },
-});
+const defaultArguments = {
+  ...flattenArgs({
+    domainKey: 'value',
+    data: rawData,
+    dimensions: { width: 800, height: 600 },
+    animationOptions: {
+      easing: 'easeBack',
+      duration: 400,
+      delay: 0,
+    },
+    padding: {
+      left: 150,
+      bottom: 100,
+      right: 150,
+      top: 100,
+    },
+    arc: {
+      donutRadius: 0,
+      cornerRadius: 0,
+      padAngle: 0,
+      padRadius: 0,
+      strokeWidth: 0,
+    },
+  }),
+  ...flattenColors(colors),
+};
 
-Default.args = defaultArguments;
+Default.args = {
+  ...defaultArguments,
+};
 
 export const SemiCircle = SemiCircleTemplate.bind({});
 

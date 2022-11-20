@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/vue';
 import {
   animationOptions,
-  colors,
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
@@ -11,40 +10,50 @@ import {
   unFlattenArgs,
   flattenArgs,
 } from '@/lib/storybook-utils';
-import ScatterChart from './ScatterChart';
+import BubbleChart from './BubbleChart';
 
-const scatterChartArgTypes = {
-  ...baseChartArgTypes,
-  'point.radius': {
+const bubbleChartArgTypes = {
+  'bubble.minRadius': {
     control: { type: 'number' },
-    table: { category: 'point props', defaultValue: { summary: '5px' } },
-    description: 'Sets the point radius',
+    table: { category: 'Bubble props', defaultValue: { summary: '1px' } },
+    description: 'Sets the minimum bubble radius',
   },
-  'point.color': {
+  'bubble.domainKey': {
+    table: { category: 'Bubble props', defaultValue: { summary: 'rValue' } },
+    description: 'Sets the domain key',
+  },
+  'bubble.maxRadius': {
+    control: { type: 'number' },
+    table: { category: 'Bubble props', defaultValue: { summary: '25px' } },
+    description: 'Sets the max bubble radius',
+  },
+  'bubble.fill': {
     control: { type: 'color' },
-    table: { category: 'point props', defaultValue: { summary: '#FF3366' } },
-    description: 'Sets the point color',
+    table: { category: 'Bubble props', defaultValue: { summary: 'Color' } },
+    description: 'Sets the bubble color',
   },
+
   yAxis: {
     table: {
       disable: true,
     },
   },
+  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
-  title: 'Vue/Scatter Chart',
-  component: ScatterChart,
+  title: 'Vue/Bubble Chart',
+  component: BubbleChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: scatterChartArgTypes,
+  argTypes: bubbleChartArgTypes,
 };
 export default meta;
 
 const DefaultTemplate: Story = (args) => ({
-  title: 'Default',
-  components: { ScatterChart, ChartWrapper },
+  title: 'Bubble',
+  components: { BubbleChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
       default: () => unFlattenArgs(args),
@@ -52,7 +61,7 @@ const DefaultTemplate: Story = (args) => ({
   },
   template: `
     <ChartWrapper>
-      <ScatterChart v-bind="allPropsFromArgs" />
+      <BubbleChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 });
@@ -78,11 +87,13 @@ const defaultArguments = flattenArgs({
   animationOptions,
   isRTL: false,
   data: correlationData,
-  dimensions: { width: 800, height: 600 },
-  point: {
-    color: colors[1],
-    radius: 5,
+  bubble: {
+    domainKey: 'rValue',
+    minRadius: 1,
+    maxRadius: 25,
+    fill: 'rgba(209, 46, 84, 0.5)',
   },
+  dimensions: { width: 800, height: 600 },
 });
 
 Default.args = defaultArguments;

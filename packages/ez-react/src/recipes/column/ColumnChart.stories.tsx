@@ -21,15 +21,48 @@ const columnChartArgTypes = {
       disable: true,
     },
   },
-  'yAxis.nice': {
+  marker: {
+    table: {
+      disable: true,
+    },
+  },
+  'marker.color': {
+    control: { type: 'color' },
+    table: { category: 'Marker options', defaultValue: { summary: '#FFF' } },
+    description: 'Sets the marker color',
+    if: { arg: 'yLineAxis', truthy: true },
+  },
+  'marker.hidden': {
+    control: { type: 'boolean' },
+    table: { category: 'Marker options', defaultValue: { summary: true } },
+    description: 'Toggles the marker',
+    if: { arg: 'yLineAxis', truthy: true },
+  },
+  'marker.radius': {
     control: { type: 'number' },
-    table: { category: 'Axis Options', defaultValue: { summary: '2' } },
-    description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
+    table: { category: 'Marker options', defaultValue: { summary: '5px' } },
+    description: 'Sets the marker radius',
+    if: { arg: 'yLineAxis', truthy: true },
   },
   yAxis: {
     table: {
       disable: true,
     },
+  },
+  'yAxis.nice': {
+    control: { type: 'number' },
+    table: { category: 'Axis Options', defaultValue: { summary: '2' } },
+    description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
+  },
+  'line.strokeWidth': {
+    control: { type: 'number' },
+    table: { category: 'Line Options', defaultValue: { summary: '2' } },
+    description: 'Sets the line stroke width',
+  },
+  'line.stroke': {
+    control: { type: 'color' },
+    table: { category: 'Line Options', defaultValue: { summary: '#81248d' } },
+    description: 'Sets the line stroke color',
   },
   ...setColorArgs(colors),
   ...baseChartArgTypes,
@@ -106,20 +139,22 @@ export const LineColumn = LineColumnTemplate.bind({});
 
 const lineColumnArguments = {
   ...defaultArguments,
-  line: {
-    strokeWidth: 2,
-    stroke: '#81248d',
-  },
-  marker: {
-    hidden: false,
-    radius: 5,
-    color: '#c400c4',
-  },
   yLineAxis: {
     domainKey: 'v',
     title: 'Value',
     nice: 2,
   },
+  ...flattenArgs({
+    line: {
+      strokeWidth: 2,
+      stroke: '#81248d',
+    },
+    marker: {
+      hidden: false,
+      radius: 5,
+      color: '#c400c4',
+    },
+  }),
 };
 
 LineColumn.args = lineColumnArguments;

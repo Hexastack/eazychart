@@ -6,10 +6,69 @@ import MultiLineChart from '@/recipes/line/MultiLineChart';
 import {
   baseChartArgTypes,
   ChartWrapper,
+  unFlattenArgs,
+  flattenArgs,
+  markerArgTypesOptions,
 } from '@/lib/storybook-utils';
 import {
-  animationOptions, colors, evolutionData, padding,
+  animationOptions,
+  colors,
+  evolutionData,
+  padding,
 } from 'eazychart-dev/storybook/data';
+
+const lineChartArgTypes = {
+  'line.strokeWidth': {
+    defaultValue: 2,
+    description: 'Sets the line stroke width',
+    control: { type: 'number' },
+    table: { category: 'Line props', defaultValue: { summary: '2px' } },
+  },
+  'line.stroke': {
+    control: { type: 'color' },
+    table: { category: 'Line props', defaultValue: { summary: '#ef476f' } },
+    description: 'Sets the line color',
+    if: { arg: 'yAxis', truthy: false },
+  },
+  'line.curve': {
+    control: {
+      type: 'select',
+      options: [
+        'curveLinear',
+        'curveBasis',
+        'curveBumpX',
+        'curveBumpY',
+        'curveBundle',
+        'curveCardinal',
+        'curveNatural',
+        'curveStep',
+        'curveStepAfter',
+        'curveStepBefore',
+      ],
+    },
+    table: { category: 'Line props', defaultValue: { summary: 'curveLinear' } },
+    description: 'Sets the type of line curve ',
+  },
+  'line.beta': {
+    // eslint-disable-next-line object-curly-newline
+    control: { type: 'range', min: 0, max: 1, step: 0.1 },
+    table: { category: 'Line props', defaultValue: { summary: '0' } },
+    description: 'Determines the straigthness of the spline',
+  },
+  ...markerArgTypesOptions,
+  ...baseChartArgTypes,
+  yAxis: {
+    control: { type: 'object' },
+    table: {
+      category: 'Multi chart Y Axis Options',
+      defaultValue: { summary: 'yValues' },
+    },
+    description: 'Sets the Y axis domain keys and title for multi chart',
+    if: { arg: 'yAxis', truthy: true },
+  },
+
+  // area: { control: { type: 'color' } },
+};
 
 const meta: Meta = {
   title: 'Vue/Line Chart',
@@ -17,39 +76,51 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: lineChartArgTypes,
 };
 export default meta;
 
-const DefaultTemplate: Story = (_args, { argTypes }) => ({
+const DefaultTemplate: Story = (args) => ({
   title: 'Default',
   components: { LineChart, ChartWrapper },
-  props: Object.keys(argTypes),
+  props: {
+    allPropsFromArgs: {
+      default: () => unFlattenArgs(args),
+    },
+  },
   template: `
     <ChartWrapper>
-      <LineChart v-bind="$props" />
+      <LineChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 });
 
-const LineErrorMarginTemplate: Story = (_args, { argTypes }) => ({
+const LineErrorMarginTemplate: Story = (args) => ({
   title: 'LineErrorMargin',
   components: { LineErrorMarginChart, ChartWrapper },
-  props: Object.keys(argTypes),
+  props: {
+    allPropsFromArgs: {
+      default: () => unFlattenArgs(args),
+    },
+  },
   template: `
     <ChartWrapper>
-      <LineErrorMarginChart v-bind="$props" />
+      <LineErrorMarginChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 });
 
-const MultiLineTemplate: Story = (_args, { argTypes }) => ({
+const MultiLineTemplate: Story = (args) => ({
   title: 'MultiLine',
   components: { MultiLineChart, ChartWrapper },
-  props: Object.keys(argTypes),
+  props: {
+    allPropsFromArgs: {
+      default: () => unFlattenArgs(args),
+    },
+  },
   template: `
     <ChartWrapper>
-      <MultiLineChart v-bind="$props" />
+      <MultiLineChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 });
@@ -59,13 +130,15 @@ const MultiLineTemplate: Story = (_args, { argTypes }) => ({
 // https://storybook.js.org/docs/vue/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
+const defaultArguments = flattenArgs({
   line: {
     strokeWidth: 2,
     stroke: colors[1],
     curve: 'curveLinear',
     beta: 0,
   },
+  isRTL: false,
+  dimensions: { width: 800, height: 600 },
   marker: {
     hidden: false,
     radius: 5,
@@ -84,9 +157,8 @@ const defaultArguments = {
   },
   padding,
   animationOptions,
-  isRTL: false,
   data: evolutionData,
-};
+});
 
 Default.args = defaultArguments;
 

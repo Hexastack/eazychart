@@ -5,16 +5,15 @@ import {
   rawData,
   animationOptions,
 } from 'eazychart-dev/storybook/data';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  ChartWrapper,
-  flattenColors,
-  unFlattenArgs,
   flattenArgs,
-  paddingArgTypesOptions,
   animationArgTypesOptions,
+  paddingArgTypesOptions,
   dimensionArgTypesOptions,
+  flattenColors,
   setColorArgs,
-} from '@/lib/storybook-utils';
+} from 'eazychart-dev/storybook/utils';
 import PieChart from './PieChart';
 import SemiCircleChart from './SemiCircleChart';
 import RadialChart from './RadialChart';
@@ -103,12 +102,17 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type PieChartProps = InstanceType<typeof PieChart>['$props'];
+type SemiCircleChartProps = InstanceType<typeof SemiCircleChart>['$props'];
+type RadialChartProps = InstanceType<typeof RadialChart>['$props'];
+type IrregularPieChartProps = InstanceType<typeof IrregularPieChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: PieChartProps) => ({
   title: 'Default',
   components: { PieChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -116,29 +120,31 @@ const DefaultTemplate: Story = (args) => ({
       <PieChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const SemiCircleTemplate: Story = (args) => ({
-  title: 'Default',
-  components: { SemiCircleChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+const SemiCircleTemplate: Story = buildTemplate(
+  (args: SemiCircleChartProps) => ({
+    title: 'Default',
+    components: { SemiCircleChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
       <SemiCircleChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+  }),
+);
 
-const RadialTemplate: Story = (args) => ({
+const RadialTemplate: Story = buildTemplate((args: RadialChartProps) => ({
   title: 'Default',
   components: { RadialChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -146,22 +152,24 @@ const RadialTemplate: Story = (args) => ({
       <RadialChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const IrregularTemplate: Story = (args) => ({
-  title: 'Default',
-  components: { IrregularPieChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+const IrregularTemplate: Story = buildTemplate(
+  (args: IrregularPieChartProps) => ({
+    title: 'Default',
+    components: { IrregularPieChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
       <IrregularPieChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
@@ -200,10 +208,21 @@ SemiCircle.args = defaultArguments;
 export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
-  ...defaultArguments,
+  ...flattenArgs({
+    domainKey: 'value',
+    data: rawData,
+    padding: {
+      left: 150,
+      bottom: 100,
+      right: 150,
+      top: 100,
+    },
+    dimensions: { width: 800, height: 600 },
+    animationOptions,
+  }),
+  ...flattenColors(colors),
   arc: undefined,
 };
-
 export const Irregular = IrregularTemplate.bind({});
 
 Irregular.args = defaultArguments;

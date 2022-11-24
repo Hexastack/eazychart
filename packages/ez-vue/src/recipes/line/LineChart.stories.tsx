@@ -3,13 +3,12 @@ import LineChart from '@/recipes/line/LineChart';
 import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
 import MultiLineChart from '@/recipes/line/MultiLineChart';
 
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
+  baseChartArgTypes,
   markerArgTypesOptions,
-} from '@/lib/storybook-utils';
+} from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
   colors,
@@ -80,12 +79,18 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type LineChartProps = InstanceType<typeof LineChart>['$props'];
+type LineErrorMarginChartProps = InstanceType<
+  typeof LineErrorMarginChart
+>['$props'];
+type MultiLineChartProps = InstanceType<typeof MultiLineChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: LineChartProps) => ({
   title: 'Default',
   components: { LineChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -93,29 +98,31 @@ const DefaultTemplate: Story = (args) => ({
       <LineChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const LineErrorMarginTemplate: Story = (args) => ({
-  title: 'LineErrorMargin',
-  components: { LineErrorMarginChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+const LineErrorMarginTemplate: Story = buildTemplate(
+  (args: LineErrorMarginChartProps) => ({
+    title: 'LineErrorMargin',
+    components: { LineErrorMarginChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
       <LineErrorMarginChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+  }),
+);
 
-const MultiLineTemplate: Story = (args) => ({
+const MultiLineTemplate: Story = buildTemplate((args: MultiLineChartProps) => ({
   title: 'MultiLine',
   components: { MultiLineChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -123,7 +130,7 @@ const MultiLineTemplate: Story = (args) => ({
       <MultiLineChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test

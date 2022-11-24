@@ -1,12 +1,8 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
-import {
-  ChartWrapper,
-  unFlattenArgs,
-  flattenArgs,
-  baseChartArgTypes,
-} from '@/lib/storybook-utils';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import { flattenArgs, baseChartArgTypes } from 'eazychart-dev/storybook/utils';
 import { correlationData } from 'eazychart-dev/storybook/data';
 const bubbleChartArgTypes = {
   'bubble.minRadius': {
@@ -49,15 +45,15 @@ const meta: Meta = {
 
 export default meta;
 
-const bubbleTemplate: Story<BubbleChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <BubbleChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const bubbleTemplate: Story<BubbleChartProps> = buildTemplate(
+  (args: BubbleChartProps) => {
+    return (
+      <ChartWrapper>
+        <BubbleChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -96,7 +92,4 @@ const defaultArguments = flattenArgs({
     fill: 'rgba(209, 46, 84, 0.5)',
   },
 });
-
-Default.args = {
-  ...defaultArguments,
-};
+Default.args = defaultArguments;

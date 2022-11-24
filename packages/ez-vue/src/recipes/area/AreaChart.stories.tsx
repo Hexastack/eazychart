@@ -1,19 +1,18 @@
 import { Meta, Story } from '@storybook/vue';
 import AreaChart from '@/recipes/area/AreaChart';
 import MultiAreaChart from '@/recipes/area/MultiAreaChart';
-import {
-  baseChartArgTypes,
-  ChartWrapper,
-  flattenArgs,
-  unFlattenArgs,
-  markerArgTypesOptions,
-} from '@/lib/storybook-utils';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   animationOptions,
   colors,
   evolutionData,
   padding,
 } from 'eazychart-dev/storybook/data';
+import {
+  flattenArgs,
+  baseChartArgTypes,
+  markerArgTypesOptions,
+} from 'eazychart-dev/storybook/utils';
 
 const areaChartArgTypes = {
   'area.stroke': {
@@ -41,7 +40,7 @@ const areaChartArgTypes = {
       defaultValue: { summary: 'yValues' },
     },
     description: 'Sets the Y axis domain keys and title for multi chart',
-    // trick to make this argument disappear in the single (default) chart
+    // Used to make this argument disappear in the single (default) chart
     if: { arg: 'yAxis', truthy: true },
   },
   ...markerArgTypesOptions,
@@ -58,12 +57,15 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type AreaChartProps = InstanceType<typeof AreaChart>['$props'];
+type MultiAreaChartProps = InstanceType<typeof MultiAreaChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: AreaChartProps) => ({
   title: 'Default',
   components: { AreaChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -71,14 +73,14 @@ const DefaultTemplate: Story = (args) => ({
       <AreaChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const MultiAreaTemplate: Story = (args) => ({
+const MultiAreaTemplate: Story = buildTemplate((args: MultiAreaChartProps) => ({
   title: 'MultiArea',
   components: { MultiAreaChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -86,7 +88,7 @@ const MultiAreaTemplate: Story = (args) => ({
       <MultiAreaChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test

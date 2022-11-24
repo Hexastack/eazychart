@@ -6,16 +6,15 @@ import {
   SemiCircleChartProps,
 } from '@/recipes/pie/SemiCircleChart';
 import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
   animationArgTypesOptions,
   paddingArgTypesOptions,
   dimensionArgTypesOptions,
   flattenColors,
   setColorArgs,
-} from '@/lib/storybook-utils';
+} from 'eazychart-dev/storybook/utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 import {
   IrregularPieChart,
@@ -107,44 +106,45 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<PieChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
-  const ex = { ...expandedArgs };
-  return (
-    <ChartWrapper>
-      <PieChart {...ex} />
-    </ChartWrapper>
-  );
-};
+const DefaultTemplate: Story<PieChartProps> = buildTemplate(
+  (args: PieChartProps) => {
+    return (
+      <ChartWrapper>
+        <PieChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-const SemiCircleTemplate: Story<SemiCircleChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
-  return (
-    <ChartWrapper>
-      <SemiCircleChart {...expandedArgs} />
-    </ChartWrapper>
-  );
-};
+const SemiCircleTemplate: Story<SemiCircleChartProps> = buildTemplate(
+  (args: SemiCircleChartProps) => {
+    return (
+      <ChartWrapper>
+        <SemiCircleChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-const RadialTemplate: Story<RadialChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
+const RadialTemplate: Story<RadialChartProps> = buildTemplate(
+  (args: RadialChartProps) => {
+    return (
+      <ChartWrapper>
+        <RadialChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-  return (
-    <ChartWrapper>
-      <RadialChart {...expandedArgs} />
-    </ChartWrapper>
-  );
-};
-
-const IrregularTemplate: Story<IrregularPieChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <IrregularPieChart {...expandedArgs} />
-    </ChartWrapper>
-  );
-};
+const IrregularTemplate: Story<IrregularPieChartProps> = buildTemplate(
+  (args: IrregularPieChartProps) => {
+    return (
+      <ChartWrapper>
+        <IrregularPieChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -176,18 +176,31 @@ const defaultArguments = {
   ...flattenColors(colors),
 };
 
-Default.args = {
-  ...defaultArguments,
-};
+Default.args = defaultArguments;
 
 export const SemiCircle = SemiCircleTemplate.bind({});
 
 SemiCircle.args = defaultArguments;
-
 export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
-  ...defaultArguments,
+  ...flattenArgs({
+    domainKey: 'value',
+    data: rawData,
+    dimensions: { width: 800, height: 600 },
+    animationOptions: {
+      easing: 'easeBack',
+      duration: 400,
+      delay: 0,
+    },
+    padding: {
+      left: 150,
+      bottom: 100,
+      right: 150,
+      top: 100,
+    },
+  }),
+  ...flattenColors(colors),
   arc: undefined,
 };
 

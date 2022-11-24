@@ -1,12 +1,11 @@
 import { Meta, Story } from '@storybook/vue';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
   flattenColors,
   setColorArgs,
-} from '@/lib/storybook-utils';
+  baseChartArgTypes,
+} from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
   colors,
@@ -79,12 +78,15 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type ColumnChartProps = InstanceType<typeof ColumnChart>['$props'];
+type LineColumnChartProps = InstanceType<typeof LineColumnChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
   title: 'Default',
   components: { ColumnChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -92,22 +94,24 @@ const DefaultTemplate: Story = (args) => ({
       <ColumnChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const LineColumnTemplate: Story = (args) => ({
-  title: 'LineColumn',
-  components: { LineColumnChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+const LineColumnTemplate: Story = buildTemplate(
+  (args: LineColumnChartProps) => ({
+    title: 'LineColumn',
+    components: { LineColumnChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
       <LineColumnChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test

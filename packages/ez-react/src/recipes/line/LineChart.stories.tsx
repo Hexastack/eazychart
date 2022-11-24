@@ -3,13 +3,12 @@ import { Meta, Story } from '@storybook/react';
 import { LineCurve } from 'eazychart-core/src/types';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
   baseChartArgTypes,
   markerArgTypesOptions,
-} from '@/lib/storybook-utils';
+} from 'eazychart-dev/storybook/utils';
 import {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
@@ -83,33 +82,35 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<LineChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-  return (
-    <ChartWrapper>
-      <LineChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const DefaultTemplate: Story<LineChartProps> = buildTemplate(
+  (args: LineChartProps) => {
+    return (
+      <ChartWrapper>
+        <LineChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-const MultiLineTemplate: Story<MultiLineChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-  return (
-    <ChartWrapper>
-      <MultiLineChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const MultiLineTemplate: Story<MultiLineChartProps> = buildTemplate(
+  (args: MultiLineChartProps) => {
+    return (
+      <ChartWrapper>
+        <MultiLineChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <LineErrorMarginChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = buildTemplate(
+  (args: LineErrorMarginChartProps) => {
+    return (
+      <ChartWrapper>
+        <LineErrorMarginChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing

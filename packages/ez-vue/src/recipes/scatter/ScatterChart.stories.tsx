@@ -5,12 +5,11 @@ import {
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
-} from '@/lib/storybook-utils';
+  baseChartArgTypes,
+} from 'eazychart-dev/storybook/utils';
 import ScatterChart from './ScatterChart';
 
 const scatterChartArgTypes = {
@@ -42,12 +41,14 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type ScatterChartProps = InstanceType<typeof ScatterChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: ScatterChartProps) => ({
   title: 'Default',
   components: { ScatterChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -55,7 +56,7 @@ const DefaultTemplate: Story = (args) => ({
       <ScatterChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test

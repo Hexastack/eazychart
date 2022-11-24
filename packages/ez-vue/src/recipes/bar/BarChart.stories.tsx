@@ -1,17 +1,14 @@
 import { Meta, Story } from '@storybook/vue';
+import { ChartWrapper, ResizableChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
   flattenArgs,
-  ResizableChartWrapper,
   setColorArgs,
-  unFlattenArgs,
   flattenColors,
-} from '@/lib/storybook-utils';
+  baseChartArgTypes,
+} from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
   colors,
-  dimensions,
   rawData,
 } from 'eazychart-dev/storybook/data';
 import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
@@ -47,11 +44,13 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type BarChartProps = InstanceType<typeof BarChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: BarChartProps) => ({
   components: { BarChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -59,24 +58,26 @@ const DefaultTemplate: Story = (args) => ({
       <BarChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const TemplateWithParentDimensions: Story = (args) => ({
-  title: 'Withparent',
-  components: { BarChart, ResizableChartWrapper, ResponsiveChartContainer },
-  props: {
-    allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+const TemplateWithParentDimensions: Story = buildTemplate(
+  (args: BarChartProps) => ({
+    title: 'Withparent',
+    components: { BarChart, ResizableChartWrapper, ResponsiveChartContainer },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ResizableChartWrapper>
       <ResponsiveChartContainer>
         <BarChart v-bind="allPropsFromArgs" />
       </ResponsiveChartContainer>
     </ResizableChartWrapper>
   `,
-});
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
@@ -111,7 +112,7 @@ const initialArguments = {
 
 Default.args = {
   ...initialArguments,
-  dimensions,
+  ...flattenArgs({ dimensions: { width: 800, height: 600 } }),
 };
 
 Resizable.args = initialArguments;

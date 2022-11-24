@@ -1,13 +1,12 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
+import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
-  ChartWrapper,
   flattenArgs,
-  unFlattenArgs,
   baseChartArgTypes,
   markerArgTypesOptions,
-} from '../../lib/storybook-utils';
+} from 'eazychart-dev/storybook/utils';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
 import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
 
@@ -37,7 +36,7 @@ const areaChartArgTypes = {
       defaultValue: { summary: 'yValues' },
     },
     description: 'Sets the Y axis domain keys and title for multi chart',
-    //trick to make this argument disappear in the single (default) chart
+    // Used to make this argument disappear in the single (default) chart
     if: { arg: 'yAxis', truthy: true },
   },
   ...markerArgTypesOptions,
@@ -56,24 +55,25 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<AreaChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-  return (
-    <ChartWrapper>
-      <AreaChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const Template: Story<AreaChartProps> = buildTemplate(
+  (args: AreaChartProps) => {
+    return (
+      <ChartWrapper>
+        <AreaChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-const MultiAreaTemplate: Story<MultiAreaChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <MultiAreaChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const MultiAreaTemplate: Story<MultiAreaChartProps> = buildTemplate(
+  (args: MultiAreaChartProps) => {
+    return (
+      <ChartWrapper>
+        <MultiAreaChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -121,9 +121,15 @@ Default.args = defaultArguments;
 
 export const MultiArea = MultiAreaTemplate.bind({});
 
+// make an area const in data and spread it here and in default args
 MultiArea.args = {
   ...defaultArguments,
-  area: { ...defaultArguments.area, opacity: 0.5 },
+  area: {
+    stroke: colors[0],
+    strokeWidth: 2,
+    fill: `${colors[0]}b0`,
+    opacity: 0.5,
+  },
   yAxis: {
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',

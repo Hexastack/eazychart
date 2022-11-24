@@ -4,12 +4,8 @@ import {
   ScatterChart,
   ScatterChartProps,
 } from '@/recipes/scatter/ScatterChart';
-import {
-  ChartWrapper,
-  unFlattenArgs,
-  flattenArgs,
-  baseChartArgTypes,
-} from '@/lib/storybook-utils';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import { flattenArgs, baseChartArgTypes } from 'eazychart-dev/storybook/utils';
 import { colors, correlationData } from 'eazychart-dev/storybook/data';
 
 const scatterChartArgTypes = {
@@ -43,15 +39,15 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<ScatterChartProps> = (args) => {
-  const extendedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <ScatterChart {...extendedArgs} />
-    </ChartWrapper>
-  );
-};
+const DefaultTemplate: Story<ScatterChartProps> = buildTemplate(
+  (args: ScatterChartProps) => {
+    return (
+      <ChartWrapper>
+        <ScatterChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
@@ -83,12 +79,10 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
   },
   data: correlationData,
-});
-
-Default.args = {
-  ...defaultArguments,
   point: {
     color: colors[1],
     radius: 5,
   },
-};
+});
+
+Default.args = defaultArguments;

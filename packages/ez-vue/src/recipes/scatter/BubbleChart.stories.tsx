@@ -4,12 +4,11 @@ import {
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
-  unFlattenArgs,
   flattenArgs,
-} from '@/lib/storybook-utils';
+  baseChartArgTypes,
+} from 'eazychart-dev/storybook/utils';
 import BubbleChart from './BubbleChart';
 
 const bubbleChartArgTypes = {
@@ -51,12 +50,14 @@ const meta: Meta = {
 };
 export default meta;
 
-const DefaultTemplate: Story = (args) => ({
+type BubbleChartProps = InstanceType<typeof BubbleChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: BubbleChartProps) => ({
   title: 'Bubble',
   components: { BubbleChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
-      default: () => unFlattenArgs(args),
+      default: () => args,
     },
   },
   template: `
@@ -64,7 +65,7 @@ const DefaultTemplate: Story = (args) => ({
       <BubbleChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test

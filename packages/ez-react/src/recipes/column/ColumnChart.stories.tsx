@@ -5,14 +5,13 @@ import {
   LineColumnChart,
   LineColumnChartProps,
 } from '@/recipes/column/LineColumnChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  baseChartArgTypes,
-  ChartWrapper,
   flattenArgs,
-  unFlattenArgs,
   flattenColors,
   setColorArgs,
-} from '@/lib/storybook-utils';
+  baseChartArgTypes,
+} from 'eazychart-dev/storybook/utils';
 import { colors, rawData } from 'eazychart-dev/storybook/data';
 
 const columnChartArgTypes = {
@@ -79,25 +78,25 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<ColumnChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
+const DefaultTemplate: Story<ColumnChartProps> = buildTemplate(
+  (args: ColumnChartProps) => {
+    return (
+      <ChartWrapper>
+        <ColumnChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
-  return (
-    <ChartWrapper>
-      <ColumnChart {...expandedArgs} />
-    </ChartWrapper>
-  );
-};
-
-const LineColumnTemplate: Story<LineColumnChartProps> = (args) => {
-  const expandedArgs = unFlattenArgs(args);
-
-  return (
-    <ChartWrapper>
-      <LineColumnChart {...expandedArgs} />
-    </ChartWrapper>
-  );
-};
+const LineColumnTemplate: Story<LineColumnChartProps> = buildTemplate(
+  (args: LineColumnChartProps) => {
+    return (
+      <ChartWrapper>
+        <LineColumnChart {...args} />
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing

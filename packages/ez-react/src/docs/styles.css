@@ -21,6 +21,7 @@
     border: 0;
     outline: 0;
     padding: 10px 20px;
+    cursor: pointer;
 }
 
 .story-tabbed-list-button-selected {
@@ -30,9 +31,12 @@
     border-bottom: 4px #71C4FD solid;
     padding: 10px 20px;
     font-weight: bold;
+    cursor: pointer;
 }
+
 .story-tabbed-code-block-container {
     position: relative;
+    background: none rgb(253, 253, 253);
 }
 
 .story-tabbed-code-block {

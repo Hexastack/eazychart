@@ -1,0 +1,124 @@
+import { Meta } from '@storybook/addon-docs';
+import Tabs from './Tabs';
+
+<Meta
+  title="Get Started/Essentials/Custom CSS"
+  parameters={{ options: { isToolshown: false }, id: 4 }}
+/>
+
+# Custom CSS
+
+**EazyChart** offers the ability to style your charts and components as you wish.
+You can use the styles found in the `eazychart-css` package, or use your custom styling by overriding `eazychart-css` styles.
+Doing so is by writing your own CSS file and adding it to your project with your custom style.
+
+Create a `.css` file and add your styling into it as the example above:
+
+Let’s override the style of the tooltip.
+Instead of black background and white text we want a white background and black bold text.
+
+(Tooltip with black background)[link to image]
+
+Create a `.css` file and add your styling into it as the example above:
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab
+    language="css"
+    code={`/* ez-styles.css */
+.ez-tooltip-text {
+  font-weight: bold;
+  color: #000;
+}
+.ez-tooltip {
+  background-color: #ffffff95; /* With some opacity */
+}`}
+  ></Tab>
+</Tabs>
+
+And then import your css file into your app main file like so:
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab language="javascript" code={`import './ez-styles.css';`}></Tab>
+</Tabs>
+
+> **Note:** Import the file only in the app main file, you won’t need to import it in every component.
+
+Save the file and you will get the next results.
+
+(Tooltip with white background)[link to image]
+
+A complete code example:
+
+<Tabs tabbedClassName="story-tabbed-code-block-big" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`import { BarChart } from 'eazychart-react';
+import 'eazychart-css';
+import './ez-styles.css';\n
+function App() {
+  const data = [
+    { yValue: 'Alpha', xValue: 5 },
+    { yValue: 'Beta', xValue: 4 },
+    { yValue: 'Gamma', xValue: 3 },
+  ];
+  return (
+    <BarChart
+      data={data}
+      xAxis={{
+        domainKey: 'xValue',
+        nice: 1
+      }}
+      yAxis={{
+        domainKey: 'yValue',
+      }}
+      colors={['#fe4a49', '#2ab7ca', '#fed766']}
+    ></BarChart>
+  );
+}
+export default App;`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<template>
+  <BarChart 
+    :data="rawData" 
+    :colors="colors"
+    :xAxis="{ domainKey: 'xValue', nice: 1}"
+    :yAxis="{ domainKey: 'yValue'}"
+  ></BarChart>
+</template>
+<script>
+  import { BarChart } from 'eazychart-vue';
+  import 'eazychart-css';\n
+  export default {
+    name: 'App',
+    components: {
+      BarChart,
+    },
+    data() {
+      return {
+        rawData: [
+          { yValue: 'Alpha', xValue: 5 },
+          { yValue: 'Beta', xValue: 4 },
+          { yValue: 'Gamma', xValue: 3 },
+        ],
+        colors: ['#fe4a49', '#2ab7ca', '#fed766'],
+      };
+    },
+  };
+</script>
+<style>
+  .ez-tooltip-text {
+    font-weight: bold;
+    color: #000;
+  }
+  .ez-tooltip {
+    background-color: #ffffff95;
+  }
+</style>`}
+  ></Tab>
+</Tabs>
+
+> All the css classes can be found in the [Github repo](https://github.com/Hexastack/eazychart/tree/master/packages/ez-css).

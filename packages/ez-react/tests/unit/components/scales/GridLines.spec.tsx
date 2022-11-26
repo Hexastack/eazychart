@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render } from '@testing-library/react';
+import { act } from '@testing-library/react';
 import { ScaleLinear } from 'eazychart-core/src';
 import { Direction } from 'eazychart-core/src/types';
 import {
@@ -11,7 +11,7 @@ import {
   horizontalLinearScaleDef,
 } from 'eazychart-core/src/sample-data';
 import { Chart, ChartProps } from '@/components/Chart';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import { GridLines } from '@/components/scales/grid/GridLines';
 import 'tests/mocks/ResizeObserver';
 import { CartesianScale } from '@/components/scales/CartesianScale';
@@ -52,7 +52,7 @@ describe('GridLines', () => {
         </CartesianScale>
       </Chart>
     );
-    const wrapper = render(gridChart);
+    const wrapper = renderSVG(gridChart);
 
     await act(async () => {
       wrapper.rerender(gridChart);
@@ -79,7 +79,7 @@ describe('GridLines', () => {
         </CartesianScale>
       </Chart>
     );
-    const wrapper = render(gridChart);
+    const wrapper = renderSVG(gridChart);
 
     await act(async () => {
       wrapper.rerender(gridChart);

@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  render,
   fireEvent,
   RenderResult,
   act,
@@ -10,7 +9,7 @@ import {
 import { Point } from '@/components/shapes/Point';
 import { Chart } from '@/components/Chart';
 import { pointA } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import { TooltipContext } from 'eazychart-core/src/types';
 import 'tests/mocks/ResizeObserver';
 
@@ -38,7 +37,7 @@ describe('Point', () => {
   it('renders an svg circle with the right coordinates', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           scopedSlots={{
@@ -56,7 +55,7 @@ describe('Point', () => {
   });
 
   it('show/hide the tooltip on mouse over/out', async () => {
-    const wrapper = render(
+    const wrapper = renderSVG(
       <Chart {...baseChartProps}>
         <Point shapeDatum={pointA} />
       </Chart>

@@ -1,30 +1,32 @@
 import React from 'react';
 import { dimensions, pointsRawData } from 'eazychart-core/src/sample-data';
 import { act, render, RenderResult, waitFor } from '@testing-library/react';
-import { AreaChart } from '@/recipes/area/AreaChart';
 import 'tests/mocks/ResizeObserver';
+import { MultiAreaChart } from '@/recipes/area/MultiAreaChart';
 
-describe('AreaChart', () => {
-  it('renders an area chart', async () => {
+describe('MultiAreaChart', () => {
+  it('renders a multiarea chart', async () => {
     let wrapper: RenderResult;
     act(() => {
       wrapper = render(
-        <AreaChart
+        <MultiAreaChart
           data={pointsRawData}
           area={{
-            stroke: 'orange',
+            stroke: 'red',
             strokeWidth: 2,
-            fill: 'orange',
+            opacity: 0.5,
           }}
           marker={{
             hidden: false,
-            color: 'orange',
+            color: 'blue',
             radius: 2,
           }}
-          xAxis={{ domainKey: 'xValue' }}
-          yAxis={{ domainKey: 'yValue' }}
           grid={{ directions: [] }}
           dimensions={dimensions}
+          xAxis={{ domainKey: 'xValue' }}
+          yAxis={{
+            domainKeys: ['yValue', 'zValue'],
+          }}
           animationOptions={{
             easing: 'easeBack',
             duration: 0,
@@ -33,6 +35,7 @@ describe('AreaChart', () => {
         />
       );
     });
+
     await waitFor(() => {
       expect(wrapper.container.innerHTML).toMatchSnapshot();
     });

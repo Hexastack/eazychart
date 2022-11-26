@@ -1,5 +1,5 @@
 import React from 'react';
-import { act, render, RenderResult, waitFor } from '@testing-library/react';
+import { act, RenderResult, waitFor } from '@testing-library/react';
 import { Chart } from '@/components/Chart';
 import {
   colors,
@@ -7,7 +7,7 @@ import {
   radialLinearScaleDef,
   rawData,
 } from 'eazychart-core/src/sample-data';
-import { baseChartProps } from 'tests/common';
+import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { Arcs } from '@/components/Arcs';
 import { LinearScale } from '@/components/scales/LinearScale';
@@ -17,7 +17,7 @@ describe('Arcs', () => {
   it('renders svg radial with the right coordinates / dimensions', async () => {
     let wrapper: RenderResult;
     act(() => {
-      wrapper = render(
+      wrapper = renderSVG(
         <Chart
           {...baseChartProps}
           rawData={rawData}

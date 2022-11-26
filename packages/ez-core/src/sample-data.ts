@@ -13,13 +13,10 @@ import {
   ScaleLinearDefinition,
   TooltipContext,
   RawDatum,
+  AreaData,
 } from './types';
 
-import  {
-  ScaleLinear,
-  ScaleBand,
-  ScaleOrdinal,
-} from '.';
+import { ScaleLinear, ScaleBand, ScaleOrdinal } from '.';
 
 export const rawData: RawData = [
   {
@@ -56,7 +53,7 @@ export const chartData: NormalizedData = rawData.map((d, idx) => {
 export const verticalLinearScaleId = 'myVerticalLinearScale';
 export const horizontalBandScaleId = 'myHorizontalBandScale';
 export const horizontalLinearScaleId = 'myHorizontalLinearScale';
-export const RadialLinearScaleId = 'myRadialLinearScale'
+export const RadialLinearScaleId = 'myRadialLinearScale';
 
 export const verticalLinearScaleDef: ScaleLinearDefinition = {
   direction: Direction.VERTICAL,
@@ -111,7 +108,7 @@ export const scaleDefinitions = {
 export const verticalLinearScale = new ScaleLinear(verticalLinearScaleDef);
 export const horizontalBandScale = new ScaleBand(horizontalBandScaleDef);
 export const horizontalLinearScale = new ScaleLinear(horizontalLinearScaleDef);
-export const radialLinearScale = new ScaleLinear(radialLinearScaleDef)
+export const radialLinearScale = new ScaleLinear(radialLinearScaleDef);
 export const colorScale = new ScaleOrdinal({
   domainKey: 'label',
   range: colors,
@@ -123,11 +120,11 @@ horizontalLinearScale.computeScale(dimensions, chartData);
 radialLinearScale.computeScale(dimensions, chartData);
 colorScale.computeScale(dimensions, chartData);
 
-export const scales: {[scaleName: string]: D3Scales} = {
+export const scales: { [scaleName: string]: D3Scales } = {
   [verticalLinearScaleId]: verticalLinearScale.scale,
   [horizontalBandScaleId]: horizontalBandScale.scale,
   [horizontalLinearScaleId]: horizontalLinearScale.scale,
-  [RadialLinearScaleId] : radialLinearScale.scale
+  [RadialLinearScaleId]: radialLinearScale.scale,
 };
 
 export const rectData: RectangleDatum = {
@@ -136,7 +133,7 @@ export const rectData: RectangleDatum = {
   x: 50,
   y: 10,
   width: 20,
-  height: 100
+  height: 100,
 };
 
 export const tooltip: TooltipContext = {
@@ -151,7 +148,7 @@ export const datumA: RawDatum = {
   xValue: 0,
   yValue: 10,
   zValue: 100,
-}
+};
 
 export const pointA: PointDatum = {
   id: 'A',
@@ -167,7 +164,7 @@ export const datumB: RawDatum = {
   xValue: 10,
   yValue: 25,
   zValue: 250,
-}
+};
 
 export const pointB: PointDatum = {
   id: 'B',
@@ -183,7 +180,7 @@ export const datumC: RawDatum = {
   xValue: 15,
   yValue: 30,
   zValue: 300,
-}
+};
 
 export const pointC: PointDatum = {
   id: 'C',
@@ -201,7 +198,7 @@ export const pointsWithMarginData: RawData = pointsRawData.map((d, idx) => {
   return {
     ...d,
     positiveMargin: (idx + 1) / 10,
-    negativeMargin: 2 * (idx + 1) / 10,
+    negativeMargin: (2 * (idx + 1)) / 10,
   };
 });
 
@@ -215,3 +212,21 @@ export const arcDatum: ArcDatum = {
   padAngle: 0,
   index: 0,
 };
+
+export const areaData: AreaData = [
+  {
+    x: 5,
+    y0: 10,
+    y1: 20,
+  },
+  {
+    x: 10,
+    y0: 7,
+    y1: 13,
+  },
+  {
+    x: 15,
+    y0: 9,
+    y1: 18,
+  },
+];

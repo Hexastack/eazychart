@@ -28,7 +28,7 @@ Our data will look like the following:
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
   <Tab
     language="javascript"
-    code={`const data = [
+    code={`const rawData = [
   {
     gdp: 19.485,
     country: 'United States',
@@ -55,9 +55,9 @@ In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yA
     language="jsx"
     code={`<ColumnChart
   data={rawData}
-  xAxis="{ domainKey: 'country'}"
-  yAxis="{ domainKey: 'gdp', nice: 10}"
-  colors="['#fe4a49', '#2ab7ca', '#fed766']"
+  xAxis={{ domainKey: 'country'}}
+  yAxis={{ domainKey: 'gdp', nice: 10}}
+  colors={['#fe4a49', '#2ab7ca', '#fed766']}
 />`}
   ></Tab>
   <Tab
@@ -74,7 +74,7 @@ In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yA
 
 The result is shown in the image below.
 
-(Column Chart: Countries in function of their GDP)[link to image]
+![Column Chart: Countries in function of their GDP](https://docs.eazychart.com/images/custom-css-data.png)
 
 > **NOTE**
 >
@@ -94,39 +94,56 @@ We use the ones supplied by [d3-ease](https://github.com/d3/d3-ease) library for
 So, please refer to the following guide to get a grasp of how each easing function would animate:
 [Transition Easing Comparison in v4](https://bl.ocks.org/d3noob/1ea51d03775b9650e8dfd03474e202fe)
 
-Available easing functions are : <animation_name_used_in_eachychart> : <type_of_the_animation>
+Available easing functions are :
 
-easeLinear: 'Linear’ | easeQuad: 'Quad' | easeQuadIn: 'Quand In' | easeQuadOut: 'Quad Out' | easeQuadInOut: 'Quad In/Out' |
-easeCubic: 'Cubic' | easeCubicIn: 'Cubic In' | easeCubicOut: 'Cubic Out' | easeCubicInOut: 'Cubic In/Out' |
-easePoly: 'Polynomial' | easePolyIn: 'Polynomial In' | easePolyOut: 'Polynomial Out' | easePolyInOut: 'Polynomial In/Out' |
-easeSin: 'Sinusoidal' | easeSinIn: 'Sinusoidal In' | easeSinOut: 'Sinusoidal Out' | easeSinInOut: 'Sinusoidal In/Out' |
-easeExp: 'Exponential' | easeExpIn: 'Exponential In' | easeExpOut: 'Exponential Out' | easeExpInOut: 'Exponential In/Out' |
-easeCircle: 'Circle' | easeCircleIn: 'Circle In' | easeCircleOut: 'Circle Out' | easeCircleInOut: 'Circle In/Out' |
-easeBounce: 'Bounce' | easeBounceIn: 'Bounce In' | easeBounceOut: 'Bounce Out' | easeBounceInOut: 'Bounce In/Out' |
-easeBack: 'Back' | easeBackIn: 'Back In' | easeBackOut: 'Back Out' | easeBackInOut: 'Back In/Out' | easeElastic: 'Elastic' |
-easeElasticIn: 'Elastic In' | easeElasticOut: 'Elastic Out' | easeElasticInOut: 'Elastic In/Out'.
+`<animation_name_used_in_eazychart>` : <type_of_the_animation>
+
+`easeLinear`: 'Linear’ | `easeQuad`: 'Quad' | `easeQuadIn`: 'Quand In' | `easeQuadOut`: 'Quad Out' | `easeQuadInOut`: 'Quad In/Out' |
+`easeCubic`: 'Cubic' | `easeCubicIn`: 'Cubic In' | `easeCubicOut`: 'Cubic Out' | `easeCubicInOut`: 'Cubic In/Out' |
+`easePoly`: 'Polynomial' | `easePolyIn`: 'Polynomial In' | `easePolyOut`: 'Polynomial Out' | `easePolyInOut`: 'Polynomial In/Out' |
+`easeSin`: 'Sinusoidal' | `easeSinIn`: 'Sinusoidal In' | `easeSinOut`: 'Sinusoidal Out' | `easeSinInOut`: 'Sinusoidal In/Out' |
+`easeExp`: 'Exponential' | `easeExpIn`: 'Exponential In' | `easeExpOut`: 'Exponential Out' | `easeExpInOut`: 'Exponential In/Out' |
+`easeCircle`: 'Circle' | `easeCircleIn`: 'Circle In' | `easeCircleOut`: 'Circle Out' | `easeCircleInOut`: 'Circle In/Out' |
+`easeBounce`: 'Bounce' | `easeBounceIn`: 'Bounce In' | `easeBounceOut`: 'Bounce Out' | `easeBounceInOut`: 'Bounce In/Out' |
+`easeBack`: 'Back' | `easeBackIn`: 'Back In' | `easeBackOut`: 'Back Out' | `easeBackInOut`: 'Back In/Out' | `easeElastic`: 'Elastic' |
+`easeElasticIn`: 'Elastic In' | `easeElasticOut`: 'Elastic Out' | `easeElasticInOut`: 'Elastic In/Out'.
 
 These animations can be provided to the chart and are used as follows:
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
   <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  data={data}
+  xAxis={{ domainKey: 'country'}}
+  yAxis={{ domainKey: 'gdp', nice: 10}}
+  colors={['#fe4a49', '#2ab7ca', '#fed766']}
+  animationOptions={{
+    easing: 'easeBounce',
+    duration: 400,
+    delay: 0,
+  }}
+/>`}
+  ></Tab>
+  <Tab
     title="Vue"
     language="markup"
     code={`<ColumnChart
-    :data="rawData"
-    :xAxis="{ domainKey: 'country'}"
-    :yAxis="{ domainKey: 'gdp', nice: 10}"
-    :colors="['#fe4a49', '#2ab7ca', '#fed766']"
-    :animationOptions="{
-      easing: 'easeBounce',
-      duration: 400,
-      delay: 0,
-    }"
-  ></ColumnChart>`}
+  :data="rawData"
+  :xAxis="{ domainKey: 'country'}"
+  :yAxis="{ domainKey: 'gdp', nice: 10}"
+  :colors="['#fe4a49', '#2ab7ca', '#fed766']"
+  :animationOptions="{
+    easing: 'easeBounce',
+    duration: 400,
+    delay: 0,
+  }"
+/>`}
   ></Tab>
 </Tabs>
 
-(Bounce animation in Column Chart)[Link to GIF]
+![Bounce animation in Column Chart](https://docs.eazychart.com/images/custom-css-animation.gif)
 
 ## Padding
 
@@ -135,9 +152,23 @@ This prop is useful when styling your whole web application.
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
   <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  // .. here should add the rest of the properties
+  padding={{
+    left: 100,
+    bottom: 200,
+    right: 100,
+    top: 200,
+  }}
+></ColumnChart>`}
+  ></Tab>
+  <Tab
     title="Vue"
     language="markup"
     code={`<ColumnChart
+  # .. here should add the rest of the properties
   :padding="{
     left: 100,
     bottom: 100,
@@ -148,11 +179,13 @@ This prop is useful when styling your whole web application.
   ></Tab>
 </Tabs>
 
-Column Chart without padding:
-(Column chart without padding)[link to the image]
+* Column Chart **without changing the default padding options**:
 
-Column Chart with padding:
-(Column chart with padding)[link to the image]
+![Column chart without padding](https://docs.eazychart.com/images/custom-css-before-padding.png)
+
+* Column Chart **with padding top and bottom changed**:
+
+![Column chart with padding](https://docs.eazychart.com/images/custom-css-after-padding.png)
 
 ## Dimensions
 
@@ -168,9 +201,18 @@ If you wish to give your chart recipe fixed dimensions, you should pass the dime
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
   <Tab
+    title="React"
+    language="jsx"
+    code={`<BarChart
+  // .. here should add the rest of the properties
+  dimensions={{ width: 1200, height: 800 }}
+></BarChart>`}
+  ></Tab>
+  <Tab
     title="Vue"
     language="markup"
     code={`<BarChart
+  # .. here should add the rest of the properties
   :dimensions="{ width: 1200, height: 800}"
 ></BarChart>`}
   ></Tab>
@@ -190,6 +232,31 @@ Grid lines provide helpful hints to the viewer, particularly for large or compli
   directions: [Direction.HORIZONTAL, Direction.VERTICAL],
   color: '#a8a8a8',
 };`}
+  ></Tab>
+</Tabs>
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  // .. here should add the rest of the properties
+  grid={{
+    directions: [ "horizontal", "vertical"],
+    color: '#a8a8a8',
+  }}
+></ColumnChart>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<ColumnChart
+  # .. here should add the rest of the properties
+  :grid="{ 
+    directions: [ 'horizontal', 'vertical'],
+    color: '#a8a8a8',
+  }"
+></ColumnChart>`}
   ></Tab>
 </Tabs>
 
@@ -214,7 +281,7 @@ The tooltip is an indicator that appears when hovering over a shape in a chart.
 This component serves as a way to display information about the chart (section, point).
 You can add your custom tooltip component, or simply use the one provided by default.
 
-(Tooltip)[Link to tooltip image]
+![Tooltip](https://docs.eazychart.com/images/tooltip.png)
 
 ## Legend
 
@@ -223,4 +290,4 @@ it is the information on this portion like the name, shape, and color of a point
 The Legend component gives the user the ability to choose what row to display in a bar chart, for example, or the portions in a pie chart.
 You can add your custom Legend component or use the included legend component in the EazyChart library package.
 
-(Gif showing legend)[link to gif]
+![Gif showing legend](https://docs.eazychart.com/images/legend.gif)

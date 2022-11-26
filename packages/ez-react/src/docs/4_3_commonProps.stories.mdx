@@ -17,7 +17,7 @@ When adding a chart to your web project,
 or creating a new chart recipe, We need to think about the fuel that we will use to fill up our engine, which is data.
 **EazyChart** handles it through its chart wrapper.
 
-So if you are creating some sort of visualization for your web project, all you need to do is to pass your data as a props to the chart.
+So if you are creating some sort of visualization for your web project, all you need to do is to pass your data as a prop to the chart.
 
 To explain how to feed your charts correctly you can follow the example below.
 
@@ -46,8 +46,8 @@ Our data will look like the following:
 </Tabs>
 
 The column chart in this case is the best option.
-We should specify the domainKey of `xAxis` and `yAxis` to the corresponding name of the property.
-In our case, the `country` will be presented in the `xAxis` and `gdp` in the `yAxis`.
+We should specify the domainKey of `xAxis` and `yAxis` to the corresponding property name.
+In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yAxis`.
 
 <Tabs tabbedClassName="story-tabbed-code-block-small" showTabs={true}>
   <Tab
@@ -84,7 +84,7 @@ The result is shown in the image below.
 
 The **EazyChart** library comes with a set of animations that you can use on your chart.
 
-As you may know, data analysis can be quite boring … let’s say animation makes it less boring.
+As you may know, data analysis can get quite boring… let’s say animation makes it less so.
 
 For animation, we use easing functions, and we offer predefined ones, but you can always supply your own.
 Easing is a method used to add motion to shapes by mutating their properties over time.
@@ -106,7 +106,7 @@ easeBounce: 'Bounce' | easeBounceIn: 'Bounce In' | easeBounceOut: 'Bounce Out' |
 easeBack: 'Back' | easeBackIn: 'Back In' | easeBackOut: 'Back Out' | easeBackInOut: 'Back In/Out' | easeElastic: 'Elastic' |
 easeElasticIn: 'Elastic In' | easeElasticOut: 'Elastic Out' | easeElasticInOut: 'Elastic In/Out'.
 
-This animations can be provided to the chart used as follows:
+These animations can be provided to the chart and are used as follows:
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
   <Tab
@@ -156,7 +156,7 @@ Column Chart with padding:
 
 ## Dimensions
 
-By default, Charts recipes in EazyChart have 800x600 pixels dimensions that can be overwritten.
+By default, Chart recipes in EazyChart have 800x600 pixel dimensions that can be overwritten.
 If you wish to give your chart recipe fixed dimensions, you should pass the dimensions as in the example below:
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
@@ -220,7 +220,7 @@ You can add your custom tooltip component, or simply use the one provided by def
 
 The legend is an indicator of a portion of a chart,
 it is the information on this portion like the name, shape, and color of a point (shape) on a chart.
-The Legend component lets the user choose over what row you want to display in a bar chart, for example, or a pie chart.
+The Legend component gives the user the ability to choose what row to display in a bar chart, for example, or the portions in a pie chart.
 You can add your custom Legend component or use the included legend component in the EazyChart library package.
 
 (Gif showing legend)[link to gif]

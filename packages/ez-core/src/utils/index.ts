@@ -9,3 +9,4 @@ export * from './scale';
 export * from './svg';
 export * from './debounce';
 export * from './clamp';
+export * from './map';

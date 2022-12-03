@@ -37,5 +37,8 @@
     "diffable-html": "^5.0.0",
     "eazychart-core": "^0.2.4-alpha.0"
   },
-  "gitHead": "4776e52be4c44e634cd6983f02bef30547617978"
+  "gitHead": "4776e52be4c44e634cd6983f02bef30547617978",
+  "dependencies": {
+    "d3-geo": "^3.0.1"
+  }
 }

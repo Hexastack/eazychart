@@ -69,9 +69,12 @@
   ],
   "dependencies": {
     "d3-ease": "^3.0.1",
+    "d3-geo": "^3.0.1",
     "d3-interpolate": "^3.0.1",
     "d3-scale": "^4.0.2",
-    "d3-shape": "^3.1.0"
+    "d3-selection": "^3.0.0",
+    "d3-shape": "^3.1.0",
+    "selection": "^0.0.1"
   },
   "devDependencies": {
     "@babel/parser": "^7.19.1",
@@ -82,8 +85,11 @@
     "@types/d3-scale": "^4.0.2",
     "@types/d3-shape": "^3.0.2",
     "@types/jest": "^27.4.0",
+    "@types/d3-geo": "^3.0.2",
+    "@types/d3-selection": "^3.0.3",
     "better-docs": "^2.7.2",
     "core-js": "^3.22.2",
+    "d3-geo": "^3.0.1",
     "jsdoc": "^3.6.10",
     "size-limit": "^7.0.8",
     "tsdx": "^0.14.1",

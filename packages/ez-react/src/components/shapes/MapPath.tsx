@@ -1,20 +1,31 @@
 import React, { FC, SVGAttributes } from 'react';
+import { ChartPadding } from 'eazychart-core/src/types';
 import { defaultColor } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 import * as d3 from 'd3-geo';
 
 export interface MapPathProps extends SVGAttributes<SVGPathElement> {
+  padding?: Partial<ChartPadding>;
   feature?: any; //GeoJsonFeature;
   projection?: d3.GeoProjection; //PathProjection;
   projectionType: string;
+  stroke: string;
+  scale: number;
+  width: number;
+  height: number;
 }
 
 export const MapPath: FC<MapPathProps> = ({
   feature = [],
   stroke = defaultColor,
+  fill = 'green',
+  width = 800,
+  height = 600,
+  scale = 100,
   strokeWidth = 1,
-  projectionType = 'geoMercator',
+  projectionType = '',
+  padding,
   ...rest
 }) => {
   const { animationOptions } = useChart();
@@ -38,7 +49,12 @@ export const MapPath: FC<MapPathProps> = ({
     default:
       projection = d3.geoMercator();
   }
-  // const projection = d3.geoMercator();
+  projection = projection
+    .scale(scale)
+    .translate([
+      width / 2 - (padding?.left || 0),
+      height / 2 - (padding?.top || 0),
+    ]);
   const pathGenerator = d3.geoPath(projection);
   const dataPath = pathGenerator(feature);
   const currentData =
@@ -49,7 +65,7 @@ export const MapPath: FC<MapPathProps> = ({
       d={currentData}
       stroke={stroke}
       strokeWidth={strokeWidth}
-      fill="none"
+      fill={fill}
       strokeLinejoin={'round'}
       strokeLinecap={'round'}
       {...rest}

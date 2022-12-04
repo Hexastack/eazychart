@@ -10,11 +10,15 @@ import Map from '@/components/Map';
 import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
+import { dimensions } from 'eazychart-dev/storybook/data';
 
 export interface MapChartProps extends SVGAttributes<SVGGElement> {
   mapData: any;
+  projectionType: string;
+  stroke: string;
+  fill: string;
   data: RawData;
-  colors?: string[];
+  scale: number;
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
   grid?: GridConfig;
@@ -29,19 +33,21 @@ export interface MapChartProps extends SVGAttributes<SVGGElement> {
 export const MapChart: FC<MapChartProps> = ({
   mapData,
   data,
+  projectionType,
+  stroke,
+  fill,
+  scale,
   animationOptions = {
     easing: 'easeBack',
     duration: 400,
     delay: 0,
   },
   padding = {
-    left: 100,
+    left: 150,
     bottom: 100,
     right: 100,
     top: 100,
   },
-  isRTL = false,
-  dimensions = {},
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -58,11 +64,12 @@ export const MapChart: FC<MapChartProps> = ({
       <Map
         dimensions={dimensions}
         rawData={data}
+        stroke={stroke}
+        fill={fill}
+        scale={scale}
         mapData={mapData}
+        projectionType={projectionType}
         padding={padding}
-        animationOptions={animationOptions}
-        scopedSlots={scopedSlots}
-        isRTL={isRTL}
       />
     </Chart>
   );

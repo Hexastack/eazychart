@@ -1,9 +1,65 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { mapData } from 'eazychart-dev/storybook/data';
-import { baseChartArgTypes } from '@/lib/storybook-utils';
 import { MapChartProps, MapChart } from '@/recipes/map/MapChart';
 
+const MapChartArgs = {
+  mapData: {
+    table: { category: 'Map Chart Data' },
+  },
+  animationOptions: {
+    table: {
+      disable: true,
+    },
+  },
+  isRTL: {
+    table: {
+      disable: true,
+    },
+  },
+  scopedSlots: {
+    table: {
+      disable: true,
+    },
+  },
+  grid: {
+    table: {
+      disable: true,
+    },
+  },
+  projectionType: {
+    control: {
+      type: 'select',
+      options: [
+        'geoMeractor',
+        'geoOrthographic',
+        'geoEqualEarth',
+        'geoEquirectangular',
+        'geoNaturalEarth1',
+      ],
+    },
+    table: {
+      category: 'Projection options',
+      defaultValue: { summary: 'geoMeractor' },
+    },
+    description: 'Sets the projection type',
+  },
+  stroke: {
+    control: { type: 'color' },
+    table: { category: 'MapChartColor', defaultValue: { summary: 'black' } },
+    description: 'Sets the map path color',
+  },
+  fill: {
+    control: { type: 'color' },
+    table: { category: 'MapChartColor', defaultValue: { summary: 'green' } },
+    description: 'Sets the map color',
+  },
+  scale: {
+    control: { type: 'number' },
+    table: { category: 'MapChart scale', defaultValue: { summary: '100' } },
+    description: 'Sets the Chart scale',
+  },
+};
 const meta: Meta = {
   id: '8',
   title: 'React/Map chart',
@@ -11,13 +67,13 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: MapChartArgs,
 };
 
 export default meta;
 
 const DefaultTemplate: Story<MapChartProps> = (args) => {
-  return <MapChart data={[]} mapData={args.mapData.features} />;
+  return <MapChart {...args} />;
 };
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
@@ -25,5 +81,11 @@ const DefaultTemplate: Story<MapChartProps> = (args) => {
 export const Default = DefaultTemplate.bind({});
 
 Default.args = {
-  mapData,
+  data: [],
+  mapData: mapData.features,
+  projectionType: 'geoMeractor',
+  stroke: '#ffffff',
+  fill: '#324678',
+  dimensions: { width: 800, height: 600 },
+  scale: 100,
 };

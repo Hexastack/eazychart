@@ -1,43 +1,60 @@
-import { select } from 'd3-selection';
 import * as d3 from 'd3-geo';
+import { ChartPadding, GeoJsonFeature } from './types';
 
 export const mapProjection = (
   scale: number,
   width: number,
   height: number,
-  data: any
+  padding: Partial<ChartPadding>,
+  projectionType: string,
+  feature: GeoJsonFeature
 ) => {
-  let projection = d3
-    .geoMercator()
+  let projection: any = {
+    geoMercator() {
+      return d3.geoMercator();
+    },
+    geoTransverseMercator() {
+      return d3.geoTransverseMercator();
+    },
+    geoOrthographic() {
+      return d3.geoOrthographic();
+    },
+    geoEqualEarth() {
+      return d3.geoEqualEarth();
+    },
+    geoEquirectangular() {
+      return d3.geoEquirectangular();
+    },
+    geoNaturalEarth1() {
+      return d3.geoNaturalEarth1();
+    },
+    geoAzimuthalEqualArea() {
+      return d3.geoAzimuthalEqualArea();
+    },
+    geoGnomonic() {
+      return d3.geoGnomonic();
+    },
+    geoStereographic() {
+      return d3.geoStereographic();
+    },
+    geoConicConformal() {
+      return d3.geoConicConformal();
+    },
+    geoConicEqualArea() {
+      return d3.geoConicEqualArea();
+    },
+    geoConicEquidistant() {
+      return d3.geoConicEquidistant();
+    },
+  };
+  projection = projection[projectionType]();
+  projection = projection
     .scale(scale)
-    .translate([width / 2, height / 2]);
-  let path = d3.geoPath().projection(projection);
-
-  select('svg')
-    .attr('width', width)
-    .attr('height', height)
-    .selectAll('.country')
-    .data(data)
-    .enter()
-    .append('path')
-    .classed('country', true)
-    .attr('stroke', 'white')
-    .attr('strokeWidth', 0.75)
-    .attr('d', path as any);
+    .translate([
+      width / 2 - (padding?.left || 0),
+      height / 2 - (padding?.top || 0),
+    ]);
+  const pathGenerator = d3.geoPath(projection);
+  const dataPath = pathGenerator(feature);
+  return dataPath;
 };
-
-// export const selectFeatures = (node: any, feature: string) => {
-//   return select(node)
-//     .append('g')
-//     .classed(feature, true);
-// };
-
-// export const getFeatures = (data: any) => {
-//   return select('g')
-//     .selectAll('path')
-//     .data(data);
-// };
-
-// export const projectMap = (context: any, d: any, projection: any) => {
-//   select(context).attr('d', d3.geoPath().projection(projection())(d));
-// };

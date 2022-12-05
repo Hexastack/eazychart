@@ -50,7 +50,5 @@
     "build": "lerna run build --stream"
   },
   "dependencies": {
-    "@types/d3-geo": "^3.0.2",
-    "d3-geo": "^3.0.1"
   }
 }

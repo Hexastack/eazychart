@@ -10,7 +10,8 @@ import {
   ShapeAttributes,
 } from '../types';
 import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
-
+import { GeoJSON, Feature } from 'geojson';
+import { GeoProjection } from 'd3-geo';
 export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
@@ -35,9 +36,10 @@ export type TickOptions = {
   tickFormat?: Function;
 };
 
-export type PointDatum = Point & ShapeAttributes & {
-  radius?: number;
-};
+export type PointDatum = Point &
+  ShapeAttributes & {
+    radius?: number;
+  };
 
 export type RectangleDatum = Point & Dimensions & ShapeAttributes;
 
@@ -53,8 +55,8 @@ export type ArcDatum = ShapeAttributes &
   PieArcDatum<
     | number
     | {
-      valueOf(): number;
-    }
+        valueOf(): number;
+      }
   >;
 
 export interface ArcConfig {
@@ -81,9 +83,9 @@ export interface ChartContext {
   data: NormalizedData;
   dataDict: NormalizedDataDict;
   isRTL: boolean;
-  registerScale: (scaleId: string, scale: AnyScale) => void,
-  getScale: (scaleId: string) => AnyScale | null,
-  onLegendClick?: (key: string, isActive: boolean, color: string) => void
+  registerScale: (scaleId: string, scale: AnyScale) => void;
+  getScale: (scaleId: string) => AnyScale | null;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
 }
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
@@ -131,14 +133,18 @@ export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;
 
 export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
 
-
 export type ScaleConfig =
   | {
-    ScaleClass: Class<ScaleLinear>;
-    definition: ScaleLinearDefinition;
-  }
+      ScaleClass: Class<ScaleLinear>;
+      definition: ScaleLinearDefinition;
+    }
   | {
-    ScaleClass: Class<ScaleBand>;
-    definition: ScaleBandDefinition;
-  };
+      ScaleClass: Class<ScaleBand>;
+      definition: ScaleBandDefinition;
+    };
 
+export type GeoJsonFeature = Feature;
+
+export type GeoJSONData = GeoJSON;
+
+export type Projection = GeoProjection;

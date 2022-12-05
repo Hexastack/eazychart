@@ -1,14 +1,17 @@
-import React, { FC, SVGAttributes } from 'react';
-import { ChartPadding } from 'eazychart-core/src/types';
-import { defaultColor } from 'eazychart-core/src';
+import React, { FC, SVGAttributes, useMemo } from 'react';
+import {
+  ChartPadding,
+  GeoJsonFeature,
+  Projection,
+} from 'eazychart-core/src/types';
+import { defaultColor, mapProjection } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
-import * as d3 from 'd3-geo';
 
 export interface MapPathProps extends SVGAttributes<SVGPathElement> {
   padding?: Partial<ChartPadding>;
-  feature?: any; //GeoJsonFeature;
-  projection?: d3.GeoProjection; //PathProjection;
+  feature?: GeoJsonFeature;
+  projection?: Projection;
   projectionType: string;
   stroke: string;
   scale: number;
@@ -17,7 +20,7 @@ export interface MapPathProps extends SVGAttributes<SVGPathElement> {
 }
 
 export const MapPath: FC<MapPathProps> = ({
-  feature = [],
+  feature = {} as GeoJsonFeature,
   stroke = defaultColor,
   fill = 'green',
   width = 800,
@@ -25,41 +28,26 @@ export const MapPath: FC<MapPathProps> = ({
   scale = 100,
   strokeWidth = 1,
   projectionType = '',
-  padding,
+  padding = {},
   ...rest
 }) => {
   const { animationOptions } = useChart();
-  let projection = d3.geoMercator();
-  switch (projectionType) {
-    case 'geoMeractor':
-      projection = d3.geoMercator();
-      break;
-    case 'geoOrthographic':
-      projection = d3.geoOrthographic();
-      break;
-    case 'geoEqualEarth':
-      projection = d3.geoEqualEarth();
-      break;
-    case 'geoEquirectangular':
-      projection = d3.geoEquirectangular();
-      break;
-    case 'geoNaturalEarth1':
-      projection = d3.geoNaturalEarth1();
-      break;
-    default:
-      projection = d3.geoMercator();
-  }
-  projection = projection
-    .scale(scale)
-    .translate([
-      width / 2 - (padding?.left || 0),
-      height / 2 - (padding?.top || 0),
-    ]);
-  const pathGenerator = d3.geoPath(projection);
-  const dataPath = pathGenerator(feature);
-  const currentData =
-    useAnimation(dataPath || '', '', animationOptions, [feature]) || '';
+  let dataPath = useMemo(
+    () => mapProjection(scale, width, height, padding, projectionType, feature),
+    [scale, width, height, padding, projectionType, feature]
+  );
 
+  const currentData =
+    useAnimation(dataPath || '', '', animationOptions, [
+      scale,
+      width,
+      height,
+      padding,
+      projectionType,
+      feature,
+      dataPath,
+    ]) || '';
+  if (!dataPath) return null;
   return (
     <path
       d={currentData}

@@ -31,11 +31,18 @@ const MapChartArgs = {
     control: {
       type: 'select',
       options: [
-        'geoMeractor',
+        'geoMercator',
+        'geoTransverseMercator',
         'geoOrthographic',
         'geoEqualEarth',
         'geoEquirectangular',
         'geoNaturalEarth1',
+        'geoAzimuthalEqualArea',
+        'geoGnomonic',
+        'geoStereographic',
+        'geoConicConformal',
+        'geoConicEqualArea',
+        'geoConicEquidistant',
       ],
     },
     table: {
@@ -83,7 +90,7 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   data: [],
   mapData: mapData.features,
-  projectionType: 'geoMeractor',
+  projectionType: 'geoMercator',
   stroke: '#ffffff',
   fill: '#324678',
   dimensions: { width: 800, height: 600 },

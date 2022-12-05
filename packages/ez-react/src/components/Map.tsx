@@ -31,9 +31,8 @@ export default function Map({
 }: MapChartProps) {
   return (
     <g>
-      {mapData.map((e: any, index: number) => (
+      {mapData.map((e: any) => (
         <MapPath
-          key={index}
           feature={e}
           projectionType={projectionType}
           stroke={stroke}

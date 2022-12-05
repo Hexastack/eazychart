@@ -39,6 +39,5 @@
   },
   "gitHead": "4776e52be4c44e634cd6983f02bef30547617978",
   "dependencies": {
-    "d3-geo": "^3.0.1"
   }
 }

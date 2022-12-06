@@ -1,4 +1,6 @@
 import { PieArcDatum } from 'd3-shape';
+import { GeoProjection } from 'd3-geo';
+import { GeoJSON, Feature } from 'geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,
@@ -10,8 +12,12 @@ import {
   ShapeAttributes,
 } from '../types';
 import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
+<<<<<<< HEAD
 import { GeoJSON, Feature } from 'geojson';
 import { GeoProjection } from 'd3-geo';
+=======
+
+>>>>>>> 29f483e (fix: fix failing tests)
 export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
@@ -148,3 +154,29 @@ export type GeoJsonFeature = Feature;
 export type GeoJSONData = GeoJSON;
 
 export type Projection = GeoProjection;
+<<<<<<< HEAD
+=======
+
+export type ProjectionTypes =
+  | 'geoAzimuthalEqualArea'
+  | 'geoAzimuthalEquidistant'
+  | 'geoGnomonic'
+  | 'geoOrthographic'
+  | 'geoStereographic'
+  | 'geoEqualEarth'
+  | 'geoAlbers'
+  | 'geoConicConformal'
+  | 'geoConicEqualArea'
+  | 'geoConicEquidistant'
+  | 'geoEquirectangular'
+  | 'geoMercator'
+  | 'geoTransverseMercator'
+  | 'geoNaturalEarth1';
+
+export type MapConfig = {
+  projectionType: ProjectionTypes;
+  stroke: string;
+  fill: string;
+  scale: number;
+};
+>>>>>>> 29f483e (fix: fix failing tests)

@@ -1,4 +1,6 @@
 import { PieArcDatum } from 'd3-shape';
+import { GeoProjection } from 'd3-geo';
+import { GeoJSON, Feature } from 'geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,
@@ -10,8 +12,6 @@ import {
   ShapeAttributes,
 } from '../types';
 import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
-import { GeoJSON, Feature } from 'geojson';
-import { GeoProjection } from 'd3-geo';
 
 export type Class<T> = new (...args: any[]) => T;
 
@@ -166,9 +166,9 @@ export type ProjectionTypes =
   | 'geoTransverseMercator'
   | 'geoNaturalEarth1';
 
-  export type MapConfig = {
-    projectionType: ProjectionTypes,
-    stroke: string,
-    fill: string,
-    scale: number,
-  }
+export type MapConfig = {
+  projectionType: ProjectionTypes;
+  stroke: string;
+  fill: string;
+  scale: number;
+};

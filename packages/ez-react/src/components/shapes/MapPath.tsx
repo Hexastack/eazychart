@@ -3,6 +3,7 @@ import {
   ChartPadding,
   GeoJsonFeature,
   Projection,
+  ProjectionTypes,
 } from 'eazychart-core/src/types';
 import { defaultColor, mapProjection } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
@@ -12,7 +13,7 @@ export interface MapPathProps extends SVGAttributes<SVGPathElement> {
   padding?: Partial<ChartPadding>;
   feature?: GeoJsonFeature;
   projection?: Projection;
-  projectionType: string;
+  projectionType: ProjectionTypes;
   stroke: string;
   scale: number;
   width: number;
@@ -27,7 +28,7 @@ export const MapPath: FC<MapPathProps> = ({
   height = 600,
   scale = 100,
   strokeWidth = 1,
-  projectionType = '',
+  projectionType = '' as ProjectionTypes,
   padding = {},
   ...rest
 }) => {
@@ -47,7 +48,9 @@ export const MapPath: FC<MapPathProps> = ({
       feature,
       dataPath,
     ]) || '';
+
   if (!dataPath) return null;
+
   return (
     <path
       d={currentData}

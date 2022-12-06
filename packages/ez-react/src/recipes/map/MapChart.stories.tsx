@@ -2,6 +2,7 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { mapData } from 'eazychart-dev/storybook/data';
 import { MapChartProps, MapChart } from '@/recipes/map/MapChart';
+import { ProjectionTypes } from 'eazychart-core/src/utils/types';
 
 const MapChartArgs = {
   mapData: {
@@ -90,9 +91,11 @@ export const Default = DefaultTemplate.bind({});
 Default.args = {
   data: [],
   mapData: mapData.features,
-  projectionType: 'geoMercator',
-  stroke: '#ffffff',
-  fill: '#324678',
+  map: {
+    projectionType: 'geoMercator' as ProjectionTypes,
+    stroke: '#ffffff',
+    fill: '#324678',
+    scale: 100,
+  },
   dimensions: { width: 800, height: 600 },
-  scale: 100,
 };

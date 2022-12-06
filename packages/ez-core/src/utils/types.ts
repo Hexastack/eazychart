@@ -12,6 +12,7 @@ import {
 import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
 import { GeoJSON, Feature } from 'geojson';
 import { GeoProjection } from 'd3-geo';
+
 export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
@@ -148,3 +149,26 @@ export type GeoJsonFeature = Feature;
 export type GeoJSONData = GeoJSON;
 
 export type Projection = GeoProjection;
+
+export type ProjectionTypes =
+  | 'geoAzimuthalEqualArea'
+  | 'geoAzimuthalEquidistant'
+  | 'geoGnomonic'
+  | 'geoOrthographic'
+  | 'geoStereographic'
+  | 'geoEqualEarth'
+  | 'geoAlbers'
+  | 'geoConicConformal'
+  | 'geoConicEqualArea'
+  | 'geoConicEquidistant'
+  | 'geoEquirectangular'
+  | 'geoMercator'
+  | 'geoTransverseMercator'
+  | 'geoNaturalEarth1';
+
+  export type MapConfig = {
+    projectionType: ProjectionTypes,
+    stroke: string,
+    fill: string,
+    scale: number,
+  }

@@ -5,6 +5,8 @@ import {
   Dimensions,
   GridConfig,
   RawData,
+  GeoJSONData,
+  MapConfig,
 } from 'eazychart-core/src/types';
 import Map from '@/components/Map';
 import { Legend, LegendProps } from '@/components/addons/legend/Legend';
@@ -13,12 +15,9 @@ import { Chart } from '@/components/Chart';
 import { dimensions } from 'eazychart-dev/storybook/data';
 
 export interface MapChartProps extends SVGAttributes<SVGGElement> {
-  mapData: any;
-  projectionType: string;
-  stroke: string;
-  fill: string;
+  mapData: [GeoJSONData];
+  map: MapConfig;
   data: RawData;
-  scale: number;
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
   grid?: GridConfig;
@@ -33,10 +32,13 @@ export interface MapChartProps extends SVGAttributes<SVGGElement> {
 export const MapChart: FC<MapChartProps> = ({
   mapData,
   data,
-  projectionType,
-  stroke,
-  fill,
-  scale,
+  map = {
+    projectionType: 'geoMercator',
+    stroke: 'white',
+    fill: 'blue',
+    scale: 100,
+  },
+
   animationOptions = {
     easing: 'easeBack',
     duration: 400,
@@ -64,11 +66,8 @@ export const MapChart: FC<MapChartProps> = ({
       <Map
         dimensions={dimensions}
         rawData={data}
-        stroke={stroke}
-        fill={fill}
-        scale={scale}
+        map={map}
         mapData={mapData}
-        projectionType={projectionType}
         padding={padding}
       />
     </Chart>

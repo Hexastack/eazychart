@@ -74,6 +74,8 @@ export const dimensionArgTypesOptions = {
 const axisArgTypesOptions = {
   yAxis: DISABLED_DEFAULT_ARG,
   xAxis: DISABLED_DEFAULT_ARG,
+  'xAxis.tickFormat': DISABLED_DEFAULT_ARG,
+  'yAxis.tickFormat': DISABLED_DEFAULT_ARG,
   ...elementSettings('xAxis', AXIS_CONFIG),
   ...elementSettings('yAxis', AXIS_CONFIG),
 };

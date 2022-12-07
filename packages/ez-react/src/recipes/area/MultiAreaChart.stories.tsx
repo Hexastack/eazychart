@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
 import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
@@ -8,6 +7,7 @@ import {
   markerArgTypesOptions,
 } from 'eazychart-dev/storybook/utils';
 import { colors, evolutionData } from 'eazychart-dev/storybook/data';
+import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
 
 const areaChartArgTypes = {
   'area.stroke': {
@@ -33,9 +33,9 @@ const areaChartArgTypes = {
 };
 
 const meta: Meta = {
-  id: '2',
-  title: 'React/Area Chart',
-  component: AreaChart,
+  id: '9',
+  title: 'React/Multi Area Chart',
+  component: MultiAreaChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -44,11 +44,11 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<AreaChartProps> = buildTemplate(
-  (args: AreaChartProps) => {
+const Template: Story<MultiAreaChartProps> = buildTemplate(
+  (args: MultiAreaChartProps) => {
     return (
       <ChartWrapper>
-        <AreaChart {...args} />
+        <MultiAreaChart {...args} />
       </ChartWrapper>
     );
   }
@@ -56,7 +56,6 @@ const Template: Story<AreaChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = Template.bind({});
 
 const defaultArguments = flattenArgs({
   area: {
@@ -96,4 +95,20 @@ const defaultArguments = flattenArgs({
   data: evolutionData,
 });
 
-Default.args = defaultArguments;
+export const MultiArea = Template.bind({});
+
+// make an area const in data and spread it here and in default args
+MultiArea.args = {
+  ...defaultArguments,
+  area: {
+    stroke: colors[0],
+    strokeWidth: 2,
+    fill: `${colors[0]}b0`,
+    opacity: 0.5,
+  },
+  yAxis: {
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    title: 'Temperature',
+    tickFormat: (d: number) => `${d}°`,
+  },
+};

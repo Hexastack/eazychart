@@ -66,8 +66,6 @@ const lineChartArgTypes = {
     description: 'Sets the Y axis domain keys and title for multi chart',
     if: { arg: 'yAxis', truthy: true },
   },
-
-  // area: { control: { type: 'color' } },
 };
 
 const meta: Meta = {

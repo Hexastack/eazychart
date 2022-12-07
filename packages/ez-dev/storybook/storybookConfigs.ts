@@ -38,7 +38,6 @@ export const PADDING_CONFIG = [
   {
     elemName: 'left',
     elemControl: 'number',
-    customDesc: 'Potato',
     defValue: '100px',
   },
   {

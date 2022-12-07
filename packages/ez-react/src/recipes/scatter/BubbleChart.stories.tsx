@@ -24,12 +24,6 @@ const bubbleChartArgTypes = {
     table: { category: 'Bubble props', defaultValue: { summary: 'Color' } },
     description: 'Sets the bubble color',
   },
-
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
   ...baseChartArgTypes,
 };
 

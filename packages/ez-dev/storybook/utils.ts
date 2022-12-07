@@ -1,62 +1,42 @@
-export const markerArgTypesOptions = {
-  marker: {
-    table: {
-      disable: true,
-    },
-  },
-  "marker.color": {
-    control: { type: "color" },
-    table: { category: "Marker options", defaultValue: { summary: "#FFF" } },
-    description: "Sets the marker color",
-  },
-  "marker.hidden": {
-    control: { type: "boolean" },
-    table: { category: "Marker options", defaultValue: { summary: true } },
-    description: "Toggles the marker",
-  },
-  "marker.radius": {
-    control: { type: "number" },
-    table: { category: "Marker options", defaultValue: { summary: "5px" } },
-    description: "Sets the marker radius",
+import {
+  GRID_CONFIG,
+  MARKER_CONFIG,
+  PADDING_CONFIG,
+  ANIMATION_CONFIG,
+  AXIS_CONFIG,
+  DIMENSION_CONFIG,
+} from './storybookConfigs';
+
+const DISABLED_DEFAULT_ARG = {
+  table: {
+    disable: true,
   },
 };
 
-const gridArgTypesOptions = {
-  "grid.directions": {
-    table: {
-      disable: true,
-    },
-  },
-
-  grid: {
-    table: {
-      disable: true,
-    },
-  },
-  "grid.directions.Direction": {
-    control: { type: "inline-check", options: ["horizontal", "vertical"] },
-    table: { category: "Grid options", defaultValue: { summary: "None" } },
-    description: "Adds the grid according to the selected axis",
-  },
-  "grid.color": {
-    control: { type: "color" },
-    table: { category: "Grid options", defaultValue: { summary: "#a8a8a8" } },
-    description: "Sets the grid lines color",
-  },
-};
-
-const PADDING_TYPES = ["left", "right", "top", "bottom"];
-const paddingSettings = () => {
-  return PADDING_TYPES.reduce(
-    (acc: { [key: string]: Object }, paddingType: string) => {
+// This function takes in the CONFIGS and creates the corresponding storybook controls
+const elementSettings = (
+  optionCategory: string,
+  controls: { [key: string]: string | undefined | string[] }[]
+) => {
+  return controls.reduce(
+    (
+      acc: { [key: string]: Object },
+      { elemName, elemControl, customDesc, defValue, elemOptions }
+    ) => {
+      console.log(elemOptions);
       if (acc) {
-        acc[`padding.${paddingType}`] = {
-          control: { type: "number" },
-          table: {
-            category: "Padding options",
-            defaultValue: { summary: "100px" },
+        acc[`${optionCategory}.${elemName}`] = {
+          control: {
+            type: `${elemControl}`,
+            options: elemOptions,
           },
-          description: `Sets the ${paddingType} side padding value`,
+          table: {
+            category: `${optionCategory} options`,
+            defaultValue: { summary: `${defValue}` },
+          },
+          description: customDesc
+            ? customDesc
+            : `Sets the ${optionCategory} ${elemName} value`,
         };
       }
       return acc;
@@ -65,130 +45,40 @@ const paddingSettings = () => {
   );
 };
 
+export const markerArgTypesOptions = {
+  marker: DISABLED_DEFAULT_ARG,
+  ...elementSettings('marker', MARKER_CONFIG),
+};
+
+const gridArgTypesOptions = {
+  'grid.directions': DISABLED_DEFAULT_ARG,
+  grid: DISABLED_DEFAULT_ARG,
+  ...elementSettings('grid', GRID_CONFIG),
+};
+
 export const paddingArgTypesOptions = {
-  padding: {
-    table: {
-      disable: true,
-    },
-  },
-  ...paddingSettings(),
+  padding: DISABLED_DEFAULT_ARG,
+  ...elementSettings('padding', PADDING_CONFIG),
 };
 
 export const animationArgTypesOptions = {
-  animationOptions: {
-    table: {
-      disable: true,
-    },
-  },
-
-  "animationOptions.duration": {
-    control: { type: "number" },
-    table: {
-      category: "Animation options",
-      defaultValue: { summary: "400ms" },
-    },
-    description: "Sets the animation duration",
-  },
-  "animationOptions.delay": {
-    control: { type: "number" },
-    table: { category: "Animation options", defaultValue: { summary: "0ms" } },
-    description: "Sets the delay for the animation",
-  },
-  "animationOptions.easing": {
-    control: {
-      type: "select",
-      options: [
-        "easeBack",
-        "easeBackIn",
-        "easeBackOut",
-        "easeBackInOut",
-        "easeLinear",
-        "easeExpout",
-        "easeExpIn",
-        "easePoly",
-        "easePolyIn",
-        "easePolyOut",
-        "easePolyInOut",
-        "easeElastic",
-        "easeElasticIn",
-        "easeElasticOut",
-        "easeElasticInOut",
-      ],
-    },
-    table: {
-      category: "Animation options",
-      defaultValue: { summary: "easeBack" },
-    },
-    description: "Sets the animation type",
-  },
+  animationOptions: DISABLED_DEFAULT_ARG,
+  ...elementSettings('animationOptions', ANIMATION_CONFIG),
 };
 
 export const dimensionArgTypesOptions = {
-  dimensions: {
-    table: {
-      disable: true,
-    },
-  },
-  "dimensions.width": {
-    control: { type: "number" },
-    table: { category: "Dimension props", defaultValue: { summary: "800px" } },
-  },
-  "dimensions.height": {
-    control: { type: "number" },
-    table: { category: "Dimension props", defaultValue: { summary: "600px" } },
-  },
+  dimensions: DISABLED_DEFAULT_ARG,
+  ...elementSettings('dimensions', DIMENSION_CONFIG),
 };
 
 const axisArgTypesOptions = {
-  "xAxis.tickFormat": {
-    table: {
-      disable: true,
-    },
-  },
-  "yAxis.tickFormat": {
-    table: {
-      disable: true,
-    },
-  },
-  xAxis: {
-    table: {
-      disable: true,
-    },
-  },
-  "xAxis.domainKey": {
-    control: { type: "object" },
-    table: { category: "Axis Options", defaultValue: { summary: "xValue" } },
-    description: "Sets the X axis domain key",
-  },
-  "yAxis.domainKey": {
-    control: { type: "object" },
-    table: { category: "Axis Options", defaultValue: { summary: "yValue" } },
-    description:
-      "Sets the Y axis domain key when using the default chart (! not for multi charts!)",
-    if: { arg: "yAxis", truthy: false },
-  },
-
-  "xAxis.title": {
-    control: { type: "text" },
-    table: { category: "Axis Options", defaultValue: { summary: "text" } },
-    description: "Sets the X axis title",
-  },
-  "yAxis.title": {
-    control: { type: "text" },
-    table: { category: "Axis Options", defaultValue: { summary: "text" } },
-    description:
-      "Sets the Y axis title when using the default chart (! not for multi charts!)",
-    if: { arg: "yAxis", truthy: false },
-  },
+  yAxis: DISABLED_DEFAULT_ARG,
+  xAxis: DISABLED_DEFAULT_ARG,
+  ...elementSettings('xAxis', AXIS_CONFIG),
+  ...elementSettings('yAxis', AXIS_CONFIG),
 };
 
-const DISABLED_DEFAULT_ARG = {
-  table: {
-    disable: true,
-  },
-};
-
-const NESTED_PROPS = ["scopedSlots", "line", "point", "bubble", "area"];
+const NESTED_PROPS = ['scopedSlots', 'line', 'point', 'bubble', 'area'];
 
 const extendBaseArgTypes = () => {
   // Disable default arg for nested props
@@ -212,13 +102,12 @@ export const baseChartArgTypes = {
   ...gridArgTypesOptions,
   // we're doing this to hide the objects that we've alreay unflattened and made an input field for each of their attributes
   ...extendBaseArgTypes(),
-
   isRTL: {
-    control: { type: "boolean" },
+    control: { type: 'boolean' },
   },
   data: {
-    control: { type: "object" },
-    table: { defaultValue: { summary: "Object" }, category: "Data" },
+    control: { type: 'object' },
+    table: { defaultValue: { summary: 'Object' }, category: 'Data' },
   },
 };
 
@@ -227,11 +116,11 @@ export const baseChartArgTypes = {
  * @returns { argument.att1, argument.att2, argument.att3 ...}
  */
 export const flattenArgs = (args: Object) => {
-  const constructedArgs = {} as {[key: string]: {}};
+  const constructedArgs = {} as { [key: string]: {} };
   Object.entries(args).forEach((val) => {
     const [key, value] = val;
     if (
-      ["string", "boolean", "number"].includes(typeof value) ||
+      ['string', 'boolean', 'number'].includes(typeof value) ||
       Array.isArray(value)
     ) {
       constructedArgs[key] = value;
@@ -249,12 +138,12 @@ export const flattenArgs = (args: Object) => {
  * @returns deconstructedArgs {chartArgs} |  [chartColors]
  */
 export const deconstructArgs = (
-  deconstructedArgs: {[key:string]: any},
+  deconstructedArgs: { [key: string]: any },
   key: string,
   values: Object | boolean | string | number,
   defaultArg: [] | {}
 ) => {
-  const parsedKeys = key.split(".");
+  const parsedKeys = key.split('.');
   if (parsedKeys.length === 1) {
     deconstructedArgs[key] = values;
   } else {
@@ -286,8 +175,8 @@ export const unFlattenArgs = (args: ArgsType) => {
   let colors = [] as Array<string>;
   for (const [key, value] of Object.entries(args)) {
     const values = value as string;
-    const parsedKeys = key.split(".");
-    if (parsedKeys[0] === "colors") {
+    const parsedKeys = key.split('.');
+    if (parsedKeys[0] === 'colors') {
       colors = deconstructArgs(colors, key, values, []) as string[];
     } else {
       deconstructedArgs = deconstructArgs(deconstructedArgs, key, values, {});
@@ -296,10 +185,9 @@ export const unFlattenArgs = (args: ArgsType) => {
   return { ...deconstructedArgs, ...colors };
 };
 
-
 // Flattens colors table
 export const flattenColors = (args: Array<string>) => {
-  let constructedArgs = {} as  {[key: string]: string };
+  let constructedArgs = {} as { [key: string]: string };
   for (let i = 0; i < args.length; i++) {
     constructedArgs[`colors.${i}`] = args[i];
   }
@@ -313,12 +201,12 @@ export const setColorArgs = (colors: string[]) => {
   for (let i = 0; i < colors.length; i++) {
     const a = {
       [`colors.${i}`]: {
-        control: { type: "color" },
+        control: { type: 'color' },
         table: {
-          category: "Chart colors",
-          defaultValue: { summary: "HexColor" },
+          category: 'Chart colors',
+          defaultValue: { summary: 'HexColor' },
         },
-        description: "Sets corresponding chart color",
+        description: 'Sets corresponding chart color',
       },
     };
     colorArgs = { ...colorArgs, ...a };

@@ -17,16 +17,6 @@ const barChartArgTypes = {
       disable: true,
     },
   },
-  'xAxis.nice': {
-    control: { type: 'number' },
-    table: { category: 'Axis Options', defaultValue: { summary: '2' } },
-    description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
-  },
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
   ...baseChartArgTypes,
   ...setColorArgs(colors),
 };

@@ -43,11 +43,6 @@ const columnChartArgTypes = {
     description: 'Sets the marker radius',
     if: { arg: 'yLineAxis', truthy: true },
   },
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
   'yAxis.nice': {
     control: { type: 'number' },
     table: { category: 'Axis Options', defaultValue: { summary: '2' } },

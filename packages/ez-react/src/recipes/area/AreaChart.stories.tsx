@@ -29,16 +29,16 @@ const areaChartArgTypes = {
     description: 'Sets the area color',
     if: { arg: 'yAxis', truthy: false },
   },
-  yAxis: {
-    control: { type: 'object' },
-    table: {
-      category: 'Multi chart Y Axis Options',
-      defaultValue: { summary: 'yValues' },
-    },
-    description: 'Sets the Y axis domain keys and title for multi chart',
-    // Used to make this argument disappear in the single (default) chart
-    if: { arg: 'yAxis', truthy: true },
-  },
+  // yAxis: {
+  //   control: { type: 'object' },
+  //   table: {
+  //     category: 'Multi chart Y Axis Options',
+  //     defaultValue: { summary: 'yValues' },
+  //   },
+  //   description: 'Sets the Y axis domain keys and title for multi chart',
+  //   // Used to make this argument disappear in the single (default) chart
+  //   if: { arg: 'yAxis', truthy: true },
+  // },
   ...markerArgTypesOptions,
   ...baseChartArgTypes,
 };

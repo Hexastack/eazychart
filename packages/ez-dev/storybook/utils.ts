@@ -4,38 +4,47 @@ import {
   PropArgType,
 } from './storybook-configs';
 
+type ArgTypeOptions = {
+  omit?: string[];
+}
+
 // This function takes in the CONFIGS and creates the corresponding storybook controls
-export const getArgTypesByProp = (category: PropArgType) => {
-  if (!(category in CONTROLS_MAP)) {
+export const getArgTypesByProp = (prop: PropArgType, options?: ArgTypeOptions) => {
+  if (!(prop in CONTROLS_MAP)) {
     throw new Error('Unknow controls category');
   }
 
-  return CONTROLS_MAP[category].reduce(
+  // Filter controls to omit certain fields
+  const controls = CONTROLS_MAP[prop].filter(({ name }) => {
+    return !options?.omit || (options.omit && !options.omit.includes(name))
+  })
+
+  return controls.reduce(
     (
       acc: { [key: string]: Object },
       { name, type, description, defaultValue, options, min, max, step }
     ) => {
-      if (acc) {
-        acc[`${category}.${name}`] = {
+      return {
+        ...acc,
+        [`${prop}.${name}`]: {
           control: {
-            type: `${type}`,
-            options: options,
-            min: min,
-            max: max,
-            step: step,
+            type,
+            options,
+            min,
+            max,
+            step,
           },
           table: {
-            category: `${category} options`,
-            defaultValue: { summary: `${defaultValue}` },
+            category: `${prop} options`,
+            defaultValue: { summary: defaultValue },
           },
           description: description
             ? description
-            : `Sets the ${category} ${name} value`,
-        };
-      }
-      return acc;
+            : `Sets the ${prop} ${name} value`,
+        }
+      };
     },
-    { [category]: DISABLED_DEFAULT_ARG }
+    { [prop]: DISABLED_DEFAULT_ARG }
   );
 };
 
@@ -44,49 +53,51 @@ export const markerArgTypes = getArgTypesByProp('marker');
 export const cartesianChartArgTypes = {
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis'),
+  ...getArgTypesByProp('yAxis'),
   isRTL: {
     control: { type: 'boolean' },
   },
 };
-export const yAxisArgTypes = {
-  ...getArgTypesByProp('yAxis'),
-};
-const NESTED_PROPS = [
-  'scopedSlots',
-  'line',
-  'point',
-  'bubble',
-  'area',
-  'onResize',
-  'xAxis.tickFormat',
-  'yAxis.tickFormat',
-  'labelDomainKey',
-];
 
-const extendBaseArgTypes = () => {
-  // Disable default arg for nested props
-  const nestedPropsArgTypes = NESTED_PROPS.reduce(
-    (acc: { [key: string]: Object }, propName: string) => {
-      if (acc) {
-        acc[propName] = DISABLED_DEFAULT_ARG;
-      }
-      return acc;
-    },
-    {}
-  );
-  return { ...nestedPropsArgTypes };
-};
+export const yAxisArgTypes = getArgTypesByProp('yAxis');
+
+// const NESTED_PROPS = [
+//   'scopedSlots',
+//   'line',
+//   'point',
+//   'bubble',
+//   'area',
+//   'onResize',
+//   'xAxis.tickFormat',
+//   'yAxis.tickFormat',
+//   'labelDomainKey',
+// ];
+
+// const extendBaseArgTypes = () => {
+//   // Disable default arg for nested props
+//   const nestedPropsArgTypes = NESTED_PROPS.reduce(
+//     (acc: { [key: string]: Object }, propName: string) => {
+//       if (acc) {
+//         acc[propName] = DISABLED_DEFAULT_ARG;
+//       }
+//       return acc;
+//     },
+//     {}
+//   );
+//   return { ...nestedPropsArgTypes };
+// };
 
 export const baseChartArgTypes = {
   ...getArgTypesByProp('dimensions'),
-  ...getArgTypesByProp('animationOptions'),
   ...getArgTypesByProp('padding'),
+  ...getArgTypesByProp('animationOptions'),
   // we're doing this to hide the objects that we've alreay unflattened and made an input field for each of their attributes
-  ...extendBaseArgTypes(),
+  // ...extendBaseArgTypes(),
   data: {
     control: { type: 'object' },
     table: { defaultValue: { summary: 'Object' }, category: 'Data' },
   },
+  scopedSlots: DISABLED_DEFAULT_ARG
 };
 
 /*
@@ -104,14 +115,14 @@ export const flattenArgs = (args: Object) => {
       constructedArgs[key] = value;
     } else {
       for (const innerKey in value) {
-        if (Array.isArray(value[innerKey])) {
-          constructedArgs = {
-            ...constructedArgs,
-            ...flattenTabArgs(value[innerKey], `${key}.${innerKey}`),
-          };
-        } else {
+        // if (Array.isArray(value[innerKey])) {
+        //   constructedArgs = {
+        //     ...constructedArgs,
+        //     ...flattenTabArgs(value[innerKey], `${key}.${innerKey}`),
+        //   };
+        // } else {
           constructedArgs[`${key}.${innerKey}`] = value[innerKey];
-        }
+        // }
       }
     }
   });

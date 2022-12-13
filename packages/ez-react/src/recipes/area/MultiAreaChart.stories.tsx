@@ -4,26 +4,22 @@ import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypes,
-  flattenTabArgs,
-  setTabArgs,
-  cartesianChartArgTypes,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
-  areaColors,
   evolutionData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
 import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
-import { MULTI_Y_AXIS_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const areaChartArgTypes = {
-  ...setTabArgs(areaColors, 'colors', 'color'),
-  ...MULTI_Y_AXIS_CONTROLS,
-  ...markerArgTypes,
   ...baseChartArgTypes,
-  ...cartesianChartArgTypes,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
+  ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
+  ...getArgTypesByProp('marker')
 };
 
 const meta: Meta = {
@@ -52,34 +48,30 @@ const Template: Story<MultiAreaChartProps> = buildTemplate(
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const MultiArea = Template.bind({});
 
-const defaultArguments = {
-  ...flattenArgs({
-    colors: ['#339999', '#993399', '#333399'],
-
-    marker: {
-      hidden: true,
-      radius: 5,
-      color: '#FFF',
-    },
-    animationOptions,
-    isRTL: false,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'xValue',
-      title: 'Hours',
-      tickFormat: (d: number) => `${d}h`,
-      nice: 0,
-    },
-    data: evolutionData,
-  }),
+const defaultArguments = flattenArgs({
+  colors: ['#339999', '#993399', '#333399'],
+  marker: {
+    hidden: true,
+    radius: 5,
+    color: '#FFF',
+  },
+  animationOptions,
+  isRTL: false,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'xValue',
+    title: 'Hours',
+    tickFormat: (d: number) => `${d}h`,
+    nice: 0,
+  },
   yAxis: {
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
   },
-  ...flattenTabArgs(areaColors, 'colors'),
-};
+  data: evolutionData,
+});
 
 MultiArea.args = defaultArguments;

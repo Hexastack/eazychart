@@ -5,10 +5,7 @@ import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypes,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -18,11 +15,12 @@ import {
 } from 'eazychart-dev/storybook/data';
 
 const areaChartArgTypes = {
-  ...cartesianChartArgTypes,
-  ...yAxisArgTypes,
-  ...getArgTypesByProp('area'),
-  ...markerArgTypes,
   ...baseChartArgTypes,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('area'),
+  ...getArgTypesByProp('marker'),
 };
 
 const meta: Meta = {

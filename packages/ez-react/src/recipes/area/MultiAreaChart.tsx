@@ -39,7 +39,6 @@ export interface MultiAreaChartProps extends SVGAttributes<SVGGElement> {
     TooltipComponent: FC<TooltipProps>;
     LegendComponent: FC<LegendProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const MultiAreaChart: FC<MultiAreaChartProps> = ({

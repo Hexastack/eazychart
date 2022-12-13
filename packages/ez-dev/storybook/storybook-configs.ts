@@ -15,12 +15,18 @@ export type PropArgType =
 export type ControlDefinition = {
   name: string;
   type: string;
-  defaultValue: any;
-  options?: Array<any>;
+  defaultValue?: string;
+  options?: Array<string>;
   description?: string;
   min?: number;
   max?: number;
   step?: number;
+};
+
+export const DISABLED_DEFAULT_ARG = {
+  table: {
+    disable: true,
+  },
 };
 
 export const GRID_ARG_TYPES: ControlDefinition[] = [
@@ -121,13 +127,13 @@ export const ANIMATION_ARG_TYPES: ControlDefinition[] = [
 export const AXIS_ARG_TYPES: ControlDefinition[] = [
   {
     name: 'domainKey',
-    type: 'object',
-    defaultValue: '400ms',
+    type: 'text',
+    defaultValue: "'yValue'",
   },
   {
-    name: 'title',
-    type: 'text',
-    defaultValue: 'text',
+    name: 'domainKeys',
+    type: 'object',
+    defaultValue: "['yValue1', 'yValue2']",
   },
   {
     name: 'title',
@@ -139,6 +145,13 @@ export const AXIS_ARG_TYPES: ControlDefinition[] = [
     type: 'number',
     defaultValue: '2',
     description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
+  },
+  {
+    name: 'tickFormat',
+    type: 'function',
+    defaultValue: '(d: number) => `${d}°`',
+    description:
+      'A callback function to format the axis ticks (to add suffix/prefix for example)',
   },
 ];
 
@@ -175,14 +188,14 @@ export const BUBBLE_CONTROLS: ControlDefinition[] = [
     defaultValue: '1px',
   },
   {
-    name: 'domainKey',
-    type: 'text',
-    defaultValue: 'rValue',
-  },
-  {
     name: 'maxRadius',
     type: 'number',
     defaultValue: '25px',
+  },
+  {
+    name: 'domainKey',
+    type: 'text',
+    defaultValue: 'rValue',
   },
   {
     name: 'fill',
@@ -191,32 +204,34 @@ export const BUBBLE_CONTROLS: ControlDefinition[] = [
   },
 ];
 
+const CURVE_CONTROL: ControlDefinition = {
+  name: 'curve',
+  type: 'select',
+  options: [
+    'curveLinear',
+    'curveBasis',
+    'curveBumpX',
+    'curveBumpY',
+    'curveBundle',
+    'curveCardinal',
+    'curveNatural',
+    'curveStep',
+    'curveStepAfter',
+    'curveStepBefore',
+  ],
+  defaultValue: 'curveLinear',
+};
+
 export const LINE_CONTROLS: ControlDefinition[] = [
-  {
-    name: 'strokeWidth',
-    type: 'number',
-    defaultValue: '2px',
-  },
+  CURVE_CONTROL,
   {
     name: 'stroke',
     type: 'color',
     defaultValue: '#ef476f',
   },
   {
-    name: 'curve',
-    type: 'select',
-    options: [
-      'curveLinear',
-      'curveBasis',
-      'curveBumpX',
-      'curveBumpY',
-      'curveBundle',
-      'curveCardinal',
-      'curveNatural',
-      'curveStep',
-      'curveStepAfter',
-      'curveStepBefore',
-    ],
+    name: 'strokeWidth',
+    type: 'number',
     defaultValue: '2px',
   },
   {
@@ -270,6 +285,16 @@ export const ARC_CONTROLS: ControlDefinition[] = [
 ];
 
 export const AREA_CONTROLS: ControlDefinition[] = [
+  CURVE_CONTROL,
+  {
+    name: 'beta',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: '0',
+    description: 'Determines the straigthness of the spline',
+  },
   {
     name: 'stroke',
     type: 'color',
@@ -285,12 +310,12 @@ export const AREA_CONTROLS: ControlDefinition[] = [
     type: 'color',
     defaultValue: '#26547cb0',
   },
-];
-export const DISABLED_DEFAULT_ARG = {
-  table: {
-    disable: true,
+  {
+    name: 'opacity',
+    type: 'number',
+    defaultValue: '0.5',
   },
-};
+];
 
 export const MULTI_Y_AXIS_CONTROLS = {
   yAxis: {
@@ -323,6 +348,7 @@ export const LINE_COLUMN_CONTROLS = {
     description: 'Sets the Y axis domain key and title for the line',
   },
 };
+
 export const CONTROLS_MAP: { [category in PropArgType]: ControlDefinition[] } =
   {
     marker: MARKER_ARG_TYPES,

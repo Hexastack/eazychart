@@ -15,7 +15,6 @@ import {
   rawData,
 } from 'eazychart-dev/storybook/data';
 import ColumnChart from './ColumnChart';
-import LineColumnChart from './LineColumnChart';
 
 const columnChartArgTypes = {
   ...yAxisArgTypes,
@@ -35,7 +34,6 @@ const meta: Meta = {
 export default meta;
 
 type ColumnChartProps = InstanceType<typeof ColumnChart>['$props'];
-type LineColumnChartProps = InstanceType<typeof LineColumnChart>['$props'];
 
 const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
   title: 'Default',
@@ -51,23 +49,6 @@ const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
     </ChartWrapper>
   `,
 }));
-
-const LineColumnTemplate: Story = buildTemplate(
-  (args: LineColumnChartProps) => ({
-    title: 'LineColumn',
-    components: { LineColumnChart, ChartWrapper },
-    props: {
-      allPropsFromArgs: {
-        default: () => args,
-      },
-    },
-    template: `
-    <ChartWrapper>
-      <LineColumnChart v-bind="allPropsFromArgs" />
-    </ChartWrapper>
-  `,
-  }),
-);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
@@ -97,5 +78,3 @@ const defaultArguments = {
 };
 
 Default.args = defaultArguments;
-
-export const LineColumn = LineColumnTemplate.bind({});

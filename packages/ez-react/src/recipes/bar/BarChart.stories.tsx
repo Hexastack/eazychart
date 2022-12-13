@@ -4,24 +4,28 @@ import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenColors,
-  setColorArgs,
+  flattenTabArgs,
+  setTabArgs,
   baseChartArgTypes,
+  cartesianChartArgTypes,
+  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
-import { colors, rawData } from 'eazychart-dev/storybook/data';
+import {
+  colors,
+  rawData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
 const barChartArgTypes = {
-  colors: {
-    table: {
-      disable: true,
-    },
-  },
+  ...yAxisArgTypes,
+  ...cartesianChartArgTypes,
   ...baseChartArgTypes,
-  ...setColorArgs(colors),
+  ...setTabArgs(colors, 'colors', 'color'),
 };
 const meta: Meta = {
-  id: '3',
+  id: '4',
   title: 'React/Bar Chart',
   component: BarChart,
   parameters: {
@@ -72,26 +76,18 @@ const initialArguments = {
       title: 'Count',
       nice: 2,
     },
-    animationOptions: {
-      easing: 'easeBack',
-      duration: 400,
-      delay: 0,
-    },
+    animationOptions,
     isRTL: false,
-    padding: {
-      left: 100,
-      bottom: 100,
-      right: 100,
-      top: 100,
-    },
+    padding,
     dimensions: { width: 800, height: 600 },
     yAxis: {
       domainKey: 'name',
       title: 'Letter',
+      nice: 2,
     },
     data: rawData,
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
 };
 
 export const Default = DefaultTemplate.bind({});

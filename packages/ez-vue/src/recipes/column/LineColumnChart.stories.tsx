@@ -7,6 +7,7 @@ import {
   baseChartArgTypes,
   cartesianChartArgTypes,
   yAxisArgTypes,
+  markerArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
@@ -14,19 +15,20 @@ import {
   padding,
   rawData,
 } from 'eazychart-dev/storybook/data';
-import ColumnChart from './ColumnChart';
+import { LINE_COLUMN_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 import LineColumnChart from './LineColumnChart';
 
 const columnChartArgTypes = {
+  ...LINE_COLUMN_CONTROLS,
+  ...markerArgTypes,
   ...yAxisArgTypes,
   ...cartesianChartArgTypes,
   ...baseChartArgTypes,
   ...setTabArgs(colors, 'colors', 'color'),
 };
-
 const meta: Meta = {
-  title: 'Vue/Column Chart',
-  component: ColumnChart,
+  title: 'Vue/Line Column Chart',
+  component: LineColumnChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -34,23 +36,7 @@ const meta: Meta = {
 };
 export default meta;
 
-type ColumnChartProps = InstanceType<typeof ColumnChart>['$props'];
 type LineColumnChartProps = InstanceType<typeof LineColumnChart>['$props'];
-
-const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
-  title: 'Default',
-  components: { ColumnChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => args,
-    },
-  },
-  template: `
-    <ChartWrapper>
-      <ColumnChart v-bind="allPropsFromArgs" />
-    </ChartWrapper>
-  `,
-}));
 
 const LineColumnTemplate: Story = buildTemplate(
   (args: LineColumnChartProps) => ({
@@ -72,7 +58,6 @@ const LineColumnTemplate: Story = buildTemplate(
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
   ...flattenArgs({
@@ -91,11 +76,29 @@ const defaultArguments = {
       title: 'Count',
       nice: 2,
     },
+    line: {
+      strokeWidth: 2,
+      stroke: '#81248d',
+    },
+    marker: {
+      hidden: false,
+      radius: 5,
+      color: '#c400c4',
+    },
     data: rawData,
   }),
   ...flattenTabArgs(colors, 'colors'),
 };
 
-Default.args = defaultArguments;
-
 export const LineColumn = LineColumnTemplate.bind({});
+
+const lineColumnArguments = {
+  ...defaultArguments,
+  yLineAxis: {
+    domainKey: 'v',
+    title: 'Value',
+    nice: 2,
+  },
+};
+
+LineColumn.args = lineColumnArguments;

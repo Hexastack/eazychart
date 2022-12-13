@@ -4,15 +4,15 @@ import {
   colors,
   rawData,
   animationOptions,
+  padding,
 } from 'eazychart-dev/storybook/data';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  animationArgTypesOptions,
-  paddingArgTypesOptions,
-  dimensionArgTypesOptions,
-  flattenColors,
-  setColorArgs,
+  flattenTabArgs,
+  setTabArgs,
+  getArgTypesByProp,
+  baseChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import PieChart from './PieChart';
 import SemiCircleChart from './SemiCircleChart';
@@ -20,76 +20,16 @@ import RadialChart from './RadialChart';
 import IrregularPieChart from './IrregularPieChart';
 
 const pieChartArgTypes = {
-  colors: {
-    table: {
-      disable: true,
-    },
-  },
-  scopedSlots: {
-    table: {
-      disable: true,
-    },
-  },
-  arc: {
-    table: {
-      disable: true,
-    },
-  },
   valueDomainKey: {
+    control: { type: 'text' },
     table: {
-      disable: true,
+      defaultValue: { summary: 'Sets the domain key value' },
+      category: 'PieOptions',
     },
   },
-  labelDomainKey: {
-    table: {
-      disable: true,
-    },
-  },
-  domainKey: {
-    control: { type: 'object' },
-  },
-  ...setColorArgs(colors),
-  'arc.donutRadius': {
-    control: { type: 'range', min: 0, max: 1, step: 0.05 },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc donut radius',
-  },
-  'arc.cornerRadius': {
-    control: { type: 'range', min: 0, max: 100, step: 1 },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-  },
-  'arc.padAngle': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc pad angle angle',
-  },
-  'arc.padRadius': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc pad angle radius',
-  },
-  'arc.stroke': {
-    control: { type: 'color' },
-    table: { category: 'Arc properties' },
-    description: 'Sets the arc pad color',
-  },
-  'arc.strokeWidth': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc stroke width',
-  },
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
-  ...paddingArgTypesOptions,
-  ...animationArgTypesOptions,
-  ...dimensionArgTypesOptions,
-  data: {
-    control: { type: 'object' },
-    table: { defaultValue: { summary: 'Object' }, category: 'Data' },
-  },
+  ...setTabArgs(colors, 'colors', 'color'),
+  ...getArgTypesByProp('arc'),
+  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
@@ -178,7 +118,7 @@ export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
   ...flattenArgs({
-    domainKey: 'value',
+    valueDomainKey: 'value',
     data: rawData,
     padding: {
       left: 150,
@@ -196,7 +136,7 @@ const defaultArguments = {
     },
     animationOptions,
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
 };
 
 Default.args = defaultArguments;
@@ -209,18 +149,13 @@ export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
   ...flattenArgs({
-    domainKey: 'value',
+    valueDomainKey: 'value',
     data: rawData,
-    padding: {
-      left: 150,
-      bottom: 100,
-      right: 150,
-      top: 100,
-    },
+    padding,
     dimensions: { width: 800, height: 600 },
     animationOptions,
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
   arc: undefined,
 };
 export const Irregular = IrregularTemplate.bind({});

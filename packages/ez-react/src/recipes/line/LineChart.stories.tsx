@@ -1,75 +1,37 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
+import { Args, ArgTypes, Meta, Story } from '@storybook/react';
 import { LineCurve } from 'eazychart-core/src/types';
-import { colors, evolutionData } from 'eazychart-dev/storybook/data';
+import {
+  colors,
+  evolutionData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypesOptions,
+  markerArgTypes,
+  yAxisArgTypes,
+  getArgTypesByProp,
+  cartesianChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
 } from '@/recipes/line/LineErrorMarginChart';
-import {
-  MultiLineChart,
-  MultiLineChartProps,
-} from '@/recipes/line/MultiLineChart';
 
-const lineChartArgTypes = {
-  'line.strokeWidth': {
-    defaultValue: 2,
-    description: 'Sets the line stroke width',
-    control: { type: 'number' },
-    table: { category: 'Line props', defaultValue: { summary: '2px' } },
-  },
-  'line.stroke': {
-    control: { type: 'color' },
-    table: { category: 'Line props', defaultValue: { summary: '#ef476f' } },
-    description: 'Sets the line color',
-    if: { arg: 'yAxis', truthy: false },
-  },
-  'line.curve': {
-    control: {
-      type: 'select',
-      options: [
-        'curveLinear',
-        'curveBasis',
-        'curveBumpX',
-        'curveBumpY',
-        'curveBundle',
-        'curveCardinal',
-        'curveNatural',
-        'curveStep',
-        'curveStepAfter',
-        'curveStepBefore',
-      ],
-    },
-    table: { category: 'Line props', defaultValue: { summary: 'curveLinear' } },
-    description: 'Sets the type of line curve ',
-  },
-  'line.beta': {
-    control: { type: 'range', min: 0, max: 1, step: 0.1 },
-    table: { category: 'Line props', defaultValue: { summary: '0' } },
-    description: 'Determines the straigthness of the spline',
-  },
-  ...markerArgTypesOptions,
+const lineChartArgTypes: Partial<ArgTypes<Args>> = {
+  ...getArgTypesByProp('line'),
+  ...cartesianChartArgTypes,
+  ...yAxisArgTypes,
+  ...markerArgTypes,
   ...baseChartArgTypes,
-  yAxis: {
-    control: { type: 'object' },
-    table: {
-      category: 'Multi chart Y Axis Options',
-      defaultValue: { summary: 'yValues' },
-    },
-    description: 'Sets the Y axis domain keys and title for multi chart',
-    if: { arg: 'yAxis', truthy: true },
-  },
 };
 
 const meta: Meta = {
-  id: '5',
+  id: '6',
   title: 'React/Line Chart',
   component: LineChart,
   parameters: {
@@ -85,16 +47,6 @@ const DefaultTemplate: Story<LineChartProps> = buildTemplate(
     return (
       <ChartWrapper>
         <LineChart {...args} />
-      </ChartWrapper>
-    );
-  }
-);
-
-const MultiLineTemplate: Story<MultiLineChartProps> = buildTemplate(
-  (args: MultiLineChartProps) => {
-    return (
-      <ChartWrapper>
-        <MultiLineChart {...args} />
       </ChartWrapper>
     );
   }
@@ -121,18 +73,9 @@ const defaultArguments = flattenArgs({
     curve: 'curveLinear' as LineCurve,
     beta: 0,
   },
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
+  animationOptions,
   isRTL: false,
-  padding: {
-    left: 100,
-    bottom: 100,
-    right: 100,
-    top: 100,
-  },
+  padding,
   dimensions: { width: 800, height: 600 },
   marker: {
     hidden: false,
@@ -144,27 +87,18 @@ const defaultArguments = flattenArgs({
     domainKey: 'xValue',
     title: 'Hours',
     tickFormat: (d: number) => `${d}h`,
+    nice: 0,
   },
   yAxis: {
     domainKey: 'yValue',
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
+    nice: 0,
   },
   data: evolutionData,
 });
 
 Default.args = defaultArguments;
-
-export const MultiLine = MultiLineTemplate.bind({});
-
-MultiLine.args = {
-  ...defaultArguments,
-  yAxis: {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
-    title: 'Temperature',
-    tickFormat: (d: number) => `${d}°`,
-  },
-};
 
 export const LineWithErrorMargin = LineErrorMarginTemplate.bind({});
 

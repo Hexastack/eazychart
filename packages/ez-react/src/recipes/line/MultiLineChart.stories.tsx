@@ -1,48 +1,53 @@
 import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
-import {
-  flattenArgs,
-  baseChartArgTypes,
-  markerArgTypes,
-  flattenTabArgs,
-  setTabArgs,
-  cartesianChartArgTypes,
-} from 'eazychart-dev/storybook/utils';
+import { Args, ArgTypes, Meta, Story } from '@storybook/react';
+import { LineCurve } from 'eazychart-core/src/types';
 import {
   areaColors,
   evolutionData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
-import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import {
+  flattenArgs,
+  baseChartArgTypes,
+  markerArgTypes,
+  getArgTypesByProp,
+  cartesianChartArgTypes,
+  setTabArgs,
+} from 'eazychart-dev/storybook/utils';
+import {
+  MultiLineChart,
+  MultiLineChartProps,
+} from '@/recipes/line/MultiLineChart';
 import { MULTI_Y_AXIS_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
-const areaChartArgTypes = {
+const lineChartArgTypes: Partial<ArgTypes<Args>> = {
+  ...getArgTypesByProp('line'),
   ...setTabArgs(areaColors, 'colors', 'color'),
-  ...MULTI_Y_AXIS_CONTROLS,
+  ...cartesianChartArgTypes,
   ...markerArgTypes,
   ...baseChartArgTypes,
-  ...cartesianChartArgTypes,
+  ...MULTI_Y_AXIS_CONTROLS,
 };
 
 const meta: Meta = {
-  id: '3',
-  title: 'React/Multi Area Chart',
-  component: MultiAreaChart,
+  id: '7',
+  title: 'React/MultiLine Chart',
+  component: MultiLineChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: areaChartArgTypes,
+  argTypes: lineChartArgTypes,
 };
 
 export default meta;
 
-const Template: Story<MultiAreaChartProps> = buildTemplate(
-  (args: MultiAreaChartProps) => {
+const MultiLineTemplate: Story<MultiLineChartProps> = buildTemplate(
+  (args: MultiLineChartProps) => {
     return (
       <ChartWrapper>
-        <MultiAreaChart {...args} />
+        <MultiLineChart {...args} />
       </ChartWrapper>
     );
   }
@@ -50,21 +55,24 @@ const Template: Story<MultiAreaChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const MultiArea = Template.bind({});
 
 const defaultArguments = {
   ...flattenArgs({
     colors: ['#339999', '#993399', '#333399'],
-
-    marker: {
-      hidden: true,
-      radius: 5,
-      color: '#FFF',
+    line: {
+      strokeWidth: 2,
+      curve: 'curveLinear' as LineCurve,
+      beta: 0,
     },
     animationOptions,
     isRTL: false,
     padding,
     dimensions: { width: 800, height: 600 },
+    marker: {
+      hidden: false,
+      radius: 5,
+      color: '#FFF',
+    },
     grid: { directions: [] },
     xAxis: {
       domainKey: 'xValue',
@@ -78,8 +86,10 @@ const defaultArguments = {
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
+    nice: 0,
   },
-  ...flattenTabArgs(areaColors, 'colors'),
 };
 
-MultiArea.args = defaultArguments;
+export const MultiLine = MultiLineTemplate.bind({});
+
+MultiLine.args = defaultArguments;

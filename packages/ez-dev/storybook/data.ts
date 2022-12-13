@@ -1,5 +1,8 @@
-import { AnimationOptions, ChartPadding, RawData } from 'eazychart-core/src/types';
-
+import {
+  AnimationOptions,
+  ChartPadding,
+  RawData,
+} from 'eazychart-core/src/types';
 
 export const dimensions = {
   width: 800,
@@ -68,6 +71,8 @@ export const evolutionData: RawData = [...Array(23).keys()].map((_v, idx) => {
 });
 
 export const colors = ['#26547c', '#ef476f', '#ffd166', '#06d6a0', '#06d6d1'];
+
+export const areaColors = ['#339999', '#993399', '#333399'];
 
 export const gridColor = '#a8a8a8';
 

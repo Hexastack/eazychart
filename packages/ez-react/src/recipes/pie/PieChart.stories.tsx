@@ -9,93 +9,37 @@ import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  animationArgTypesOptions,
-  paddingArgTypesOptions,
-  dimensionArgTypesOptions,
-  flattenColors,
-  setColorArgs,
+  flattenTabArgs,
+  setTabArgs,
+  getArgTypesByProp,
+  baseChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
-import { colors, rawData } from 'eazychart-dev/storybook/data';
+import {
+  colors,
+  rawData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 import {
   IrregularPieChart,
   IrregularPieChartProps,
 } from '@/recipes/pie/IrregularPieChart';
 
 const pieChartArgTypes = {
-  colors: {
-    table: {
-      disable: true,
-    },
-  },
-  scopedSlots: {
-    table: {
-      disable: true,
-    },
-  },
-  arc: {
-    table: {
-      disable: true,
-    },
-  },
   valueDomainKey: {
+    control: { type: 'text' },
     table: {
-      disable: true,
+      defaultValue: { summary: 'Sets the domain key value' },
+      category: 'PieOptions',
     },
   },
-  labelDomainKey: {
-    table: {
-      disable: true,
-    },
-  },
-  domainKey: {
-    control: { type: 'object' },
-  },
-  ...setColorArgs(colors),
-  'arc.donutRadius': {
-    control: { type: 'range', min: 0, max: 1, step: 0.05 },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc donut radius',
-  },
-  'arc.cornerRadius': {
-    control: { type: 'range', min: 0, max: 100, step: 1 },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-  },
-  'arc.padAngle': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc pad angle angle',
-  },
-  'arc.padRadius': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc pad angle radius',
-  },
-  'arc.stroke': {
-    control: { type: 'color' },
-    table: { category: 'Arc properties' },
-    description: 'Sets the arc pad color',
-  },
-  'arc.strokeWidth': {
-    control: { type: 'number' },
-    table: { category: 'Arc properties', defaultValue: { summary: '0' } },
-    description: 'Sets the arc stroke width',
-  },
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
-  ...paddingArgTypesOptions,
-  ...animationArgTypesOptions,
-  ...dimensionArgTypesOptions,
-  data: {
-    control: { type: 'object' },
-    table: { defaultValue: { summary: 'Object' }, category: 'Data' },
-  },
+  ...setTabArgs(colors, 'colors', 'color'),
+  ...getArgTypesByProp('arc'),
+  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
-  id: '6',
+  id: '8',
   title: 'React/Pie Chart',
   component: PieChart,
   parameters: {
@@ -151,20 +95,11 @@ const IrregularTemplate: Story<IrregularPieChartProps> = buildTemplate(
 export const Default = DefaultTemplate.bind({});
 const defaultArguments = {
   ...flattenArgs({
-    domainKey: 'value',
+    valueDomainKey: 'value',
     data: rawData,
     dimensions: { width: 800, height: 600 },
-    animationOptions: {
-      easing: 'easeBack',
-      duration: 400,
-      delay: 0,
-    },
-    padding: {
-      left: 150,
-      bottom: 100,
-      right: 150,
-      top: 100,
-    },
+    animationOptions,
+    padding,
     arc: {
       donutRadius: 0,
       cornerRadius: 0,
@@ -173,7 +108,7 @@ const defaultArguments = {
       strokeWidth: 0,
     },
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
 };
 
 Default.args = defaultArguments;
@@ -185,7 +120,7 @@ export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
   ...flattenArgs({
-    domainKey: 'value',
+    valueDomainKey: 'value',
     data: rawData,
     dimensions: { width: 800, height: 600 },
     animationOptions: {
@@ -200,7 +135,7 @@ Radial.args = {
       top: 100,
     },
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
   arc: undefined,
 };
 

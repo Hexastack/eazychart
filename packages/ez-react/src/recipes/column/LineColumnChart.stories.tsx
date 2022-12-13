@@ -1,7 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
-
+import {
+  LineColumnChart,
+  LineColumnChartProps,
+} from '@/recipes/column/LineColumnChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
@@ -10,6 +12,7 @@ import {
   baseChartArgTypes,
   cartesianChartArgTypes,
   yAxisArgTypes,
+  markerArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -17,18 +20,20 @@ import {
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
+import { LINE_COLUMN_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const columnChartArgTypes = {
+  ...LINE_COLUMN_CONTROLS,
+  ...markerArgTypes,
   ...yAxisArgTypes,
   ...cartesianChartArgTypes,
   ...baseChartArgTypes,
   ...setTabArgs(colors, 'colors', 'color'),
 };
-
 const meta: Meta = {
-  id: '5',
-  title: 'React/Column Chart',
-  component: ColumnChart,
+  id: '11',
+  title: 'React/Line Column Chart',
+  component: LineColumnChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -37,18 +42,18 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<ColumnChartProps> = buildTemplate(
-  (args: ColumnChartProps) => {
+const LineColumnTemplate: Story<LineColumnChartProps> = buildTemplate(
+  (args: LineColumnChartProps) => {
     return (
       <ChartWrapper>
-        <ColumnChart {...args} />
+        <LineColumnChart {...args} />
       </ChartWrapper>
     );
   }
 );
+
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = {
   ...flattenArgs({
@@ -67,9 +72,29 @@ const defaultArguments = {
       title: 'Count',
       nice: 2,
     },
+    line: {
+      strokeWidth: 2,
+      stroke: '#81248d',
+    },
+    marker: {
+      hidden: false,
+      radius: 5,
+      color: '#c400c4',
+    },
     data: rawData,
   }),
   ...flattenTabArgs(colors, 'colors'),
 };
 
-Default.args = defaultArguments;
+export const LineColumn = LineColumnTemplate.bind({});
+
+const lineColumnArguments = {
+  ...defaultArguments,
+  yLineAxis: {
+    domainKey: 'v',
+    title: 'Value',
+    nice: 2,
+  },
+};
+
+LineColumn.args = lineColumnArguments;

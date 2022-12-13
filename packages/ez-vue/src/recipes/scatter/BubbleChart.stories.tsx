@@ -8,35 +8,16 @@ import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
+  getArgTypesByProp,
+  cartesianChartArgTypes,
+  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import BubbleChart from './BubbleChart';
 
 const bubbleChartArgTypes = {
-  'bubble.minRadius': {
-    control: { type: 'number' },
-    table: { category: 'Bubble props', defaultValue: { summary: '1px' } },
-    description: 'Sets the minimum bubble radius',
-  },
-  'bubble.domainKey': {
-    table: { category: 'Bubble props', defaultValue: { summary: 'rValue' } },
-    description: 'Sets the domain key',
-  },
-  'bubble.maxRadius': {
-    control: { type: 'number' },
-    table: { category: 'Bubble props', defaultValue: { summary: '25px' } },
-    description: 'Sets the max bubble radius',
-  },
-  'bubble.fill': {
-    control: { type: 'color' },
-    table: { category: 'Bubble props', defaultValue: { summary: 'Color' } },
-    description: 'Sets the bubble color',
-  },
-
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
+  ...yAxisArgTypes,
+  ...cartesianChartArgTypes,
+  ...getArgTypesByProp('bubble'),
   ...baseChartArgTypes,
 };
 
@@ -78,11 +59,13 @@ const defaultArguments = flattenArgs({
     domainKey: 'xValue',
     title: 'Width',
     tickFormat: (d: number) => `${d}m`,
+    nice: 0,
   },
   yAxis: {
     domainKey: 'yValue',
     title: 'Height',
     tickFormat: (d: number) => `${d}c`,
+    nice: 0,
   },
   padding,
   animationOptions,

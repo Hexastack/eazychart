@@ -5,30 +5,23 @@ import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypesOptions,
+  markerArgTypes,
+  getArgTypesByProp,
+  cartesianChartArgTypes,
+  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
-import { colors, evolutionData } from 'eazychart-dev/storybook/data';
+import {
+  colors,
+  evolutionData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 
 const areaChartArgTypes = {
-  'area.stroke': {
-    control: { type: 'color' },
-    table: { category: 'Area props', defaultValue: { summary: 'color' } },
-    description: 'Sets the stroke color',
-    if: { arg: 'yAxis', truthy: false },
-  },
-  'area.strokeWidth': {
-    control: { type: 'number' },
-    table: { category: 'Area props', defaultValue: { summary: '2px' } },
-    description: 'Sets the stroke width',
-    if: { arg: 'yAxis', truthy: false },
-  },
-  'area.fill': {
-    control: { type: 'color' },
-    table: { category: 'Area props', defaultValue: { summary: '#26547c' } },
-    description: 'Sets the area color',
-    if: { arg: 'yAxis', truthy: false },
-  },
-  ...markerArgTypesOptions,
+  ...cartesianChartArgTypes,
+  ...yAxisArgTypes,
+  ...getArgTypesByProp('area'),
+  ...markerArgTypes,
   ...baseChartArgTypes,
 };
 
@@ -69,29 +62,22 @@ const defaultArguments = flattenArgs({
     radius: 5,
     color: '#FFF',
   },
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
+  animationOptions,
   isRTL: false,
-  padding: {
-    left: 100,
-    bottom: 100,
-    right: 100,
-    top: 100,
-  },
+  padding,
   dimensions: { width: 800, height: 600 },
   grid: { directions: [] },
   xAxis: {
     domainKey: 'xValue',
     title: 'Hours',
     tickFormat: (d: number) => `${d}h`,
+    nice: 0,
   },
   yAxis: {
     domainKey: 'yValue',
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
+    nice: 0,
   },
   data: evolutionData,
 });

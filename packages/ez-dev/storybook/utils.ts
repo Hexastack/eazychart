@@ -1,86 +1,67 @@
 import {
-  GRID_CONFIG,
-  MARKER_CONFIG,
-  PADDING_CONFIG,
-  ANIMATION_CONFIG,
-  AXIS_CONFIG,
-  DIMENSION_CONFIG,
-} from './storybookConfigs';
-
-const DISABLED_DEFAULT_ARG = {
-  table: {
-    disable: true,
-  },
-};
+  CONTROLS_MAP,
+  DISABLED_DEFAULT_ARG,
+  PropArgType,
+} from './storybook-configs';
 
 // This function takes in the CONFIGS and creates the corresponding storybook controls
-const elementSettings = (
-  optionCategory: string,
-  controls: { [key: string]: string | undefined | string[] }[]
-) => {
-  return controls.reduce(
+export const getArgTypesByProp = (category: PropArgType) => {
+  if (!(category in CONTROLS_MAP)) {
+    throw new Error('Unknow controls category');
+  }
+
+  return CONTROLS_MAP[category].reduce(
     (
       acc: { [key: string]: Object },
-      { elemName, elemControl, customDesc, defValue, elemOptions }
+      { name, type, description, defaultValue, options, min, max, step }
     ) => {
-      console.log(elemOptions);
       if (acc) {
-        acc[`${optionCategory}.${elemName}`] = {
+        acc[`${category}.${name}`] = {
           control: {
-            type: `${elemControl}`,
-            options: elemOptions,
+            type: `${type}`,
+            options: options,
+            min: min,
+            max: max,
+            step: step,
           },
           table: {
-            category: `${optionCategory} options`,
-            defaultValue: { summary: `${defValue}` },
+            category: `${category} options`,
+            defaultValue: { summary: `${defaultValue}` },
           },
-          description: customDesc
-            ? customDesc
-            : `Sets the ${optionCategory} ${elemName} value`,
+          description: description
+            ? description
+            : `Sets the ${category} ${name} value`,
         };
       }
       return acc;
     },
-    {}
+    { [category]: DISABLED_DEFAULT_ARG }
   );
 };
 
-export const markerArgTypesOptions = {
-  marker: DISABLED_DEFAULT_ARG,
-  ...elementSettings('marker', MARKER_CONFIG),
-};
+export const markerArgTypes = getArgTypesByProp('marker');
 
-const gridArgTypesOptions = {
-  'grid.directions': DISABLED_DEFAULT_ARG,
-  grid: DISABLED_DEFAULT_ARG,
-  ...elementSettings('grid', GRID_CONFIG),
+export const cartesianChartArgTypes = {
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis'),
+  isRTL: {
+    control: { type: 'boolean' },
+  },
 };
-
-export const paddingArgTypesOptions = {
-  padding: DISABLED_DEFAULT_ARG,
-  ...elementSettings('padding', PADDING_CONFIG),
+export const yAxisArgTypes = {
+  ...getArgTypesByProp('yAxis'),
 };
-
-export const animationArgTypesOptions = {
-  animationOptions: DISABLED_DEFAULT_ARG,
-  ...elementSettings('animationOptions', ANIMATION_CONFIG),
-};
-
-export const dimensionArgTypesOptions = {
-  dimensions: DISABLED_DEFAULT_ARG,
-  ...elementSettings('dimensions', DIMENSION_CONFIG),
-};
-
-const axisArgTypesOptions = {
-  yAxis: DISABLED_DEFAULT_ARG,
-  xAxis: DISABLED_DEFAULT_ARG,
-  'xAxis.tickFormat': DISABLED_DEFAULT_ARG,
-  'yAxis.tickFormat': DISABLED_DEFAULT_ARG,
-  ...elementSettings('xAxis', AXIS_CONFIG),
-  ...elementSettings('yAxis', AXIS_CONFIG),
-};
-
-const NESTED_PROPS = ['scopedSlots', 'line', 'point', 'bubble', 'area'];
+const NESTED_PROPS = [
+  'scopedSlots',
+  'line',
+  'point',
+  'bubble',
+  'area',
+  'onResize',
+  'xAxis.tickFormat',
+  'yAxis.tickFormat',
+  'labelDomainKey',
+];
 
 const extendBaseArgTypes = () => {
   // Disable default arg for nested props
@@ -97,16 +78,11 @@ const extendBaseArgTypes = () => {
 };
 
 export const baseChartArgTypes = {
-  ...axisArgTypesOptions,
-  ...dimensionArgTypesOptions,
-  ...animationArgTypesOptions,
-  ...paddingArgTypesOptions,
-  ...gridArgTypesOptions,
+  ...getArgTypesByProp('dimensions'),
+  ...getArgTypesByProp('animationOptions'),
+  ...getArgTypesByProp('padding'),
   // we're doing this to hide the objects that we've alreay unflattened and made an input field for each of their attributes
   ...extendBaseArgTypes(),
-  isRTL: {
-    control: { type: 'boolean' },
-  },
   data: {
     control: { type: 'object' },
     table: { defaultValue: { summary: 'Object' }, category: 'Data' },
@@ -115,10 +91,10 @@ export const baseChartArgTypes = {
 
 /*
  * @param args
- * @returns { argument.att1, argument.att2, argument.att3 ...}
+ * @returns { argument.att1.att2.att3 ...}
  */
 export const flattenArgs = (args: Object) => {
-  const constructedArgs = {} as { [key: string]: {} };
+  let constructedArgs = {} as { [key: string]: {} };
   Object.entries(args).forEach((val) => {
     const [key, value] = val;
     if (
@@ -128,7 +104,14 @@ export const flattenArgs = (args: Object) => {
       constructedArgs[key] = value;
     } else {
       for (const innerKey in value) {
-        constructedArgs[`${key}.${innerKey}`] = value[innerKey];
+        if (Array.isArray(value[innerKey])) {
+          constructedArgs = {
+            ...constructedArgs,
+            ...flattenTabArgs(value[innerKey], `${key}.${innerKey}`),
+          };
+        } else {
+          constructedArgs[`${key}.${innerKey}`] = value[innerKey];
+        }
       }
     }
   });
@@ -136,9 +119,10 @@ export const flattenArgs = (args: Object) => {
 };
 
 /**
- * @params deconstructedArgs, key, values, defaultArg
+ * @params deconstructedArgs
  * @returns deconstructedArgs {chartArgs} |  [chartColors]
  */
+
 export const deconstructArgs = (
   deconstructedArgs: { [key: string]: any },
   key: string,
@@ -153,8 +137,10 @@ export const deconstructArgs = (
     deconstructedArgs[parentKey] = deconstructedArgs[parentKey] ?? defaultArg;
     deconstructedArgs[parentKey][prop] = values;
   }
+
   return deconstructedArgs;
 };
+
 export interface ArgsType {
   [key: string]:
     | boolean
@@ -167,51 +153,65 @@ export interface ArgsType {
 }
 
 /**
- * Convert { area.stroke = "#fffff", area.strokeWidth= 0 }
+ * Convert { area.stroke = "#fffff".strokeWidth= 0 }
  * To {area: {stroke: '#fffff'}}
  * @param args
  * @returns
  */
 export const unFlattenArgs = (args: ArgsType) => {
   let deconstructedArgs = {} as any;
-  let colors = [] as Array<string>;
+  let deconstructedArray = [] as Array<string>;
+
   for (const [key, value] of Object.entries(args)) {
     const values = value as string;
     const parsedKeys = key.split('.');
-    if (parsedKeys[0] === 'colors') {
-      colors = deconstructArgs(colors, key, values, []) as string[];
+    if (/^[0-9]+$/.test(parsedKeys[1])) {
+      deconstructedArray = deconstructArgs(
+        deconstructedArray,
+        key,
+        values,
+        []
+      ) as string[];
     } else {
       deconstructedArgs = deconstructArgs(deconstructedArgs, key, values, {});
     }
   }
-  return { ...deconstructedArgs, ...colors };
+  return { ...deconstructedArgs, ...deconstructedArray };
 };
 
-// Flattens colors table
-export const flattenColors = (args: Array<string>) => {
+// Flattens a table of args
+export const flattenTabArgs = (args: Array<string>, argName: string) => {
   let constructedArgs = {} as { [key: string]: string };
   for (let i = 0; i < args.length; i++) {
-    constructedArgs[`colors.${i}`] = args[i];
+    constructedArgs[`${argName}.${i}`] = args[i];
   }
   return constructedArgs;
 };
 
-// Sets colorArgtypes
-export const setColorArgs = (colors: string[]) => {
-  let colorArgs = {};
-
-  for (let i = 0; i < colors.length; i++) {
-    const a = {
-      [`colors.${i}`]: {
-        control: { type: 'color' },
+/**
+ * Takes in same type arguments table, the arg name and the type
+ * @params (argTable: [], argName: '', type: 'ControlType')
+ * @returns controls for each element in the arg table
+ */
+export const setTabArgs = (
+  argTable: string[],
+  argName: string,
+  type: string
+) => {
+  let tabArgs = {} as { [key: string]: string | any };
+  tabArgs = { [`${argName}`]: DISABLED_DEFAULT_ARG };
+  for (let i = 0; i < argTable.length; i++) {
+    const tabArg = {
+      [`${argName}.${i}`]: {
+        control: { type: type },
         table: {
-          category: 'Chart colors',
-          defaultValue: { summary: 'HexColor' },
+          category: `Chart ${argName}`,
+          defaultValue: { summary: `${type}` },
         },
-        description: 'Sets corresponding chart color',
+        description: `Sets corresponding chart ${argName}`,
       },
     };
-    colorArgs = { ...colorArgs, ...a };
+    tabArgs = { ...tabArgs, ...tabArg };
   }
-  return colorArgs;
+  return tabArgs;
 };

@@ -2,33 +2,28 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
-import { flattenArgs, baseChartArgTypes } from 'eazychart-dev/storybook/utils';
-import { correlationData } from 'eazychart-dev/storybook/data';
+import {
+  flattenArgs,
+  baseChartArgTypes,
+  getArgTypesByProp,
+  cartesianChartArgTypes,
+  yAxisArgTypes,
+} from 'eazychart-dev/storybook/utils';
+import {
+  correlationData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
+
 const bubbleChartArgTypes = {
-  'bubble.minRadius': {
-    control: { type: 'number' },
-    table: { category: 'Bubble props', defaultValue: { summary: '1px' } },
-    description: 'Sets the minimum bubble radius',
-  },
-  'bubble.domainKey': {
-    table: { category: 'Bubble props', defaultValue: { summary: 'rValue' } },
-    description: 'Sets the domain key',
-  },
-  'bubble.maxRadius': {
-    control: { type: 'number' },
-    table: { category: 'Bubble props', defaultValue: { summary: '25px' } },
-    description: 'Sets the max bubble radius',
-  },
-  'bubble.fill': {
-    control: { type: 'color' },
-    table: { category: 'Bubble props', defaultValue: { summary: 'Color' } },
-    description: 'Sets the bubble color',
-  },
+  ...yAxisArgTypes,
+  ...cartesianChartArgTypes,
+  ...getArgTypesByProp('bubble'),
   ...baseChartArgTypes,
 };
 
 const meta: Meta = {
-  id: '8',
+  id: '9',
   title: 'React/Bubble Chart',
   component: BubbleChart,
   parameters: {
@@ -55,28 +50,21 @@ export const Default = bubbleTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   grid: { directions: [] },
-  animationOptions: {
-    easing: 'easeBack',
-    duration: 400,
-    delay: 0,
-  },
+  animationOptions,
   isRTL: false,
-  padding: {
-    left: 100,
-    bottom: 100,
-    right: 100,
-    top: 100,
-  },
+  padding,
   dimensions: { width: 800, height: 600 },
   xAxis: {
     domainKey: 'xValue',
     title: 'Width',
     tickFormat: (d: number) => `${d}m`,
+    nice: 0,
   },
   yAxis: {
     domainKey: 'yValue',
     title: 'Height',
     tickFormat: (d: number) => `${d}c`,
+    nice: 0,
   },
   data: correlationData,
   bubble: {

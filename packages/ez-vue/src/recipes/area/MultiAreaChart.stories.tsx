@@ -1,6 +1,13 @@
-import React from 'react';
-import { Meta, Story } from '@storybook/react';
-import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
+import { Meta, Story } from '@storybook/vue';
+import MultiAreaChart from '@/recipes/area/MultiAreaChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import {
+  areaColors,
+  colors,
+  evolutionData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 import {
   flattenArgs,
   baseChartArgTypes,
@@ -9,13 +16,6 @@ import {
   setTabArgs,
   cartesianChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
-import {
-  areaColors,
-  evolutionData,
-  animationOptions,
-  padding,
-} from 'eazychart-dev/storybook/data';
-import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
 import { MULTI_Y_AXIS_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const areaChartArgTypes = {
@@ -27,35 +27,39 @@ const areaChartArgTypes = {
 };
 
 const meta: Meta = {
-  id: '3',
-  title: 'React/Multi Area Chart',
+  title: 'Vue/Multi Area Chart',
   component: MultiAreaChart,
   parameters: {
     controls: { expanded: true },
   },
   argTypes: areaChartArgTypes,
 };
-
 export default meta;
 
-const Template: Story<MultiAreaChartProps> = buildTemplate(
-  (args: MultiAreaChartProps) => {
-    return (
-      <ChartWrapper>
-        <MultiAreaChart {...args} />
-      </ChartWrapper>
-    );
-  }
-);
+type MultiAreaChartProps = InstanceType<typeof MultiAreaChart>['$props'];
 
-// By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
-// https://storybook.js.org/docs/react/workflows/unit-testing
-export const MultiArea = Template.bind({});
+const DefaultTemplate: Story = buildTemplate((args: MultiAreaChartProps) => ({
+  title: 'MultiArea',
+  components: { MultiAreaChart, ChartWrapper },
+  props: {
+    allPropsFromArgs: {
+      default: () => args,
+    },
+  },
+  template: `
+    <ChartWrapper>
+      <MultiAreaChart v-bind="allPropsFromArgs" />
+    </ChartWrapper>
+  `,
+}));
+
+// By passing using the Args format for exported stories,
+// you can control the props for a component for reuse in a test
+// https://storybook.js.org/docs/vue/workflows/unit-testing
+export const MultiArea = DefaultTemplate.bind({});
 
 const defaultArguments = {
   ...flattenArgs({
-    colors: ['#339999', '#993399', '#333399'],
-
     marker: {
       hidden: true,
       radius: 5,
@@ -74,6 +78,12 @@ const defaultArguments = {
     },
     data: evolutionData,
   }),
+  area: {
+    stroke: colors[0],
+    strokeWidth: 2,
+    fill: `${colors[0]}b0`,
+    opacity: 0.5,
+  },
   yAxis: {
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',

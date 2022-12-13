@@ -1,37 +1,31 @@
 import { Meta, Story } from '@storybook/vue';
-import { ChartWrapper, ResizableChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import {
+  ChartWrapper,
+  ResizableChartWrapper,
+  buildTemplate,
+} from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  setColorArgs,
-  flattenColors,
+  flattenTabArgs,
+  setTabArgs,
   baseChartArgTypes,
+  cartesianChartArgTypes,
+  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
-  animationOptions,
   colors,
   rawData,
+  animationOptions,
+  padding,
 } from 'eazychart-dev/storybook/data';
 import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
 import BarChart from './BarChart';
 
 const barChartArgTypes = {
-  colors: {
-    table: {
-      disable: true,
-    },
-  },
-  'xAxis.nice': {
-    control: { type: 'number' },
-    table: { category: 'Axis Options', defaultValue: { summary: '2' } },
-    description: "Rounds the domain to 'nice' values ex: [-0.78,0.9] to [-1,1]",
-  },
-  yAxis: {
-    table: {
-      disable: true,
-    },
-  },
+  ...yAxisArgTypes,
+  ...cartesianChartArgTypes,
   ...baseChartArgTypes,
-  ...setColorArgs(colors),
+  ...setTabArgs(colors, 'colors', 'color'),
 };
 
 const meta: Meta = {
@@ -93,21 +87,17 @@ const initialArguments = {
       title: 'Count',
       nice: 2,
     },
+    animationOptions,
+    isRTL: false,
+    padding,
+    dimensions: { width: 800, height: 600 },
     yAxis: {
       domainKey: 'name',
       title: 'Letter',
     },
-    padding: {
-      left: 150,
-      bottom: 100,
-      right: 150,
-      top: 100,
-    },
-    animationOptions,
-    isRTL: false,
     data: rawData,
   }),
-  ...flattenColors(colors),
+  ...flattenTabArgs(colors, 'colors'),
 };
 
 Default.args = {

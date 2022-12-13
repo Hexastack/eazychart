@@ -1,0 +1,324 @@
+import { Meta } from '@storybook/addon-docs';
+import Tabs from './Tabs';
+
+<Meta
+  title="Get Started/Essentials/Common Props"
+  parameters={{ options: { isToolshown: false }, id: 6 }}
+/>
+
+# Common Props
+
+In this section, we will cover properties that most of the charts have in common.
+These so-called props are responsible for the display and behavior of your chart.
+
+## Data
+
+When adding a chart to your web project,
+or creating a new chart recipe, We need to think about the fuel that we will use to fill up our engine, which is data.
+**EazyChart** handles it through its chart wrapper.
+
+So if you are creating some sort of visualization for your web project, all you need to do is to pass your data as a prop to the chart.
+
+To explain how to feed your charts correctly you can follow the example below.
+
+Let's first create the data object. In this example, we want to present the countries in function of their GDP (Gross Domestic Product)
+
+Our data will look like the following:
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab
+    language="javascript"
+    code={`const rawData = [
+  {
+    gdp: 19.485,
+    country: 'United States',
+  },
+  {
+    gdp: 12.238,
+    country: 'China',
+  },
+  {
+    gdp: 4.872,
+    country: 'Japan',
+  },
+];`}
+  ></Tab>
+</Tabs>
+
+The column chart in this case is the best option.
+We should specify the domainKey of `xAxis` and `yAxis` to the corresponding property name.
+In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yAxis`.
+
+<Tabs tabbedClassName="story-tabbed-code-block-small" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  data={rawData}
+  xAxis={{ domainKey: 'country'}}
+  yAxis={{ domainKey: 'gdp', nice: 10}}
+  colors={['#fe4a49', '#2ab7ca', '#fed766']}
+/>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<ColumnChart
+  :data="rawData"
+  :xAxis="{ domainKey: 'country'}"
+  :yAxis="{ domainKey: 'gdp', nice: 10}"
+  :colors="['#fe4a49', '#2ab7ca', '#fed766']"
+/>`}
+  ></Tab>
+</Tabs>
+
+The result is shown in the image below.
+
+![Column Chart: Countries in function of their GDP](https://docs.eazychart.com/images/custom-css-data.png)
+
+> **NOTE**
+>
+> Providing the wrong property name or inaccurate values with inconsistent types to the axes may cause the chart to not be displayed correctly.
+
+## AnimationOptions
+
+The **EazyChart** library comes with a set of animations that you can use on your chart.
+
+As you may know, data analysis can get quite boring… let’s say animation makes it less so.
+
+For animation, we use easing functions, and we offer predefined ones, but you can always supply your own.
+Easing is a method used to add motion to shapes by mutating their properties over time.
+By easing time, transitions are smoother and exhibit more plausible motion.
+
+We use the ones supplied by [d3-ease](https://github.com/d3/d3-ease) library for this matter in order to enhance the interaction with the chart.
+So, please refer to the following guide to get a grasp of how each easing function would animate:
+[Transition Easing Comparison in v4](https://bl.ocks.org/d3noob/1ea51d03775b9650e8dfd03474e202fe)
+
+Available easing functions are :
+
+| Animation name used in eazychart | Type of the animation |
+| :------------------------------- | :-------------------: |
+|           `easeLinear`           |        Linear         |
+|          `easeQuadOut`           |       Quad Out        |
+|          `easeCubicIn`           |       Cubic In        |
+|           `easeLinear`           |        Linear         |
+|            `easeQuad`            |         Quad          |
+|           `easeQuadIn`           |       Quand In        |
+|          `easeQuadOut`           |       Quad Out        |
+|         `easeQuadInOut`          |      Quad In/Out      |
+|           `easeCubic`            |         Cubic         |
+|          `easeCubicIn`           |       Cubic In        |
+|          `easeCubicOut`          |       Cubic Out       |
+|         `easeCubicInOut`         |     Cubic In/Out      |
+|            `easePoly`            |      Polynomial       |
+|           `easePolyIn`           |     Polynomial In     |
+|          `easePolyOut`           |    Polynomial Out     |
+|         `easePolyInOut`          |   Polynomial In/Out   |
+|            `easeSin`             |      Sinusoidal       |
+|           `easeSinIn`            |     Sinusoidal In     |
+|           `easeSinOut`           |    Sinusoidal Out     |
+|          `easeSinInOut`          |   Sinusoidal In/Out   |
+|            `easeExp`             |      Exponential      |
+|           `easeExpIn`            |    Exponential In     |
+|           `easeExpOut`           |    Exponential Out    |
+|          `easeExpInOut`          |  Exponential In/Out   |
+|           `easeCircle`           |        Circle         |
+|          `easeCircleIn`          |       Circle In       |
+|         `easeCircleOut`          |      Circle Out       |
+|        `easeCircleInOut`         |     Circle In/Out     |
+|           `easeBounce`           |        Bounce         |
+|          `easeBounceIn`          |       Bounce In       |
+|         `easeBounceOut`          |      Bounce Out       |
+|        `easeBounceInOut`         |     Bounce In/Out     |
+|            `easeBack`            |         Back          |
+|           `easeBackIn`           |        Back In        |
+|          `easeBackOut`           |       Back Out        |
+|         `easeBackInOut`          |      Back In/Out      |
+|          `easeElastic`           |        Elastic        |
+|         `easeElasticIn`          |      Elastic In       |
+|         `easeElasticOut`         |      Elastic Out      |
+|        `easeElasticInOut`        |    Elastic In/Out     |
+
+These animations can be provided to the chart and are used as follows:
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  data={data}
+  xAxis={{ domainKey: 'country'}}
+  yAxis={{ domainKey: 'gdp', nice: 10}}
+  colors={['#fe4a49', '#2ab7ca', '#fed766']}
+  animationOptions={{
+    easing: 'easeBounce',
+    duration: 400,
+    delay: 0,
+  }}
+/>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<ColumnChart
+  :data="rawData"
+  :xAxis="{ domainKey: 'country'}"
+  :yAxis="{ domainKey: 'gdp', nice: 10}"
+  :colors="['#fe4a49', '#2ab7ca', '#fed766']"
+  :animationOptions="{
+    easing: 'easeBounce',
+    duration: 400,
+    delay: 0,
+  }"
+/>`}
+  ></Tab>
+</Tabs>
+
+![Bounce animation in Column Chart](https://docs.eazychart.com/images/custom-css-animation.gif)
+
+## Padding
+
+The padding props let you choose the size of the space between the chart container and the actual container component.
+This prop is useful when styling your whole web application.
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  // .. here should add the rest of the properties
+  padding={{
+    left: 100,
+    bottom: 200,
+    right: 100,
+    top: 200,
+  }}
+></ColumnChart>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<ColumnChart
+  # .. here should add the rest of the properties
+  :padding="{
+    left: 100,
+    bottom: 100,
+    right: 100,
+    top: 100,
+  }"
+></ColumnChart>`}
+  ></Tab>
+</Tabs>
+
+- Column Chart **without changing the default padding options**:
+
+![Column chart without padding](https://docs.eazychart.com/images/custom-css-before-padding.png)
+
+- Column Chart **with padding top and bottom changed**:
+
+![Column chart with padding](https://docs.eazychart.com/images/custom-css-after-padding.png)
+
+## Dimensions
+
+By default, Chart recipes in EazyChart have 800x600 pixel dimensions that can be overwritten.
+If you wish to give your chart recipe fixed dimensions, you should pass the dimensions as in the example below:
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab
+    language="javascript"
+    code={`const dimensions = { width: 1200, height: 800 };`}
+  ></Tab>
+</Tabs>
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<BarChart
+  // .. here should add the rest of the properties
+  dimensions={{ width: 1200, height: 800 }}
+></BarChart>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<BarChart
+  # .. here should add the rest of the properties
+  :dimensions="{ width: 1200, height: 800}"
+></BarChart>`}
+  ></Tab>
+</Tabs>
+
+## Grid
+
+Grid lines are lines that cross the chart plot to represent axis divisions.
+They help chart viewers distinguish what value an unlabeled data point represents.
+
+Grid lines provide helpful hints to the viewer, particularly for large or complicated charts.
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab
+    language="javascript"
+    code={`grid = {
+  directions: [Direction.HORIZONTAL, Direction.VERTICAL],
+  color: '#a8a8a8',
+};`}
+  ></Tab>
+</Tabs>
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
+  <Tab
+    title="React"
+    language="jsx"
+    code={`<ColumnChart
+  // .. here should add the rest of the properties
+  grid={{
+    directions: [ "horizontal", "vertical"],
+    color: '#a8a8a8',
+  }}
+></ColumnChart>`}
+  ></Tab>
+  <Tab
+    title="Vue"
+    language="markup"
+    code={`<ColumnChart
+  # .. here should add the rest of the properties
+  :grid="{ 
+    directions: [ 'horizontal', 'vertical'],
+    color: '#a8a8a8',
+  }"
+></ColumnChart>`}
+  ></Tab>
+</Tabs>
+
+## Scoped Slots
+
+Scooped slots is a prop that takes an object which contains your customized add-ons like the legend and the tooltip.
+When adding a chart to your project or creating your own chart recipe, add your custom legend and tooltip components, or simply use the included add-on component.
+
+<Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
+  <Tab
+    language="javascript"
+    code={`scopedSlots = {
+  LegendComponent: Legend,
+  TooltipComponent: Tooltip,
+};`}
+  ></Tab>
+</Tabs>
+
+## Tooltip
+
+The tooltip is an indicator that appears when hovering over a shape in a chart.
+This component serves as a way to display information about the chart (section, point).
+You can add your custom tooltip component, or simply use the one provided by default.
+
+![Tooltip](https://docs.eazychart.com/images/tooltip.png)
+
+## Legend
+
+The legend is an indicator of a portion of a chart,
+it is the information on this portion like the name, shape, and color of a point (shape) on a chart.
+The Legend component gives the user the ability to choose what row to display in a bar chart, for example, or the portions in a pie chart.
+You can add your custom Legend component or use the included legend component in the EazyChart library package.
+
+![Gif showing legend](https://docs.eazychart.com/images/legend.gif)

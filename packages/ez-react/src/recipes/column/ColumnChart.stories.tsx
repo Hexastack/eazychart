@@ -5,11 +5,8 @@ import { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
   baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -19,10 +16,11 @@ import {
 } from 'eazychart-dev/storybook/data';
 
 const columnChartArgTypes = {
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
   ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  // ...setTabArgs(colors, 'colors', 'color'),
 };
 
 const meta: Meta = {
@@ -69,7 +67,8 @@ const defaultArguments = {
     },
     data: rawData,
   }),
-  ...flattenTabArgs(colors, 'colors'),
+  colors,
+  // ...flattenTabArgs(colors, 'colors'),
 };
 
 Default.args = defaultArguments;

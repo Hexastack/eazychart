@@ -6,18 +6,21 @@ import {
 
 type ArgTypeOptions = {
   omit?: string[];
-}
+};
 
 // This function takes in the CONFIGS and creates the corresponding storybook controls
-export const getArgTypesByProp = (prop: PropArgType, options?: ArgTypeOptions) => {
+export const getArgTypesByProp = (
+  prop: PropArgType,
+  options?: ArgTypeOptions
+) => {
   if (!(prop in CONTROLS_MAP)) {
     throw new Error('Unknow controls category');
   }
 
   // Filter controls to omit certain fields
   const controls = CONTROLS_MAP[prop].filter(({ name }) => {
-    return !options?.omit || (options.omit && !options.omit.includes(name))
-  })
+    return !options?.omit || (options.omit && !options.omit.includes(name));
+  });
 
   return controls.reduce(
     (
@@ -41,7 +44,7 @@ export const getArgTypesByProp = (prop: PropArgType, options?: ArgTypeOptions) =
           description: description
             ? description
             : `Sets the ${prop} ${name} value`,
-        }
+        },
       };
     },
     { [prop]: DISABLED_DEFAULT_ARG }
@@ -97,7 +100,7 @@ export const baseChartArgTypes = {
     control: { type: 'object' },
     table: { defaultValue: { summary: 'Object' }, category: 'Data' },
   },
-  scopedSlots: DISABLED_DEFAULT_ARG
+  scopedSlots: DISABLED_DEFAULT_ARG,
 };
 
 /*
@@ -121,7 +124,7 @@ export const flattenArgs = (args: Object) => {
         //     ...flattenTabArgs(value[innerKey], `${key}.${innerKey}`),
         //   };
         // } else {
-          constructedArgs[`${key}.${innerKey}`] = value[innerKey];
+        constructedArgs[`${key}.${innerKey}`] = value[innerKey];
         // }
       }
     }
@@ -210,7 +213,8 @@ export const setTabArgs = (
   type: string
 ) => {
   let tabArgs = {} as { [key: string]: string | any };
-  tabArgs = { [`${argName}`]: DISABLED_DEFAULT_ARG };
+  // tabArgs = { [`${argName}`]: DISABLED_DEFAULT_ARG };
+  tabArgs = {};
   for (let i = 0; i < argTable.length; i++) {
     const tabArg = {
       [`${argName}.${i}`]: {

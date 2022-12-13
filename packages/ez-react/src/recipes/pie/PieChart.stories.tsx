@@ -9,8 +9,6 @@ import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
   getArgTypesByProp,
   baseChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
@@ -24,18 +22,13 @@ import {
   IrregularPieChart,
   IrregularPieChartProps,
 } from '@/recipes/pie/IrregularPieChart';
+import { PIE_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const pieChartArgTypes = {
-  valueDomainKey: {
-    control: { type: 'text' },
-    table: {
-      defaultValue: { summary: 'Sets the domain key value' },
-      category: 'PieOptions',
-    },
-  },
-  ...setTabArgs(colors, 'colors', 'color'),
-  ...getArgTypesByProp('arc'),
   ...baseChartArgTypes,
+  ...PIE_CONTROLS,
+  ...getArgTypesByProp('arc'),
+  // ...setTabArgs(colors, 'colors', 'color'),
 };
 
 const meta: Meta = {
@@ -95,7 +88,9 @@ const IrregularTemplate: Story<IrregularPieChartProps> = buildTemplate(
 export const Default = DefaultTemplate.bind({});
 const defaultArguments = {
   ...flattenArgs({
+    colors,
     valueDomainKey: 'value',
+    labelDomainKey: 'name',
     data: rawData,
     dimensions: { width: 800, height: 600 },
     animationOptions,
@@ -108,7 +103,7 @@ const defaultArguments = {
       strokeWidth: 0,
     },
   }),
-  ...flattenTabArgs(colors, 'colors'),
+  // ...flattenTabArgs(colors, 'colors'),
 };
 
 Default.args = defaultArguments;
@@ -120,7 +115,9 @@ export const Radial = RadialTemplate.bind({});
 
 Radial.args = {
   ...flattenArgs({
+    colors,
     valueDomainKey: 'value',
+    labelDomainKey: 'name',
     data: rawData,
     dimensions: { width: 800, height: 600 },
     animationOptions: {
@@ -135,7 +132,7 @@ Radial.args = {
       top: 100,
     },
   }),
-  ...flattenTabArgs(colors, 'colors'),
+  // ...flattenTabArgs(colors, 'colors'),
   arc: undefined,
 };
 

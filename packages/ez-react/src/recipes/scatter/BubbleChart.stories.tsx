@@ -6,8 +6,6 @@ import {
   flattenArgs,
   baseChartArgTypes,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   correlationData,
@@ -16,10 +14,11 @@ import {
 } from 'eazychart-dev/storybook/data';
 
 const bubbleChartArgTypes = {
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
-  ...getArgTypesByProp('bubble'),
   ...baseChartArgTypes,
+  ...getArgTypesByProp('bubble'),
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
 
 const meta: Meta = {

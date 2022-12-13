@@ -19,7 +19,7 @@ const areaChartArgTypes = {
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
   ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
-  ...getArgTypesByProp('marker')
+  ...getArgTypesByProp('marker'),
 };
 
 const meta: Meta = {
@@ -49,6 +49,12 @@ const Template: Story<MultiAreaChartProps> = buildTemplate(
 export const MultiArea = Template.bind({});
 
 const defaultArguments = flattenArgs({
+  area: {
+    curve: 'curveLinear',
+    beta: 0,
+    strokeWidth: 2,
+    opacity: 0.5,
+  },
   colors: ['#339999', '#993399', '#333399'],
   marker: {
     hidden: true,
@@ -70,6 +76,7 @@ const defaultArguments = flattenArgs({
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
+    nice: 0,
   },
   data: evolutionData,
 });

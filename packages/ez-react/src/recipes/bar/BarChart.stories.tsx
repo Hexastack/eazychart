@@ -4,11 +4,8 @@ import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
   baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -19,10 +16,10 @@ import {
 import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
 const barChartArgTypes = {
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
   ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
 const meta: Meta = {
   id: '4',
@@ -70,6 +67,7 @@ const TemplateWithParentDimensions: Story<BarChartProps> = buildTemplate(
 // https://storybook.js.org/docs/react/workflows/unit-testing
 const initialArguments = {
   ...flattenArgs({
+    colors,
     grid: { directions: [] },
     xAxis: {
       domainKey: 'value',
@@ -87,7 +85,7 @@ const initialArguments = {
     },
     data: rawData,
   }),
-  ...flattenTabArgs(colors, 'colors'),
+  // ...flattenTabArgs(colors, 'colors'),
 };
 
 export const Default = DefaultTemplate.bind({});

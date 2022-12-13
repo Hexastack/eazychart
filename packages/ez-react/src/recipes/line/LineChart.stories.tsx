@@ -12,10 +12,7 @@ import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypes,
-  yAxisArgTypes,
   getArgTypesByProp,
-  cartesianChartArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   LineErrorMarginChart,
@@ -23,11 +20,15 @@ import {
 } from '@/recipes/line/LineErrorMarginChart';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
-  ...getArgTypesByProp('line'),
-  ...cartesianChartArgTypes,
-  ...yAxisArgTypes,
-  ...markerArgTypes,
   ...baseChartArgTypes,
+  ...getArgTypesByProp('line'),
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('area', {
+    omit: ['stroke', 'curve', 'beta', 'strokeWidth', 'opacity'],
+  }),
 };
 
 const meta: Meta = {

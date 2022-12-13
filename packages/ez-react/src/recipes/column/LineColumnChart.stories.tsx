@@ -7,12 +7,8 @@ import {
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
   baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
-  markerArgTypes,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -23,12 +19,13 @@ import {
 import { LINE_COLUMN_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const columnChartArgTypes = {
-  ...LINE_COLUMN_CONTROLS,
-  ...markerArgTypes,
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
   ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...LINE_COLUMN_CONTROLS,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  // ...setTabArgs(colors, 'colors', 'color'),
 };
 const meta: Meta = {
   id: '11',
@@ -83,7 +80,8 @@ const defaultArguments = {
     },
     data: rawData,
   }),
-  ...flattenTabArgs(colors, 'colors'),
+  colors,
+  // ...flattenTabArgs(colors, 'colors'),
 };
 
 export const LineColumn = LineColumnTemplate.bind({});

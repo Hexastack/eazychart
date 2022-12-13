@@ -38,7 +38,7 @@ export const GRID_ARG_TYPES: ControlDefinition[] = [
   {
     name: 'directions',
     type: 'inline-check',
-    defaultValue: '#a8a8a8',
+    defaultValue: 'false, false',
     options: ['horizontal', 'vertical'],
     description: 'Adds the grid lines according to the selected axis',
   },
@@ -184,12 +184,18 @@ export const POINT_CONTROLS: ControlDefinition[] = [
 export const BUBBLE_CONTROLS: ControlDefinition[] = [
   {
     name: 'minRadius',
-    type: 'number',
+    type: 'range',
+    min: 0,
+    max: 100,
+    step: 1,
     defaultValue: '1px',
   },
   {
     name: 'maxRadius',
-    type: 'number',
+    type: 'range',
+    min: 0,
+    max: 100,
+    step: 1,
     defaultValue: '25px',
   },
   {
@@ -312,7 +318,10 @@ export const AREA_CONTROLS: ControlDefinition[] = [
   },
   {
     name: 'opacity',
-    type: 'number',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.1,
     defaultValue: '0.5',
   },
 ];
@@ -329,6 +338,7 @@ export const MULTI_Y_AXIS_CONTROLS = {
 };
 
 export const LINE_COLUMN_CONTROLS = {
+  line: DISABLED_DEFAULT_ARG,
   'line.strokeWidth': {
     control: { type: 'number' },
     table: { category: 'Line Options', defaultValue: { summary: '2' } },
@@ -349,6 +359,22 @@ export const LINE_COLUMN_CONTROLS = {
   },
 };
 
+export const PIE_CONTROLS = {
+  valueDomainKey: {
+    control: { type: 'text' },
+    table: {
+      defaultValue: { summary: 'Sets the domain key value' },
+      category: 'Pie Options',
+    },
+  },
+  labelDomainKey: {
+    control: { type: 'text' },
+    table: {
+      defaultValue: { summary: 'Sets the domain key label' },
+      category: 'Pie Options',
+    },
+  },
+};
 export const CONTROLS_MAP: { [category in PropArgType]: ControlDefinition[] } =
   {
     marker: MARKER_ARG_TYPES,

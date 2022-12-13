@@ -9,8 +9,6 @@ import {
   flattenArgs,
   baseChartArgTypes,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -20,10 +18,11 @@ import {
 } from 'eazychart-dev/storybook/data';
 
 const scatterChartArgTypes = {
-  ...getArgTypesByProp('point'),
-  ...cartesianChartArgTypes,
-  ...yAxisArgTypes,
   ...baseChartArgTypes,
+  ...getArgTypesByProp('point'),
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
 
 const meta: Meta = {

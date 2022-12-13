@@ -2,7 +2,6 @@ import React from 'react';
 import { Args, ArgTypes, Meta, Story } from '@storybook/react';
 import { LineCurve } from 'eazychart-core/src/types';
 import {
-  areaColors,
   evolutionData,
   animationOptions,
   padding,
@@ -11,24 +10,21 @@ import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   baseChartArgTypes,
-  markerArgTypes,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  setTabArgs,
 } from 'eazychart-dev/storybook/utils';
 import {
   MultiLineChart,
   MultiLineChartProps,
 } from '@/recipes/line/MultiLineChart';
-import { MULTI_Y_AXIS_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
-  ...getArgTypesByProp('line'),
-  ...setTabArgs(areaColors, 'colors', 'color'),
-  ...cartesianChartArgTypes,
-  ...markerArgTypes,
   ...baseChartArgTypes,
-  ...MULTI_Y_AXIS_CONTROLS,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
+  ...getArgTypesByProp('line', { omit: ['stroke'] }),
+  // ...setTabArgs(areaColors, 'colors', 'color'),
 };
 
 const meta: Meta = {
@@ -81,13 +77,13 @@ const defaultArguments = {
       nice: 0,
     },
     data: evolutionData,
+    yAxis: {
+      domainKeys: ['yValue', 'yValue1', 'yValue2'],
+      title: 'Temperature',
+      tickFormat: (d: number) => `${d}°`,
+      nice: 0,
+    },
   }),
-  yAxis: {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
-    title: 'Temperature',
-    tickFormat: (d: number) => `${d}°`,
-    nice: 0,
-  },
 };
 
 export const MultiLine = MultiLineTemplate.bind({});

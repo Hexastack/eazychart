@@ -39,7 +39,6 @@ export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
     TooltipComponent: FC<TooltipProps>;
     LegendComponent: FC<LegendProps>;
   };
-  onResize?: (dimensions: Dimensions) => void;
 }
 
 export const MultiLineChart: FC<MultiLineChartProps> = ({

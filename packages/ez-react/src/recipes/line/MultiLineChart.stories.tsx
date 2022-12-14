@@ -24,12 +24,11 @@ const lineChartArgTypes: Partial<ArgTypes<Args>> = {
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
   ...getArgTypesByProp('line', { omit: ['stroke'] }),
-  // ...setTabArgs(areaColors, 'colors', 'color'),
 };
 
 const meta: Meta = {
   id: '7',
-  title: 'React/MultiLine Chart',
+  title: 'React/Line Chart/MultiLine',
   component: MultiLineChart,
   parameters: {
     controls: { expanded: true },
@@ -51,41 +50,38 @@ const MultiLineTemplate: Story<MultiLineChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-
-const defaultArguments = {
-  ...flattenArgs({
-    colors: ['#339999', '#993399', '#333399'],
-    line: {
-      strokeWidth: 2,
-      curve: 'curveLinear' as LineCurve,
-      beta: 0,
-    },
-    animationOptions,
-    isRTL: false,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    marker: {
-      hidden: false,
-      radius: 5,
-      color: '#FFF',
-    },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'xValue',
-      title: 'Hours',
-      tickFormat: (d: number) => `${d}h`,
-      nice: 0,
-    },
-    data: evolutionData,
-    yAxis: {
-      domainKeys: ['yValue', 'yValue1', 'yValue2'],
-      title: 'Temperature',
-      tickFormat: (d: number) => `${d}°`,
-      nice: 0,
-    },
-  }),
-};
-
 export const MultiLine = MultiLineTemplate.bind({});
+
+const defaultArguments = flattenArgs({
+  colors: ['#339999', '#993399', '#333399'],
+  line: {
+    strokeWidth: 2,
+    curve: 'curveLinear' as LineCurve,
+    beta: 0,
+  },
+  animationOptions,
+  isRTL: false,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  marker: {
+    hidden: false,
+    radius: 5,
+    color: '#FFF',
+  },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'xValue',
+    title: 'Hours',
+    tickFormat: (d: number) => `${d}h`,
+    nice: 0,
+  },
+  yAxis: {
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    title: 'Temperature',
+    tickFormat: (d: number) => `${d}°`,
+    nice: 0,
+  },
+  data: evolutionData,
+});
 
 MultiLine.args = defaultArguments;

@@ -17,8 +17,9 @@ export const Segments: FC<SegmentsProps> = ({
   yDomainKey,
   line = {
     stroke: '#339999',
-    strokeWidth: 2,
+    strokeWidth: 23,
     curve: 'curveLinear',
+    beta: 0,
   },
   marker = {
     hidden: true,

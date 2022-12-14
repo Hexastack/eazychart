@@ -10,7 +10,9 @@ export type PropArgType =
   | 'bubble'
   | 'arc'
   | 'line'
-  | 'area';
+  | 'area'
+  | 'yLineAxis'
+  | 'errorMargins';
 
 export type ControlDefinition = {
   name: string;
@@ -28,6 +30,21 @@ export const DISABLED_DEFAULT_ARG = {
     disable: true,
   },
 };
+
+export const ERROR_MARGIN_CONTROLS: ControlDefinition[] = [
+  {
+    name: 'positive',
+    type: 'text',
+    defaultValue: 'positiveMargin',
+    description: 'Sets the domainKey for the positive error margin',
+  },
+  {
+    name: 'negative',
+    type: 'text',
+    defaultValue: 'negativeMargin',
+    description: 'Sets the domainKey for the negative error margin',
+  },
+];
 
 export const GRID_ARG_TYPES: ControlDefinition[] = [
   {
@@ -171,7 +188,10 @@ export const DIMENSION_CONTROLS: ControlDefinition[] = [
 export const POINT_CONTROLS: ControlDefinition[] = [
   {
     name: 'radius',
-    type: 'number',
+    type: 'range',
+    min: 0,
+    max: 100,
+    step: 1,
     defaultValue: '5px',
   },
   {
@@ -210,6 +230,16 @@ export const BUBBLE_CONTROLS: ControlDefinition[] = [
   },
 ];
 
+const BETA_CONTROL: ControlDefinition = {
+  name: 'beta',
+  type: 'range',
+  min: 0,
+  max: 1,
+  step: 0.1,
+  defaultValue: '0',
+  description: 'Determines the straigthness of the spline',
+};
+
 const CURVE_CONTROL: ControlDefinition = {
   name: 'curve',
   type: 'select',
@@ -240,15 +270,7 @@ export const LINE_CONTROLS: ControlDefinition[] = [
     type: 'number',
     defaultValue: '2px',
   },
-  {
-    name: 'beta',
-    type: 'range',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    defaultValue: '0',
-    description: 'Determines the straigthness of the spline',
-  },
+  BETA_CONTROL,
 ];
 
 export const ARC_CONTROLS: ControlDefinition[] = [
@@ -292,15 +314,7 @@ export const ARC_CONTROLS: ControlDefinition[] = [
 
 export const AREA_CONTROLS: ControlDefinition[] = [
   CURVE_CONTROL,
-  {
-    name: 'beta',
-    type: 'range',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    defaultValue: '0',
-    description: 'Determines the straigthness of the spline',
-  },
+  BETA_CONTROL,
   {
     name: 'stroke',
     type: 'color',
@@ -326,39 +340,6 @@ export const AREA_CONTROLS: ControlDefinition[] = [
   },
 ];
 
-export const MULTI_Y_AXIS_CONTROLS = {
-  yAxis: {
-    control: { type: 'object' },
-    table: {
-      category: 'Multi chart Y Axis Options',
-      defaultValue: { summary: 'yValues' },
-    },
-    description: 'Sets the Y axis domain keys and title for multi chart',
-  },
-};
-
-export const LINE_COLUMN_CONTROLS = {
-  line: DISABLED_DEFAULT_ARG,
-  'line.strokeWidth': {
-    control: { type: 'number' },
-    table: { category: 'Line Options', defaultValue: { summary: '2' } },
-    description: 'Sets the line stroke width',
-  },
-  'line.stroke': {
-    control: { type: 'color' },
-    table: { category: 'Line Options', defaultValue: { summary: '#81248d' } },
-    description: 'Sets the line stroke color',
-  },
-  yLineAxis: {
-    control: { type: 'object' },
-    table: {
-      category: 'Line Options',
-      defaultValue: { summary: 'yValues' },
-    },
-    description: 'Sets the Y axis domain key and title for the line',
-  },
-};
-
 export const PIE_CONTROLS = {
   valueDomainKey: {
     control: { type: 'text' },
@@ -375,6 +356,7 @@ export const PIE_CONTROLS = {
     },
   },
 };
+
 export const CONTROLS_MAP: { [category in PropArgType]: ControlDefinition[] } =
   {
     marker: MARKER_ARG_TYPES,
@@ -389,4 +371,6 @@ export const CONTROLS_MAP: { [category in PropArgType]: ControlDefinition[] } =
     arc: ARC_CONTROLS,
     line: LINE_CONTROLS,
     area: AREA_CONTROLS,
+    yLineAxis: AXIS_ARG_TYPES,
+    errorMargins: ERROR_MARGIN_CONTROLS,
   };

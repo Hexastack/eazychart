@@ -19,8 +19,8 @@ const areaChartArgTypes = {
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('area'),
   ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('area'),
 };
 
 const meta: Meta = {

@@ -15,15 +15,15 @@ import {
 
 const bubbleChartArgTypes = {
   ...baseChartArgTypes,
-  ...getArgTypesByProp('bubble'),
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('bubble'),
 };
 
 const meta: Meta = {
   id: '9',
-  title: 'React/Bubble Chart',
+  title: 'React/Scatter Chart/Bubble',
   component: BubbleChart,
   parameters: {
     controls: { expanded: true },
@@ -45,7 +45,7 @@ const bubbleTemplate: Story<BubbleChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = bubbleTemplate.bind({});
+export const Bubble = bubbleTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   grid: { directions: [] },
@@ -65,12 +65,12 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
     nice: 0,
   },
-  data: correlationData,
   bubble: {
     domainKey: 'rValue',
     minRadius: 1,
     maxRadius: 25,
     fill: 'rgba(209, 46, 84, 0.5)',
   },
+  data: correlationData,
 });
-Default.args = defaultArguments;
+Bubble.args = defaultArguments;

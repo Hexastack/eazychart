@@ -41,6 +41,7 @@ export const LineChart: FC<LineChartProps> = ({
     stroke: '#339999',
     strokeWidth: 2,
     curve: 'curveLinear',
+    beta: 0,
   },
   marker = {
     hidden: true,

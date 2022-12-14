@@ -20,7 +20,6 @@ const columnChartArgTypes = {
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
-  // ...setTabArgs(colors, 'colors', 'color'),
 };
 
 const meta: Meta = {
@@ -48,27 +47,24 @@ const DefaultTemplate: Story<ColumnChartProps> = buildTemplate(
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
-  ...flattenArgs({
-    isRTL: false,
-    animationOptions,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'name',
-      title: 'Letter',
-      nice: 0,
-    },
-    yAxis: {
-      domainKey: 'value',
-      title: 'Count',
-      nice: 2,
-    },
-    data: rawData,
-  }),
+const defaultArguments = flattenArgs({
+  isRTL: false,
   colors,
-  // ...flattenTabArgs(colors, 'colors'),
-};
+  animationOptions,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'name',
+    title: 'Letter',
+    nice: 0,
+  },
+  yAxis: {
+    domainKey: 'value',
+    title: 'Count',
+    nice: 2,
+  },
+  data: rawData,
+});
 
 Default.args = defaultArguments;

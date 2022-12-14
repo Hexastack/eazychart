@@ -19,10 +19,10 @@ import {
 
 const scatterChartArgTypes = {
   ...baseChartArgTypes,
-  ...getArgTypesByProp('point'),
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('point'),
 };
 
 const meta: Meta = {
@@ -69,11 +69,11 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
     nice: 0,
   },
-  data: correlationData,
   point: {
     color: colors[1],
     radius: 5,
   },
+  data: correlationData,
 });
 
 Default.args = defaultArguments;

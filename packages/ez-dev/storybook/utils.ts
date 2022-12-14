@@ -57,6 +57,7 @@ export const cartesianChartArgTypes = {
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis'),
   ...getArgTypesByProp('yAxis'),
+
   isRTL: {
     control: { type: 'boolean' },
   },
@@ -64,41 +65,20 @@ export const cartesianChartArgTypes = {
 
 export const yAxisArgTypes = getArgTypesByProp('yAxis');
 
-// const NESTED_PROPS = [
-//   'scopedSlots',
-//   'line',
-//   'point',
-//   'bubble',
-//   'area',
-//   'onResize',
-//   'xAxis.tickFormat',
-//   'yAxis.tickFormat',
-//   'labelDomainKey',
-// ];
-
-// const extendBaseArgTypes = () => {
-//   // Disable default arg for nested props
-//   const nestedPropsArgTypes = NESTED_PROPS.reduce(
-//     (acc: { [key: string]: Object }, propName: string) => {
-//       if (acc) {
-//         acc[propName] = DISABLED_DEFAULT_ARG;
-//       }
-//       return acc;
-//     },
-//     {}
-//   );
-//   return { ...nestedPropsArgTypes };
-// };
-
 export const baseChartArgTypes = {
   ...getArgTypesByProp('dimensions'),
   ...getArgTypesByProp('padding'),
   ...getArgTypesByProp('animationOptions'),
-  // we're doing this to hide the objects that we've alreay unflattened and made an input field for each of their attributes
-  // ...extendBaseArgTypes(),
   data: {
     control: { type: 'object' },
     table: { defaultValue: { summary: 'Object' }, category: 'Data' },
+  },
+  colors: {
+    table: {
+      category: 'Chart colors',
+    },
+    description: 'Sets the corresponding chart color',
+    if: { arg: 'colors', truthy: true },
   },
   scopedSlots: DISABLED_DEFAULT_ARG,
 };
@@ -118,14 +98,7 @@ export const flattenArgs = (args: Object) => {
       constructedArgs[key] = value;
     } else {
       for (const innerKey in value) {
-        // if (Array.isArray(value[innerKey])) {
-        //   constructedArgs = {
-        //     ...constructedArgs,
-        //     ...flattenTabArgs(value[innerKey], `${key}.${innerKey}`),
-        //   };
-        // } else {
         constructedArgs[`${key}.${innerKey}`] = value[innerKey];
-        // }
       }
     }
   });

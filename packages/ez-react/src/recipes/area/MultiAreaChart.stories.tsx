@@ -18,13 +18,13 @@ const areaChartArgTypes = {
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
-  ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
   ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
 };
 
 const meta: Meta = {
   id: '3',
-  title: 'React/Multi Area Chart',
+  title: 'React/Area Chart/MultiArea',
   component: MultiAreaChart,
   parameters: {
     controls: { expanded: true },

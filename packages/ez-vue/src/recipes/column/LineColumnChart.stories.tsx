@@ -2,12 +2,8 @@ import { Meta, Story } from '@storybook/vue';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
-  baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
-  markerArgTypes,
+  BASE_CHART_ARG_TYPES,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
@@ -15,19 +11,19 @@ import {
   padding,
   rawData,
 } from 'eazychart-dev/storybook/data';
-import { LINE_COLUMN_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 import LineColumnChart from './LineColumnChart';
 
 const columnChartArgTypes = {
-  ...LINE_COLUMN_CONTROLS,
-  ...markerArgTypes,
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
-  ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yLineAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('line'),
 };
 const meta: Meta = {
-  title: 'Vue/Line Column Chart',
+  title: 'Vue/Column Chart/LineColumn',
   component: LineColumnChart,
   parameters: {
     controls: { expanded: true },
@@ -58,47 +54,41 @@ const LineColumnTemplate: Story = buildTemplate(
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-
-const defaultArguments = {
-  ...flattenArgs({
-    isRTL: false,
-    animationOptions,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'name',
-      title: 'Letter',
-      nice: 0,
-    },
-    yAxis: {
-      domainKey: 'value',
-      title: 'Count',
-      nice: 2,
-    },
-    line: {
-      strokeWidth: 2,
-      stroke: '#81248d',
-    },
-    marker: {
-      hidden: false,
-      radius: 5,
-      color: '#c400c4',
-    },
-    data: rawData,
-  }),
-  ...flattenTabArgs(colors, 'colors'),
-};
-
 export const LineColumn = LineColumnTemplate.bind({});
 
-const lineColumnArguments = {
-  ...defaultArguments,
+const defaultArguments = flattenArgs({
+  colors,
+  isRTL: false,
+  animationOptions,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'name',
+    title: 'Letter',
+    nice: 0,
+  },
+  yAxis: {
+    domainKey: 'value',
+    title: 'Count',
+    nice: 2,
+  },
+  line: {
+    strokeWidth: 2,
+    stroke: '#81248d',
+    beta: 0,
+  },
+  marker: {
+    hidden: false,
+    radius: 5,
+    color: '#c400c4',
+  },
   yLineAxis: {
     domainKey: 'v',
     title: 'Value',
     nice: 2,
   },
-};
+  data: rawData,
+});
 
-LineColumn.args = lineColumnArguments;
+LineColumn.args = defaultArguments;

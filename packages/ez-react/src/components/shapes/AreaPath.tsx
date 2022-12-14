@@ -8,12 +8,16 @@ export interface AreaPathProps extends SVGAttributes<SVGPathElement> {
   shapeData?: AreaData;
   curve?: AreaCurve;
   beta?: number;
+  stroke?: string;
+  strokeWidth?: number;
 }
 
 export const AreaPath: FC<AreaPathProps> = ({
   shapeData = [],
   curve = 'curveLinear',
   beta,
+  stroke = '#1f77b4',
+  strokeWidth = 0,
   fill = defaultColor,
   opacity = 1,
   ...rest
@@ -28,8 +32,8 @@ export const AreaPath: FC<AreaPathProps> = ({
   return (
     <path
       d={currentData}
-      stroke={'none'}
-      strokeWidth={0}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
       fill={fill}
       opacity={opacity}
       strokeLinejoin={'round'}

@@ -1,8 +1,6 @@
 // eslint-disable-next-line object-curly-newline
 import { Args, ArgTypes, Meta, Story } from '@storybook/vue';
-import LineChart from '@/recipes/line/LineChart';
-import MultiLineChart from '@/recipes/line/MultiLineChart';
-
+import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
@@ -11,6 +9,7 @@ import {
 } from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
+  colors,
   evolutionData,
   padding,
 } from 'eazychart-dev/storybook/data';
@@ -20,14 +19,16 @@ const lineChartArgTypes: Partial<ArgTypes<Args>> = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('errorMargins'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
-  ...getArgTypesByProp('line', { omit: ['stroke'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('area', { omit: ['beta', 'curve'] }),
+  ...getArgTypesByProp('line'),
 };
 
 const meta: Meta = {
-  title: 'Vue/Line Chart/MultiLine',
-  component: LineChart,
+  title: 'Vue/Line Chart/LineErrorMargin',
+  component: LineErrorMarginChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -35,32 +36,37 @@ const meta: Meta = {
 };
 export default meta;
 
-type MultiLineChartProps = InstanceType<typeof MultiLineChart>['$props'];
+type LineErrorMarginChartProps = InstanceType<
+  typeof LineErrorMarginChart
+>['$props'];
 
-const MultiLineTemplate: Story = buildTemplate((args: MultiLineChartProps) => ({
-  title: 'MultiLine',
-  components: { MultiLineChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => args,
+const LineErrorMarginTemplate: Story = buildTemplate(
+  (args: LineErrorMarginChartProps) => ({
+    title: 'LineErrorMargin',
+    components: { LineErrorMarginChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
-      <MultiLineChart v-bind="allPropsFromArgs" />
+      <LineErrorMarginChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-}));
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const MultiLine = MultiLineTemplate.bind({});
+export const LineErrorMargin = LineErrorMarginTemplate.bind({});
 
 const defaultArguments = flattenArgs({
-  colors: ['#339999', '#993399', '#333399'],
+  errorMargins: { positive: 'positiveMargin', negative: 'negativeMargin' },
   line: {
     strokeWidth: 2,
+    stroke: colors[1],
     curve: 'curveLinear' as LineCurve,
     beta: 0,
   },
@@ -81,12 +87,18 @@ const defaultArguments = flattenArgs({
     nice: 0,
   },
   yAxis: {
-    domainKeys: ['yValue', 'yValue1', 'yValue2'],
+    domainKey: 'yValue',
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
     nice: 0,
   },
+  area: {
+    fill: `${colors[1]}b0`,
+    stroke: '#339999',
+    strokeWidth: 0,
+    opacity: 1,
+  },
   data: evolutionData,
 });
 
-MultiLine.args = defaultArguments;
+LineErrorMargin.args = defaultArguments;

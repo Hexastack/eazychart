@@ -46,7 +46,7 @@ export const ERROR_MARGIN_CONTROLS: ControlDefinition[] = [
   },
 ];
 
-export const GRID_ARG_TYPES: ControlDefinition[] = [
+export const GRID_CONTROLS: ControlDefinition[] = [
   {
     name: 'color',
     type: 'color',
@@ -61,7 +61,7 @@ export const GRID_ARG_TYPES: ControlDefinition[] = [
   },
 ];
 
-export const MARKER_ARG_TYPES: ControlDefinition[] = [
+export const MARKER_CONTROLS: ControlDefinition[] = [
   {
     name: 'color',
     type: 'color',
@@ -82,7 +82,7 @@ export const MARKER_ARG_TYPES: ControlDefinition[] = [
   },
 ];
 
-export const PADDING_ARG_TYPES: ControlDefinition[] = [
+export const PADDING_CONTROLS: ControlDefinition[] = [
   {
     name: 'left',
     type: 'number',
@@ -105,7 +105,7 @@ export const PADDING_ARG_TYPES: ControlDefinition[] = [
   },
 ];
 
-export const ANIMATION_ARG_TYPES: ControlDefinition[] = [
+export const ANIMATION_CONTROLS: ControlDefinition[] = [
   {
     name: 'duration',
     type: 'number',
@@ -141,7 +141,7 @@ export const ANIMATION_ARG_TYPES: ControlDefinition[] = [
   },
 ];
 
-export const AXIS_ARG_TYPES: ControlDefinition[] = [
+export const AXIS_CONTROLS: ControlDefinition[] = [
   {
     name: 'domainKey',
     type: 'text',
@@ -237,7 +237,14 @@ const BETA_CONTROL: ControlDefinition = {
   max: 1,
   step: 0.1,
   defaultValue: '0',
-  description: 'Determines the straigthness of the spline',
+  description:
+    'Determines the straigthness of the spline !! only works with curveBundle !!',
+};
+
+const STROKE_WIDTH_CONTROL: ControlDefinition = {
+  name: 'strokeWidth',
+  type: 'number',
+  defaultValue: '2 or 0 px',
 };
 
 const CURVE_CONTROL: ControlDefinition = {
@@ -265,11 +272,7 @@ export const LINE_CONTROLS: ControlDefinition[] = [
     type: 'color',
     defaultValue: '#ef476f',
   },
-  {
-    name: 'strokeWidth',
-    type: 'number',
-    defaultValue: '2px',
-  },
+  STROKE_WIDTH_CONTROL,
   BETA_CONTROL,
 ];
 
@@ -305,25 +308,17 @@ export const ARC_CONTROLS: ControlDefinition[] = [
     type: 'color',
     defaultValue: 'Transparent',
   },
-  {
-    name: 'strokeWidth',
-    type: 'number',
-    defaultValue: '0',
-  },
+  STROKE_WIDTH_CONTROL,
 ];
 
 export const AREA_CONTROLS: ControlDefinition[] = [
   CURVE_CONTROL,
   BETA_CONTROL,
+  STROKE_WIDTH_CONTROL,
   {
     name: 'stroke',
     type: 'color',
     defaultValue: '#26547c',
-  },
-  {
-    name: 'strokeWidth',
-    type: 'number',
-    defaultValue: '2px',
   },
   {
     name: 'fill',
@@ -340,37 +335,21 @@ export const AREA_CONTROLS: ControlDefinition[] = [
   },
 ];
 
-export const PIE_CONTROLS = {
-  valueDomainKey: {
-    control: { type: 'text' },
-    table: {
-      defaultValue: { summary: 'Sets the domain key value' },
-      category: 'Pie Options',
-    },
-  },
-  labelDomainKey: {
-    control: { type: 'text' },
-    table: {
-      defaultValue: { summary: 'Sets the domain key label' },
-      category: 'Pie Options',
-    },
-  },
+export const CONTROLS_MAP: {
+  [category in PropArgType]: ControlDefinition[];
+} = {
+  marker: MARKER_CONTROLS,
+  grid: GRID_CONTROLS,
+  padding: PADDING_CONTROLS,
+  animationOptions: ANIMATION_CONTROLS,
+  xAxis: AXIS_CONTROLS,
+  yAxis: AXIS_CONTROLS,
+  dimensions: DIMENSION_CONTROLS,
+  point: POINT_CONTROLS,
+  bubble: BUBBLE_CONTROLS,
+  arc: ARC_CONTROLS,
+  line: LINE_CONTROLS,
+  area: AREA_CONTROLS,
+  yLineAxis: AXIS_CONTROLS,
+  errorMargins: ERROR_MARGIN_CONTROLS,
 };
-
-export const CONTROLS_MAP: { [category in PropArgType]: ControlDefinition[] } =
-  {
-    marker: MARKER_ARG_TYPES,
-    grid: GRID_ARG_TYPES,
-    padding: PADDING_ARG_TYPES,
-    animationOptions: ANIMATION_ARG_TYPES,
-    xAxis: AXIS_ARG_TYPES,
-    yAxis: AXIS_ARG_TYPES,
-    dimensions: DIMENSION_CONTROLS,
-    point: POINT_CONTROLS,
-    bubble: BUBBLE_CONTROLS,
-    arc: ARC_CONTROLS,
-    line: LINE_CONTROLS,
-    area: AREA_CONTROLS,
-    yLineAxis: AXIS_ARG_TYPES,
-    errorMargins: ERROR_MARGIN_CONTROLS,
-  };

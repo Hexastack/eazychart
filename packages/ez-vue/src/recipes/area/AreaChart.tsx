@@ -57,9 +57,12 @@ export default class AreaChart extends Vue {
     type: Object as PropType<AreaConfig>,
     default() {
       return {
+        stroke: '#339999',
+        strokeWidth: 2,
         fill: '#339999',
         lineWidth: 2,
         curve: 'curveLinear',
+        opacity: 1,
       };
     },
   })

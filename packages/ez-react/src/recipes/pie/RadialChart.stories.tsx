@@ -2,21 +2,22 @@ import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { RadialChart, RadialChartProps } from '@/recipes/pie/RadialChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
-import { flattenArgs, baseChartArgTypes } from 'eazychart-dev/storybook/utils';
+import {
+  flattenArgs,
+  BASE_CHART_ARG_TYPES,
+  PIE_ARGTYPES,
+} from 'eazychart-dev/storybook/utils';
 import {
   colors,
   rawData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
-import {
-  DISABLED_DEFAULT_ARG,
-  PIE_CONTROLS,
-} from 'eazychart-dev/storybook/storybook-configs';
+import { DISABLED_DEFAULT_ARG } from 'eazychart-dev/storybook/storybook-configs';
 
 const pieChartArgTypes = {
-  ...baseChartArgTypes,
-  ...PIE_CONTROLS,
+  ...BASE_CHART_ARG_TYPES,
+  ...PIE_ARGTYPES,
   arc: DISABLED_DEFAULT_ARG,
 };
 

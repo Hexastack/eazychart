@@ -51,21 +51,24 @@ export const getArgTypesByProp = (
   );
 };
 
-export const markerArgTypes = getArgTypesByProp('marker');
-
-export const cartesianChartArgTypes = {
-  ...getArgTypesByProp('grid'),
-  ...getArgTypesByProp('xAxis'),
-  ...getArgTypesByProp('yAxis'),
-
-  isRTL: {
-    control: { type: 'boolean' },
+export const PIE_ARGTYPES = {
+  valueDomainKey: {
+    control: { type: 'text' },
+    table: {
+      defaultValue: { summary: 'Sets the domain key value' },
+      category: 'Pie Options',
+    },
+  },
+  labelDomainKey: {
+    control: { type: 'text' },
+    table: {
+      defaultValue: { summary: 'Sets the domain key label' },
+      category: 'Pie Options',
+    },
   },
 };
 
-export const yAxisArgTypes = getArgTypesByProp('yAxis');
-
-export const baseChartArgTypes = {
+export const BASE_CHART_ARG_TYPES = {
   ...getArgTypesByProp('dimensions'),
   ...getArgTypesByProp('padding'),
   ...getArgTypesByProp('animationOptions'),
@@ -164,42 +167,4 @@ export const unFlattenArgs = (args: ArgsType) => {
     }
   }
   return { ...deconstructedArgs, ...deconstructedArray };
-};
-
-// Flattens a table of args
-export const flattenTabArgs = (args: Array<string>, argName: string) => {
-  let constructedArgs = {} as { [key: string]: string };
-  for (let i = 0; i < args.length; i++) {
-    constructedArgs[`${argName}.${i}`] = args[i];
-  }
-  return constructedArgs;
-};
-
-/**
- * Takes in same type arguments table, the arg name and the type
- * @params (argTable: [], argName: '', type: 'ControlType')
- * @returns controls for each element in the arg table
- */
-export const setTabArgs = (
-  argTable: string[],
-  argName: string,
-  type: string
-) => {
-  let tabArgs = {} as { [key: string]: string | any };
-  // tabArgs = { [`${argName}`]: DISABLED_DEFAULT_ARG };
-  tabArgs = {};
-  for (let i = 0; i < argTable.length; i++) {
-    const tabArg = {
-      [`${argName}.${i}`]: {
-        control: { type: type },
-        table: {
-          category: `Chart ${argName}`,
-          defaultValue: { summary: `${type}` },
-        },
-        description: `Sets corresponding chart ${argName}`,
-      },
-    };
-    tabArgs = { ...tabArgs, ...tabArg };
-  }
-  return tabArgs;
 };

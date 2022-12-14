@@ -8,18 +8,17 @@ import {
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 import ScatterChart from './ScatterChart';
 
 const scatterChartArgTypes = {
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('point'),
-  ...cartesianChartArgTypes,
-  ...yAxisArgTypes,
-  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
@@ -56,6 +55,7 @@ export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   grid: { directions: [] },
+  animationOptions,
   isRTL: false,
   padding,
   dimensions: { width: 800, height: 600 },
@@ -71,12 +71,11 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
     nice: 0,
   },
-  data: correlationData,
   point: {
     color: colors[1],
     radius: 5,
   },
-  animationOptions,
+  data: correlationData,
 });
 
 Default.args = defaultArguments;

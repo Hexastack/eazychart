@@ -9,19 +9,17 @@ import {
 } from 'eazychart-dev/storybook/data';
 import {
   flattenArgs,
-  baseChartArgTypes,
-  markerArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
 } from 'eazychart-dev/storybook/utils';
 
 const areaChartArgTypes = {
-  ...cartesianChartArgTypes,
-  ...yAxisArgTypes,
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('area'),
-  ...markerArgTypes,
-  ...baseChartArgTypes,
 };
 
 const meta: Meta = {
@@ -61,6 +59,8 @@ const defaultArguments = flattenArgs({
     stroke: colors[0],
     strokeWidth: 2,
     fill: `${colors[0]}b0`,
+    beta: 0,
+    opacity: 1,
   },
   marker: {
     hidden: true,

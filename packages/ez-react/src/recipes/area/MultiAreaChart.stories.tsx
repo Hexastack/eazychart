@@ -3,7 +3,7 @@ import { Meta, Story } from '@storybook/react';
 import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
@@ -14,7 +14,7 @@ import {
 import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
 
 const areaChartArgTypes = {
-  ...baseChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),

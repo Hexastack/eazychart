@@ -2,11 +2,8 @@ import { Meta, Story } from '@storybook/vue';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
-  baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
+  BASE_CHART_ARG_TYPES,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
   animationOptions,
@@ -17,10 +14,10 @@ import {
 import ColumnChart from './ColumnChart';
 
 const columnChartArgTypes = {
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
-  ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
 
 const meta: Meta = {
@@ -55,26 +52,24 @@ const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
 // https://storybook.js.org/docs/vue/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
-  ...flattenArgs({
-    isRTL: false,
-    animationOptions,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'name',
-      title: 'Letter',
-      nice: 0,
-    },
-    yAxis: {
-      domainKey: 'value',
-      title: 'Count',
-      nice: 2,
-    },
-    data: rawData,
-  }),
-  ...flattenTabArgs(colors, 'colors'),
-};
+const defaultArguments = flattenArgs({
+  isRTL: false,
+  colors,
+  animationOptions,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'name',
+    title: 'Letter',
+    nice: 0,
+  },
+  yAxis: {
+    domainKey: 'value',
+    title: 'Count',
+    nice: 2,
+  },
+  data: rawData,
+});
 
 Default.args = defaultArguments;

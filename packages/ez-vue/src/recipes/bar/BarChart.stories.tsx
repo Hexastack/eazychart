@@ -6,11 +6,8 @@ import {
 } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  flattenTabArgs,
-  setTabArgs,
-  baseChartArgTypes,
-  cartesianChartArgTypes,
-  yAxisArgTypes,
+  getArgTypesByProp,
+  BASE_CHART_ARG_TYPES,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -22,10 +19,10 @@ import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
 import BarChart from './BarChart';
 
 const barChartArgTypes = {
-  ...yAxisArgTypes,
-  ...cartesianChartArgTypes,
-  ...baseChartArgTypes,
-  ...setTabArgs(colors, 'colors', 'color'),
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
 
 const meta: Meta = {
@@ -79,30 +76,26 @@ const TemplateWithParentDimensions: Story = buildTemplate(
 export const Default = DefaultTemplate.bind({});
 export const Resizable = TemplateWithParentDimensions.bind({});
 
-const initialArguments = {
-  ...flattenArgs({
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'value',
-      title: 'Count',
-      nice: 2,
-    },
-    animationOptions,
-    isRTL: false,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    yAxis: {
-      domainKey: 'name',
-      title: 'Letter',
-    },
-    data: rawData,
-  }),
-  ...flattenTabArgs(colors, 'colors'),
-};
+const initialArguments = flattenArgs({
+  colors,
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'value',
+    title: 'Count',
+    nice: 2,
+  },
+  animationOptions,
+  isRTL: false,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  yAxis: {
+    domainKey: 'name',
+    title: 'Letter',
+    nice: 2,
+  },
+  data: rawData,
+});
 
-Default.args = {
-  ...initialArguments,
-  ...flattenArgs({ dimensions: { width: 800, height: 600 } }),
-};
+Default.args = initialArguments;
 
 Resizable.args = initialArguments;

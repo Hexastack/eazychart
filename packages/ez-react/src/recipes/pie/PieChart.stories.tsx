@@ -9,7 +9,8 @@ import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   getArgTypesByProp,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
+  PIE_ARGTYPES,
 } from 'eazychart-dev/storybook/utils';
 import {
   colors,
@@ -21,11 +22,10 @@ import {
   IrregularPieChart,
   IrregularPieChartProps,
 } from '@/recipes/pie/IrregularPieChart';
-import { PIE_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const pieChartArgTypes = {
-  ...baseChartArgTypes,
-  ...PIE_CONTROLS,
+  ...BASE_CHART_ARG_TYPES,
+  ...PIE_ARGTYPES,
   ...getArgTypesByProp('arc'),
 };
 
@@ -74,6 +74,7 @@ const IrregularTemplate: Story<IrregularPieChartProps> = buildTemplate(
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
+
 const defaultArguments = flattenArgs({
   colors,
   valueDomainKey: 'value',

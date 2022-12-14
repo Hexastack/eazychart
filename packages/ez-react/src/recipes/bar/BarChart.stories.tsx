@@ -4,7 +4,7 @@ import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
@@ -16,11 +16,12 @@ import {
 import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
 const barChartArgTypes = {
-  ...baseChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
 };
+
 const meta: Meta = {
   id: '4',
   title: 'React/Bar Chart',

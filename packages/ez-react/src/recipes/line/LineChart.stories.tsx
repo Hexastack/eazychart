@@ -11,12 +11,12 @@ import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
-  ...baseChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),

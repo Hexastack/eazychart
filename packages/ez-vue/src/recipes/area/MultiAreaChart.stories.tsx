@@ -2,32 +2,27 @@ import { Meta, Story } from '@storybook/vue';
 import MultiAreaChart from '@/recipes/area/MultiAreaChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
-  areaColors,
-  colors,
   evolutionData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
 import {
   flattenArgs,
-  baseChartArgTypes,
-  markerArgTypes,
-  flattenTabArgs,
-  setTabArgs,
-  cartesianChartArgTypes,
+  BASE_CHART_ARG_TYPES,
+  getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
-import { MULTI_Y_AXIS_CONTROLS } from 'eazychart-dev/storybook/storybook-configs';
 
 const areaChartArgTypes = {
-  ...setTabArgs(areaColors, 'colors', 'color'),
-  ...MULTI_Y_AXIS_CONTROLS,
-  ...markerArgTypes,
-  ...baseChartArgTypes,
-  ...cartesianChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
+  ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
 };
 
 const meta: Meta = {
-  title: 'Vue/Multi Area Chart',
+  title: 'Vue/Area Chart/MultiArea',
   component: MultiAreaChart,
   parameters: {
     controls: { expanded: true },
@@ -58,38 +53,37 @@ const DefaultTemplate: Story = buildTemplate((args: MultiAreaChartProps) => ({
 // https://storybook.js.org/docs/vue/workflows/unit-testing
 export const MultiArea = DefaultTemplate.bind({});
 
-const defaultArguments = {
-  ...flattenArgs({
-    marker: {
-      hidden: true,
-      radius: 5,
-      color: '#FFF',
-    },
-    animationOptions,
-    isRTL: false,
-    padding,
-    dimensions: { width: 800, height: 600 },
-    grid: { directions: [] },
-    xAxis: {
-      domainKey: 'xValue',
-      title: 'Hours',
-      tickFormat: (d: number) => `${d}h`,
-      nice: 0,
-    },
-    data: evolutionData,
-  }),
+const defaultArguments = flattenArgs({
   area: {
-    stroke: colors[0],
+    curve: 'curveLinear',
+    beta: 0,
     strokeWidth: 2,
-    fill: `${colors[0]}b0`,
     opacity: 0.5,
+  },
+  colors: ['#339999', '#993399', '#333399'],
+  marker: {
+    hidden: true,
+    radius: 5,
+    color: '#FFF',
+  },
+  animationOptions,
+  isRTL: false,
+  padding,
+  dimensions: { width: 800, height: 600 },
+  grid: { directions: [] },
+  xAxis: {
+    domainKey: 'xValue',
+    title: 'Hours',
+    tickFormat: (d: number) => `${d}h`,
+    nice: 0,
   },
   yAxis: {
     domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
+    nice: 0,
   },
-  ...flattenTabArgs(areaColors, 'colors'),
-};
+  data: evolutionData,
+});
 
 MultiArea.args = defaultArguments;

@@ -5,7 +5,7 @@ import { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
@@ -16,7 +16,7 @@ import {
 } from 'eazychart-dev/storybook/data';
 
 const columnChartArgTypes = {
-  ...baseChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),

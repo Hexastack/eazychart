@@ -10,7 +10,7 @@ import {
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
-  baseChartArgTypes,
+  BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
@@ -19,7 +19,7 @@ import {
 } from '@/recipes/line/LineErrorMarginChart';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
-  ...baseChartArgTypes,
+  ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('errorMargins'),

@@ -14,6 +14,7 @@ import {
   rawData,
   animationOptions,
   padding,
+  dimensions,
 } from 'eazychart-dev/storybook/data';
 import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
 import BarChart from './BarChart';
@@ -87,7 +88,6 @@ const initialArguments = flattenArgs({
   animationOptions,
   isRTL: false,
   padding,
-  dimensions: { width: 800, height: 600 },
   yAxis: {
     domainKey: 'name',
     title: 'Letter',
@@ -96,6 +96,9 @@ const initialArguments = flattenArgs({
   data: rawData,
 });
 
-Default.args = initialArguments;
+Default.args = {
+  ...initialArguments,
+  ...flattenArgs({ dimensions }),
+};
 
 Resizable.args = initialArguments;

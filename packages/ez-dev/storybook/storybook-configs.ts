@@ -31,6 +31,41 @@ export const DISABLED_DEFAULT_ARG = {
   },
 };
 
+const BETA_CONTROL: ControlDefinition = {
+  name: 'beta',
+  type: 'range',
+  min: 0,
+  max: 1,
+  step: 0.1,
+  defaultValue: '0',
+  description:
+    'Determines the straigthness of the spline !! only works with curveBundle !!',
+};
+
+const STROKE_WIDTH_CONTROL: ControlDefinition = {
+  name: 'strokeWidth',
+  type: 'number',
+  defaultValue: '2 or 0 px',
+};
+
+const CURVE_CONTROL: ControlDefinition = {
+  name: 'curve',
+  type: 'select',
+  options: [
+    'curveLinear',
+    'curveBasis',
+    'curveBumpX',
+    'curveBumpY',
+    'curveBundle',
+    'curveCardinal',
+    'curveNatural',
+    'curveStep',
+    'curveStepAfter',
+    'curveStepBefore',
+  ],
+  defaultValue: 'curveLinear',
+};
+
 export const ERROR_MARGIN_CONTROLS: ControlDefinition[] = [
   {
     name: 'positive',
@@ -145,7 +180,7 @@ export const AXIS_CONTROLS: ControlDefinition[] = [
   {
     name: 'domainKey',
     type: 'text',
-    defaultValue: "'yValue'",
+    defaultValue: "'value'",
   },
   {
     name: 'domainKeys',
@@ -229,41 +264,6 @@ export const BUBBLE_CONTROLS: ControlDefinition[] = [
     defaultValue: 'rgba(209, 46, 84, 0.5)',
   },
 ];
-
-const BETA_CONTROL: ControlDefinition = {
-  name: 'beta',
-  type: 'range',
-  min: 0,
-  max: 1,
-  step: 0.1,
-  defaultValue: '0',
-  description:
-    'Determines the straigthness of the spline !! only works with curveBundle !!',
-};
-
-const STROKE_WIDTH_CONTROL: ControlDefinition = {
-  name: 'strokeWidth',
-  type: 'number',
-  defaultValue: '2 or 0 px',
-};
-
-const CURVE_CONTROL: ControlDefinition = {
-  name: 'curve',
-  type: 'select',
-  options: [
-    'curveLinear',
-    'curveBasis',
-    'curveBumpX',
-    'curveBumpY',
-    'curveBundle',
-    'curveCardinal',
-    'curveNatural',
-    'curveStep',
-    'curveStepAfter',
-    'curveStepBefore',
-  ],
-  defaultValue: 'curveLinear',
-};
 
 export const LINE_CONTROLS: ControlDefinition[] = [
   CURVE_CONTROL,

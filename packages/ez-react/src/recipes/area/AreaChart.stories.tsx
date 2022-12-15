@@ -53,8 +53,8 @@ const defaultArguments = flattenArgs({
   area: {
     stroke: colors[0],
     strokeWidth: 2,
-    fill: `${colors[0]}b0`,
-    opacity: 1,
+    fill: colors[0],
+    opacity: 0.5,
   },
   marker: {
     hidden: true,

@@ -56,6 +56,9 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
   },
   area = {
     fill: '#ef476f80',
+    stroke: '#339999',
+    strokeWidth: 0,
+    opacity: 1,
   },
   marker = {
     hidden: false,
@@ -158,6 +161,9 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
                     curve={line.curve as AreaCurve}
                     beta={line.beta}
                     fill={area.fill}
+                    stroke={area.stroke}
+                    strokeWidth={area.strokeWidth}
+                    opacity={area.opacity}
                   />
                   <LinePath
                     shapeData={shapeData}

@@ -75,6 +75,9 @@ export default class LineErrorMarginChart extends Vue {
     default() {
       return {
         fill: '#ef476f80',
+        stroke: '#339999',
+        strokeWidth: 0,
+        opacity: 1,
       };
     },
   })
@@ -260,6 +263,9 @@ export default class LineErrorMarginChart extends Vue {
                       curve={line.curve as AreaCurve}
                       beta={line.beta}
                       fill={area.fill}
+                      stroke={area.stroke}
+                      strokeWidth={area.strokeWidth}
+                      opacity={area.opacity}
                     />
                     <LinePath
                       shapeData={shapeData}

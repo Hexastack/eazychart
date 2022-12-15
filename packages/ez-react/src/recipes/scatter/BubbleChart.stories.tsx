@@ -1,7 +1,6 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
-
+import { BubbleChart, BubbleChartProps } from '@/recipes/scatter/BubbleChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
@@ -9,62 +8,69 @@ import {
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
-  colors,
-  rawData,
+  correlationData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
 
-const columnChartArgTypes = {
+const bubbleChartArgTypes = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('bubble'),
 };
 
 const meta: Meta = {
-  id: '5',
-  title: 'React/Column Chart',
-  component: ColumnChart,
+  id: '9',
+  title: 'React/Scatter Chart/Bubble',
+  component: BubbleChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: columnChartArgTypes,
+  argTypes: bubbleChartArgTypes,
 };
 
 export default meta;
 
-const DefaultTemplate: Story<ColumnChartProps> = buildTemplate(
-  (args: ColumnChartProps) => {
+const bubbleTemplate: Story<BubbleChartProps> = buildTemplate(
+  (args: BubbleChartProps) => {
     return (
       <ChartWrapper>
-        <ColumnChart {...args} />
+        <BubbleChart {...args} />
       </ChartWrapper>
     );
   }
 );
+
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const Bubble = bubbleTemplate.bind({});
 
 const defaultArguments = flattenArgs({
-  isRTL: false,
-  colors,
+  grid: { directions: [] },
   animationOptions,
+  isRTL: false,
   padding,
   dimensions: { width: 800, height: 600 },
-  grid: { directions: [] },
   xAxis: {
-    domainKey: 'name',
-    title: 'Letter',
+    domainKey: 'xValue',
+    title: 'Width',
+    tickFormat: (d: number) => `${d}m`,
     nice: 0,
   },
   yAxis: {
-    domainKey: 'value',
-    title: 'Count',
-    nice: 2,
+    domainKey: 'yValue',
+    title: 'Height',
+    tickFormat: (d: number) => `${d}c`,
+    nice: 0,
   },
-  data: rawData,
+  bubble: {
+    domainKey: 'rValue',
+    minRadius: 1,
+    maxRadius: 25,
+    fill: 'rgba(209, 46, 84, 0.5)',
+  },
+  data: correlationData,
 });
-
-Default.args = defaultArguments;
+Bubble.args = defaultArguments;

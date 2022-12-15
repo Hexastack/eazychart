@@ -47,6 +47,22 @@ export default class AreaPath extends mixins(AnimationMixin) {
   })
   private readonly opacity!: number;
 
+  @Prop({
+    type: Number,
+    default() {
+      return 0;
+    },
+  })
+  private readonly strokeWidth!: number;
+
+  @Prop({
+    type: String,
+    default() {
+      return defaultColor;
+    },
+  })
+  private readonly stroke!: string;
+
   private currentShapeData = '';
 
   get animationArguments() {
@@ -61,12 +77,13 @@ export default class AreaPath extends mixins(AnimationMixin) {
   }
 
   render() {
-    const { currentShapeData, fill, opacity } = this;
+    // eslint-disable-next-line object-curly-newline
+    const { currentShapeData, fill, opacity, strokeWidth, stroke } = this;
     return (
       <path
         d={currentShapeData}
-        stroke={'none'}
-        stroke-width={0}
+        stroke={stroke}
+        stroke-width={strokeWidth}
         fill={fill}
         opacity={opacity}
         stroke-linejoin={'round'}

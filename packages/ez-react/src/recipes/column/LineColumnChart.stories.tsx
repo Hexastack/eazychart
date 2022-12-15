@@ -1,7 +1,9 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { ColumnChart, ColumnChartProps } from '@/recipes/column/ColumnChart';
-
+import {
+  LineColumnChart,
+  LineColumnChartProps,
+} from '@/recipes/column/LineColumnChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
@@ -18,14 +20,16 @@ import {
 const columnChartArgTypes = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yLineAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('line'),
 };
-
 const meta: Meta = {
-  id: '5',
-  title: 'React/Column Chart',
-  component: ColumnChart,
+  id: '11',
+  title: 'React/Column Chart/LineColumn',
+  component: LineColumnChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -34,22 +38,23 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<ColumnChartProps> = buildTemplate(
-  (args: ColumnChartProps) => {
+const LineColumnTemplate: Story<LineColumnChartProps> = buildTemplate(
+  (args: LineColumnChartProps) => {
     return (
       <ChartWrapper>
-        <ColumnChart {...args} />
+        <LineColumnChart {...args} />
       </ChartWrapper>
     );
   }
 );
+
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const LineColumn = LineColumnTemplate.bind({});
 
 const defaultArguments = flattenArgs({
-  isRTL: false,
   colors,
+  isRTL: false,
   animationOptions,
   padding,
   dimensions: { width: 800, height: 600 },
@@ -64,7 +69,22 @@ const defaultArguments = flattenArgs({
     title: 'Count',
     nice: 2,
   },
+  line: {
+    strokeWidth: 2,
+    stroke: '#81248d',
+    beta: 0,
+  },
+  marker: {
+    hidden: false,
+    radius: 5,
+    color: '#c400c4',
+  },
+  yLineAxis: {
+    domainKey: 'v',
+    title: 'Value',
+    nice: 2,
+  },
   data: rawData,
 });
 
-Default.args = defaultArguments;
+LineColumn.args = defaultArguments;

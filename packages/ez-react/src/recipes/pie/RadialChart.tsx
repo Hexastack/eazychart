@@ -21,7 +21,6 @@ export interface RadialChartProps extends SVGAttributes<SVGGElement> {
   padding?: ChartPadding;
   valueDomainKey?: string;
   labelDomainKey?: string;
-  index?: number;
   arc?: RadialConfig;
   dimensions?: Partial<Dimensions>;
   scopedSlots?: {

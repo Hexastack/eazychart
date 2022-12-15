@@ -1,10 +1,27 @@
+/* eslint-disable object-curly-newline */
 import { Meta, Story } from '@storybook/vue';
-import { colors, rawData } from 'eazychart-dev/storybook/data';
-import { ChartWrapper } from '@/lib/storybook-utils';
+import {
+  colors,
+  rawData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import {
+  flattenArgs,
+  BASE_CHART_ARG_TYPES,
+  getArgTypesByProp,
+  PIE_ARGTYPES,
+} from 'eazychart-dev/storybook/utils';
 import PieChart from './PieChart';
 import SemiCircleChart from './SemiCircleChart';
-import RadialChart from './RadialChart';
 import IrregularPieChart from './IrregularPieChart';
+
+const pieChartArgTypes = {
+  ...BASE_CHART_ARG_TYPES,
+  ...PIE_ARGTYPES,
+  ...getArgTypesByProp('arc'),
+};
 
 const meta: Meta = {
   title: 'Vue/Pie Chart',
@@ -12,83 +29,90 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: {},
+  argTypes: pieChartArgTypes,
 };
 export default meta;
 
-const DefaultTemplate: Story = (_args, { argTypes }) => ({
+type PieChartProps = InstanceType<typeof PieChart>['$props'];
+type SemiCircleChartProps = InstanceType<typeof SemiCircleChart>['$props'];
+type IrregularPieChartProps = InstanceType<typeof IrregularPieChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: PieChartProps) => ({
   title: 'Default',
   components: { PieChart, ChartWrapper },
-  props: Object.keys(argTypes),
+  props: {
+    allPropsFromArgs: {
+      default: () => args,
+    },
+  },
   template: `
     <ChartWrapper>
-      <PieChart v-bind="$props" />
+      <PieChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const SemiCircleTemplate: Story = (_args, { argTypes }) => ({
-  title: 'Default',
-  components: { SemiCircleChart, ChartWrapper },
-  props: Object.keys(argTypes),
-  template: `
+const SemiCircleTemplate: Story = buildTemplate(
+  (args: SemiCircleChartProps) => ({
+    title: 'Default',
+    components: { SemiCircleChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
+    },
+    template: `
     <ChartWrapper>
-      <SemiCircleChart v-bind="$props" />
+      <SemiCircleChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+  }),
+);
 
-const RadialTemplate: Story = (_args, { argTypes }) => ({
-  title: 'Default',
-  components: { RadialChart, ChartWrapper },
-  props: Object.keys(argTypes),
-  template: `
+const IrregularTemplate: Story = buildTemplate(
+  (args: IrregularPieChartProps) => ({
+    title: 'Default',
+    components: { IrregularPieChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
+    },
+    template: `
     <ChartWrapper>
-      <RadialChart v-bind="$props" />
+      <IrregularPieChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
-
-const IrregularTemplate: Story = (_args, { argTypes }) => ({
-  title: 'Default',
-  components: { IrregularPieChart, ChartWrapper },
-  props: Object.keys(argTypes),
-  template: `
-    <ChartWrapper>
-      <IrregularPieChart v-bind="$props" />
-    </ChartWrapper>
-  `,
-});
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
 export const Default = DefaultTemplate.bind({});
 
-const defaultArguments = {
+const defaultArguments = flattenArgs({
   colors,
-  domainKey: 'value',
-  data: rawData,
-  padding: {
-    left: 150,
-    bottom: 100,
-    right: 150,
-    top: 100,
+  valueDomainKey: 'value',
+  labelDomainKey: 'name',
+  dimensions: { width: 800, height: 600 },
+  animationOptions,
+  padding,
+  arc: {
+    donutRadius: 0,
+    cornerRadius: 0,
+    padAngle: 0,
+    padRadius: 0,
+    strokeWidth: 0,
   },
-};
+  data: rawData,
+});
 
 Default.args = defaultArguments;
 
 export const SemiCircle = SemiCircleTemplate.bind({});
 
 SemiCircle.args = defaultArguments;
-
-export const Radial = RadialTemplate.bind({});
-
-Radial.args = {
-  ...defaultArguments,
-  arc: undefined,
-};
 
 export const Irregular = IrregularTemplate.bind({});
 

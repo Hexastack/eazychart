@@ -1,17 +1,30 @@
 import { Meta, Story } from '@storybook/vue';
 import {
-  baseChartArgTypes,
   ChartWrapper,
   ResizableChartWrapper,
+  buildTemplate,
 } from '@/lib/storybook-utils';
 import {
-  animationOptions,
+  flattenArgs,
+  getArgTypesByProp,
+  BASE_CHART_ARG_TYPES,
+} from 'eazychart-dev/storybook/utils';
+import {
   colors,
-  dimensions,
   rawData,
+  animationOptions,
+  padding,
+  dimensions,
 } from 'eazychart-dev/storybook/data';
 import ResponsiveChartContainer from '@/components/ResponsiveChartContainer';
 import BarChart from './BarChart';
+
+const barChartArgTypes = {
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+};
 
 const meta: Meta = {
   title: 'Vue/Bar Chart',
@@ -19,33 +32,44 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: barChartArgTypes,
 };
 export default meta;
 
-const DefaultTemplate: Story = (_args, { argTypes }) => ({
-  title: 'Default',
+type BarChartProps = InstanceType<typeof BarChart>['$props'];
+
+const DefaultTemplate: Story = buildTemplate((args: BarChartProps) => ({
   components: { BarChart, ChartWrapper },
-  props: Object.keys(argTypes),
+  props: {
+    allPropsFromArgs: {
+      default: () => args,
+    },
+  },
   template: `
     <ChartWrapper>
-      <BarChart v-bind="$props" />
+      <BarChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-});
+}));
 
-const TemplateWithParentDimensions: Story = (_args, { argTypes }) => ({
-  title: 'Withparent',
-  components: { BarChart, ResizableChartWrapper, ResponsiveChartContainer },
-  props: Object.keys(argTypes),
-  template: `
+const TemplateWithParentDimensions: Story = buildTemplate(
+  (args: BarChartProps) => ({
+    title: 'Withparent',
+    components: { BarChart, ResizableChartWrapper, ResponsiveChartContainer },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
+    },
+    template: `
     <ResizableChartWrapper>
       <ResponsiveChartContainer>
-        <BarChart v-bind="$props" />
+        <BarChart v-bind="allPropsFromArgs" />
       </ResponsiveChartContainer>
     </ResizableChartWrapper>
   `,
-});
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
@@ -53,7 +77,7 @@ const TemplateWithParentDimensions: Story = (_args, { argTypes }) => ({
 export const Default = DefaultTemplate.bind({});
 export const Resizable = TemplateWithParentDimensions.bind({});
 
-const initialArguments = {
+const initialArguments = flattenArgs({
   colors,
   grid: { directions: [] },
   xAxis: {
@@ -61,24 +85,20 @@ const initialArguments = {
     title: 'Count',
     nice: 2,
   },
+  animationOptions,
+  isRTL: false,
+  padding,
   yAxis: {
     domainKey: 'name',
     title: 'Letter',
+    nice: 2,
   },
-  padding: {
-    left: 150,
-    bottom: 100,
-    right: 150,
-    top: 100,
-  },
-  animationOptions,
-  isRTL: false,
   data: rawData,
-};
+});
 
 Default.args = {
   ...initialArguments,
-  dimensions,
+  ...flattenArgs({ dimensions }),
 };
 
 Resizable.args = initialArguments;

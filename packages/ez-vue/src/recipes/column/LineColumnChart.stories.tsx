@@ -11,18 +11,20 @@ import {
   padding,
   rawData,
 } from 'eazychart-dev/storybook/data';
-import ColumnChart from './ColumnChart';
+import LineColumnChart from './LineColumnChart';
 
 const columnChartArgTypes = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yLineAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('line'),
 };
-
 const meta: Meta = {
-  title: 'Vue/Column Chart',
-  component: ColumnChart,
+  title: 'Vue/Column Chart/LineColumn',
+  component: LineColumnChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -30,31 +32,33 @@ const meta: Meta = {
 };
 export default meta;
 
-type ColumnChartProps = InstanceType<typeof ColumnChart>['$props'];
+type LineColumnChartProps = InstanceType<typeof LineColumnChart>['$props'];
 
-const DefaultTemplate: Story = buildTemplate((args: ColumnChartProps) => ({
-  title: 'Default',
-  components: { ColumnChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => args,
+const LineColumnTemplate: Story = buildTemplate(
+  (args: LineColumnChartProps) => ({
+    title: 'LineColumn',
+    components: { LineColumnChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
-      <ColumnChart v-bind="allPropsFromArgs" />
+      <LineColumnChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-}));
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const LineColumn = LineColumnTemplate.bind({});
 
 const defaultArguments = flattenArgs({
-  isRTL: false,
   colors,
+  isRTL: false,
   animationOptions,
   padding,
   dimensions: { width: 800, height: 600 },
@@ -69,7 +73,22 @@ const defaultArguments = flattenArgs({
     title: 'Count',
     nice: 2,
   },
+  line: {
+    strokeWidth: 2,
+    stroke: '#81248d',
+    beta: 0,
+  },
+  marker: {
+    hidden: false,
+    radius: 5,
+    color: '#c400c4',
+  },
+  yLineAxis: {
+    domainKey: 'v',
+    title: 'Value',
+    nice: 2,
+  },
   data: rawData,
 });
 
-Default.args = defaultArguments;
+LineColumn.args = defaultArguments;

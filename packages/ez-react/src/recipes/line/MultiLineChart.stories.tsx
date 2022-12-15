@@ -2,32 +2,34 @@ import React from 'react';
 import { Args, ArgTypes, Meta, Story } from '@storybook/react';
 import { LineCurve } from 'eazychart-core/src/types';
 import {
-  colors,
   evolutionData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
-import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
+import {
+  MultiLineChart,
+  MultiLineChartProps,
+} from '@/recipes/line/MultiLineChart';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('line'),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
+  ...getArgTypesByProp('line', { omit: ['stroke'] }),
 };
 
 const meta: Meta = {
-  id: '6',
-  title: 'React/Line Chart',
-  component: LineChart,
+  id: '7',
+  title: 'React/Line Chart/MultiLine',
+  component: MultiLineChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -36,11 +38,11 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<LineChartProps> = buildTemplate(
-  (args: LineChartProps) => {
+const MultiLineTemplate: Story<MultiLineChartProps> = buildTemplate(
+  (args: MultiLineChartProps) => {
     return (
       <ChartWrapper>
-        <LineChart {...args} />
+        <MultiLineChart {...args} />
       </ChartWrapper>
     );
   }
@@ -48,14 +50,14 @@ const DefaultTemplate: Story<LineChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const MultiLine = MultiLineTemplate.bind({});
 
 const defaultArguments = flattenArgs({
+  colors: ['#339999', '#993399', '#333399'],
   line: {
     strokeWidth: 2,
-    stroke: colors[1],
     curve: 'curveLinear' as LineCurve,
-    beta: 1,
+    beta: 0,
   },
   animationOptions,
   isRTL: false,
@@ -74,7 +76,7 @@ const defaultArguments = flattenArgs({
     nice: 0,
   },
   yAxis: {
-    domainKey: 'yValue',
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
     nice: 0,
@@ -82,4 +84,4 @@ const defaultArguments = flattenArgs({
   data: evolutionData,
 });
 
-Default.args = defaultArguments;
+MultiLine.args = defaultArguments;

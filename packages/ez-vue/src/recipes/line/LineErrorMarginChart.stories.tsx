@@ -1,6 +1,6 @@
 // eslint-disable-next-line object-curly-newline
 import { Args, ArgTypes, Meta, Story } from '@storybook/vue';
-import LineChart from '@/recipes/line/LineChart';
+import LineErrorMarginChart from '@/recipes/line/LineErrorMarginChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
@@ -19,14 +19,16 @@ const lineChartArgTypes: Partial<ArgTypes<Args>> = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('errorMargins'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('area', { omit: ['beta', 'curve'] }),
   ...getArgTypesByProp('line'),
 };
 
 const meta: Meta = {
-  title: 'Vue/Line Chart',
-  component: LineChart,
+  title: 'Vue/Line Chart/LineErrorMargin',
+  component: LineErrorMarginChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -34,34 +36,39 @@ const meta: Meta = {
 };
 export default meta;
 
-type LineChartProps = InstanceType<typeof LineChart>['$props'];
+type LineErrorMarginChartProps = InstanceType<
+  typeof LineErrorMarginChart
+>['$props'];
 
-const DefaultTemplate: Story = buildTemplate((args: LineChartProps) => ({
-  title: 'Default',
-  components: { LineChart, ChartWrapper },
-  props: {
-    allPropsFromArgs: {
-      default: () => args,
+const LineErrorMarginTemplate: Story = buildTemplate(
+  (args: LineErrorMarginChartProps) => ({
+    title: 'LineErrorMargin',
+    components: { LineErrorMarginChart, ChartWrapper },
+    props: {
+      allPropsFromArgs: {
+        default: () => args,
+      },
     },
-  },
-  template: `
+    template: `
     <ChartWrapper>
-      <LineChart v-bind="allPropsFromArgs" />
+      <LineErrorMarginChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
-}));
+  }),
+);
 
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const LineErrorMargin = LineErrorMarginTemplate.bind({});
 
 const defaultArguments = flattenArgs({
+  errorMargins: { positive: 'positiveMargin', negative: 'negativeMargin' },
   line: {
     strokeWidth: 2,
     stroke: colors[1],
     curve: 'curveLinear' as LineCurve,
-    beta: 1,
+    beta: 0,
   },
   animationOptions,
   isRTL: false,
@@ -85,7 +92,13 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}°`,
     nice: 0,
   },
+  area: {
+    fill: `${colors[1]}b0`,
+    stroke: '#339999',
+    strokeWidth: 0,
+    opacity: 1,
+  },
   data: evolutionData,
 });
 
-Default.args = defaultArguments;
+LineErrorMargin.args = defaultArguments;

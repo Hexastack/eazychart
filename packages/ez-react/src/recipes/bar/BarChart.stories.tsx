@@ -1,51 +1,72 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
 import { BarChart, BarChartProps } from '@/recipes/bar/BarChart';
-import { baseChartArgTypes, ChartWrapper } from '@/lib/storybook-utils';
-import { colors, dimensions, rawData } from 'eazychart-dev/storybook/data';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import {
+  flattenArgs,
+  BASE_CHART_ARG_TYPES,
+  getArgTypesByProp,
+} from 'eazychart-dev/storybook/utils';
+import {
+  colors,
+  rawData,
+  animationOptions,
+  padding,
+} from 'eazychart-dev/storybook/data';
 import { ResponsiveChartContainer } from '@/components/ResponsiveChartContainer';
 
+const barChartArgTypes = {
+  ...BASE_CHART_ARG_TYPES,
+  ...getArgTypesByProp('grid'),
+  ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+};
+
 const meta: Meta = {
-  id: '3',
+  id: '4',
   title: 'React/Bar Chart',
   component: BarChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: baseChartArgTypes,
+  argTypes: barChartArgTypes,
 };
 
 export default meta;
 
-const DefaultTemplate: Story<BarChartProps> = (args) => {
-  return (
-    <ChartWrapper>
-      <BarChart {...args} />
-    </ChartWrapper>
-  );
-};
-
-const TemplateWithParentDimensions: Story<BarChartProps> = (args) => {
-  return (
-    <ChartWrapper
-      style={{
-        width: '100%',
-        height: '100vh',
-        border: '2px solid #ccc',
-        resize: 'auto',
-        overflow: 'scroll',
-      }}
-    >
-      <ResponsiveChartContainer>
+const DefaultTemplate: Story<BarChartProps> = buildTemplate(
+  (args: BarChartProps) => {
+    return (
+      <ChartWrapper>
         <BarChart {...args} />
-      </ResponsiveChartContainer>
-    </ChartWrapper>
-  );
-};
+      </ChartWrapper>
+    );
+  }
+);
+
+const TemplateWithParentDimensions: Story<BarChartProps> = buildTemplate(
+  (args: BarChartProps) => {
+    return (
+      <ChartWrapper
+        style={{
+          width: '100%',
+          height: '100vh',
+          border: '2px solid #ccc',
+          resize: 'auto',
+          overflow: 'scroll',
+        }}
+      >
+        <ResponsiveChartContainer>
+          <BarChart {...args} />
+        </ResponsiveChartContainer>
+      </ChartWrapper>
+    );
+  }
+);
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-const initialArguments = {
+const initialArguments = flattenArgs({
   colors,
   grid: { directions: [] },
   xAxis: {
@@ -53,18 +74,20 @@ const initialArguments = {
     title: 'Count',
     nice: 2,
   },
+  animationOptions,
+  isRTL: false,
+  padding,
+  dimensions: { width: 800, height: 600 },
   yAxis: {
     domainKey: 'name',
     title: 'Letter',
+    nice: 2,
   },
   data: rawData,
-};
+});
 
 export const Default = DefaultTemplate.bind({});
-Default.args = {
-  ...initialArguments,
-  dimensions,
-};
+Default.args = initialArguments;
 
 export const Resizable = TemplateWithParentDimensions.bind({});
 Resizable.args = initialArguments;

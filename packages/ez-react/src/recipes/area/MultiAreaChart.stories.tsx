@@ -1,6 +1,5 @@
 import React from 'react';
 import { Meta, Story } from '@storybook/react';
-import { AreaChart, AreaChartProps } from '@/recipes/area/AreaChart';
 import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 import {
   flattenArgs,
@@ -8,25 +7,25 @@ import {
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import {
-  colors,
   evolutionData,
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
+import { MultiAreaChart, MultiAreaChartProps } from './MultiAreaChart';
 
 const areaChartArgTypes = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('yAxis', { omit: ['domainKey'] }),
   ...getArgTypesByProp('marker'),
-  ...getArgTypesByProp('area'),
+  ...getArgTypesByProp('area', { omit: ['stroke', 'fill'] }),
 };
 
 const meta: Meta = {
-  id: '2',
-  title: 'React/Area Chart',
-  component: AreaChart,
+  id: '3',
+  title: 'React/Area Chart/MultiArea',
+  component: MultiAreaChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -35,11 +34,11 @@ const meta: Meta = {
 
 export default meta;
 
-const Template: Story<AreaChartProps> = buildTemplate(
-  (args: AreaChartProps) => {
+const Template: Story<MultiAreaChartProps> = buildTemplate(
+  (args: MultiAreaChartProps) => {
     return (
       <ChartWrapper>
-        <AreaChart {...args} />
+        <MultiAreaChart {...args} />
       </ChartWrapper>
     );
   }
@@ -47,15 +46,16 @@ const Template: Story<AreaChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = Template.bind({});
+export const MultiArea = Template.bind({});
 
 const defaultArguments = flattenArgs({
   area: {
-    stroke: colors[0],
+    curve: 'curveLinear',
+    beta: 0,
     strokeWidth: 2,
-    fill: `${colors[0]}b0`,
-    opacity: 1,
+    opacity: 0.5,
   },
+  colors: ['#339999', '#993399', '#333399'],
   marker: {
     hidden: true,
     radius: 5,
@@ -73,7 +73,7 @@ const defaultArguments = flattenArgs({
     nice: 0,
   },
   yAxis: {
-    domainKey: 'yValue',
+    domainKeys: ['yValue', 'yValue1', 'yValue2'],
     title: 'Temperature',
     tickFormat: (d: number) => `${d}°`,
     nice: 0,
@@ -81,4 +81,4 @@ const defaultArguments = flattenArgs({
   data: evolutionData,
 });
 
-Default.args = defaultArguments;
+MultiArea.args = defaultArguments;

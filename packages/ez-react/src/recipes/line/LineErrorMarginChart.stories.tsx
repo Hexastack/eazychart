@@ -7,27 +7,32 @@ import {
   animationOptions,
   padding,
 } from 'eazychart-dev/storybook/data';
-import { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   flattenArgs,
   BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
+import {
+  LineErrorMarginChart,
+  LineErrorMarginChartProps,
+} from '@/recipes/line/LineErrorMarginChart';
 
 const lineChartArgTypes: Partial<ArgTypes<Args>> = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('marker'),
+  ...getArgTypesByProp('errorMargins'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
+  ...getArgTypesByProp('area', { omit: ['beta', 'curve'] }),
   ...getArgTypesByProp('line'),
 };
 
 const meta: Meta = {
   id: '6',
-  title: 'React/Line Chart',
-  component: LineChart,
+  title: 'React/Line Chart/LineErrorMargin',
+  component: LineErrorMarginChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -36,11 +41,11 @@ const meta: Meta = {
 
 export default meta;
 
-const DefaultTemplate: Story<LineChartProps> = buildTemplate(
-  (args: LineChartProps) => {
+const LineErrorMarginTemplate: Story<LineErrorMarginChartProps> = buildTemplate(
+  (args: LineErrorMarginChartProps) => {
     return (
       <ChartWrapper>
-        <LineChart {...args} />
+        <LineErrorMarginChart {...args} />
       </ChartWrapper>
     );
   }
@@ -48,14 +53,15 @@ const DefaultTemplate: Story<LineChartProps> = buildTemplate(
 
 // By passing using the Args format for exported stories, you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/react/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const LineErrorMargin = LineErrorMarginTemplate.bind({});
 
 const defaultArguments = flattenArgs({
+  errorMargins: { positive: 'positiveMargin', negative: 'negativeMargin' },
   line: {
     strokeWidth: 2,
     stroke: colors[1],
     curve: 'curveLinear' as LineCurve,
-    beta: 1,
+    beta: 0,
   },
   animationOptions,
   isRTL: false,
@@ -79,7 +85,13 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}°`,
     nice: 0,
   },
+  area: {
+    fill: `${colors[1]}b0`,
+    stroke: '#339999',
+    strokeWidth: 0,
+    opacity: 1,
+  },
   data: evolutionData,
 });
 
-Default.args = defaultArguments;
+LineErrorMargin.args = defaultArguments;

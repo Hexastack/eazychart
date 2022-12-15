@@ -1,7 +1,6 @@
 import { Meta, Story } from '@storybook/vue';
 import {
   animationOptions,
-  colors,
   correlationData,
   padding,
 } from 'eazychart-dev/storybook/data';
@@ -11,31 +10,31 @@ import {
   BASE_CHART_ARG_TYPES,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
-import ScatterChart from './ScatterChart';
+import BubbleChart from './BubbleChart';
 
-const scatterChartArgTypes = {
+const bubbleChartArgTypes = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('grid'),
   ...getArgTypesByProp('xAxis', { omit: ['domainKeys'] }),
   ...getArgTypesByProp('yAxis', { omit: ['domainKeys'] }),
-  ...getArgTypesByProp('point'),
+  ...getArgTypesByProp('bubble'),
 };
 
 const meta: Meta = {
-  title: 'Vue/Scatter Chart',
-  component: ScatterChart,
+  title: 'Vue/Scatter Chart/Bubble',
+  component: BubbleChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: scatterChartArgTypes,
+  argTypes: bubbleChartArgTypes,
 };
 export default meta;
 
-type ScatterChartProps = InstanceType<typeof ScatterChart>['$props'];
+type BubbleChartProps = InstanceType<typeof BubbleChart>['$props'];
 
-const DefaultTemplate: Story = buildTemplate((args: ScatterChartProps) => ({
-  title: 'Default',
-  components: { ScatterChart, ChartWrapper },
+const DefaultTemplate: Story = buildTemplate((args: BubbleChartProps) => ({
+  title: 'Bubble',
+  components: { BubbleChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
       default: () => args,
@@ -43,7 +42,7 @@ const DefaultTemplate: Story = buildTemplate((args: ScatterChartProps) => ({
   },
   template: `
     <ChartWrapper>
-      <ScatterChart v-bind="allPropsFromArgs" />
+      <BubbleChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 }));
@@ -51,7 +50,7 @@ const DefaultTemplate: Story = buildTemplate((args: ScatterChartProps) => ({
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const Bubble = DefaultTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   grid: { directions: [] },
@@ -71,11 +70,13 @@ const defaultArguments = flattenArgs({
     tickFormat: (d: number) => `${d}c`,
     nice: 0,
   },
-  point: {
-    color: colors[1],
-    radius: 5,
+  bubble: {
+    domainKey: 'rValue',
+    minRadius: 1,
+    maxRadius: 25,
+    fill: 'rgba(209, 46, 84, 0.5)',
   },
   data: correlationData,
 });
 
-Default.args = defaultArguments;
+Bubble.args = defaultArguments;

@@ -1,6 +1,6 @@
 import { PieArcDatum } from 'd3-shape';
-import { GeoProjection } from 'd3-geo';
-import { GeoJSON, Feature } from 'geojson';
+import * as d3Geo from 'd3-geo';
+import { GeoJSON, FeatureCollection } from 'geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,
@@ -11,13 +11,8 @@ import {
   ScaleLinearDefinition,
   ShapeAttributes,
 } from '../types';
-import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
-<<<<<<< HEAD
-import { GeoJSON, Feature } from 'geojson';
-import { GeoProjection } from 'd3-geo';
-=======
+import { ScaleBand, ScaleLinear, ScaleOrdinal, ScaleQuantile } from '../scales';
 
->>>>>>> 29f483e (fix: fix failing tests)
 export type Class<T> = new (...args: any[]) => T;
 
 export type ChartPadding = {
@@ -135,7 +130,7 @@ export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
 
-export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal | ScaleQuantile;
 
 export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
 
@@ -149,15 +144,14 @@ export type ScaleConfig =
       definition: ScaleBandDefinition;
     };
 
-export type GeoJsonFeature = Feature;
+export type GeoJsonFeature = GeoJSON;
 
-export type GeoJSONData = GeoJSON;
+export type GeoJSONData = FeatureCollection;
 
-export type Projection = GeoProjection;
-<<<<<<< HEAD
-=======
+export type Projection = d3Geo.GeoProjection;
 
-export type ProjectionTypes =
+export type ProjectionType = keyof Pick<
+  typeof d3Geo,
   | 'geoAzimuthalEqualArea'
   | 'geoAzimuthalEquidistant'
   | 'geoGnomonic'
@@ -171,12 +165,14 @@ export type ProjectionTypes =
   | 'geoEquirectangular'
   | 'geoMercator'
   | 'geoTransverseMercator'
-  | 'geoNaturalEarth1';
+  | 'geoNaturalEarth1'
+>;
 
 export type MapConfig = {
-  projectionType: ProjectionTypes;
+  geoDomainKey: string;
+  valueDomainKey: string;
+  projectionType: ProjectionType;
   stroke: string;
   fill: string;
   scale: number;
 };
->>>>>>> 29f483e (fix: fix failing tests)

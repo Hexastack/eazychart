@@ -4,6 +4,7 @@ import { Point } from '@/components/shapes/Point';
 import { Points } from '@/components/Points';
 import { LinePath } from '@/components/shapes/LinePath';
 import { useColorScale } from '@/components/scales/ColorScale';
+import { ScaleOrdinal } from 'eazychart-core';
 
 export interface SegmentsProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -30,7 +31,10 @@ export const Segments: FC<SegmentsProps> = ({
   const { colorScale } = useColorScale();
 
   const color = useMemo(
-    () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : line.stroke),
+    () =>
+      colorScale.isDefined()
+        ? (colorScale as unknown as ScaleOrdinal).scale(yDomainKey)
+        : line.stroke,
     [colorScale, yDomainKey, line]
   );
 

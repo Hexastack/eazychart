@@ -69,6 +69,7 @@
   ],
   "dependencies": {
     "d3-ease": "^3.0.1",
+    "d3-geo": "^3.0.1",
     "d3-interpolate": "^3.0.1",
     "d3-scale": "^4.0.2",
     "d3-shape": "^3.1.0"

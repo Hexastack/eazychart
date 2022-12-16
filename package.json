@@ -36,10 +36,5 @@
     "test:react": "lerna run test --scope=eazychart-react --stream",
     "test": "lerna run test --stream",
     "build": "lerna run build --stream"
-<<<<<<< HEAD
-=======
-  },
-  "dependencies": {
->>>>>>> 56a9778 (feat: map chart draft v3)
   }
 }

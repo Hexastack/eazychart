@@ -1,8 +1,11 @@
 import {
   AnimationOptions,
   ChartPadding,
+  GeoJSONData,
   RawData,
 } from 'eazychart-core/src/types';
+
+const  USA_MAP = require('./usa-map.json')
 
 export const dimensions = {
   width: 800,
@@ -88,3 +91,5 @@ export const animationOptions: AnimationOptions = {
   duration: 400,
   delay: 0,
 };
+
+export const mapData = USA_MAP as GeoJSONData;

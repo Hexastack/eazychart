@@ -6,6 +6,7 @@ import {
   Dimensions,
   MapConfig,
   AnimationOptions,
+  RawData,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -14,6 +15,7 @@ import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
 import Map from '@/components/Map';
+import ColorScale from '@/components/scales/ColorScale';
 
 @Component({
   components: {
@@ -27,7 +29,7 @@ import Map from '@/components/Map';
 })
 export default class MapChart extends Vue {
   @Prop({
-    type: {} as PropType<Dimensions>,
+    type: Object as PropType<Dimensions>,
     required: true,
   })
   private readonly dimensions!: Partial<Dimensions>;
@@ -45,7 +47,7 @@ export default class MapChart extends Vue {
   private readonly animationOptions!: AnimationOptions;
 
   @Prop({
-    type: {} as PropType<ChartPadding>,
+    type: Object as PropType<ChartPadding>,
     required: true,
     default() {
       return {
@@ -64,17 +66,20 @@ export default class MapChart extends Vue {
   private readonly map!: MapConfig;
 
   @Prop({
-    type: Object as PropType<[GeoJSONData]>,
+    type: Object as PropType<GeoJSONData>,
   })
-  private readonly mapData!: [GeoJSONData];
+  private readonly mapData!: GeoJSONData;
 
   @Prop({
-    type: Boolean,
-    default() {
-      return false;
-    },
+    type: Array,
+    default: () => ['red', 'blue', 'orange', 'yellow'],
   })
-  private readonly isRTL!: boolean;
+  private readonly colors!: string[];
+
+  @Prop({
+    type: Array as PropType<RawData>,
+  })
+  private readonly data!: RawData;
 
   render() {
     const {
@@ -82,9 +87,10 @@ export default class MapChart extends Vue {
       map,
       padding,
       animationOptions,
-      isRTL,
       $scopedSlots,
       dimensions,
+      data,
+      colors,
     } = this;
 
     return (
@@ -93,14 +99,17 @@ export default class MapChart extends Vue {
         padding={padding}
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
-        isRTL={isRTL}
+        rawData={data}
       >
-        <Map
-          map={map}
-          dimensions={dimensions}
-          mapData={mapData}
-          padding={padding}
-        />
+        <ColorScale
+          type={'quantile'}
+          definition={{
+            domainKey: map.valueDomainKey,
+            range: colors,
+          }}
+        >
+          <Map colors={colors} map={map} mapData={mapData} />
+        </ColorScale>
       </Chart>
     );
   }

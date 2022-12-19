@@ -6,8 +6,12 @@ import {
   ProvideReactive,
   Watch,
 } from 'vue-property-decorator';
-import { ChartContext, ScaleOrdinalDefinition } from 'eazychart-core/src/types';
-import { ScaleOrdinal } from 'eazychart-core/src';
+import {
+  ChartContext,
+  ScaleOrdinalDefinition,
+  ScaleQuantileDefinition,
+} from 'eazychart-core/src/types';
+import { ScaleOrdinal, ScaleQuantile } from 'eazychart-core/src';
 import Fragment from '@/lib/Fragment';
 
 @Component
@@ -16,13 +20,22 @@ export default class ColorScale extends Vue {
   private chart!: ChartContext;
 
   @ProvideReactive('colorScale')
-  private colorScale = new ScaleOrdinal();
+  private colorScale: ScaleOrdinal | ScaleQuantile = new ScaleOrdinal();
 
   @Prop({
-    type: Object as PropType<ScaleOrdinalDefinition>,
+    type: Object as PropType<ScaleOrdinalDefinition | ScaleQuantileDefinition>,
     required: true,
   })
-  private readonly definition!: ScaleOrdinalDefinition;
+  private readonly definition!:
+    | ScaleOrdinalDefinition
+    | ScaleQuantileDefinition;
+
+  @Prop({
+    type: String,
+    required: false,
+    default: () => 'ordinal',
+  })
+  private readonly type!: string;
 
   mounted() {
     this.colorScale = this.defineScale();
@@ -41,9 +54,15 @@ export default class ColorScale extends Vue {
   }
 
   defineScale() {
-    const { definition } = this;
+    const { definition, type } = this;
     const { dimensions, data } = this.chart;
-    const scale = new ScaleOrdinal(definition);
+    let scale: ScaleOrdinal | ScaleQuantile;
+
+    if (type === 'quantile') {
+      scale = new ScaleQuantile(definition as ScaleQuantileDefinition);
+    } else {
+      scale = new ScaleOrdinal(definition as ScaleOrdinalDefinition);
+    }
     scale.computeScale(dimensions, data);
     return scale;
   }

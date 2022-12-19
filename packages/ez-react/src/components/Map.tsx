@@ -1,21 +1,14 @@
 import React from 'react';
-import {
-  RawData,
-  GeoJSONData,
-  MapConfig,
-  ShapeDatum,
-} from 'eazychart-core/src/types';
+import { GeoJSONData, MapConfig, ShapeDatum } from 'eazychart-core/src/types';
 import { MapPath } from './shapes/MapPath';
 import { dimensions } from 'eazychart-dev/storybook/data';
 import { useColorScale } from './scales/ColorScale';
 import { useChart } from '@/lib/use-chart';
 
 export type MapChartProps = {
-  rawData: RawData;
   isWrapped?: boolean;
   map: MapConfig;
   mapData: GeoJSONData;
-  colors: string[];
 };
 
 export default function Map({ mapData, map }: MapChartProps) {
@@ -38,7 +31,7 @@ export default function Map({ mapData, map }: MapChartProps) {
         return (
           <MapPath
             key={idx}
-            shapeDatum={{ id: datum?.id || '', color: color } as ShapeDatum}
+            shapeDatum={{ id: datum?.id || '', color } as ShapeDatum}
             feature={feature}
             stroke={map.stroke}
             projectionType={map.projectionType}

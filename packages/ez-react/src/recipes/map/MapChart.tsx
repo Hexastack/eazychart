@@ -71,7 +71,7 @@ export const MapChart: FC<MapChartProps> = ({
         domainKey={map.valueDomainKey}
         range={colors}
       >
-        <Map colors={colors} rawData={data} map={map} mapData={mapData} />
+        <Map map={map} mapData={mapData} />
       </ColorScale>
     </Chart>
   );

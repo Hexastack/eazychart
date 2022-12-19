@@ -13,7 +13,8 @@ export type PropArgType =
   | 'arc'
   | 'line'
   | 'area'
-  | 'map';
+  | 'map'
+  | 'mapData';
 
 export type ControlDefinition = {
   name: string;
@@ -378,6 +379,18 @@ export const MAP_CONTROLS: ControlDefinition[] = [
   },
 ];
 
+export const MAP_DATA_Controls: ControlDefinition[] = [
+  {
+    name: 'type',
+    type: 'text',
+    defaultValue: 'FeatureCollection',
+  },
+  {
+    name: 'features',
+    type: 'object',
+  },
+];
+
 export const CONTROLS_MAP: {
   [category in PropArgType]: ControlDefinition[];
 } = {
@@ -396,4 +409,5 @@ export const CONTROLS_MAP: {
   line: LINE_CONTROLS,
   area: AREA_CONTROLS,
   map: MAP_CONTROLS,
+  mapData: MAP_DATA_Controls,
 };

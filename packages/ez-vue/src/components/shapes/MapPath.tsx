@@ -2,12 +2,13 @@ import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import {
   ChartContext,
-  ChartPadding,
   GeoJsonFeature,
-  ProjectionTypes,
+  ProjectionType,
+  ShapeDatum,
+  TooltipContext,
 } from 'eazychart-core/src/types';
-import { InjectReactive, Prop } from 'vue-property-decorator';
-import { defaultColor, mapProjection } from 'eazychart-core/src';
+import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
+import { defaultColor, generateGeoFeaturePath } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
@@ -15,16 +16,16 @@ export default class MapPath extends mixins(AnimationMixin) {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  @Prop({
-    type: {} as PropType<ChartPadding>,
-    default() {
-      return {};
-    },
-  })
-  private readonly padding!: Partial<ChartPadding>;
+  @Inject('tooltip')
+  private tooltip!: TooltipContext;
 
   @Prop({
-    type: {} as PropType<GeoJsonFeature>,
+    type: Object as PropType<ShapeDatum>,
+  })
+  private readonly shapeDatum!: ShapeDatum;
+
+  @Prop({
+    type: Object as PropType<GeoJsonFeature>,
     default() {
       return {};
     },
@@ -32,20 +33,12 @@ export default class MapPath extends mixins(AnimationMixin) {
   private readonly feature!: GeoJsonFeature;
 
   @Prop({
-    type: String as PropType<ProjectionTypes>,
+    type: String as PropType<ProjectionType>,
     default() {
       return 'geoMercator';
     },
   })
-  private readonly projectionType!: ProjectionTypes;
-
-  @Prop({
-    type: Number,
-    default() {
-      return 100;
-    },
-  })
-  private readonly scale!: number;
+  private readonly projectionType!: ProjectionType;
 
   @Prop({
     type: String,
@@ -71,33 +64,22 @@ export default class MapPath extends mixins(AnimationMixin) {
   })
   private readonly fill!: string;
 
-  @Prop({
-    type: Number,
-    default() {
-      return 800;
-    },
-  })
-  private readonly width!: number;
-
-  @Prop({
-    type: Number,
-    default() {
-      return 600;
-    },
-  })
-  private readonly height!: number;
-
   private currentShapeData = '';
 
+  handleMouseOver(event: MouseEvent) {
+    this.tooltip.showTooltip(this.shapeDatum, event);
+  }
+
+  handleMouseMove(event: MouseEvent) {
+    this.tooltip.moveTooltip(this.shapeDatum, event);
+  }
+
+  handleMouseLeave(event: MouseEvent) {
+    this.tooltip.hideTooltip(this.shapeDatum, event);
+  }
+
   get animationArguments() {
-    const path = mapProjection(
-      this.scale,
-      this.width,
-      this.height,
-      this.padding,
-      this.projectionType,
-      this.feature,
-    );
+    const path = generateGeoFeaturePath(this.feature, this.projectionType);
 
     return {
       from: this.currentShapeData,
@@ -111,13 +93,24 @@ export default class MapPath extends mixins(AnimationMixin) {
         'padding',
         'projectionType',
         'feature',
+        'path',
+        'shapeDatum',
       ],
     };
   }
 
   render() {
     // eslint-disable-next-line object-curly-newline
-    const { currentShapeData, stroke, strokeWidth, fill } = this;
+    const {
+      currentShapeData,
+      stroke,
+      strokeWidth,
+      fill,
+      handleMouseOver,
+      handleMouseMove,
+      handleMouseLeave,
+    } = this;
+
     return (
       <path
         d={currentShapeData}
@@ -126,6 +119,9 @@ export default class MapPath extends mixins(AnimationMixin) {
         fill={fill}
         stroke-linejoin={'round'}
         stroke-linecap={'round'}
+        onMouseover={handleMouseOver}
+        onMousemove={handleMouseMove}
+        onMouseleave={handleMouseLeave}
         class="ez-map-path"
       />
     );

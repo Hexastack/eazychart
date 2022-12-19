@@ -17,17 +17,10 @@ import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 const MapChartArgs = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('map'),
-  'mapData.features': {
-    table: { category: 'Map Chart Data' },
-  },
-  mapData: {
-    table: {
-      disable: true,
-    },
-  },
+  ...getArgTypesByProp('mapData'),
 };
 const meta: Meta = {
-  id: '15',
+  id: '11',
   title: 'React/Map chart',
   component: MapChart,
   parameters: {

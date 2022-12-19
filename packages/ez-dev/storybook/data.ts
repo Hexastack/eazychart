@@ -5,7 +5,7 @@ import {
   RawData,
 } from 'eazychart-core/src/types';
 
-const  USA_MAP = require('./usa-map.json')
+const USA_MAP = require('./usa-map.json');
 
 export const dimensions = {
   width: 800,

@@ -30,13 +30,16 @@ export const Area: FC<AreaProps> = ({
 }) => {
   const { colorScale } = useColorScale();
 
-  const color = useMemo(
-    () =>
-      colorScale.isDefined()
-        ? (colorScale as unknown as ScaleOrdinal).scale(yDomainKey)
-        : area.fill,
-    [area.fill, colorScale, yDomainKey]
-  );
+  const color = useMemo(() => {
+    if (colorScale.isDefined()) {
+      if (colorScale.constructor.name === 'ScaleOrdinal') {
+        return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
+      } else {
+        throw new Error('Area shape does not support non ordinal color scale');
+      }
+    }
+    return area.fill;
+  }, [area.fill, colorScale, yDomainKey]);
 
   return (
     <Points

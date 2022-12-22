@@ -379,7 +379,7 @@ export const MAP_CONTROLS: ControlDefinition[] = [
   },
 ];
 
-export const MAP_DATA_Controls: ControlDefinition[] = [
+export const MAP_DATA_CONTROLS: ControlDefinition[] = [
   {
     name: 'type',
     type: 'text',
@@ -409,5 +409,5 @@ export const CONTROLS_MAP: {
   line: LINE_CONTROLS,
   area: AREA_CONTROLS,
   map: MAP_CONTROLS,
-  mapData: MAP_DATA_Controls,
+  mapData: MAP_DATA_CONTROLS,
 };

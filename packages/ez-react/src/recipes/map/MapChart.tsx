@@ -45,7 +45,7 @@ export const MapChart: FC<MapChartProps> = ({
     delay: 0,
   },
   padding = {
-    left: 150,
+    left: 100,
     bottom: 100,
     right: 100,
     top: 100,

@@ -250,7 +250,7 @@ export const scaleGeoFeatureData = (
   features: GeoFeatures,
   geoDomainKey: string,
   valueDomainKey: string,
-  colorScale: AnyScale,
+  colorScale: AnyScale | undefined,
   defaultColor: string
 ): GeoFeatureDatum[] => {
   const geoFeatureDataDict = getGeoFeatureDataDict(
@@ -259,7 +259,7 @@ export const scaleGeoFeatureData = (
     geoDomainKey
   );
   return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
-    const color = datum && colorScale.isDefined()
+    const color = datum && colorScale?.isDefined()
       ? colorScale.scale(datum[valueDomainKey] as number)
       : defaultColor;
 

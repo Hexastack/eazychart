@@ -4,10 +4,10 @@ import {
   ChartPadding,
   Dimensions,
   RawData,
-  GeoJSONData,
+  GeoJsonData,
   MapConfig,
 } from 'eazychart-core/src/types';
-import Map from '@/components/Map';
+import { Map } from '@/components/Map';
 import { LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -15,10 +15,10 @@ import { dimensions } from 'eazychart-dev/storybook/data';
 import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface MapChartProps extends SVGAttributes<SVGGElement> {
-  mapData: GeoJSONData;
+  data: RawData;
+  geoJson: GeoJsonData;
   colors?: string[];
   map: MapConfig;
-  data: RawData;
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
   dimensions?: Partial<Dimensions>;
@@ -29,18 +29,17 @@ export interface MapChartProps extends SVGAttributes<SVGGElement> {
 }
 
 export const MapChart: FC<MapChartProps> = ({
-  mapData,
   data,
-  colors = ['red', 'blue', 'orange', 'yellow'],
+  geoJson,
+  colors = ['white', 'pink', 'red'],
   map = {
     geoDomainKey: 'geo_code',
-    valueDomainKey: 'poverty',
+    valueDomainKey: 'value',
     projectionType: 'geoMercator',
     stroke: 'white',
-    fill: 'blue',
+    fill: 'black',
     scale: 100,
   },
-
   animationOptions = {
     easing: 'easeBack',
     duration: 400,
@@ -58,6 +57,12 @@ export const MapChart: FC<MapChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
+  if (geoJson && !('features' in geoJson)) {
+    throw new Error(
+      'GeoJSON must contain features so that each feature is mapped to a data item.'
+    );
+  }
+
   return (
     <Chart
       dimensions={dimensions}
@@ -71,7 +76,7 @@ export const MapChart: FC<MapChartProps> = ({
         domainKey={map.valueDomainKey}
         range={colors}
       >
-        <Map map={map} mapData={mapData} />
+        <Map map={map} geoJson={geoJson} />
       </ColorScale>
     </Chart>
   );

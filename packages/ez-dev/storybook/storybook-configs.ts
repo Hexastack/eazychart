@@ -14,7 +14,7 @@ export type PropArgType =
   | 'line'
   | 'area'
   | 'map'
-  | 'mapData';
+  | 'geoJson';
 
 export type ControlDefinition = {
   name: string;
@@ -346,7 +346,7 @@ export const MAP_CONTROLS: ControlDefinition[] = [
   {
     name: 'valueDomainKey',
     type: 'text',
-    defaultValue: 'population',
+    defaultValue: 'value',
   },
   {
     name: 'stroke',
@@ -379,7 +379,7 @@ export const MAP_CONTROLS: ControlDefinition[] = [
   },
 ];
 
-export const MAP_DATA_CONTROLS: ControlDefinition[] = [
+export const GEOJSON_CONTROLS: ControlDefinition[] = [
   {
     name: 'type',
     type: 'text',
@@ -409,5 +409,5 @@ export const CONTROLS_MAP: {
   line: LINE_CONTROLS,
   area: AREA_CONTROLS,
   map: MAP_CONTROLS,
-  mapData: MAP_DATA_CONTROLS,
+  geoJson: GEOJSON_CONTROLS,
 };

@@ -8,7 +8,15 @@ import {
   NumberLike,
   RawData,
 } from '../types';
-import { AnyScale, ArcDatum, PointDatum, RectangleDatum } from './types';
+import { getGeoFeatureDataDict } from './map';
+import {
+  AnyScale,
+  ArcDatum,
+  GeoFeatureDatum,
+  GeoFeatures,
+  PointDatum,
+  RectangleDatum,
+} from './types';
 
 export const scaleDatumValue = <T = string | number>(
   datum: NormalizedDatum,
@@ -235,4 +243,30 @@ export const getDomainByKeys = (domainKeys: string[], data: RawData) => {
     },
     [+Infinity, -Infinity] as number[]
   ) as ArrayOfTwoNumbers;
+};
+
+export const scaleGeoFeatureData = (
+  data: NormalizedData,
+  features: GeoFeatures,
+  geoDomainKey: string,
+  valueDomainKey: string,
+  colorScale: AnyScale,
+  defaultColor: string
+): GeoFeatureDatum[] => {
+  const geoFeatureDataDict = getGeoFeatureDataDict(
+    features,
+    data,
+    geoDomainKey
+  );
+  return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
+    const color = datum
+      ? colorScale.scale(datum[valueDomainKey] as number)
+      : defaultColor;
+
+    return {
+      id: datum?.id,
+      color,
+      ...feature,
+    } as GeoFeatureDatum;
+  });
 };

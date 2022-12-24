@@ -1,46 +1,58 @@
-import React from 'react';
-import { GeoJSONData, MapConfig, ShapeDatum } from 'eazychart-core/src/types';
+import React, { SVGAttributes, useMemo } from 'react';
+import {
+  calculateGeoProjectionCenter,
+  scaleGeoFeatureData,
+} from 'eazychart-core/src';
+import { GeoFeatureCollection, MapConfig } from 'eazychart-core/src/types';
 import { MapPath } from './shapes/MapPath';
-import { dimensions } from 'eazychart-dev/storybook/data';
 import { useColorScale } from './scales/ColorScale';
 import { useChart } from '@/lib/use-chart';
 
-export type MapChartProps = {
+export interface MapChartProps extends SVGAttributes<SVGPathElement> {
   isWrapped?: boolean;
   map: MapConfig;
-  mapData: GeoJSONData;
-};
+  geoJson: GeoFeatureCollection;
+}
 
-export default function Map({ mapData, map }: MapChartProps) {
+export const Map: React.FC<MapChartProps> = ({
+  geoJson,
+  map,
+  ...rest
+}: MapChartProps) => {
+  const { projectionType, geoDomainKey, valueDomainKey, fill, stroke } = map;
   const { colorScale } = useColorScale();
-  const { data } = useChart();
+  const { data, dimensions } = useChart();
+
+  const projectionCenter = useMemo(
+    () => calculateGeoProjectionCenter(geoJson, projectionType, dimensions),
+    [geoJson, projectionType, dimensions]
+  );
+
+  const shapeData = useMemo(() => {
+    return scaleGeoFeatureData(
+      data,
+      geoJson?.features || [],
+      geoDomainKey,
+      valueDomainKey,
+      colorScale,
+      fill
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data, geoJson?.features, geoDomainKey, colorScale.scale]);
 
   return (
-    <g>
-      {mapData.features.map((feature, idx) => {
-        const datum = data.find(
-          (datum) =>
-            feature.properties &&
-            datum[map.geoDomainKey] === feature.properties[map.geoDomainKey]
-        );
-
-        const color = datum
-          ? colorScale.scale(datum[map.valueDomainKey] as number)
-          : map.fill;
-
+    <g {...rest} className="ez-map">
+      {shapeData.map((shapeDatum, idx) => {
         return (
           <MapPath
             key={idx}
-            shapeDatum={{ id: datum?.id || '', color } as ShapeDatum}
-            feature={feature}
-            stroke={map.stroke}
-            projectionType={map.projectionType}
-            fill={color}
-            width={dimensions.width}
-            height={dimensions.height}
+            shapeDatum={shapeDatum}
+            projectionType={projectionType}
+            projectionCenter={projectionCenter}
+            stroke={stroke}
           />
         );
       })}
     </g>
   );
-}
+};

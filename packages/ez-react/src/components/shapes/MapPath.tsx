@@ -1,9 +1,9 @@
 import React, { FC, MouseEventHandler, SVGAttributes, useMemo } from 'react';
 import {
-  GeoJsonFeature,
-  Projection,
-  ProjectionType,
-  ShapeDatum,
+  GeoProjection,
+  GeoProjectionType,
+  GeoProjectionCenter,
+  GeoFeatureDatum,
 } from 'eazychart-core/src/types';
 import { defaultColor, generateGeoFeaturePath } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
@@ -11,43 +11,29 @@ import { useChart } from '@/lib/use-chart';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
 
 export interface MapPathProps extends SVGAttributes<SVGPathElement> {
-  shapeDatum: ShapeDatum;
-  feature?: GeoJsonFeature;
-  projection?: Projection;
-  projectionType?: ProjectionType;
-  stroke: string;
-  width: number;
-  height: number;
+  shapeDatum: GeoFeatureDatum;
+  projectionType?: GeoProjectionType;
+  projection?: GeoProjection;
+  projectionCenter: GeoProjectionCenter;
 }
 
 export const MapPath: FC<MapPathProps> = ({
   shapeDatum,
-  feature = {} as GeoJsonFeature,
-  stroke = defaultColor,
-  fill = 'green',
-  width = 800,
-  height = 600,
-  scale = 100,
-  strokeWidth = 1,
   projectionType = 'geoMercator',
+  projectionCenter,
+  stroke = defaultColor,
+  fill = defaultColor,
+  strokeWidth = 1,
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const { animationOptions } = useChart();
   const dataPath = useMemo(
-    () => generateGeoFeaturePath(feature, projectionType),
-    [feature, projectionType]
+    () => generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter),
+    [shapeDatum, projectionType, projectionCenter]
   );
 
-  const currentData =
-    useAnimation(dataPath || '', '', animationOptions, [
-      scale,
-      width,
-      height,
-      projectionType,
-      feature,
-      dataPath,
-    ]) || '';
+  const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
 
   const handleMouseOver: MouseEventHandler<SVGPathElement> = (event) => {
     showTooltip(shapeDatum, event as any as MouseEvent);
@@ -66,9 +52,9 @@ export const MapPath: FC<MapPathProps> = ({
   return (
     <path
       d={currentData}
-      stroke={stroke}
+      stroke={stroke || shapeDatum.color}
       strokeWidth={strokeWidth}
-      fill={fill}
+      fill={shapeDatum.color || fill}
       strokeLinejoin={'round'}
       strokeLinecap={'round'}
       onMouseOver={handleMouseOver}

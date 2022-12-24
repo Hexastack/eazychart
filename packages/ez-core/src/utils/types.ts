@@ -1,11 +1,18 @@
 import { PieArcDatum } from 'd3-shape';
 import * as d3Geo from 'd3-geo';
-import { GeoJSON, FeatureCollection } from 'geojson';
+import {
+  GeoJSON,
+  FeatureCollection,
+  Feature,
+  Geometry,
+  GeoJsonProperties,
+} from 'geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,
   NormalizedData,
   NormalizedDataDict,
+  NormalizedDatum,
   Point,
   ScaleBandDefinition,
   ScaleLinearDefinition,
@@ -89,8 +96,6 @@ export interface ChartContext {
   onLegendClick?: (key: string, isActive: boolean, color: string) => void;
 }
 
-export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
-
 export type TooltipContext = {
   showTooltip: (_datum: ShapeDatum, _event: MouseEvent) => void;
   hideTooltip: (_datum: ShapeDatum, _event: MouseEvent) => void;
@@ -144,13 +149,14 @@ export type ScaleConfig =
       definition: ScaleBandDefinition;
     };
 
-export type GeoJsonFeature = GeoJSON;
+export type GeoJsonData = GeoJSON;
+export type GeoFeature = Feature<Geometry, GeoJsonProperties>;
+export type GeoFeatureCollection = FeatureCollection<Geometry, GeoJsonProperties>
+export type GeoFeatures = FeatureCollection['features'];
 
-export type GeoJSONData = FeatureCollection;
+export type GeoProjection = d3Geo.GeoProjection;
 
-export type Projection = d3Geo.GeoProjection;
-
-export type ProjectionType = keyof Pick<
+export type GeoProjectionType = keyof Pick<
   typeof d3Geo,
   | 'geoAzimuthalEqualArea'
   | 'geoAzimuthalEquidistant'
@@ -168,11 +174,29 @@ export type ProjectionType = keyof Pick<
   | 'geoNaturalEarth1'
 >;
 
+export type GeoProjectionCenter = {
+  center: [number, number],
+  scale: number,
+  offset: [number, number]
+}
+
+export type GeoFeatureDatum = GeoFeature & ShapeAttributes;
+
+export type GeoFeatureDataDict = {
+  [geoDomainKey: string]: {
+    feature: GeoFeature;
+    datum: NormalizedDatum | undefined;
+  };
+};
+
 export type MapConfig = {
   geoDomainKey: string;
   valueDomainKey: string;
-  projectionType: ProjectionType;
+  projectionType: GeoProjectionType;
   stroke: string;
   fill: string;
   scale: number;
 };
+
+
+export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum | GeoFeatureDatum;

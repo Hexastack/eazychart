@@ -1,7 +1,7 @@
 import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import {
-  GeoJSONData,
+  GeoJsonData,
   ChartPadding,
   Dimensions,
   MapConfig,
@@ -62,17 +62,24 @@ export default class MapChart extends Vue {
 
   @Prop({
     type: Object as PropType<MapConfig>,
+    default: () => ({
+      geoDomainKey: 'geo_code',
+      valueDomainKey: 'value',
+      projectionType: 'geoMercator',
+      stroke: 'white',
+      fill: 'black',
+    }),
   })
   private readonly map!: MapConfig;
 
   @Prop({
-    type: Object as PropType<GeoJSONData>,
+    type: Object as PropType<GeoJsonData>,
   })
-  private readonly mapData!: GeoJSONData;
+  private readonly geoJson!: GeoJsonData;
 
   @Prop({
     type: Array,
-    default: () => ['red', 'blue', 'orange', 'yellow'],
+    default: () => ['white', 'pink', 'red'],
   })
   private readonly colors!: string[];
 
@@ -83,7 +90,7 @@ export default class MapChart extends Vue {
 
   render() {
     const {
-      mapData,
+      geoJson,
       map,
       padding,
       animationOptions,
@@ -92,6 +99,12 @@ export default class MapChart extends Vue {
       data,
       colors,
     } = this;
+
+    if (geoJson && !('features' in geoJson)) {
+      throw new Error(
+        'GeoJSON must contain features so that each feature is mapped to a data item.',
+      );
+    }
 
     return (
       <Chart
@@ -108,7 +121,7 @@ export default class MapChart extends Vue {
             range: colors,
           }}
         >
-          <Map colors={colors} map={map} mapData={mapData} />
+          <Map map={map} geoJson={geoJson} />
         </ColorScale>
       </Chart>
     );

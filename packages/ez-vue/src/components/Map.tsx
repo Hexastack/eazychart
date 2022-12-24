@@ -2,13 +2,16 @@ import Vue, { PropType } from 'vue';
 import Component from 'vue-class-component';
 import {
   MapConfig,
-  GeoJSONData,
-  ShapeDatum,
+  GeoFeatureCollection,
   ChartContext,
+  AnyScale,
 } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
 import MapPath from '@/components/shapes/MapPath';
-import { ScaleQuantile } from 'eazychart-core';
+import {
+  calculateGeoProjectionCenter,
+  scaleGeoFeatureData,
+} from 'eazychart-core/src';
 
 @Component({ components: { MapPath } })
 export default class Map extends Vue {
@@ -18,45 +21,53 @@ export default class Map extends Vue {
   private readonly map!: MapConfig;
 
   @Prop({
-    type: Object as PropType<GeoJSONData>,
+    type: Object as PropType<GeoFeatureCollection>,
   })
-  private readonly mapData!: GeoJSONData;
+  private readonly geoJson!: GeoFeatureCollection;
 
   @InjectReactive('colorScale')
-  private colorScale!: ScaleQuantile;
+  private colorScale!: AnyScale;
 
   @InjectReactive('chart')
   private chart!: ChartContext;
 
+  get projectionCenter() {
+    const { geoJson, chart, map } = this;
+    const { dimensions } = chart;
+    const { projectionType } = map;
+    return calculateGeoProjectionCenter(geoJson, projectionType, dimensions);
+  }
+
+  get shapeData() {
+    const {
+      geoJson, chart, colorScale, map,
+    } = this;
+    const { data } = chart;
+    const { geoDomainKey, valueDomainKey, fill } = map;
+    return scaleGeoFeatureData(
+      data,
+      geoJson?.features || [],
+      geoDomainKey,
+      valueDomainKey,
+      colorScale,
+      fill,
+    );
+  }
+
   render() {
-    // eslint-disable-next-line object-curly-newline
-    const { map, mapData, colorScale } = this;
-    const { data } = this.chart;
+    const { map, projectionCenter, shapeData } = this;
 
     return (
-      <g class="ez-segments">
-        {mapData.features.map((feature, idx) => {
-          const datum = data.find(
-            // eslint-disable-next-line no-shadow
-            (datum) => feature.properties
-            && datum[map.geoDomainKey] === feature.properties[map.geoDomainKey],
-          );
-
-          const color = datum
-            ? colorScale.scale(datum[map.valueDomainKey] as number)
-            : map.fill;
-
-          return (
+      <g class="ez-map">
+        {shapeData.map((shapeDatum, idx) => (
             <MapPath
               key={idx}
-              shapeDatum={{ id: datum?.id || '', color } as ShapeDatum}
-              feature={feature}
+              shapeDatum={shapeDatum}
               projectionType={map.projectionType}
+              projectionCenter={projectionCenter}
               stroke={map.stroke}
-              fill={color}
             />
-          );
-        })}
+        ))}
       </g>
     );
   }

@@ -31,11 +31,11 @@ export default class ColorScale extends Vue {
     | ScaleQuantileDefinition;
 
   @Prop({
-    type: String,
+    type: String as PropType<'quantile' | 'ordinal'>,
     required: false,
     default: () => 'ordinal',
   })
-  private readonly type!: string;
+  private readonly type!: 'quantile' | 'ordinal';
 
   mounted() {
     this.colorScale = this.defineScale();

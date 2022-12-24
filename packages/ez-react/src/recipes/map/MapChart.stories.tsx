@@ -17,7 +17,7 @@ import {
 } from 'eazychart-dev/storybook/utils';
 import { ChartWrapper, buildTemplate } from '../../lib/storybook-utils';
 
-const MapChartArgs = {
+const mapChartArgs = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('map'),
   ...getArgTypesByProp('geoJson'),
@@ -29,7 +29,7 @@ const meta: Meta = {
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: MapChartArgs,
+  argTypes: mapChartArgs,
 };
 
 export default meta;

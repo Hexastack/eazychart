@@ -1,6 +1,4 @@
 import { Meta, Story } from '@storybook/vue';
-import MapChart from '@/recipes/map/MapChart';
-import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 import {
   animationOptions,
   mapData,
@@ -11,21 +9,26 @@ import {
   flattenArgs,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
+import {
+  GeoFeatureCollection,
+  GeoProjectionType,
+} from 'eazychart-core/src/types';
+import MapChart from '@/recipes/map/MapChart';
+import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 
-const MapChartArgs = {
+const mapChartArgs = {
   ...BASE_CHART_ARG_TYPES,
-  ...getArgTypesByProp('mapData'),
   ...getArgTypesByProp('map'),
+  ...getArgTypesByProp('geoJson'),
 };
 
 const meta: Meta = {
-  id: '9',
   title: 'Vue/Map Chart',
   component: MapChart,
   parameters: {
     controls: { expanded: true },
   },
-  argTypes: MapChartArgs,
+  argTypes: mapChartArgs,
 };
 
 export default meta;
@@ -54,39 +57,21 @@ export const Default = DefaultTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   map: {
-    geoDomainKey: 'adm1_code',
-    valueDomainKey: 'population',
-    projectionType: 'geoMercator',
-    stroke: '#ffffff',
-    fill: '#324678',
+    geoDomainKey: 'admin',
+    valueDomainKey: 'value',
+    projectionType: 'geoMercator' as GeoProjectionType,
+    stroke: 'black',
+    fill: 'black',
   },
   dimensions: { width: 800, height: 600 },
   padding,
   animationOptions,
-  colors: ['red', 'yellow', 'blue'],
-  mapData,
-  data: [
-    {
-      population: 1,
-      adm1_code: 'USA-3514',
-    },
-    {
-      population: 5,
-      adm1_code: 'USA-3515',
-    },
-    {
-      population: 40,
-      adm1_code: 'USA-3516',
-    },
-    {
-      population: 55,
-      adm1_code: 'USA-3526',
-    },
-    {
-      population: 100,
-      adm1_code: 'USA-3527',
-    },
-  ],
+  colors: ['white', 'pink', 'red'],
+  geoJson: mapData,
+  data: (mapData as GeoFeatureCollection).features.map((feature, idx) => ({
+    admin: feature.properties?.admin,
+    value: idx,
+  })),
 });
 
 Default.args = defaultArguments;

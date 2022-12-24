@@ -2,9 +2,9 @@ import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
 import {
   ChartContext,
-  GeoJsonFeature,
-  ProjectionType,
-  ShapeDatum,
+  GeoFeatureDatum,
+  GeoProjectionCenter,
+  GeoProjectionType,
   TooltipContext,
 } from 'eazychart-core/src/types';
 import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
@@ -20,25 +20,23 @@ export default class MapPath extends mixins(AnimationMixin) {
   private tooltip!: TooltipContext;
 
   @Prop({
-    type: Object as PropType<ShapeDatum>,
+    type: Object as PropType<GeoFeatureDatum>,
   })
-  private readonly shapeDatum!: ShapeDatum;
+  private readonly shapeDatum!: GeoFeatureDatum;
 
   @Prop({
-    type: Object as PropType<GeoJsonFeature>,
-    default() {
-      return {};
-    },
-  })
-  private readonly feature!: GeoJsonFeature;
-
-  @Prop({
-    type: String as PropType<ProjectionType>,
+    type: String as PropType<GeoProjectionType>,
     default() {
       return 'geoMercator';
     },
   })
-  private readonly projectionType!: ProjectionType;
+  private readonly projectionType!: GeoProjectionType;
+
+  @Prop({
+    type: Object as PropType<GeoProjectionCenter>,
+    required: true,
+  })
+  private readonly projectionCenter!: GeoProjectionCenter;
 
   @Prop({
     type: String,
@@ -59,7 +57,7 @@ export default class MapPath extends mixins(AnimationMixin) {
   @Prop({
     type: String,
     default() {
-      return 'blue';
+      return defaultColor;
     },
   })
   private readonly fill!: string;
@@ -79,29 +77,25 @@ export default class MapPath extends mixins(AnimationMixin) {
   }
 
   get animationArguments() {
-    const path = generateGeoFeaturePath(this.feature, this.projectionType);
+    const { shapeDatum, projectionType, projectionCenter } = this;
+    const path = generateGeoFeaturePath(
+      shapeDatum,
+      projectionType,
+      projectionCenter,
+    );
 
     return {
       from: this.currentShapeData,
       to: path || '',
       options: this.chart.animationOptions,
       onUpdate: (v: string) => (this.currentShapeData = v),
-      dependencies: [
-        'scale',
-        'width',
-        'height',
-        'padding',
-        'projectionType',
-        'feature',
-        'path',
-        'shapeDatum',
-      ],
+      dependencies: ['shapeDatum', 'projectionType', 'projectionCenter'],
     };
   }
 
   render() {
-    // eslint-disable-next-line object-curly-newline
     const {
+      shapeDatum,
       currentShapeData,
       stroke,
       strokeWidth,
@@ -114,9 +108,9 @@ export default class MapPath extends mixins(AnimationMixin) {
     return (
       <path
         d={currentShapeData}
-        stroke={stroke}
+        stroke={stroke || shapeDatum.color}
         stroke-width={strokeWidth}
-        fill={fill}
+        fill={shapeDatum.color || fill}
         stroke-linejoin={'round'}
         stroke-linecap={'round'}
         onMouseover={handleMouseOver}

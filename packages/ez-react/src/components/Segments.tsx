@@ -30,13 +30,16 @@ export const Segments: FC<SegmentsProps> = ({
 }) => {
   const { colorScale } = useColorScale();
 
-  const color = useMemo(
-    () =>
-      colorScale.isDefined()
-        ? (colorScale as unknown as ScaleOrdinal).scale(yDomainKey)
-        : line.stroke,
-    [colorScale, yDomainKey, line]
-  );
+  const color = useMemo(() => {
+    if (colorScale.isDefined()) {
+      if (colorScale.constructor.name === 'ScaleOrdinal') {
+        return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
+      } else {
+        throw new Error('Segments does not support non ordinal color scale');
+      }
+    }
+    return line.stroke;
+  }, [colorScale, yDomainKey, line]);
 
   return (
     <Points

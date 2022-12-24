@@ -48,7 +48,6 @@ export default class MapChart extends Vue {
 
   @Prop({
     type: Object as PropType<ChartPadding>,
-    required: true,
     default() {
       return {
         left: 100,

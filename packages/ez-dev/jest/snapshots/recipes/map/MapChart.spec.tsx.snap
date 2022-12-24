@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MapChart renders a map chart 1`] = `
+<div
+  class="ez-viz"
+  style="width: 800px; height: 600px;"
+>
+  <div class="ez-fragment-tooltip">
+    <div class="ez-fragment-filter">
+      <div class="ez-chart">
+        <svg
+          class="ez-svg"
+          style="width: 800px; height: 600px;"
+        >
+          <g transform="translate(150, 100)">
+            <g class="ez-fragment-color-scale">
+              <g class="ez-map">
+                <path
+                  class="ez-map-path"
+                  d="M51.548893115786086,126.37118500072279L167.7314657298939,126.37118500072279L166.0717146925499,177.82346715839913L237.44100929835895,176.1637161210556L237.44100929835895,372.01433852769355L144.51641699158517,369.98249107153333L51.548893115786086,370.35458749034956Z"
+                  fill="red"
+                  stroke="red"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                >
+                </path>
+                <path
+                  class="ez-map-path"
+                  d="M162.752212617861,-26.325910434961543L229.08401336928,-28.900321363955072L295.4962760512285,-30.0367862667199L361.92658243877486,-29.73156447171891L428.31237859296425,-27.985661472305992L433.29163170499714,176.1637161210556L299.6480171326407,174.28463495644155L166.0717146925499,177.82346715839913Z"
+                  fill="green"
+                  stroke="red"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                >
+                </path>
+                <path
+                  class="ez-map-path"
+                  d="M234.10857343347016,177.40087797367278L333.68141203404275,175.2778446412126L433.29163170499714,176.1637161210556L504.66092631080573,245.87325968951995L506.32067734815064,370.35458749034956L371.8497737116845,368.667991866221L237.44100929835895,372.01433852769355Z"
+                  fill="blue"
+                  stroke="red"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1"
+                >
+                </path>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+    <div
+      class="ez-tooltip"
+      style="left: 0px; top: 0px; opacity: 0;"
+    >
+    </div>
+  </div>
+</div>
+`;

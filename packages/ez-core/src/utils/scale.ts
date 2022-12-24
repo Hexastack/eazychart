@@ -259,7 +259,7 @@ export const scaleGeoFeatureData = (
     geoDomainKey
   );
   return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
-    const color = datum
+    const color = datum && colorScale.isDefined()
       ? colorScale.scale(datum[valueDomainKey] as number)
       : defaultColor;
 

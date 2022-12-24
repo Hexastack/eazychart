@@ -38,7 +38,6 @@ export const MapChart: FC<MapChartProps> = ({
     projectionType: 'geoMercator',
     stroke: 'white',
     fill: 'black',
-    scale: 100,
   },
   animationOptions = {
     easing: 'easeBack',

@@ -195,7 +195,6 @@ export type MapConfig = {
   projectionType: GeoProjectionType;
   stroke: string;
   fill: string;
-  scale: number;
 };
 
 

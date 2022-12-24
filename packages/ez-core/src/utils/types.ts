@@ -6,7 +6,7 @@ import {
   Feature,
   Geometry,
   GeoJsonProperties,
-} from 'geojson';
+} from './geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,

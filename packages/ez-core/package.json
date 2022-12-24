@@ -83,7 +83,6 @@
     "@types/d3-interpolate": "^3.0.1",
     "@types/d3-scale": "^4.0.2",
     "@types/d3-shape": "^3.0.2",
-    "@types/geojson": "^7946.0.10",
     "@types/jest": "^27.4.0",
     "better-docs": "^2.7.2",
     "core-js": "^3.22.2",

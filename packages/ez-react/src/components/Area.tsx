@@ -5,6 +5,7 @@ import { Points } from '@/components/Points';
 import { useColorScale } from '@/components/scales/ColorScale';
 import { AreaPath } from './shapes/AreaPath';
 import { LinePath } from './shapes/LinePath';
+import { ScaleOrdinal } from 'eazychart-core';
 
 export interface AreaProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;
@@ -29,10 +30,17 @@ export const Area: FC<AreaProps> = ({
 }) => {
   const { colorScale } = useColorScale();
 
-  const color = useMemo(
-    () => (colorScale.isDefined() ? colorScale.scale(yDomainKey) : area.fill),
-    [area.fill, colorScale, yDomainKey]
-  );
+  const color = useMemo(() => {
+    if (colorScale.isDefined()) {
+      if (colorScale.constructor.name === 'ScaleOrdinal') {
+        return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
+      } else {
+        throw new Error('Area shape does not support non ordinal color scale');
+      }
+    }
+    return area.fill;
+  }, [area.fill, colorScale, yDomainKey]);
+
   return (
     <Points
       xDomainKey={xDomainKey}

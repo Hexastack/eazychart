@@ -1,18 +1,31 @@
 import { pie } from 'd3-shape';
-import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
-import { ArrayOfTwoNumbers, Dimensions, NormalizedData, NormalizedDatum, NumberLike, RawData } from '../types';
-import { ArcDatum, PointDatum, RectangleDatum } from './types';
-
-type ComputedScale = ScaleBand | ScaleLinear | ScaleOrdinal;
+import { ScaleBand, ScaleLinear } from '../scales';
+import {
+  ArrayOfTwoNumbers,
+  Dimensions,
+  NormalizedData,
+  NormalizedDatum,
+  NumberLike,
+  RawData,
+} from '../types';
+import { getGeoFeatureDataDict } from './map';
+import {
+  AnyScale,
+  ArcDatum,
+  GeoFeatureDatum,
+  GeoFeatures,
+  PointDatum,
+  RectangleDatum,
+} from './types';
 
 export const scaleDatumValue = <T = string | number>(
   datum: NormalizedDatum,
   domainKey: string,
-  computedScale: ComputedScale
+  AnyScale: AnyScale
 ) => {
   if (domainKey in datum) {
     const value = datum[domainKey] as T;
-    const scaleValue = computedScale.scale(value as NumberLike) || 0;
+    const scaleValue = AnyScale.scale(value as NumberLike) || 0;
     return scaleValue;
   }
   throw new Error('Domain key does not exist in the supplied data');
@@ -24,7 +37,7 @@ export const scaleVerticalRectangleData = (
   yDomainKey: string,
   xScale: ScaleBand,
   yScale: ScaleLinear,
-  colorScale: ScaleOrdinal,
+  colorScale: AnyScale,
   dimensions: Dimensions
 ): RectangleDatum => {
   const x = scaleDatumValue(datum, xDomainKey, xScale);
@@ -46,7 +59,7 @@ export const scaleHorizontalRectangleData = (
   yDomainKey: string,
   xScale: ScaleLinear,
   yScale: ScaleBand,
-  colorScale: ScaleOrdinal,
+  colorScale: AnyScale,
   dimensions: Dimensions,
   isRTL: boolean
 ): RectangleDatum => {
@@ -67,16 +80,24 @@ export const scaleRectangleData = (
   data: NormalizedDatum[],
   xDomainKey: string,
   yDomainKey: string,
-  xScale: ComputedScale,
-  yScale: ComputedScale,
-  colorScale: ScaleOrdinal,
+  xScale: AnyScale,
+  yScale: AnyScale,
+  colorScale: AnyScale,
   dimensions: Dimensions,
   isRTL: boolean
 ): RectangleDatum[] => {
   if (xScale instanceof ScaleBand && yScale instanceof ScaleLinear) {
     // We need to display vertical bars
     return data.map(datum => {
-      return scaleVerticalRectangleData(datum, xDomainKey, yDomainKey, xScale, yScale, colorScale, dimensions);
+      return scaleVerticalRectangleData(
+        datum,
+        xDomainKey,
+        yDomainKey,
+        xScale,
+        yScale,
+        colorScale,
+        dimensions
+      );
     });
   } else if (xScale instanceof ScaleLinear && yScale instanceof ScaleBand) {
     // We need to display hoziontal bars
@@ -102,8 +123,8 @@ export const scalePointDatum = (
   datum: NormalizedDatum,
   xDomainKey: string,
   yDomainKey: string,
-  xScale: ComputedScale,
-  yScale: ComputedScale,
+  xScale: AnyScale,
+  yScale: AnyScale
 ): PointDatum => {
   const x = scaleDatumValue(datum, xDomainKey, xScale);
   const y = scaleDatumValue(datum, yDomainKey, yScale);
@@ -118,8 +139,8 @@ export const scalePointData = (
   data: NormalizedData,
   xDomainKey: string,
   yDomainKey: string,
-  xScale: ComputedScale,
-  yScale: ComputedScale,
+  xScale: AnyScale,
+  yScale: AnyScale
 ): PointDatum[] => {
   return data.map(datum => {
     return scalePointDatum(datum, xDomainKey, yDomainKey, xScale, yScale);
@@ -131,24 +152,26 @@ export const scaleBubbleData = (
   xDomainKey: string,
   yDomainKey: string,
   rDomainKey: string,
-  xScale: ComputedScale,
-  yScale: ComputedScale,
+  xScale: AnyScale,
+  yScale: AnyScale,
   rScale: ScaleLinear
 ): PointDatum[] => {
-  return data.filter((datum) => rDomainKey in datum).map(datum => {
-    const v = datum[rDomainKey];
-    return {
-      ...scalePointDatum(datum, xDomainKey, yDomainKey, xScale, yScale),
-      radius: rScale.scale(v as number),
-    };
-  });
+  return data
+    .filter(datum => rDomainKey in datum)
+    .map(datum => {
+      const v = datum[rDomainKey];
+      return {
+        ...scalePointDatum(datum, xDomainKey, yDomainKey, xScale, yScale),
+        radius: rScale.scale(v as number),
+      };
+    });
 };
 
 export const scalePieArcData = (
   data: NormalizedDatum[],
   valueDomainKey: string,
   labelDomainKey: string,
-  colorScale: ScaleOrdinal,
+  colorScale: AnyScale,
   startAngle: number = 0,
   endAngle: number = Math.PI * 2,
   sortValues?: (a: number, b: number) => number
@@ -178,8 +201,8 @@ export const scaleArcData = (
   data: NormalizedDatum[],
   valueDomainKey: string,
   labelDomainKey: string,
-  angleScale: ComputedScale,
-  colorScale: ScaleOrdinal,
+  angleScale: AnyScale,
+  colorScale: AnyScale,
   startAngle: number = 0,
   sortValues?: (a: number, b: number) => number
 ): ArcDatum[] => {
@@ -215,9 +238,35 @@ export const scaleArcData = (
 export const getDomainByKeys = (domainKeys: string[], data: RawData) => {
   return domainKeys.reduce(
     ([min, max], domainKey) => {
-      const values = data.map((datum) => datum[domainKey] as number);
+      const values = data.map(datum => datum[domainKey] as number);
       return [Math.min(min, ...values), Math.max(max, ...values)];
     },
     [+Infinity, -Infinity] as number[]
   ) as ArrayOfTwoNumbers;
+};
+
+export const scaleGeoFeatureData = (
+  data: NormalizedData,
+  features: GeoFeatures,
+  geoDomainKey: string,
+  valueDomainKey: string,
+  colorScale: AnyScale | undefined,
+  defaultColor: string
+): GeoFeatureDatum[] => {
+  const geoFeatureDataDict = getGeoFeatureDataDict(
+    features,
+    data,
+    geoDomainKey
+  );
+  return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
+    const color = datum && colorScale?.isDefined()
+      ? colorScale.scale(datum[valueDomainKey] as number)
+      : defaultColor;
+
+    return {
+      id: datum?.id,
+      color,
+      ...feature,
+    } as GeoFeatureDatum;
+  });
 };

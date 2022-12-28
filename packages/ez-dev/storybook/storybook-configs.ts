@@ -1,18 +1,20 @@
 export type PropArgType =
   | 'marker'
+  | 'xAxis'
+  | 'yAxis'
+  | 'yLineAxis'
   | 'grid'
   | 'padding'
   | 'animationOptions'
-  | 'xAxis'
-  | 'yAxis'
+  | 'errorMargins'
   | 'dimensions'
   | 'point'
   | 'bubble'
   | 'arc'
   | 'line'
   | 'area'
-  | 'yLineAxis'
-  | 'errorMargins';
+  | 'map'
+  | 'geoJson';
 
 export type ControlDefinition = {
   name: string;
@@ -335,21 +337,77 @@ export const AREA_CONTROLS: ControlDefinition[] = [
   },
 ];
 
+export const MAP_CONTROLS: ControlDefinition[] = [
+  {
+    name: 'geoDomainKey',
+    type: 'text',
+    defaultValue: 'adm1_code',
+  },
+  {
+    name: 'valueDomainKey',
+    type: 'text',
+    defaultValue: 'value',
+  },
+  {
+    name: 'stroke',
+    type: 'color',
+    defaultValue: '#ffffff',
+  },
+  {
+    name: 'fill',
+    type: 'color',
+    defaultValue: '#324678',
+  },
+  {
+    name: 'projectionType',
+    type: 'select',
+    options: [
+      'geoMercator',
+      'geoTransverseMercator',
+      'geoOrthographic',
+      'geoEqualEarth',
+      'geoEquirectangular',
+      'geoNaturalEarth1',
+      'geoAzimuthalEqualArea',
+      'geoGnomonic',
+      'geoStereographic',
+      'geoConicConformal',
+      'geoConicEqualArea',
+      'geoConicEquidistant',
+    ],
+    defaultValue: 'geoMeractor',
+  },
+];
+
+export const GEOJSON_CONTROLS: ControlDefinition[] = [
+  {
+    name: 'type',
+    type: 'text',
+    defaultValue: 'FeatureCollection',
+  },
+  {
+    name: 'features',
+    type: 'object',
+  },
+];
+
 export const CONTROLS_MAP: {
   [category in PropArgType]: ControlDefinition[];
 } = {
   marker: MARKER_CONTROLS,
-  grid: GRID_CONTROLS,
-  padding: PADDING_CONTROLS,
-  animationOptions: ANIMATION_CONTROLS,
   xAxis: AXIS_CONTROLS,
   yAxis: AXIS_CONTROLS,
+  yLineAxis: AXIS_CONTROLS,
+  grid: GRID_CONTROLS,
+  padding: PADDING_CONTROLS,
+  errorMargins: ERROR_MARGIN_CONTROLS,
+  animationOptions: ANIMATION_CONTROLS,
   dimensions: DIMENSION_CONTROLS,
   point: POINT_CONTROLS,
   bubble: BUBBLE_CONTROLS,
   arc: ARC_CONTROLS,
   line: LINE_CONTROLS,
   area: AREA_CONTROLS,
-  yLineAxis: AXIS_CONTROLS,
-  errorMargins: ERROR_MARGIN_CONTROLS,
+  map: MAP_CONTROLS,
+  geoJson: GEOJSON_CONTROLS,
 };

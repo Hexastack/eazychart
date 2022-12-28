@@ -14,6 +14,8 @@ import {
   TooltipContext,
   RawDatum,
   AreaData,
+  GeoFeatureCollection,
+  GeoFeature,
 } from './types';
 
 import { ScaleLinear, ScaleBand, ScaleOrdinal } from '.';
@@ -230,3 +232,65 @@ export const areaData: AreaData = [
     y1: 18,
   },
 ];
+
+export const geoFeatureA: GeoFeature = {
+  type: 'Feature',
+  properties: { label: 'Alpha' },
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        
+        [-114.03808593750001, 42.00032514831623],
+        [-110.96191406250001, 42.00032514831623],
+        [-111.00585937500001, 40.97989806962016],
+        [-109.11621093750001, 41.0130657870063],
+        [-109.11621093750001, 36.98500309285596],
+        [-114.03808593750001, 37.02009820136812],
+        [-114.03808593750001, 42.00032514831623]
+      ]
+    ]
+  }  
+}
+
+export const geoFeatureB: GeoFeature = {
+  type: 'Feature',
+  properties: { label: 'Beta' },
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [-111.09375000000001, 44.93369638969471],
+        [-104.0625, 44.96479793033104],
+        [-103.93066406250001, 41.0130657870063],
+        [-111.00585937500001, 40.97989806962016],
+        [-111.09375000000001, 44.93369638969471]
+      ]
+    ]
+  }
+}
+
+
+export const geoFeatureC: GeoFeature = {
+  type: 'Feature',
+  properties: { label: 'Gamma' },
+  geometry: {
+    type: 'Polygon',
+    coordinates: [
+      [
+        [-109.20444401111992, 40.98834448518997],
+        [-103.93066406250001, 41.0130657870063],
+        [-102.04101562500001, 39.60568817832081],
+        [-101.99707031250001, 37.02009820136812],
+        [-109.11621093750001, 36.98500309285596],
+        [-109.20444401111992, 40.98834448518997]
+      ]
+    ]
+  }
+}
+
+export const mapFeatureData: GeoFeatureCollection = {
+  type: 'FeatureCollection',
+  features: [geoFeatureA, geoFeatureB, geoFeatureC]
+}
+ 

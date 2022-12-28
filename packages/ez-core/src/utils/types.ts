@@ -1,15 +1,24 @@
 import { PieArcDatum } from 'd3-shape';
+import * as d3Geo from 'd3-geo';
+import {
+  GeoJSON,
+  FeatureCollection,
+  Feature,
+  Geometry,
+  GeoJsonProperties,
+} from './geojson';
 import { AnimationOptions } from '../animation/types';
 import {
   Dimensions,
   NormalizedData,
   NormalizedDataDict,
+  NormalizedDatum,
   Point,
   ScaleBandDefinition,
   ScaleLinearDefinition,
   ShapeAttributes,
 } from '../types';
-import { ScaleBand, ScaleLinear, ScaleOrdinal } from '../scales';
+import { ScaleBand, ScaleLinear, ScaleOrdinal, ScaleQuantile } from '../scales';
 
 export type Class<T> = new (...args: any[]) => T;
 
@@ -35,9 +44,10 @@ export type TickOptions = {
   tickFormat?: Function;
 };
 
-export type PointDatum = Point & ShapeAttributes & {
-  radius?: number;
-};
+export type PointDatum = Point &
+  ShapeAttributes & {
+    radius?: number;
+  };
 
 export type RectangleDatum = Point & Dimensions & ShapeAttributes;
 
@@ -53,8 +63,8 @@ export type ArcDatum = ShapeAttributes &
   PieArcDatum<
     | number
     | {
-      valueOf(): number;
-    }
+        valueOf(): number;
+      }
   >;
 
 export interface ArcConfig {
@@ -81,12 +91,10 @@ export interface ChartContext {
   data: NormalizedData;
   dataDict: NormalizedDataDict;
   isRTL: boolean;
-  registerScale: (scaleId: string, scale: AnyScale) => void,
-  getScale: (scaleId: string) => AnyScale | null,
-  onLegendClick?: (key: string, isActive: boolean, color: string) => void
+  registerScale: (scaleId: string, scale: AnyScale) => void;
+  getScale: (scaleId: string) => AnyScale | null;
+  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
 }
-
-export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum;
 
 export type TooltipContext = {
   showTooltip: (_datum: ShapeDatum, _event: MouseEvent) => void;
@@ -127,18 +135,67 @@ export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
 
-export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal;
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal | ScaleQuantile;
 
 export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
 
-
 export type ScaleConfig =
   | {
-    ScaleClass: Class<ScaleLinear>;
-    definition: ScaleLinearDefinition;
-  }
+      ScaleClass: Class<ScaleLinear>;
+      definition: ScaleLinearDefinition;
+    }
   | {
-    ScaleClass: Class<ScaleBand>;
-    definition: ScaleBandDefinition;
-  };
+      ScaleClass: Class<ScaleBand>;
+      definition: ScaleBandDefinition;
+    };
 
+export type GeoJsonData = GeoJSON;
+export type GeoFeature = Feature<Geometry, GeoJsonProperties>;
+export type GeoFeatureCollection = FeatureCollection<Geometry, GeoJsonProperties>
+export type GeoFeatures = FeatureCollection['features'];
+
+export type GeoProjection = d3Geo.GeoProjection;
+
+export type GeoProjectionType = keyof Pick<
+  typeof d3Geo,
+  | 'geoAzimuthalEqualArea'
+  | 'geoAzimuthalEquidistant'
+  | 'geoGnomonic'
+  | 'geoOrthographic'
+  | 'geoStereographic'
+  | 'geoEqualEarth'
+  | 'geoAlbers'
+  | 'geoConicConformal'
+  | 'geoConicEqualArea'
+  | 'geoConicEquidistant'
+  | 'geoEquirectangular'
+  | 'geoMercator'
+  | 'geoTransverseMercator'
+  | 'geoNaturalEarth1'
+>;
+
+export type GeoProjectionCenter = {
+  center: [number, number],
+  scale: number,
+  offset: [number, number]
+}
+
+export type GeoFeatureDatum = GeoFeature & ShapeAttributes;
+
+export type GeoFeatureDataDict = {
+  [geoDomainKey: string]: {
+    feature: GeoFeature;
+    datum: NormalizedDatum | undefined;
+  };
+};
+
+export type MapConfig = {
+  geoDomainKey: string;
+  valueDomainKey: string;
+  projectionType: GeoProjectionType;
+  stroke: string;
+  fill: string;
+};
+
+
+export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum | GeoFeatureDatum;

@@ -9,6 +9,7 @@ const esModules = [
   'd3-shape',
   'd3-path',
   'd3-ease',
+  'd3-geo',
 ].join('|');
 
 module.exports = {

@@ -19,6 +19,7 @@ export const useCartesianScales = () => {
 export type CartesianScaleProps = {
   xScaleConfig: ScaleConfig;
   yScaleConfig: ScaleConfig;
+  children: React.ReactNode;
   isWrapped?: boolean;
 };
 

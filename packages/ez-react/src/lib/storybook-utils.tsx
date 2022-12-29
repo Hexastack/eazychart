@@ -2,7 +2,10 @@ import React, { FC } from 'react';
 import { Story } from '@storybook/react/dist/ts3.9/client/index';
 import { unFlattenArgs, ArgsType } from 'eazychart-dev/storybook/utils';
 
-export const ChartWrapper: FC<{ style?: any }> = ({ children, ...props }) => {
+export const ChartWrapper: FC<{ children: React.ReactNode; style?: any }> = ({
+  children,
+  ...props
+}) => {
   return <div {...props}>{children}</div>;
 };
 

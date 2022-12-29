@@ -31,6 +31,7 @@ export type ChartProps = {
   };
   isRTL?: boolean;
   onLegendClick?: (key: string, isActive: boolean, color: string) => void;
+  children?: React.ReactNode;
   isWrapped?: boolean;
 };
 
@@ -165,7 +166,7 @@ export const Chart: FC<ChartProps> = ({
                 scopedSlots?.LegendComponent && (
                   <scopedSlots.LegendComponent
                     onLegendClick={onLegendClick}
-                    onResize={onLegendResize}
+                    onLegendResize={onLegendResize}
                   />
                 )
               }
@@ -188,7 +189,7 @@ export const Chart: FC<ChartProps> = ({
               scopedSlots?.LegendComponent && (
                 <scopedSlots.LegendComponent
                   onLegendClick={onLegendClick}
-                  onResize={onLegendResize}
+                  onLegendResize={onLegendResize}
                 />
               )
             }

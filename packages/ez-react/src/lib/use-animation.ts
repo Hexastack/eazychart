@@ -13,7 +13,7 @@ export const useAnimation = <T extends Interpolables>(
     shouldAnimation ? initialData : targetData
   );
   const updateOnAnimate = useCallback(
-    (v) => {
+    (v: any) => {
       if (v) {
         setCurrentData(
           typeof v === 'object'

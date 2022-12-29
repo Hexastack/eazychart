@@ -2,15 +2,16 @@ import React, { DOMAttributes, useEffect, useRef, useState } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { LegendItem } from '@/components/addons/legend/LegendItem';
 import { debounce } from 'eazychart-core/src';
+import { Dimensions } from 'eazychart-core/src/types';
 
 export interface LegendProps extends DOMAttributes<HTMLDivElement> {
   onLegendClick?: (key: string, isActive: boolean, color: string) => void;
-  onResize?: ({ width, height }: { width: number; height: number }) => void;
+  onLegendResize?: ({ width, height }: Dimensions) => void;
 }
 
 export const Legend: React.FC<LegendProps> = ({
   onLegendClick,
-  onResize,
+  onLegendResize,
   ...rest
 }) => {
   const { getScale } = useChart();
@@ -38,7 +39,7 @@ export const Legend: React.FC<LegendProps> = ({
         width: Math.floor(entry.contentRect.width),
         height: Math.floor(entry.contentRect.height),
       };
-      onResize && onResize(newDimensions);
+      onLegendResize && onLegendResize(newDimensions);
     });
   };
 

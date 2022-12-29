@@ -8,6 +8,7 @@ import { TooltipContext } from './TooltipContext';
 
 export interface TooltipProviderProps {
   Tooltip?: FC<TooltipProps>;
+  children: React.ReactNode;
   isWrapped?: boolean;
 }
 

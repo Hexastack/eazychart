@@ -3,6 +3,7 @@ import React, { FC } from 'react';
 
 export interface LegendProviderProps {
   Legend?: JSX.Element;
+  children: React.ReactNode;
   isWrapped?: boolean;
 }
 

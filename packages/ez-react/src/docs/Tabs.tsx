@@ -6,12 +6,12 @@ import './styles.css';
 
 type Props = {
   tabbedClassName: string;
-  children: any;
+  children: React.ReactElement[];
   showTabs: boolean;
 };
 
 const Tabs: React.FC<Props> = ({ children, tabbedClassName, showTabs }) => {
-  const [selectedTab, setSelectedTab] = useState(0);
+  const [selectedTabIdx, setSelectedTabIdx] = useState(0);
   const [showCopied, setShowCopied] = useState(false);
 
   children = Array.isArray(children) ? children : [children];
@@ -24,6 +24,8 @@ const Tabs: React.FC<Props> = ({ children, tabbedClassName, showTabs }) => {
     }
   }, [showCopied]);
 
+  const selectedTab = children[selectedTabIdx];
+
   return (
     <div className="story-tabbed-code-container">
       {showTabs ? (
@@ -33,8 +35,8 @@ const Tabs: React.FC<Props> = ({ children, tabbedClassName, showTabs }) => {
               key={index}
               title={item.props.title}
               index={index}
-              setSelectedTab={setSelectedTab}
-              selectedTab={selectedTab}
+              setSelectedTab={setSelectedTabIdx}
+              selectedTab={selectedTabIdx}
             />
           ))}
         </ul>
@@ -42,18 +44,18 @@ const Tabs: React.FC<Props> = ({ children, tabbedClassName, showTabs }) => {
       <div className="story-tabbed-code-block-container">
         <div className={`story-tabbed-code-block ${tabbedClassName}`}>
           <SyntaxHighlighter
-            language={children[selectedTab].props.language}
+            language={selectedTab.props.language}
             wrapLines={true}
             style={coy}
           >
-            {children[selectedTab].props.code}
+            {selectedTab.props.code}
           </SyntaxHighlighter>
         </div>
         <div className="story-copy-code">
           <button
             className="story-copy-code-button"
             onClick={() => {
-              navigator.clipboard.writeText(children[selectedTab].props.code);
+              navigator.clipboard.writeText(selectedTab.props.code);
               setShowCopied(true);
             }}
           >

@@ -25,11 +25,13 @@ export const useColorScale = () => {
 
 type ColorScaleOrdinalProps = ScaleOrdinalDefinition & {
   type?: 'ordinal';
+  children: React.ReactNode;
   isWrapped?: boolean;
 };
 
 type ColorScaleQuantileProps = ScaleQuantileDefinition & {
   type?: 'quantile';
+  children?: React.ReactNode;
   isWrapped?: boolean;
 };
 

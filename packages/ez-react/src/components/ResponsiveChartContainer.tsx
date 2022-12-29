@@ -5,6 +5,7 @@ import { ResponsiveChartContext } from '@/lib/use-responsive-chart';
 
 export type ResponsiveChartContainerProps = {
   onResize?: (dimensions: Dimensions) => void;
+  children: React.ReactNode;
 };
 
 export const ResponsiveChartContainer: FC<ResponsiveChartContainerProps> = ({

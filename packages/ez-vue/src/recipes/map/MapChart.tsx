@@ -30,7 +30,9 @@ import ColorScale from '@/components/scales/ColorScale';
 export default class MapChart extends Vue {
   @Prop({
     type: Object as PropType<Dimensions>,
-    required: true,
+    default() {
+      return {};
+    },
   })
   private readonly dimensions!: Partial<Dimensions>;
 

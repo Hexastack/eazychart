@@ -11,7 +11,6 @@ import { Map } from '@/components/Map';
 import { LegendProps } from '@/components/addons/legend/Legend';
 import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
-import { dimensions } from 'eazychart-dev/storybook/data';
 import { ColorScale } from '@/components/scales/ColorScale';
 
 export interface MapChartProps extends SVGAttributes<SVGGElement> {
@@ -50,6 +49,7 @@ export const MapChart: FC<MapChartProps> = ({
     right: 100,
     top: 100,
   },
+  dimensions = {},
   scopedSlots = {
     // @todo : support Legend
     // LegendComponent: Legend,

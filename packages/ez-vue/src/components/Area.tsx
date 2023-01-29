@@ -58,10 +58,8 @@ export default class Area extends Vue {
   get color() {
     const { colorScale, yDomainKey, area } = this;
     if (colorScale && colorScale.isDefined()) {
-      if (colorScale.constructor.name === 'ScaleOrdinal') {
-        return colorScale.scale(yDomainKey);
-      }
-      throw new Error('Area shape does not support non ordinal color scale');
+      // Area shape does not support non ordinal color scale
+      return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
     }
     return area.fill;
   }

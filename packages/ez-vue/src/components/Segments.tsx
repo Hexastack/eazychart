@@ -51,12 +51,8 @@ export default class Segments extends Vue {
   get color() {
     const { colorScale, yDomainKey, line } = this;
     if (colorScale && colorScale.isDefined()) {
-      if (colorScale.constructor.name === 'ScaleOrdinal') {
-        return colorScale.scale(yDomainKey);
-      }
-      throw new Error(
-        'Segments shape does not support non ordinal color scale',
-      );
+      // Segments shape does not support non ordinal color scale
+      return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
     }
     return line.stroke;
   }

@@ -32,11 +32,8 @@ export const Area: FC<AreaProps> = ({
 
   const color = useMemo(() => {
     if (colorScale.isDefined()) {
-      if (colorScale.constructor.name === 'ScaleOrdinal') {
-        return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
-      } else {
-        throw new Error('Area shape does not support non ordinal color scale');
-      }
+      // Area shape does not support non ordinal color scale
+      return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
     }
     return area.fill;
   }, [area.fill, colorScale, yDomainKey]);

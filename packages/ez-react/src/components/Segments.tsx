@@ -32,11 +32,8 @@ export const Segments: FC<SegmentsProps> = ({
 
   const color = useMemo(() => {
     if (colorScale.isDefined()) {
-      if (colorScale.constructor.name === 'ScaleOrdinal') {
-        return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
-      } else {
-        throw new Error('Segments does not support non ordinal color scale');
-      }
+      // Segment shape does not support non ordinal color scale
+      return (colorScale as any as ScaleOrdinal).scale(yDomainKey);
     }
     return line.stroke;
   }, [colorScale, yDomainKey, line]);

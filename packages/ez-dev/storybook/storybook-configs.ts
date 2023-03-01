@@ -14,7 +14,8 @@ export type PropArgType =
   | 'line'
   | 'area'
   | 'map'
-  | 'geoJson';
+  | 'geoJson'
+  | 'bubbles';
 
 export type ControlDefinition = {
   name: string;
@@ -391,6 +392,43 @@ export const GEOJSON_CONTROLS: ControlDefinition[] = [
   },
 ];
 
+export const MAP_BUBBLES_CONTROLS: ControlDefinition[] = [
+  {
+    name: 'minRange',
+    type: 'range',
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: '0px',
+  },
+  {
+    name: 'maxRange',
+    type: 'range',
+    min: 0,
+    max: 100,
+    step: 1,
+    defaultValue: '30px',
+  },
+  {
+    name: 'opacity',
+    type: 'range',
+    min: 0,
+    max: 1,
+    step: 0.1,
+    defaultValue: '0.5px',
+  },
+  {
+    name: 'fill',
+    type: 'color',
+    defaultValue: 'rgba(209, 46, 84, 0.5)',
+  },
+  {
+    name: 'stroke',
+    type: 'color',
+    defaultValue: 'rgba(209, 46, 84, 0.5)',
+  },
+];
+
 export const CONTROLS_MAP: {
   [category in PropArgType]: ControlDefinition[];
 } = {
@@ -410,4 +448,5 @@ export const CONTROLS_MAP: {
   area: AREA_CONTROLS,
   map: MAP_CONTROLS,
   geoJson: GEOJSON_CONTROLS,
+  bubbles: MAP_BUBBLES_CONTROLS,
 };

@@ -1,4 +1,5 @@
 import * as d3Geo from 'd3-geo';
+import * as d3Scale from 'd3-scale';
 import { Dimensions, NormalizedData } from '../types';
 import {
   GeoFeatureDataDict,
@@ -19,9 +20,7 @@ export const calculateGeoProjectionCenter = (
   const initialOffset: [number, number] = [width / 2, height / 2];
   const projection = d3Geo[projectionType as GeoProjectionType]();
 
-  projection
-    .center(center)
-    .translate(initialOffset);
+  projection.center(center).translate(initialOffset);
 
   // Create the path
   const path = d3Geo.geoPath(projection);
@@ -45,6 +44,7 @@ export const calculateGeoProjectionCenter = (
 };
 
 export const getGeoFeatureCentroid = d3Geo.geoCentroid;
+export const centroids = [] as any;
 
 export const getGeoFeatureDataDict = (
   features: GeoFeatures,
@@ -62,11 +62,26 @@ export const getGeoFeatureDataDict = (
     const datum = data.find(
       datum => datum[geoDomainKey] === properties[geoDomainKey]
     );
+
     return {
       feature,
       datum,
     };
   }, {} as GeoFeatureDataDict);
+};
+
+export let sqrtScale = d3Scale
+  .scaleSqrt()
+  .domain([0, 100])
+  .range([0, 30]);
+
+export const scaler = (rangeMin: number, rangeMax: number, value: number) => {
+  const sqrtScale = d3Scale
+    .scaleSqrt()
+    .domain([0, 100])
+    .range([rangeMin, rangeMax]);
+
+  return sqrtScale(value);
 };
 
 export const generateGeoFeaturePath = (
@@ -86,6 +101,9 @@ export const generateGeoFeaturePath = (
 
   const pathGenerator = d3Geo.geoPath(projection);
   const dataPath = pathGenerator(feature);
+  const pathCenter = pathGenerator.centroid(feature);
 
-  return dataPath;
+  centroids.push([pathCenter[0], pathCenter[1]]);
+
+  return { dataPath, centroids };
 };

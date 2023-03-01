@@ -197,5 +197,13 @@ export type MapConfig = {
   fill: string;
 };
 
+export type BubbleConfig = {
+  minRange: number;
+  maxRange: number;
+  opacity: number;
+  fill: string;
+  stroke: string;
+}
+
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum | GeoFeatureDatum;

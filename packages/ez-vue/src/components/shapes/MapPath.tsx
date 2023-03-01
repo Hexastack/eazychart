@@ -78,7 +78,7 @@ export default class MapPath extends mixins(AnimationMixin) {
 
   get animationArguments() {
     const { shapeDatum, projectionType, projectionCenter } = this;
-    const path = generateGeoFeaturePath(
+    const { dataPath } = generateGeoFeaturePath(
       shapeDatum,
       projectionType,
       projectionCenter,
@@ -86,7 +86,7 @@ export default class MapPath extends mixins(AnimationMixin) {
 
     return {
       from: this.currentShapeData,
-      to: path || '',
+      to: dataPath || '',
       options: this.chart.animationOptions,
       onUpdate: (v: string) => (this.currentShapeData = v),
       dependencies: ['shapeDatum', 'projectionType', 'projectionCenter'],

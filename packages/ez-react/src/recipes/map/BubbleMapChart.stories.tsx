@@ -54,7 +54,7 @@ const defaultArguments = flattenArgs({
     valueDomainKey: 'value',
     projectionType: 'geoMercator' as GeoProjectionType,
     stroke: 'black',
-    fill: 'black',
+    fill: 'white',
   },
   dimensions: { width: 800, height: 600 },
   padding,

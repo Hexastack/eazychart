@@ -87,7 +87,8 @@ export const scaler = (rangeMin: number, rangeMax: number, value: number) => {
 export const generateGeoFeaturePath = (
   feature: GeoFeature,
   projectionType: GeoProjectionType,
-  { center, scale, offset }: GeoProjectionCenter
+  { center, scale, offset }: GeoProjectionCenter,
+  idx?: number
 ) => {
   if (!(projectionType in d3Geo)) {
     throw new Error('Uknown projection type provided!');
@@ -103,7 +104,10 @@ export const generateGeoFeaturePath = (
   const dataPath = pathGenerator(feature);
   const pathCenter = pathGenerator.centroid(feature);
 
-  centroids.push([pathCenter[0], pathCenter[1]]);
+  if (idx != null) {
+    centroids[idx] = [pathCenter[0], pathCenter[1]];
+    return { dataPath, centroids };
+  }
 
-  return { dataPath, centroids };
+  return dataPath;
 };

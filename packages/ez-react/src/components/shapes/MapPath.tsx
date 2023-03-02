@@ -29,10 +29,10 @@ export const MapPath: FC<MapPathProps> = ({
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const { animationOptions } = useChart();
 
-  const { dataPath } = useMemo(
+  const dataPath = useMemo(
     () => generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter),
     [shapeDatum, projectionType, projectionCenter]
-  );
+  ) as string;
 
   const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
 

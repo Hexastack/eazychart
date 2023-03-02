@@ -42,12 +42,13 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
-  const { animationOptions } = useChart();
+  const { animationOptions, data } = useChart();
 
   const { dataPath, centroids } = useMemo(
-    () => generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter),
-    [shapeDatum, projectionType, projectionCenter]
-  );
+    () =>
+      generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter, idx),
+    [shapeDatum, projectionType, projectionCenter, idx]
+  ) as { dataPath: string | null; centroids: [] };
 
   const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
 
@@ -69,21 +70,22 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
     <>
       <path
         d={currentData}
-        stroke={stroke || shapeDatum.color}
+        stroke={stroke}
         strokeWidth={strokeWidth}
-        fill={shapeDatum.color || fill}
+        fill={fill}
         strokeLinejoin={'round'}
         strokeLinecap={'round'}
-        onMouseOver={handleMouseOver}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
         {...rest}
         className="ez-map-path"
       />
       <circle
         stroke={bubbles.stroke}
-        fill={bubbles.fill}
-        r={scaler(bubbles.minRange, bubbles.maxRange, Number(shapeDatum.id))}
+        fill={shapeDatum.color || fill}
+        r={scaler(
+          bubbles.minRange,
+          bubbles.maxRange,
+          Number(data[Number(shapeDatum.id)].value) || 0
+        )}
         cx={centroids[idx][0]}
         cy={centroids[idx][1]}
         onMouseOver={handleMouseOver}

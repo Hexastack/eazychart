@@ -56,6 +56,7 @@ export const BubbleMap: React.FC<BubbleMapChartProps> = ({
             projectionType={projectionType}
             projectionCenter={projectionCenter}
             stroke={stroke}
+            fill={fill}
             bubbles={bubbles}
           />
         );

@@ -4,6 +4,7 @@ import {
   GeoProjectionType,
   GeoProjectionCenter,
   GeoFeatureDatum,
+  centroidsRecord,
 } from 'eazychart-core/src/types';
 import {
   scaler,
@@ -14,10 +15,10 @@ import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
 import { BubbleConfig } from 'eazychart-core/src/utils/types';
+import { Point } from './Point';
 
 export interface BubbleMapPathProps extends SVGAttributes<SVGPathElement> {
   shapeDatum: GeoFeatureDatum;
-  idx: number;
   projectionType?: GeoProjectionType;
   projection?: GeoProjection;
   projectionCenter: GeoProjectionCenter;
@@ -26,7 +27,6 @@ export interface BubbleMapPathProps extends SVGAttributes<SVGPathElement> {
 
 export const BubbleMapPath: FC<BubbleMapPathProps> = ({
   shapeDatum,
-  idx,
   projectionType = 'geoMercator',
   projectionCenter,
   stroke = defaultColor,
@@ -41,16 +41,24 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
   },
   ...rest
 }) => {
+  const shapeId = Number(shapeDatum.id);
+
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const { animationOptions, data } = useChart();
-
   const { dataPath, centroids } = useMemo(
     () =>
-      generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter, idx),
-    [shapeDatum, projectionType, projectionCenter, idx]
-  ) as { dataPath: string | null; centroids: [] };
+      generateGeoFeaturePath(
+        shapeDatum,
+        projectionType,
+        projectionCenter,
+        shapeId
+      ),
+    [shapeDatum, projectionType, projectionCenter, shapeId]
+  ) as { dataPath: string | null; centroids: centroidsRecord };
 
   const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
+  const animatedCentroids =
+    useAnimation(centroids || '', {}, animationOptions) || '';
 
   const handleMouseOver: MouseEventHandler<SVGPathElement> = (event) => {
     showTooltip(shapeDatum, event as any as MouseEvent);
@@ -62,6 +70,14 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
 
   const handleMouseLeave: MouseEventHandler<SVGPathElement> = (event) => {
     hideTooltip(shapeDatum, event as any as MouseEvent);
+  };
+
+  // Returns the feature value if it exists
+  const getValueById = (id: number): number => {
+    const featureData = data.find(
+      (featureData) => Number(featureData.id) === id
+    );
+    return (featureData ? featureData.value : 0) as number;
   };
 
   if (!dataPath) return null;
@@ -78,16 +94,12 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
         {...rest}
         className="ez-map-path"
       />
-      <circle
+      <Point
         stroke={bubbles.stroke}
         fill={shapeDatum.color || fill}
-        r={scaler(
-          bubbles.minRange,
-          bubbles.maxRange,
-          Number(data[Number(shapeDatum.id)].value) || 0
-        )}
-        cx={centroids[idx][0]}
-        cy={centroids[idx][1]}
+        r={scaler(bubbles.minRange, bubbles.maxRange, getValueById(shapeId))}
+        cx={animatedCentroids[shapeId]?.x}
+        cy={animatedCentroids[shapeId]?.y}
         onMouseOver={handleMouseOver}
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}

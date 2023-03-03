@@ -95,3 +95,5 @@ export interface BubbleConfig {
   maxRadius: number;
   fill: string;
 }
+
+export type centroidsRecord = Record<number, { x: number; y: number }>;

@@ -1,6 +1,6 @@
 import * as d3Geo from 'd3-geo';
 import * as d3Scale from 'd3-scale';
-import { Dimensions, NormalizedData } from '../types';
+import { Dimensions, NormalizedData, centroidsRecord } from '../types';
 import {
   GeoFeatureDataDict,
   GeoFeature,
@@ -44,7 +44,8 @@ export const calculateGeoProjectionCenter = (
 };
 
 export const getGeoFeatureCentroid = d3Geo.geoCentroid;
-export const centroids = [] as any;
+
+const centroids: centroidsRecord = {};
 
 export const getGeoFeatureDataDict = (
   features: GeoFeatures,
@@ -88,7 +89,7 @@ export const generateGeoFeaturePath = (
   feature: GeoFeature,
   projectionType: GeoProjectionType,
   { center, scale, offset }: GeoProjectionCenter,
-  idx?: number
+  shapeId?: number
 ) => {
   if (!(projectionType in d3Geo)) {
     throw new Error('Uknown projection type provided!');
@@ -104,8 +105,8 @@ export const generateGeoFeaturePath = (
   const dataPath = pathGenerator(feature);
   const pathCenter = pathGenerator.centroid(feature);
 
-  if (idx != null) {
-    centroids[idx] = [pathCenter[0], pathCenter[1]];
+  if (shapeId != null) {
+    centroids[shapeId] = { x: pathCenter[0], y: pathCenter[1] };
     return { dataPath, centroids };
   }
 

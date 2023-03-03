@@ -51,7 +51,6 @@ export const BubbleMap: React.FC<BubbleMapChartProps> = ({
         return (
           <BubbleMapPath
             key={idx}
-            idx={idx}
             shapeDatum={shapeDatum}
             projectionType={projectionType}
             projectionCenter={projectionCenter}

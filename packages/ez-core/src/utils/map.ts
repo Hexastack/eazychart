@@ -103,9 +103,9 @@ export const generateGeoFeaturePath = (
 
   const pathGenerator = d3Geo.geoPath(projection);
   const dataPath = pathGenerator(feature);
-  const pathCenter = pathGenerator.centroid(feature);
-
+  
   if (shapeId != null) {
+    const pathCenter = pathGenerator.centroid(feature);
     centroids[shapeId] = { x: pathCenter[0], y: pathCenter[1] };
     return { dataPath, centroids };
   }

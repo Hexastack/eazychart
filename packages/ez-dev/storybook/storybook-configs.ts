@@ -420,12 +420,12 @@ export const MAP_BUBBLES_CONTROLS: ControlDefinition[] = [
   {
     name: 'fill',
     type: 'color',
-    defaultValue: 'rgba(209, 46, 84, 0.5)',
+    defaultValue: 'rgba(255, 165, 0, 1)',
   },
   {
     name: 'stroke',
     type: 'color',
-    defaultValue: 'rgba(209, 46, 84, 0.5)',
+    defaultValue: 'rgba(0, 0, 0, 1)',
   },
 ];
 

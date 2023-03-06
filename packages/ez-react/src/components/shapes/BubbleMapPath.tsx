@@ -15,7 +15,6 @@ import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
 import { BubbleConfig } from 'eazychart-core/src/utils/types';
-import { Point } from './Point';
 
 export interface BubbleMapPathProps extends SVGAttributes<SVGPathElement> {
   shapeDatum: GeoFeatureDatum;
@@ -83,7 +82,7 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
   if (!dataPath) return null;
 
   return (
-    <>
+    <g>
       <path
         d={currentData}
         stroke={stroke}
@@ -94,7 +93,7 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
         {...rest}
         className="ez-map-path"
       />
-      <Point
+      <circle
         stroke={bubbles.stroke}
         fill={shapeDatum.color || fill}
         r={scaler(bubbles.minRange, bubbles.maxRange, getValueById(shapeId))}
@@ -107,8 +106,7 @@ export const BubbleMapPath: FC<BubbleMapPathProps> = ({
         {...rest}
         strokeWidth={1}
         data-testid="ez-point"
-        className="ez-point"
       />
-    </>
+    </g>
   );
 };

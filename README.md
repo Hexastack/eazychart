@@ -131,6 +131,7 @@ Here are some of technical stuff that you need to know before adding any code :
 
 Clone the project and then in the root folder, perform the following commands :
 ```
+npm install -g lerna yarn
 yarn setup
 ```
 

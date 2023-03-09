@@ -21,6 +21,7 @@ export {
   ScaleSequentialPower,
   ScaleSequentialSqrt,
   ScaleSequentialSymLog,
+  ScaleSqrt,
   ScaleThreshold,
   ScaleQuantize,
   ScaleQuantile,

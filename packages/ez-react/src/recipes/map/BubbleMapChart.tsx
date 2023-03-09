@@ -13,6 +13,7 @@ import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
 import { ColorScale } from '@/components/scales/ColorScale';
 import { BubbleConfig } from 'eazychart-core/src/utils/types';
+import { SqrtScale } from '@/components/scales/SqrtScale';
 
 export interface BubbleMapChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -53,6 +54,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
   },
   dimensions = {},
   bubbles = {
+    domainKey: 'value',
     minRange: 0,
     maxRange: 30,
     opacity: 0.5,
@@ -79,13 +81,19 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
     >
-      <ColorScale
-        type={'quantile'}
-        domainKey={map.valueDomainKey}
-        range={colors}
+      <SqrtScale
+        domainKey={bubbles.domainKey}
+        domain={[0, 100]}
+        range={[bubbles.minRange, bubbles.maxRange]}
       >
-        <BubbleMap map={map} geoJson={geoJson} bubbles={bubbles} />
-      </ColorScale>
+        <ColorScale
+          type={'quantile'}
+          domainKey={map.valueDomainKey}
+          range={colors}
+        >
+          <BubbleMap map={map} geoJson={geoJson} bubbles={bubbles} />
+        </ColorScale>
+      </SqrtScale>
     </Chart>
   );
 };

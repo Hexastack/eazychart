@@ -1,5 +1,5 @@
 import { pie } from 'd3-shape';
-import { ScaleBand, ScaleLinear } from '../scales';
+import { ScaleBand, ScaleLinear, ScaleSqrt } from '../scales';
 import {
   ArrayOfTwoNumbers,
   Dimensions,
@@ -8,12 +8,14 @@ import {
   NumberLike,
   RawData,
 } from '../types';
-import { getGeoFeatureDataDict } from './map';
+import { calculateCentroid, getGeoFeatureDataDict } from './map';
 import {
   AnyScale,
   ArcDatum,
   GeoFeatureDatum,
   GeoFeatures,
+  GeoProjectionCenter,
+  GeoProjectionType,
   PointDatum,
   RectangleDatum,
 } from './types';
@@ -251,7 +253,10 @@ export const scaleGeoFeatureData = (
   geoDomainKey: string,
   valueDomainKey: string,
   colorScale: AnyScale | undefined,
-  defaultColor: string
+  defaultColor: string,
+  projectionType?: GeoProjectionType,
+  projectionCenter?: GeoProjectionCenter,
+  rScale?: ScaleSqrt
 ): GeoFeatureDatum[] => {
   const geoFeatureDataDict = getGeoFeatureDataDict(
     features,
@@ -259,14 +264,58 @@ export const scaleGeoFeatureData = (
     geoDomainKey
   );
   return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
-    const color = datum && colorScale?.isDefined()
-      ? colorScale.scale(datum[valueDomainKey] as number)
-      : defaultColor;
+    let bubbleData = {};
+    if (rScale && projectionCenter && projectionType) {
+      bubbleData = scaleMapBubbleData(
+        datum,
+        feature,
+        valueDomainKey,
+        rScale,
+        projectionType,
+        projectionCenter
+      );
+    }
+    const color =
+      datum && colorScale?.isDefined()
+        ? colorScale.scale(datum[valueDomainKey] as number)
+        : defaultColor;
 
+    if (bubbleData) {
+      return {
+        id: datum?.id,
+        color,
+        bubbleData,
+        ...feature,
+      } as GeoFeatureDatum;
+    }
     return {
       id: datum?.id,
       color,
       ...feature,
     } as GeoFeatureDatum;
   });
+};
+
+export const scaleMapBubbleData = (
+  datum: any,
+  feature: any,
+  rDomainKey: string,
+  rScale: any,
+  projectionType: GeoProjectionType,
+  projectionCenter: GeoProjectionCenter
+): any[] => {
+  if (rDomainKey in datum) {
+    const v = datum[rDomainKey];
+    return {
+      ...datum,
+      ...calculateCentroid(
+        feature,
+        projectionType,
+        projectionCenter,
+        Number(datum.id)
+      ),
+      radius: rScale.scale(v as number),
+    };
+  }
+  return [];
 };

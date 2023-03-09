@@ -151,7 +151,10 @@ export type ScaleConfig =
 
 export type GeoJsonData = GeoJSON;
 export type GeoFeature = Feature<Geometry, GeoJsonProperties>;
-export type GeoFeatureCollection = FeatureCollection<Geometry, GeoJsonProperties>
+export type GeoFeatureCollection = FeatureCollection<
+  Geometry,
+  GeoJsonProperties
+>;
 export type GeoFeatures = FeatureCollection['features'];
 
 export type GeoProjection = d3Geo.GeoProjection;
@@ -175,10 +178,10 @@ export type GeoProjectionType = keyof Pick<
 >;
 
 export type GeoProjectionCenter = {
-  center: [number, number],
-  scale: number,
-  offset: [number, number]
-}
+  center: [number, number];
+  scale: number;
+  offset: [number, number];
+};
 
 export type GeoFeatureDatum = GeoFeature & ShapeAttributes;
 
@@ -198,12 +201,16 @@ export type MapConfig = {
 };
 
 export type BubbleConfig = {
+  domainKey?: string;
   minRange: number;
   maxRange: number;
   opacity: number;
   fill: string;
   stroke: string;
-}
+};
 
-
-export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum | GeoFeatureDatum;
+export type ShapeDatum =
+  | PointDatum
+  | RectangleDatum
+  | ArcDatum
+  | GeoFeatureDatum;

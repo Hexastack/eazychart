@@ -85,6 +85,24 @@ export const scaler = (rangeMin: number, rangeMax: number, value: number) => {
   return sqrtScale(value);
 };
 
+export const calculateCentroid = (
+  feature: GeoFeature,
+  projectionType: GeoProjectionType,
+  { center, scale, offset }: GeoProjectionCenter,
+  shapeId: number
+) => {
+  const projection = d3Geo[projectionType as GeoProjectionType]();
+
+  projection.center(center);
+  projection.scale(scale);
+  projection.translate(offset);
+
+  const pathGenerator = d3Geo.geoPath(projection);
+  const pathCenter = pathGenerator.centroid(feature);
+  centroids[shapeId] = { x: pathCenter[0], y: pathCenter[1] };
+  return centroids[shapeId];
+};
+
 export const generateGeoFeaturePath = (
   feature: GeoFeature,
   projectionType: GeoProjectionType,
@@ -103,7 +121,7 @@ export const generateGeoFeaturePath = (
 
   const pathGenerator = d3Geo.geoPath(projection);
   const dataPath = pathGenerator(feature);
-  
+
   if (shapeId != null) {
     const pathCenter = pathGenerator.centroid(feature);
     centroids[shapeId] = { x: pathCenter[0], y: pathCenter[1] };

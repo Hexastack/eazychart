@@ -23,3 +23,4 @@ export { default as ScaleSequentialSymLog } from './ScaleSequentialSymLog';
 export { default as ScaleThreshold } from './ScaleThreshold';
 export { default as ScaleQuantize } from './ScaleQuantize';
 export { default as ScaleQuantile } from './ScaleQuantile';
+export { default as ScaleSqrt } from './ScaleSqrt';

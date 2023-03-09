@@ -106,8 +106,7 @@ export const calculateCentroid = (
 export const generateGeoFeaturePath = (
   feature: GeoFeature,
   projectionType: GeoProjectionType,
-  { center, scale, offset }: GeoProjectionCenter,
-  shapeId?: number
+  { center, scale, offset }: GeoProjectionCenter
 ) => {
   if (!(projectionType in d3Geo)) {
     throw new Error('Uknown projection type provided!');
@@ -121,12 +120,6 @@ export const generateGeoFeaturePath = (
 
   const pathGenerator = d3Geo.geoPath(projection);
   const dataPath = pathGenerator(feature);
-
-  if (shapeId != null) {
-    const pathCenter = pathGenerator.centroid(feature);
-    centroids[shapeId] = { x: pathCenter[0], y: pathCenter[1] };
-    return { dataPath, centroids };
-  }
 
   return dataPath;
 };

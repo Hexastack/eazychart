@@ -25,6 +25,7 @@ describe('BubbleMapChart', () => {
           stroke: 'red',
         },
         bubbles: {
+          domainKey: 'value',
           minRange: 0,
           maxRange: 30,
           opacity: 0.5,

@@ -1,5 +1,5 @@
 import { pie } from 'd3-shape';
-import { ScaleBand, ScaleLinear, ScaleSqrt } from '../scales';
+import { ScaleBand, ScaleLinear } from '../scales';
 import {
   ArrayOfTwoNumbers,
   Dimensions,
@@ -254,9 +254,9 @@ export const scaleGeoFeatureData = (
   valueDomainKey: string,
   colorScale: AnyScale | undefined,
   defaultColor: string,
-  projectionType?: GeoProjectionType,
-  projectionCenter?: GeoProjectionCenter,
-  rScale?: ScaleSqrt
+  projectionType: GeoProjectionType,
+  projectionCenter: GeoProjectionCenter,
+  rDomainKey?: string
 ): GeoFeatureDatum[] => {
   const geoFeatureDataDict = getGeoFeatureDataDict(
     features,
@@ -264,58 +264,27 @@ export const scaleGeoFeatureData = (
     geoDomainKey
   );
   return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
-    let bubbleData = {};
-    if (rScale && projectionCenter && projectionType) {
-      bubbleData = scaleMapBubbleData(
-        datum,
-        feature,
-        valueDomainKey,
-        rScale,
-        projectionType,
-        projectionCenter
-      );
-    }
+    const { x, y } = calculateCentroid(
+      feature,
+      projectionType,
+      projectionCenter,
+      Number(datum?.id)
+    );
+
+    const radius = rDomainKey ? datum && datum[rDomainKey] : 0;
+
     const color =
       datum && colorScale?.isDefined()
         ? colorScale.scale(datum[valueDomainKey] as number)
         : defaultColor;
 
-    if (bubbleData) {
-      return {
-        id: datum?.id,
-        color,
-        bubbleData,
-        ...feature,
-      } as GeoFeatureDatum;
-    }
     return {
       id: datum?.id,
       color,
+      x,
+      y,
+      radius,
       ...feature,
     } as GeoFeatureDatum;
   });
-};
-
-export const scaleMapBubbleData = (
-  datum: any,
-  feature: any,
-  rDomainKey: string,
-  rScale: any,
-  projectionType: GeoProjectionType,
-  projectionCenter: GeoProjectionCenter
-): any[] => {
-  if (rDomainKey in datum) {
-    const v = datum[rDomainKey];
-    return {
-      ...datum,
-      ...calculateCentroid(
-        feature,
-        projectionType,
-        projectionCenter,
-        Number(datum.id)
-      ),
-      radius: rScale.scale(v as number),
-    };
-  }
-  return [];
 };

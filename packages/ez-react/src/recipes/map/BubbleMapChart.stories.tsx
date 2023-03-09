@@ -62,6 +62,7 @@ const defaultArguments = flattenArgs({
   colors: ['#FBE5E5', '#FFA1C9', '#E60965'],
   geoJson: mapData,
   bubbles: {
+    domainKey: 'value',
     minRange: 0,
     maxRange: 30,
     opacity: 0.6,

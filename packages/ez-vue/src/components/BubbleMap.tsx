@@ -45,11 +45,9 @@ export default class BubbleMap extends Vue {
   }
 
   get shapeData() {
-    const {
-      geoJson, chart, colorScale, map,
-    } = this;
+    const { geoJson, chart, colorScale, map, projectionCenter, bubbles } = this;
     const { data } = chart;
-    const { geoDomainKey, valueDomainKey, fill } = map;
+    const { geoDomainKey, valueDomainKey, fill, projectionType } = map;
     return scaleGeoFeatureData(
       data,
       geoJson?.features || [],
@@ -57,26 +55,27 @@ export default class BubbleMap extends Vue {
       valueDomainKey,
       colorScale,
       fill,
+      projectionType,
+      projectionCenter,
+      bubbles?.domainKey,
     );
   }
 
   render() {
-    const {
-      map, projectionCenter, shapeData, bubbles,
-    } = this;
+    const { map, projectionCenter, shapeData, bubbles } = this;
 
     return (
       <g class="ez-map">
         {shapeData.map((shapeDatum, idx) => (
-            <BubbleMapPath
-              key={idx}
-              shapeDatum={shapeDatum}
-              projectionType={map.projectionType}
-              projectionCenter={projectionCenter}
-              stroke={map.stroke}
-              fill={map.fill}
-              bubbles={bubbles}
-              />
+          <BubbleMapPath
+            key={idx}
+            shapeDatum={shapeDatum}
+            projectionType={map.projectionType}
+            projectionCenter={projectionCenter}
+            stroke={map.stroke}
+            fill={map.fill}
+            bubbles={bubbles}
+          />
         ))}
       </g>
     );

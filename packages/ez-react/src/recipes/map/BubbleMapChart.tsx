@@ -7,13 +7,13 @@ import {
   GeoJsonData,
   MapConfig,
 } from 'eazychart-core/src/types';
-import { BubbleMap } from '../../components/BubbleMap';
-import { LegendProps } from '@/components/addons/legend/Legend';
-import { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
+import { Map } from '../../components/Map';
 import { Chart } from '@/components/Chart';
 import { ColorScale } from '@/components/scales/ColorScale';
 import { BubbleConfig } from 'eazychart-core/src/utils/types';
 import { SqrtScale } from '@/components/scales/SqrtScale';
+import { Point } from '@/components/shapes/Point';
+import { ScaleSqrt } from 'eazychart-core/src';
 
 export interface BubbleMapChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -25,8 +25,13 @@ export interface BubbleMapChartProps extends SVGAttributes<SVGGElement> {
   dimensions?: Partial<Dimensions>;
   bubbles: BubbleConfig;
   scopedSlots?: {
-    LegendComponent: React.FC<LegendProps>;
-    TooltipComponent: React.FC<TooltipProps>;
+    default: ({
+      shapeDatum,
+      scales,
+    }: {
+      shapeDatum: any;
+      scales: { rScale: ScaleSqrt };
+    }) => React.ReactChild;
   };
 }
 
@@ -61,11 +66,6 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
     fill: 'orange',
     stroke: 'black',
   },
-  scopedSlots = {
-    // @todo : support Legend
-    // LegendComponent: Legend,
-    TooltipComponent: Tooltip,
-  },
 }) => {
   if (geoJson && !('features' in geoJson)) {
     throw new Error(
@@ -79,7 +79,6 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
-      scopedSlots={scopedSlots}
     >
       <SqrtScale
         domainKey={bubbles.domainKey}
@@ -91,7 +90,28 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
           domainKey={map.valueDomainKey}
           range={colors}
         >
-          <BubbleMap map={map} geoJson={geoJson} bubbles={bubbles} />
+          <Map
+            map={map}
+            geoJson={geoJson}
+            bubbles={bubbles}
+            scopedSlots={{
+              default: ({ shapeDatum, scales }) => {
+                return (
+                  <g className="ez-map-bubble">
+                    <Point
+                      key={shapeDatum.id}
+                      shapeDatum={shapeDatum}
+                      r={scales.rScale.scale((shapeDatum as any).radius)}
+                      fill={shapeDatum.color}
+                      stroke={bubbles.stroke}
+                      strokeWidth={1}
+                      opacity={bubbles.opacity}
+                    />
+                  </g>
+                );
+              },
+            }}
+          />
         </ColorScale>
       </SqrtScale>
     </Chart>

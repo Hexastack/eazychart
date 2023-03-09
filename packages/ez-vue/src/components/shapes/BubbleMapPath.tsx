@@ -97,14 +97,11 @@ export default class BubbleMapPath extends mixins(AnimationMixin) {
 
   get animationArguments() {
     const { shapeDatum, projectionType, projectionCenter } = this;
-    const { dataPath, centroids } = generateGeoFeaturePath(
+    const dataPath = generateGeoFeaturePath(
       shapeDatum,
       projectionType,
       projectionCenter,
-      Number(shapeDatum.id),
-    ) as { dataPath: string | null; centroids: centroidsRecord };
-
-    this.centroids = centroids;
+    ) as string | null;
 
     return {
       from: this.currentShapeData,
@@ -112,7 +109,6 @@ export default class BubbleMapPath extends mixins(AnimationMixin) {
       options: this.chart.animationOptions,
       onUpdate: (v: string) => (this.currentShapeData = v),
       dependencies: ['shapeDatum', 'projectionType', 'projectionCenter'],
-      centroids,
     };
   }
 

@@ -5,6 +5,7 @@ import {
   GeoFeatureCollection,
   ChartContext,
   AnyScale,
+  BubbleConfig,
 } from 'eazychart-core/src/types';
 import { InjectReactive, Prop } from 'vue-property-decorator';
 import MapPath from '@/components/shapes/MapPath';
@@ -25,6 +26,11 @@ export default class Map extends Vue {
   })
   private readonly geoJson!: GeoFeatureCollection;
 
+  @Prop({
+    type: Object as PropType<BubbleConfig>,
+  })
+  private readonly bubbles?: BubbleConfig;
+
   @InjectReactive('colorScale')
   private colorScale!: AnyScale;
 
@@ -39,11 +45,9 @@ export default class Map extends Vue {
   }
 
   get shapeData() {
-    const {
-      geoJson, chart, colorScale, map,
-    } = this;
+    const { geoJson, chart, colorScale, map, projectionCenter, bubbles } = this;
     const { data } = chart;
-    const { geoDomainKey, valueDomainKey, fill } = map;
+    const { geoDomainKey, valueDomainKey, fill, projectionType } = map;
     return scaleGeoFeatureData(
       data,
       geoJson?.features || [],
@@ -51,6 +55,9 @@ export default class Map extends Vue {
       valueDomainKey,
       colorScale,
       fill,
+      projectionType,
+      projectionCenter,
+      bubbles?.domainKey,
     );
   }
 
@@ -60,13 +67,13 @@ export default class Map extends Vue {
     return (
       <g class="ez-map">
         {shapeData.map((shapeDatum, idx) => (
-            <MapPath
-              key={idx}
-              shapeDatum={shapeDatum}
-              projectionType={map.projectionType}
-              projectionCenter={projectionCenter}
-              stroke={map.stroke}
-            />
+          <MapPath
+            key={idx}
+            shapeDatum={shapeDatum}
+            projectionType={map.projectionType}
+            projectionCenter={projectionCenter}
+            stroke={map.stroke}
+          />
         ))}
       </g>
     );

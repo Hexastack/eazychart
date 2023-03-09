@@ -18,7 +18,13 @@ import {
   ScaleLinearDefinition,
   ShapeAttributes,
 } from '../types';
-import { ScaleBand, ScaleLinear, ScaleOrdinal, ScaleQuantile } from '../scales';
+import {
+  ScaleBand,
+  ScaleLinear,
+  ScaleOrdinal,
+  ScaleQuantile,
+  ScaleSqrt,
+} from '../scales';
 
 export type Class<T> = new (...args: any[]) => T;
 
@@ -135,7 +141,12 @@ export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
 
-export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal | ScaleQuantile;
+export type AnyScale =
+  | ScaleLinear
+  | ScaleBand
+  | ScaleOrdinal
+  | ScaleQuantile
+  | ScaleSqrt;
 
 export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
 
@@ -201,7 +212,7 @@ export type MapConfig = {
 };
 
 export type BubbleConfig = {
-  domainKey?: string;
+  domainKey: string;
   minRange: number;
   maxRange: number;
   opacity: number;

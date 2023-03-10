@@ -270,7 +270,7 @@ export const scaleGeoFeatureData = (
       projectionCenter,
       Number(datum?.id)
     );
-
+    
     const radius = rDomainKey ? datum && datum[rDomainKey] : 0;
 
     const color =

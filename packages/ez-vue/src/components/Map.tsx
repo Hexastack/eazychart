@@ -37,6 +37,9 @@ export default class Map extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
+  @InjectReactive('sqrtScale')
+  private rScale!: AnyScale;
+
   get projectionCenter() {
     const { geoJson, chart, map } = this;
     const { dimensions } = chart;
@@ -45,9 +48,13 @@ export default class Map extends Vue {
   }
 
   get shapeData() {
-    const { geoJson, chart, colorScale, map, projectionCenter, bubbles } = this;
+    const {
+      geoJson, chart, colorScale, map, projectionCenter, bubbles,
+    } = this;
     const { data } = chart;
-    const { geoDomainKey, valueDomainKey, fill, projectionType } = map;
+    const {
+      geoDomainKey, valueDomainKey, fill, projectionType,
+    } = map;
     return scaleGeoFeatureData(
       data,
       geoJson?.features || [],
@@ -62,19 +69,33 @@ export default class Map extends Vue {
   }
 
   render() {
-    const { map, projectionCenter, shapeData } = this;
+    const {
+      map, projectionCenter, shapeData, $scopedSlots, rScale,
+    } = this;
 
     return (
       <g class="ez-map">
         {shapeData.map((shapeDatum, idx) => (
-          <MapPath
-            key={idx}
-            shapeDatum={shapeDatum}
-            projectionType={map.projectionType}
-            projectionCenter={projectionCenter}
-            stroke={map.stroke}
-          />
+          <g>
+            <MapPath
+              key={idx}
+              shapeDatum={shapeDatum}
+              projectionType={map.projectionType}
+              projectionCenter={projectionCenter}
+              stroke={map.stroke}
+            />
+          </g>
         ))}
+        <g>
+          {$scopedSlots.default ? (
+            <g class="ez-map-bubble">
+              {$scopedSlots.default({
+                shapeData,
+                scales: { rScale },
+              })}
+            </g>
+          ) : null}
+        </g>
       </g>
     );
   }

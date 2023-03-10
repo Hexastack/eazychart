@@ -14,15 +14,18 @@ import Axis from '@/components/scales/Axis';
 import Legend from '@/components/addons/legend/Legend';
 import Tooltip from '@/components/addons/tooltip/Tooltip';
 import Grid from '@/components/scales/grid/Grid';
-import BubbleMap from '@/components/BubbleMap';
+import Map from '@/components/Map';
 import ColorScale from '@/components/scales/ColorScale';
-import { BubbleConfig } from 'eazychart-core/src/utils/types';
+import { BubbleConfig, GeoFeatureDatum } from 'eazychart-core/src/utils/types';
+import SqrtScale from '@/components/scales/SqrtScale';
+import Point from '@/components/shapes/Point';
+import { ScaleSqrt } from 'eazychart-core/src';
 
 @Component({
   components: {
     Chart,
     Grid,
-    BubbleMap,
+    Map,
     Axis,
     Legend,
     Tooltip,
@@ -131,15 +134,50 @@ export default class BubbleMapChart extends Vue {
         scopedSlots={$scopedSlots}
         rawData={data}
       >
-        <ColorScale
-          type={'quantile'}
+        <SqrtScale
+          domainKey={bubbles.domainKey}
           definition={{
-            domainKey: map.valueDomainKey,
-            range: colors,
+            domain: [0, 100],
+            range: [bubbles.minRange, bubbles.maxRange],
           }}
         >
-          <BubbleMap map={map} geoJson={geoJson} bubbles={bubbles} />
-        </ColorScale>
+          <ColorScale
+            type={'quantile'}
+            definition={{
+              domainKey: map.valueDomainKey,
+              range: colors,
+            }}
+          >
+            <Map
+              map={map}
+              geoJson={geoJson}
+              bubbles={bubbles}
+              scopedSlots={{
+                default: ({
+                  shapeData,
+                  scales,
+                }: {
+                  shapeData: GeoFeatureDatum[];
+                  scales: { rScale: ScaleSqrt };
+                }) => (
+                  <g class="ez-area">
+                    {shapeData.map((shapeDatum) => (
+                        <Point
+                          key={shapeDatum.id}
+                          shapeDatum={shapeDatum}
+                          r={scales.rScale.scale((shapeDatum as any).radius)}
+                          fill={shapeDatum.color}
+                          stroke={bubbles.stroke}
+                          strokeWidth={1}
+                          opacity={bubbles.opacity}
+                        />
+                    ))}
+                  </g>
+                ),
+              }}
+            />
+          </ColorScale>
+        </SqrtScale>
       </Chart>
     );
   }

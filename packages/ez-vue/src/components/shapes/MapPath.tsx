@@ -79,7 +79,7 @@ export default class MapPath extends mixins(AnimationMixin) {
   get animationArguments() {
     const { shapeDatum, projectionType, projectionCenter } = this;
     const path = generateGeoFeaturePath(
-      shapeDatum,
+      shapeDatum.feature,
       projectionType,
       projectionCenter,
     );

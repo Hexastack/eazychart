@@ -32,6 +32,10 @@ export {
 } from '@/recipes/line/MultiLineChart';
 export { MapChart, MapChartProps } from '@/recipes/map/MapChart';
 export {
+  BubbleMapChart,
+  BubbleMapChartProps,
+} from '@/recipes/map/BubbleMapChart';
+export {
   ResponsiveChartContainer,
   ResponsiveChartContainerProps,
 } from '@/components/ResponsiveChartContainer';

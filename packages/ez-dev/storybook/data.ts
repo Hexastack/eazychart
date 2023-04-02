@@ -1,7 +1,7 @@
 import {
   AnimationOptions,
   ChartPadding,
-  GeoJsonData,
+  GeoFeatureCollection,
   RawData,
 } from 'eazychart-core/src/types';
 
@@ -92,4 +92,12 @@ export const animationOptions: AnimationOptions = {
   delay: 0,
 };
 
-export const mapData = GEOJSON_MAP as GeoJsonData;
+export const mapGeoJson = (GEOJSON_MAP as GeoFeatureCollection);
+
+export const mapData = (GEOJSON_MAP as GeoFeatureCollection).features.map(({ properties }) => {
+  return {
+    admin: properties?.admin,
+    value: properties?.pop_rank,
+    rValue: properties?.gdp_md,
+  };
+})

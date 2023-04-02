@@ -24,7 +24,7 @@ describe('MapPath', () => {
         shapeDatum: {
           id: '1',
           color: 'red',
-          ...geoFeatureA,
+          feature: geoFeatureA,
         } as GeoFeatureDatum,
         projectionCenter,
       },

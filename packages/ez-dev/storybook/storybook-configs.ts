@@ -44,10 +44,31 @@ const BETA_CONTROL: ControlDefinition = {
     'Determines the straigthness of the spline !! only works with curveBundle !!',
 };
 
+const FILL_CONTROL: ControlDefinition = {
+  name: 'fill',
+  type: 'color',
+  defaultValue: 'rgba(209, 46, 84, 0.5)',
+};
+
+const STROKE_CONTROL: ControlDefinition = {
+  name: 'stroke',
+  type: 'color',
+  defaultValue: '#ffffff',
+};
+
 const STROKE_WIDTH_CONTROL: ControlDefinition = {
   name: 'strokeWidth',
   type: 'number',
   defaultValue: '2 or 0 px',
+};
+
+const OPACITY_CONTROL: ControlDefinition = {
+  name: 'opacity',
+  type: 'range',
+  min: 0,
+  max: 1,
+  step: 0.1,
+  defaultValue: '0.5',
 };
 
 const CURVE_CONTROL: ControlDefinition = {
@@ -261,17 +282,22 @@ export const BUBBLE_CONTROLS: ControlDefinition[] = [
     defaultValue: 'rValue',
   },
   {
-    name: 'fill',
-    type: 'color',
-    defaultValue: 'rgba(209, 46, 84, 0.5)',
+    name: 'colors',
+    type: 'object',
   },
+  FILL_CONTROL,
+  {
+    ...STROKE_CONTROL,
+    defaultValue: 'rgba(0, 0, 0, 1)',
+  },
+  STROKE_WIDTH_CONTROL,
+  OPACITY_CONTROL,
 ];
 
 export const LINE_CONTROLS: ControlDefinition[] = [
   CURVE_CONTROL,
   {
-    name: 'stroke',
-    type: 'color',
+    ...STROKE_CONTROL,
     defaultValue: '#ef476f',
   },
   STROKE_WIDTH_CONTROL,
@@ -306,8 +332,7 @@ export const ARC_CONTROLS: ControlDefinition[] = [
     defaultValue: '0',
   },
   {
-    name: 'stroke',
-    type: 'color',
+    ...STROKE_CONTROL,
     defaultValue: 'Transparent',
   },
   STROKE_WIDTH_CONTROL,
@@ -316,25 +341,16 @@ export const ARC_CONTROLS: ControlDefinition[] = [
 export const AREA_CONTROLS: ControlDefinition[] = [
   CURVE_CONTROL,
   BETA_CONTROL,
-  STROKE_WIDTH_CONTROL,
   {
-    name: 'stroke',
-    type: 'color',
+    ...STROKE_CONTROL,
     defaultValue: '#26547c',
   },
+  STROKE_WIDTH_CONTROL,
   {
-    name: 'fill',
-    type: 'color',
+    ...FILL_CONTROL,
     defaultValue: '#26547cb0',
   },
-  {
-    name: 'opacity',
-    type: 'range',
-    min: 0,
-    max: 1,
-    step: 0.1,
-    defaultValue: '0.5',
-  },
+  OPACITY_CONTROL,
 ];
 
 export const MAP_CONTROLS: ControlDefinition[] = [
@@ -348,14 +364,9 @@ export const MAP_CONTROLS: ControlDefinition[] = [
     type: 'text',
     defaultValue: 'value',
   },
+  STROKE_CONTROL,
   {
-    name: 'stroke',
-    type: 'color',
-    defaultValue: '#ffffff',
-  },
-  {
-    name: 'fill',
-    type: 'color',
+    ...FILL_CONTROL,
     defaultValue: '#324678',
   },
   {

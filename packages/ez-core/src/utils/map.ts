@@ -1,27 +1,24 @@
 import * as d3Geo from 'd3-geo';
-import { Dimensions, NormalizedData } from '../types';
+import { Dimensions } from '../types';
 import {
-  GeoFeatureDataDict,
-  GeoFeature,
   GeoFeatureCollection,
-  GeoFeatures,
-  GeoProjectionCenter,
+  GeoProjectionViewport,
   GeoProjectionType,
+  GeoProjection,
+  GeoPathGenerator,
 } from './types';
 
-export const calculateGeoProjectionCenter = (
+export const calculateGeoProjectionViewport = (
   geoJson: GeoFeatureCollection,
   projectionType: GeoProjectionType,
   { width, height }: Dimensions
-) => {
+): GeoProjectionViewport => {
   // Create a first guess for the projection
   const center = d3Geo.geoCentroid(geoJson);
   const initialOffset: [number, number] = [width / 2, height / 2];
   const projection = d3Geo[projectionType as GeoProjectionType]();
 
-  projection
-    .center(center)
-    .translate(initialOffset);
+  projection.center(center).translate(initialOffset);
 
   // Create the path
   const path = d3Geo.geoPath(projection);
@@ -44,36 +41,10 @@ export const calculateGeoProjectionCenter = (
   };
 };
 
-export const getGeoFeatureCentroid = d3Geo.geoCentroid;
-
-export const getGeoFeatureDataDict = (
-  features: GeoFeatures,
-  data: NormalizedData,
-  geoDomainKey: string
-) => {
-  return features.map(feature => {
-    const { properties } = feature;
-    if (!properties || !(geoDomainKey in properties)) {
-      console.warn(
-        'Unable to find the geo domain key in the feature properties'
-      );
-      return { feature };
-    }
-    const datum = data.find(
-      datum => datum[geoDomainKey] === properties[geoDomainKey]
-    );
-    return {
-      feature,
-      datum,
-    };
-  }, {} as GeoFeatureDataDict);
-};
-
-export const generateGeoFeaturePath = (
-  feature: GeoFeature,
+export const computeMapProjection = (
   projectionType: GeoProjectionType,
-  { center, scale, offset }: GeoProjectionCenter
-) => {
+  { center, scale, offset }: GeoProjectionViewport
+): { projection: GeoProjection; geoPathGenerator: GeoPathGenerator } => {
   if (!(projectionType in d3Geo)) {
     throw new Error('Uknown projection type provided!');
   }
@@ -84,8 +55,8 @@ export const generateGeoFeaturePath = (
   projection.scale(scale);
   projection.translate(offset);
 
-  const pathGenerator = d3Geo.geoPath(projection);
-  const dataPath = pathGenerator(feature);
-
-  return dataPath;
+  return {
+    projection,
+    geoPathGenerator: d3Geo.geoPath(projection),
+  };
 };

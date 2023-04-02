@@ -20,6 +20,7 @@ export { default as ScaleSequentialLogarithmic } from './ScaleSequentialLogarith
 export { default as ScaleSequentialPower } from './ScaleSequentialPower';
 export { default as ScaleSequentialSqrt } from './ScaleSequentialSqrt';
 export { default as ScaleSequentialSymLog } from './ScaleSequentialSymLog';
+export { default as ScaleSqrt } from './ScaleSqrt';
 export { default as ScaleThreshold } from './ScaleThreshold';
 export { default as ScaleQuantize } from './ScaleQuantize';
 export { default as ScaleQuantile } from './ScaleQuantile';

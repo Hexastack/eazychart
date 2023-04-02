@@ -93,5 +93,10 @@ export interface BubbleConfig {
   domainKey: string;
   minRadius: number;
   maxRadius: number;
-  fill: string;
+  // @TODO: Enhance so that we have either fill or colors
+  fill?: string;
+  colors?: string[];
+  stroke?: string;
+  strokeWidth?: number;
+  opacity?: number;
 }

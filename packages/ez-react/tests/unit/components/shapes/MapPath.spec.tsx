@@ -7,18 +7,28 @@ import 'tests/mocks/ResizeObserver';
 import { MapPath } from '@/components/shapes/MapPath';
 import { GeoFeatureDatum } from 'eazychart-core/src/types';
 import {
-  calculateGeoProjectionCenter,
+  calculateGeoProjectionViewport,
+  computeMapProjection,
   defaultChartDimensions,
 } from 'eazychart-core/src';
 
+jest.mock('@/lib/use-map', () => {
+  const projectionViewport = calculateGeoProjectionViewport(
+    { type: 'FeatureCollection', features: [geoFeatureA] },
+    'geoMercator',
+    defaultChartDimensions
+  );
+
+  return jest.fn(() => computeMapProjection('geoMercator', projectionViewport));
+});
+
 describe('MapPath', () => {
+  afterAll(() => {
+    jest.clearAllMocks();
+  });
+
   it('renders an svg path given a GeoJSON feature', async () => {
     let wrapper: RenderResult;
-    const projectionCenter = calculateGeoProjectionCenter(
-      { type: 'FeatureCollection', features: [geoFeatureA] },
-      'geoMercator',
-      defaultChartDimensions
-    );
     await act(async () => {
       wrapper = renderSVG(
         <Chart
@@ -30,9 +40,8 @@ describe('MapPath', () => {
         >
           <MapPath
             shapeDatum={
-              { id: '1', color: 'red', ...geoFeatureA } as GeoFeatureDatum
+              { id: '1', color: 'red', feature: geoFeatureA } as GeoFeatureDatum
             }
-            projectionCenter={projectionCenter}
           />
         </Chart>
       );

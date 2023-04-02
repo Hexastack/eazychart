@@ -2,6 +2,7 @@ import { Meta, Story } from '@storybook/vue';
 import {
   animationOptions,
   mapData,
+  mapGeoJson,
   padding,
 } from 'eazychart-dev/storybook/data';
 import {
@@ -9,10 +10,7 @@ import {
   flattenArgs,
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
-import {
-  GeoFeatureCollection,
-  GeoProjectionType,
-} from 'eazychart-core/src/types';
+import { GeoProjectionType } from 'eazychart-core/src/types';
 import MapChart from '@/recipes/map/MapChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
 
@@ -67,11 +65,8 @@ const defaultArguments = flattenArgs({
   padding,
   animationOptions,
   colors: ['white', 'pink', 'red'],
-  geoJson: mapData,
-  data: (mapData as GeoFeatureCollection).features.map((feature, idx) => ({
-    admin: feature.properties?.admin,
-    value: idx,
-  })),
+  geoJson: mapGeoJson,
+  data: mapData,
 });
 
 Default.args = defaultArguments;

@@ -1,5 +1,6 @@
 import { pie } from 'd3-shape';
-import { ScaleBand, ScaleLinear } from '../scales';
+import { geoCentroid } from 'd3-geo';
+import { ScaleBand, ScaleLinear, ScaleSqrt } from '../scales';
 import {
   ArrayOfTwoNumbers,
   Dimensions,
@@ -8,12 +9,12 @@ import {
   NumberLike,
   RawData,
 } from '../types';
-import { getGeoFeatureDataDict } from './map';
 import {
   AnyScale,
   ArcDatum,
-  GeoFeatureDatum,
+  GeoFeatureData,
   GeoFeatures,
+  GeoPathGenerator,
   PointDatum,
   RectangleDatum,
 } from './types';
@@ -168,7 +169,7 @@ export const scaleBubbleData = (
 };
 
 export const scalePieArcData = (
-  data: NormalizedDatum[],
+  data: NormalizedData,
   valueDomainKey: string,
   labelDomainKey: string,
   colorScale: AnyScale,
@@ -252,21 +253,70 @@ export const scaleGeoFeatureData = (
   valueDomainKey: string,
   colorScale: AnyScale | undefined,
   defaultColor: string
-): GeoFeatureDatum[] => {
-  const geoFeatureDataDict = getGeoFeatureDataDict(
-    features,
-    data,
-    geoDomainKey
-  );
-  return Object.values(geoFeatureDataDict).map(({ feature, datum }) => {
-    const color = datum && colorScale?.isDefined()
-      ? colorScale.scale(datum[valueDomainKey] as number)
-      : defaultColor;
+): GeoFeatureData => {
+  return features.map((feature, idx) => {
+    let color = defaultColor;
+    let id: string = `${feature.id || idx}`;
+    const { properties } = feature;
+    // Check if geo domain key is part of the feature properties
+    // and map each feature to it's corresponding datum.
+    // We draw the feature anyway using the default color when
+    // failing to find the corresponding datum so we are able
+    // to draw the whole map.
+    if (properties && geoDomainKey in properties) {
+      const datum = data.find(
+        datum => datum[geoDomainKey] === properties[geoDomainKey]
+      );
+      if (datum) {
+        color =
+          datum && colorScale?.isDefined()
+            ? colorScale.scale(datum[valueDomainKey] as number)
+            : defaultColor;
+        id = datum.id;
+      } else {
+        console.warn(
+          'Unable to find map feature to datum by the provided geo domain key'
+        );
+      }
+    } else {
+      console.warn(
+        'Geo feature is missing the provided geo domain key property'
+      );
+    }
 
+    const [x, y] = geoCentroid(feature);
     return {
-      id: datum?.id,
+      id,
       color,
-      ...feature,
-    } as GeoFeatureDatum;
+      feature,
+      centroid: { x, y },
+    };
+  });
+};
+
+export const scaleMapBubbleData = (
+  data: NormalizedData,
+  mapData: GeoFeatureData,
+  geoPathGenerator: GeoPathGenerator,
+  rDomainKey: string,
+  rScale: ScaleSqrt,
+  colorScale: AnyScale
+): PointDatum[] => {
+  return mapData.map(shapeDatum => {
+    const datum = data.find(
+      datum => rDomainKey in datum && datum.id === shapeDatum.id
+    );
+    if (datum) {
+      const v = datum[rDomainKey] as number;
+      const [x, y] = geoPathGenerator.centroid(shapeDatum.feature);
+      return {
+        id: shapeDatum.id,
+        x,
+        y,
+        radius: rScale.scale(v),
+        color: colorScale.scale(v),
+      };
+    }
+    return { id: shapeDatum.id, x: 0, y: 0, color: '#000' };
   });
 };

@@ -1,6 +1,6 @@
 {
   "name": "eazychart-monorepo",
-  "version": 0.0.1,
+  "version": "0.0.1",
   "description": "EazyChart is an easy to use reactive library that allows you to add customizable charts into your React or Vue web applications.",
   "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
   "author": "Hexastack",

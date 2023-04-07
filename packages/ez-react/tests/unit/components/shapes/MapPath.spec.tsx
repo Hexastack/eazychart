@@ -6,23 +6,28 @@ import { baseChartProps, renderSVG } from 'tests/common';
 import 'tests/mocks/ResizeObserver';
 import { MapPath } from '@/components/shapes/MapPath';
 import { GeoFeatureDatum } from 'eazychart-core/src/types';
+import { useMap } from '@/lib/use-map';
+
 import {
   calculateGeoProjectionViewport,
   computeMapProjection,
   defaultChartDimensions,
 } from 'eazychart-core/src';
 
-jest.mock('@/lib/use-map', () => {
-  const projectionViewport = calculateGeoProjectionViewport(
-    { type: 'FeatureCollection', features: [geoFeatureA] },
-    'geoMercator',
-    defaultChartDimensions
-  );
-
-  return jest.fn(() => computeMapProjection('geoMercator', projectionViewport));
-});
+jest.mock('@/lib/use-map');
 
 describe('MapPath', () => {
+  beforeEach(() => {
+    (useMap as jest.Mock).mockImplementation(() => {
+      const projectionViewport = calculateGeoProjectionViewport(
+        { type: 'FeatureCollection', features: [geoFeatureA] },
+        'geoMercator',
+        defaultChartDimensions
+      );
+
+      return computeMapProjection('geoMercator', projectionViewport);
+    });
+  });
   afterAll(() => {
     jest.clearAllMocks();
   });

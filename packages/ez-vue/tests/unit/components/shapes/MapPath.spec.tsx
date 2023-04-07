@@ -7,18 +7,20 @@ import {
 } from 'eazychart-core/src/sample-data';
 import MapPath from '@/components/shapes/MapPath';
 import {
-  calculateGeoProjectionCenter,
+  calculateGeoProjectionViewport,
+  computeMapProjection,
   defaultChartDimensions,
 } from 'eazychart-core/src';
 import { GeoFeatureDatum } from 'eazychart-core/src/types';
 
 describe('MapPath', () => {
   it('renders an svg path given a GeoJSON feature', async () => {
-    const projectionCenter = calculateGeoProjectionCenter(
+    const projectionViewport = calculateGeoProjectionViewport(
       { type: 'FeatureCollection', features: [geoFeatureA] },
       'geoMercator',
       defaultChartDimensions,
     );
+    const mapContext = computeMapProjection('geoMercator', projectionViewport);
     const wrapper = render(MapPath, {
       propsData: {
         shapeDatum: {
@@ -26,7 +28,6 @@ describe('MapPath', () => {
           color: 'red',
           feature: geoFeatureA,
         } as GeoFeatureDatum,
-        projectionCenter,
       },
       provide: {
         __reactiveInject__: {
@@ -37,6 +38,7 @@ describe('MapPath', () => {
               delay: 0,
             },
           },
+          mapContext,
         },
         tooltip,
         dimensions,

@@ -5,11 +5,19 @@ import {
   GeoFeatureCollection,
   ChartContext,
   AnyScale,
+  MapContext,
+  GeoProjectionViewport,
 } from 'eazychart-core/src/types';
-import { InjectReactive, Prop } from 'vue-property-decorator';
+import {
+  InjectReactive,
+  Prop,
+  ProvideReactive,
+  Watch,
+} from 'vue-property-decorator';
 import MapPath from '@/components/shapes/MapPath';
 import {
-  calculateGeoProjectionCenter,
+  calculateGeoProjectionViewport,
+  computeMapProjection,
   scaleGeoFeatureData,
 } from 'eazychart-core/src';
 
@@ -31,12 +39,11 @@ export default class Map extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  get projectionCenter() {
-    const { geoJson, chart, map } = this;
-    const { dimensions } = chart;
-    const { projectionType } = map;
-    return calculateGeoProjectionCenter(geoJson, projectionType, dimensions);
-  }
+  private projectionViewPort: GeoProjectionViewport = {
+    scale: 150,
+    center: [0, 0],
+    offset: [0, 0],
+  };
 
   get shapeData() {
     const {
@@ -54,20 +61,59 @@ export default class Map extends Vue {
     );
   }
 
+  @ProvideReactive('mapContext')
+  // @ts-ignore
+  private mapContext: MapContext = {
+    ...this.mapChartContext,
+    mapData: [],
+  };
+
+  @Watch('shapeData')
+  @Watch('chart.dimensions')
+  onMapContextChange() {
+    this.mapContext = { ...this.mapChartContext, mapData: this.shapeData };
+  }
+
+  @Watch('projectionType')
+  @Watch('shapeData')
+  @Watch('chart.dimensions')
+  onChartChange() {
+    const { geoJson, chart, map } = this;
+    const { dimensions } = chart;
+    const { projectionType } = map;
+
+    this.projectionViewPort = calculateGeoProjectionViewport(
+      geoJson,
+      projectionType,
+      dimensions,
+    );
+  }
+
+  get mapChartContext(): Omit<MapContext, 'mapData'> {
+    const { projectionViewPort, map } = this;
+    const { projectionType } = map;
+
+    return {
+      ...computeMapProjection(projectionType, projectionViewPort),
+    };
+  }
+
   render() {
-    const { map, projectionCenter, shapeData } = this;
+    const { map, shapeData, $scopedSlots } = this;
 
     return (
       <g class="ez-map">
         {shapeData.map((shapeDatum, idx) => (
-            <MapPath
-              key={idx}
-              shapeDatum={shapeDatum}
-              projectionType={map.projectionType}
-              projectionCenter={projectionCenter}
-              stroke={map.stroke}
-            />
+          <MapPath
+            key={idx}
+            shapeDatum={shapeDatum}
+            stroke={map.stroke}
+          />
         ))}
+
+        {$scopedSlots.default ? (
+          <g class="ez-map-bubble">{$scopedSlots.default({})}</g>
+        ) : null}
       </g>
     );
   }

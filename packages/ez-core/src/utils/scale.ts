@@ -1,5 +1,4 @@
 import { pie } from 'd3-shape';
-import { geoCentroid } from 'd3-geo';
 import { ScaleBand, ScaleLinear, ScaleSqrt } from '../scales';
 import {
   ArrayOfTwoNumbers,
@@ -251,8 +250,9 @@ export const scaleGeoFeatureData = (
   features: GeoFeatures,
   geoDomainKey: string,
   valueDomainKey: string,
+  geoPathGenerator: GeoPathGenerator,
   colorScale: AnyScale | undefined,
-  defaultColor: string
+  defaultColor: string,
 ): GeoFeatureData => {
   return features.map((feature, idx) => {
     let color = defaultColor;
@@ -284,7 +284,7 @@ export const scaleGeoFeatureData = (
       );
     }
 
-    const [x, y] = geoCentroid(feature);
+    const [x, y] = geoPathGenerator.centroid(feature);
     return {
       id,
       color,

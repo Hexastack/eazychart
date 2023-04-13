@@ -49,6 +49,7 @@ export const Map: React.FC<MapProps> = ({
       geoJson?.features || [],
       geoDomainKey,
       valueDomainKey,
+      geoPathGenerator,
       colorScale,
       fill
     );

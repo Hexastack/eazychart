@@ -38,9 +38,6 @@ describe('Map', () => {
     });
 
     await Vue.nextTick();
-    await Vue.nextTick();
-    await Vue.nextTick();
-    await Vue.nextTick();
 
     expect(wrapper.container.innerHTML).toMatchSnapshot();
   });

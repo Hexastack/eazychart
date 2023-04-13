@@ -40,48 +40,51 @@ export default class Map extends Vue {
   private chart!: ChartContext;
 
   private projectionViewPort: GeoProjectionViewport = {
-    scale: 150,
-    center: [0, 0],
-    offset: [0, 0],
+    scale: 3245.9683663289666,
+    center: [-108.12968310294252, 40.49228863865995],
+    offset: [399.7007419894367, 302.1284346877323],
+  };
+
+  @ProvideReactive('mapContext')
+  // @ts-ignore
+  private mapContext: MapContext = {
+    ...this.mapProjection,
+    mapData: [],
   };
 
   get shapeData() {
     const {
-      geoJson, chart, colorScale, map,
+      geoJson, chart, colorScale, map, mapProjection,
     } = this;
     const { data } = chart;
     const { geoDomainKey, valueDomainKey, fill } = map;
+
     return scaleGeoFeatureData(
       data,
       geoJson?.features || [],
       geoDomainKey,
       valueDomainKey,
+      mapProjection.geoPathGenerator,
       colorScale,
       fill,
     );
   }
 
-  @ProvideReactive('mapContext')
-  // @ts-ignore
-  private mapContext: MapContext = {
-    ...this.mapChartContext,
-    mapData: [],
-  };
-
-  @Watch('shapeData')
   @Watch('chart.dimensions')
+  @Watch('projectionViewPort')
   onMapContextChange() {
-    this.mapContext = { ...this.mapChartContext, mapData: this.shapeData };
+    this.mapContext = {
+      ...this.mapProjection,
+      mapData: this.shapeData,
+    };
   }
 
-  @Watch('projectionType')
-  @Watch('shapeData')
+  @Watch('map.projectionType')
   @Watch('chart.dimensions')
   onChartChange() {
     const { geoJson, chart, map } = this;
     const { dimensions } = chart;
     const { projectionType } = map;
-
     this.projectionViewPort = calculateGeoProjectionViewport(
       geoJson,
       projectionType,
@@ -89,10 +92,9 @@ export default class Map extends Vue {
     );
   }
 
-  get mapChartContext(): Omit<MapContext, 'mapData'> {
+  get mapProjection(): Omit<MapContext, 'mapData'> {
     const { projectionViewPort, map } = this;
     const { projectionType } = map;
-
     return {
       ...computeMapProjection(projectionType, projectionViewPort),
     };
@@ -100,15 +102,10 @@ export default class Map extends Vue {
 
   render() {
     const { map, shapeData, $scopedSlots } = this;
-
     return (
       <g class="ez-map">
         {shapeData.map((shapeDatum, idx) => (
-          <MapPath
-            key={idx}
-            shapeDatum={shapeDatum}
-            stroke={map.stroke}
-          />
+          <MapPath key={idx} shapeDatum={shapeDatum} stroke={map.stroke} />
         ))}
 
         {$scopedSlots.default ? (

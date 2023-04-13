@@ -66,9 +66,7 @@ export default class MapPath extends mixins(AnimationMixin) {
 
   get animationArguments() {
     const { shapeDatum, mapContext } = this;
-
-    const path = mapContext.geoPathGenerator(shapeDatum.feature);
-
+    const path = mapContext?.geoPathGenerator(shapeDatum.feature) || '';
     return {
       from: this.currentShapeData,
       to: path || '',

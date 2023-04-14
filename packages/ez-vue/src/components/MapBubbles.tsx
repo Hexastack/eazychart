@@ -45,10 +45,11 @@ export default class Bubbles extends Vue {
 
   get shapeData() {
     const { chart, mapContext, colorScale } = this;
+    const { mapData, projection } = mapContext;
     return scaleMapBubbleData(
       chart.data,
-      mapContext.mapData,
-      mapContext.geoPathGenerator,
+      mapData,
+      projection,
       this.rDomainKey,
       this.rScale,
       colorScale,

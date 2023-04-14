@@ -1,5 +1,7 @@
-import { PropType } from 'vue';
-import Component, { mixins } from 'vue-class-component';
+import Vue, { PropType } from 'vue';
+// import Component, { mixins } from 'vue-class-component';
+import Component from 'vue-class-component';
+
 import {
   ChartContext,
   GeoFeatureDatum,
@@ -7,11 +9,12 @@ import {
   TooltipContext,
 } from 'eazychart-core/src/types';
 import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
-import { defaultColor } from 'eazychart-core/src';
-import AnimationMixin from '@/lib/AnimationMixin';
+import { defaultColor, getGeoPathByProjection } from 'eazychart-core/src';
+// import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
-export default class MapPath extends mixins(AnimationMixin) {
+// export default class MapPath extends mixins(AnimationMixin) {
+export default class MapPath extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
@@ -64,9 +67,19 @@ export default class MapPath extends mixins(AnimationMixin) {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
-  get animationArguments() {
+  get currentShapeData2() {
     const { shapeDatum, mapContext } = this;
-    const path = mapContext?.geoPathGenerator(shapeDatum.feature) || '';
+    if (!mapContext?.projection) {
+      return '';
+    }
+    const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
+    return geoPathGenerator(shapeDatum.feature) || '';
+  }
+
+  get animationArguments() {
+    const { shapeDatum } = this;
+    const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
+    const path = geoPathGenerator(shapeDatum.feature) || '';
     return {
       from: this.currentShapeData,
       to: path || '',
@@ -79,7 +92,7 @@ export default class MapPath extends mixins(AnimationMixin) {
   render() {
     const {
       shapeDatum,
-      currentShapeData,
+      currentShapeData2,
       stroke,
       strokeWidth,
       fill,
@@ -90,7 +103,7 @@ export default class MapPath extends mixins(AnimationMixin) {
 
     return (
       <path
-        d={currentShapeData}
+        d={currentShapeData2}
         stroke={stroke || shapeDatum.color}
         stroke-width={strokeWidth}
         fill={shapeDatum.color || fill}

@@ -6,7 +6,7 @@ import {
   ChartContext,
   AnyScale,
   MapContext,
-  GeoProjectionViewport,
+  GeoProjection,
 } from 'eazychart-core/src/types';
 import {
   InjectReactive,
@@ -20,6 +20,7 @@ import {
   computeMapProjection,
   scaleGeoFeatureData,
 } from 'eazychart-core/src';
+import { defaultChartDimensions } from 'eazychart-core';
 
 @Component({ components: { MapPath } })
 export default class Map extends Vue {
@@ -39,23 +40,15 @@ export default class Map extends Vue {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
-  private projectionViewPort: GeoProjectionViewport = {
-    scale: 3245.9683663289666,
-    center: [-108.12968310294252, 40.49228863865995],
-    offset: [399.7007419894367, 302.1284346877323],
-  };
-
   @ProvideReactive('mapContext')
   // @ts-ignore
   private mapContext: MapContext = {
-    ...this.mapProjection,
+    projection: this.mapProjection,
     mapData: [],
   };
 
   get shapeData() {
-    const {
-      geoJson, chart, colorScale, map, mapProjection,
-    } = this;
+    const { geoJson, chart, colorScale, map, mapProjection } = this;
     const { data } = chart;
     const { geoDomainKey, valueDomainKey, fill } = map;
 
@@ -64,7 +57,7 @@ export default class Map extends Vue {
       geoJson?.features || [],
       geoDomainKey,
       valueDomainKey,
-      mapProjection.geoPathGenerator,
+      mapProjection,
       colorScale,
       fill,
     );
@@ -74,30 +67,21 @@ export default class Map extends Vue {
   @Watch('projectionViewPort')
   onMapContextChange() {
     this.mapContext = {
-      ...this.mapProjection,
+      projection: this.mapProjection,
       mapData: this.shapeData,
     };
   }
 
-  @Watch('map.projectionType')
-  @Watch('chart.dimensions')
-  onChartChange() {
+  get mapProjection(): GeoProjection {
     const { geoJson, chart, map } = this;
-    const { dimensions } = chart;
     const { projectionType } = map;
-    this.projectionViewPort = calculateGeoProjectionViewport(
+    const projectionViewPort = calculateGeoProjectionViewport(
       geoJson,
       projectionType,
-      dimensions,
+      chart?.dimensions || defaultChartDimensions,
     );
-  }
-
-  get mapProjection(): Omit<MapContext, 'mapData'> {
-    const { projectionViewPort, map } = this;
-    const { projectionType } = map;
-    return {
-      ...computeMapProjection(projectionType, projectionViewPort),
-    };
+    const projection = computeMapProjection(projectionType, projectionViewPort);
+    return projection;
   }
 
   render() {

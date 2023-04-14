@@ -13,10 +13,11 @@ import {
   ArcDatum,
   GeoFeatureData,
   GeoFeatures,
-  GeoPathGenerator,
+  GeoProjection,
   PointDatum,
   RectangleDatum,
 } from './types';
+import { getGeoPathByProjection } from '../utils/map'
 
 export const scaleDatumValue = <T = string | number>(
   datum: NormalizedDatum,
@@ -250,10 +251,11 @@ export const scaleGeoFeatureData = (
   features: GeoFeatures,
   geoDomainKey: string,
   valueDomainKey: string,
-  geoPathGenerator: GeoPathGenerator,
+  projection: GeoProjection,
   colorScale: AnyScale | undefined,
   defaultColor: string,
 ): GeoFeatureData => {
+  const geoPath = getGeoPathByProjection(projection)
   return features.map((feature, idx) => {
     let color = defaultColor;
     let id: string = `${feature.id || idx}`;
@@ -284,7 +286,7 @@ export const scaleGeoFeatureData = (
       );
     }
 
-    const [x, y] = geoPathGenerator.centroid(feature);
+    const [x, y] = geoPath.centroid(feature);
     return {
       id,
       color,
@@ -297,18 +299,19 @@ export const scaleGeoFeatureData = (
 export const scaleMapBubbleData = (
   data: NormalizedData,
   mapData: GeoFeatureData,
-  geoPathGenerator: GeoPathGenerator,
+  projection: GeoProjection,
   rDomainKey: string,
   rScale: ScaleSqrt,
   colorScale: AnyScale
 ): PointDatum[] => {
+  const geoPath = getGeoPathByProjection(projection)
   return mapData.map(shapeDatum => {
     const datum = data.find(
       datum => rDomainKey in datum && datum.id === shapeDatum.id
     );
     if (datum) {
       const v = datum[rDomainKey] as number;
-      const [x, y] = geoPathGenerator.centroid(shapeDatum.feature);
+      const [x, y] = geoPath.centroid(shapeDatum.feature);
       return {
         id: shapeDatum.id,
         x,

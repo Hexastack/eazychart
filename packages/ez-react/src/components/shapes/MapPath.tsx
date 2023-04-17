@@ -1,6 +1,6 @@
 import React, { FC, MouseEventHandler, SVGAttributes, useMemo } from 'react';
 import { GeoFeatureDatum } from 'eazychart-core/src/types';
-import { defaultColor } from 'eazychart-core/src';
+import { defaultColor, getGeoPathByProjection } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
@@ -19,11 +19,11 @@ export const MapPath: FC<MapPathProps> = ({
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const { animationOptions } = useChart();
-  const { geoPathGenerator } = useMap();
-  const dataPath = useMemo(
-    () => geoPathGenerator(shapeDatum.feature),
-    [geoPathGenerator, shapeDatum.feature]
-  );
+  const { projection } = useMap();
+  const dataPath = useMemo(() => {
+    const geoPathGenerator = getGeoPathByProjection(projection);
+    return geoPathGenerator(shapeDatum.feature);
+  }, [projection, shapeDatum.feature]);
 
   const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
 

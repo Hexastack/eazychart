@@ -25,7 +25,12 @@ describe('MapPath', () => {
         defaultChartDimensions
       );
 
-      return computeMapProjection('geoMercator', projectionViewport);
+      const projection = computeMapProjection(
+        'geoMercator',
+        projectionViewport
+      );
+
+      return { projection };
     });
   });
   afterAll(() => {

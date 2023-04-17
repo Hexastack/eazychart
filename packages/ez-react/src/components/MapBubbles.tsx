@@ -27,20 +27,20 @@ export const MapBubbles: FC<MapBubblesProps> = ({
 }) => {
   const { data } = useChart();
   const { sqrtScale: rScale } = useSqrtScale();
-  const { geoPathGenerator, mapData } = useMap();
+  const { projection, mapData } = useMap();
   const { colorScale } = useColorScale();
 
   const shapeData = useMemo(() => {
     return scaleMapBubbleData(
       data,
       mapData,
-      geoPathGenerator,
+      projection,
       rDomainKey,
       rScale,
       colorScale
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, geoPathGenerator, rDomainKey, rScale]);
+  }, [data, projection, rDomainKey, rScale]);
 
   if (scopedSlots && scopedSlots.default) {
     return (

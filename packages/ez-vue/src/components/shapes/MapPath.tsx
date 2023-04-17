@@ -85,7 +85,7 @@ export default class MapPath extends Vue {
       to: path || '',
       options: this.chart.animationOptions,
       onUpdate: (v: string) => (this.currentShapeData = v),
-      dependencies: ['shapeDatum', 'projectionType', 'projectionViewPort'],
+      dependencies: ['shapeDatum', 'mapContext'],
     };
   }
 

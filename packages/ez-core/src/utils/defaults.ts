@@ -114,9 +114,9 @@ export const defaultChartContext: ChartContext = {
 
 export const defaultMapContext: MapContext = {
   mapData: [],
-  ...computeMapProjection('geoMercator', {
+  projection: computeMapProjection('geoMercator', {
     offset: [0, 0],
     center: [0, 0],
-    scale: 0
-  })
+    scale: 0,
+  }),
 };

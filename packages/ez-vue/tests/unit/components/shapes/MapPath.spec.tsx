@@ -1,10 +1,6 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
-import {
-  dimensions,
-  geoFeatureA,
-  tooltip,
-} from 'eazychart-core/src/sample-data';
+import { geoFeatureA, tooltip } from 'eazychart-core/src/sample-data';
 import MapPath from '@/components/shapes/MapPath';
 import {
   calculateGeoProjectionViewport,
@@ -20,7 +16,8 @@ describe('MapPath', () => {
       'geoMercator',
       defaultChartDimensions,
     );
-    const mapContext = computeMapProjection('geoMercator', projectionViewport);
+    const projection = computeMapProjection('geoMercator', projectionViewport);
+
     const wrapper = render(MapPath, {
       propsData: {
         shapeDatum: {
@@ -38,10 +35,9 @@ describe('MapPath', () => {
               delay: 0,
             },
           },
-          mapContext,
+          mapContext: { projection },
         },
         tooltip,
-        dimensions,
       },
     });
 

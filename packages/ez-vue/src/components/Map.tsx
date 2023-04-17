@@ -48,7 +48,9 @@ export default class Map extends Vue {
   };
 
   get shapeData() {
-    const { geoJson, chart, colorScale, map, mapProjection } = this;
+    const {
+      geoJson, chart, colorScale, map, mapProjection,
+    } = this;
     const { data } = chart;
     const { geoDomainKey, valueDomainKey, fill } = map;
 

@@ -38,7 +38,7 @@ export const Map: React.FC<MapProps> = ({
     [geoJson, projectionType, dimensions]
   );
 
-  const { projection, geoPathGenerator } = useMemo(
+  const projection = useMemo(
     () => computeMapProjection(projectionType, projectionViewport),
     [projectionType, projectionViewport]
   );
@@ -49,7 +49,7 @@ export const Map: React.FC<MapProps> = ({
       geoJson?.features || [],
       geoDomainKey,
       valueDomainKey,
-      geoPathGenerator,
+      projection,
       colorScale,
       fill
     );
@@ -57,7 +57,7 @@ export const Map: React.FC<MapProps> = ({
   }, [data, geoJson?.features, geoDomainKey, colorScale.scale]);
 
   return (
-    <MapContext.Provider value={{ projection, geoPathGenerator, mapData }}>
+    <MapContext.Provider value={{ projection, mapData }}>
       <g className="ez-map" {...rest}>
         {mapData.map((shapeDatum, idx) => {
           return <MapPath key={idx} shapeDatum={shapeDatum} stroke={stroke} />;

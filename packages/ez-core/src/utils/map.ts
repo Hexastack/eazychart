@@ -5,7 +5,6 @@ import {
   GeoProjectionViewport,
   GeoProjectionType,
   GeoProjection,
-  GeoPathGenerator,
 } from './types';
 
 export const calculateGeoProjectionViewport = (
@@ -44,7 +43,7 @@ export const calculateGeoProjectionViewport = (
 export const computeMapProjection = (
   projectionType: GeoProjectionType,
   { center, scale, offset }: GeoProjectionViewport
-): { projection: GeoProjection; geoPathGenerator: GeoPathGenerator } => {
+): GeoProjection => {
   if (!(projectionType in d3Geo)) {
     throw new Error('Uknown projection type provided!');
   }
@@ -55,8 +54,9 @@ export const computeMapProjection = (
   projection.scale(scale);
   projection.translate(offset);
 
-  return {
-    projection,
-    geoPathGenerator: d3Geo.geoPath(projection),
-  };
+  return projection;
 };
+
+export const getGeoPathByProjection = (projection: GeoProjection) => {
+  return d3Geo.geoPath(projection);
+}

@@ -1,20 +1,23 @@
 import { PropType } from 'vue';
 import Component, { mixins } from 'vue-class-component';
+
 import {
   ChartContext,
   GeoFeatureDatum,
-  GeoProjectionCenter,
-  GeoProjectionType,
+  MapContext,
   TooltipContext,
 } from 'eazychart-core/src/types';
 import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
-import { defaultColor, generateGeoFeaturePath } from 'eazychart-core/src';
+import { defaultColor, getGeoPathByProjection } from 'eazychart-core/src';
 import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
 export default class MapPath extends mixins(AnimationMixin) {
   @InjectReactive('chart')
   private chart!: ChartContext;
+
+  @InjectReactive('mapContext')
+  private mapContext!: MapContext;
 
   @Inject('tooltip')
   private tooltip!: TooltipContext;
@@ -23,20 +26,6 @@ export default class MapPath extends mixins(AnimationMixin) {
     type: Object as PropType<GeoFeatureDatum>,
   })
   private readonly shapeDatum!: GeoFeatureDatum;
-
-  @Prop({
-    type: String as PropType<GeoProjectionType>,
-    default() {
-      return 'geoMercator';
-    },
-  })
-  private readonly projectionType!: GeoProjectionType;
-
-  @Prop({
-    type: Object as PropType<GeoProjectionCenter>,
-    required: true,
-  })
-  private readonly projectionCenter!: GeoProjectionCenter;
 
   @Prop({
     type: String,
@@ -77,19 +66,15 @@ export default class MapPath extends mixins(AnimationMixin) {
   }
 
   get animationArguments() {
-    const { shapeDatum, projectionType, projectionCenter } = this;
-    const path = generateGeoFeaturePath(
-      shapeDatum.feature,
-      projectionType,
-      projectionCenter,
-    );
-
+    const { shapeDatum } = this;
+    const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
+    const path = geoPathGenerator(shapeDatum.feature) || '';
     return {
       from: this.currentShapeData,
       to: path || '',
       options: this.chart.animationOptions,
       onUpdate: (v: string) => (this.currentShapeData = v),
-      dependencies: ['shapeDatum', 'projectionType', 'projectionCenter'],
+      dependencies: ['shapeDatum', 'mapContext'],
     };
   }
 

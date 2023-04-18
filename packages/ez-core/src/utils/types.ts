@@ -98,7 +98,6 @@ export interface ChartContext {
 export interface MapContext {
   mapData: GeoFeatureData;
   projection: GeoProjection;
-  geoPathGenerator: GeoPathGenerator;
 }
 
 export type TooltipContext = {

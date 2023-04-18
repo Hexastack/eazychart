@@ -1,6 +1,5 @@
-import Vue, { PropType } from 'vue';
-// import Component, { mixins } from 'vue-class-component';
-import Component from 'vue-class-component';
+import { PropType } from 'vue';
+import Component, { mixins } from 'vue-class-component';
 
 import {
   ChartContext,
@@ -10,11 +9,10 @@ import {
 } from 'eazychart-core/src/types';
 import { Inject, InjectReactive, Prop } from 'vue-property-decorator';
 import { defaultColor, getGeoPathByProjection } from 'eazychart-core/src';
-// import AnimationMixin from '@/lib/AnimationMixin';
+import AnimationMixin from '@/lib/AnimationMixin';
 
 @Component
-// export default class MapPath extends mixins(AnimationMixin) {
-export default class MapPath extends Vue {
+export default class MapPath extends mixins(AnimationMixin) {
   @InjectReactive('chart')
   private chart!: ChartContext;
 
@@ -67,15 +65,6 @@ export default class MapPath extends Vue {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
-  get currentShapeData2() {
-    const { shapeDatum, mapContext } = this;
-    if (!mapContext?.projection) {
-      return '';
-    }
-    const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
-    return geoPathGenerator(shapeDatum.feature) || '';
-  }
-
   get animationArguments() {
     const { shapeDatum } = this;
     const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
@@ -92,7 +81,7 @@ export default class MapPath extends Vue {
   render() {
     const {
       shapeDatum,
-      currentShapeData2,
+      currentShapeData,
       stroke,
       strokeWidth,
       fill,
@@ -103,7 +92,7 @@ export default class MapPath extends Vue {
 
     return (
       <path
-        d={currentShapeData2}
+        d={currentShapeData}
         stroke={stroke || shapeDatum.color}
         stroke-width={strokeWidth}
         fill={shapeDatum.color || fill}

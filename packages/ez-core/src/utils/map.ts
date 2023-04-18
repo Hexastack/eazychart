@@ -58,8 +58,5 @@ export const computeMapProjection = (
 };
 
 export const getGeoPathByProjection = (projection: GeoProjection) => {
-  const geoPath =  d3Geo.geoPath(projection);
-  // @ts-ignore
-  geoPath._projection = projection;
   return d3Geo.geoPath(projection);
 }

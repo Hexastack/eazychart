@@ -12,7 +12,6 @@ import {
   Dimensions,
   NormalizedData,
   NormalizedDataDict,
-  NormalizedDatum,
   Point,
   ScaleBandDefinition,
   ScaleLinearDefinition,
@@ -96,6 +95,11 @@ export interface ChartContext {
   onLegendClick?: (key: string, isActive: boolean, color: string) => void;
 }
 
+export interface MapContext {
+  mapData: GeoFeatureData;
+  projection: GeoProjection;
+}
+
 export type TooltipContext = {
   showTooltip: (_datum: ShapeDatum, _event: MouseEvent) => void;
   hideTooltip: (_datum: ShapeDatum, _event: MouseEvent) => void;
@@ -155,6 +159,7 @@ export type GeoFeatureCollection = FeatureCollection<Geometry, GeoJsonProperties
 export type GeoFeatures = FeatureCollection['features'];
 
 export type GeoProjection = d3Geo.GeoProjection;
+export type GeoPathGenerator = d3Geo.GeoPath;
 
 export type GeoProjectionType = keyof Pick<
   typeof d3Geo,
@@ -174,20 +179,18 @@ export type GeoProjectionType = keyof Pick<
   | 'geoNaturalEarth1'
 >;
 
-export type GeoProjectionCenter = {
+export type GeoProjectionViewport = {
   center: [number, number],
   scale: number,
   offset: [number, number]
 }
 
-export type GeoFeatureDatum = GeoFeature & ShapeAttributes;
-
-export type GeoFeatureDataDict = {
-  [geoDomainKey: string]: {
-    feature: GeoFeature;
-    datum: NormalizedDatum | undefined;
-  };
+export type GeoFeatureDatum = ShapeAttributes & {
+  feature: GeoFeature;
+  centroid: Point;
 };
+
+export type GeoFeatureData = GeoFeatureDatum[];
 
 export type MapConfig = {
   geoDomainKey: string;

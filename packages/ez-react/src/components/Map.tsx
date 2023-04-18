@@ -1,39 +1,55 @@
 import React, { SVGAttributes, useMemo } from 'react';
 import {
-  calculateGeoProjectionCenter,
+  calculateGeoProjectionViewport,
+  computeMapProjection,
   scaleGeoFeatureData,
 } from 'eazychart-core/src';
-import { GeoFeatureCollection, MapConfig } from 'eazychart-core/src/types';
+import { GeoJsonData, MapConfig } from 'eazychart-core/src/types';
 import { MapPath } from './shapes/MapPath';
 import { useColorScale } from './scales/ColorScale';
 import { useChart } from '@/lib/use-chart';
+import { MapContext } from '@/lib/use-map';
 
-export interface MapChartProps extends SVGAttributes<SVGPathElement> {
+export interface MapProps extends SVGAttributes<SVGPathElement> {
   isWrapped?: boolean;
   map: MapConfig;
-  geoJson: GeoFeatureCollection;
+  geoJson: GeoJsonData;
+  children?: React.ReactNode;
 }
 
-export const Map: React.FC<MapChartProps> = ({
+export const Map: React.FC<MapProps> = ({
   geoJson,
-  map,
+  map: { projectionType, geoDomainKey, valueDomainKey, fill, stroke },
+  children,
   ...rest
-}: MapChartProps) => {
-  const { projectionType, geoDomainKey, valueDomainKey, fill, stroke } = map;
+}) => {
+  // Validate GeoJSON data structure
+  if (geoJson && !('features' in geoJson)) {
+    throw new Error(
+      'GeoJSON must contain features so that each feature is mapped to a data item.'
+    );
+  }
+
   const { colorScale } = useColorScale();
   const { data, dimensions } = useChart();
 
-  const projectionCenter = useMemo(
-    () => calculateGeoProjectionCenter(geoJson, projectionType, dimensions),
+  const projectionViewport = useMemo(
+    () => calculateGeoProjectionViewport(geoJson, projectionType, dimensions),
     [geoJson, projectionType, dimensions]
   );
 
-  const shapeData = useMemo(() => {
+  const projection = useMemo(
+    () => computeMapProjection(projectionType, projectionViewport),
+    [projectionType, projectionViewport]
+  );
+
+  const mapData = useMemo(() => {
     return scaleGeoFeatureData(
       data,
       geoJson?.features || [],
       geoDomainKey,
       valueDomainKey,
+      projection,
       colorScale,
       fill
     );
@@ -41,18 +57,13 @@ export const Map: React.FC<MapChartProps> = ({
   }, [data, geoJson?.features, geoDomainKey, colorScale.scale]);
 
   return (
-    <g {...rest} className="ez-map">
-      {shapeData.map((shapeDatum, idx) => {
-        return (
-          <MapPath
-            key={idx}
-            shapeDatum={shapeDatum}
-            projectionType={projectionType}
-            projectionCenter={projectionCenter}
-            stroke={stroke}
-          />
-        );
-      })}
-    </g>
+    <MapContext.Provider value={{ projection, mapData }}>
+      <g className="ez-map" {...rest}>
+        {mapData.map((shapeDatum, idx) => {
+          return <MapPath key={idx} shapeDatum={shapeDatum} stroke={stroke} />;
+        })}
+      </g>
+      {children}
+    </MapContext.Provider>
   );
 };

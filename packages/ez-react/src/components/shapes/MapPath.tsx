@@ -1,26 +1,17 @@
 import React, { FC, MouseEventHandler, SVGAttributes, useMemo } from 'react';
-import {
-  GeoProjection,
-  GeoProjectionType,
-  GeoProjectionCenter,
-  GeoFeatureDatum,
-} from 'eazychart-core/src/types';
-import { defaultColor, generateGeoFeaturePath } from 'eazychart-core/src';
+import { GeoFeatureDatum } from 'eazychart-core/src/types';
+import { defaultColor, getGeoPathByProjection } from 'eazychart-core/src';
 import { useAnimation } from '@/lib/use-animation';
 import { useChart } from '@/lib/use-chart';
 import { useTooltip } from '../addons/tooltip/use-tooltip';
+import { useMap } from '@/lib/use-map';
 
 export interface MapPathProps extends SVGAttributes<SVGPathElement> {
   shapeDatum: GeoFeatureDatum;
-  projectionType?: GeoProjectionType;
-  projection?: GeoProjection;
-  projectionCenter: GeoProjectionCenter;
 }
 
 export const MapPath: FC<MapPathProps> = ({
   shapeDatum,
-  projectionType = 'geoMercator',
-  projectionCenter,
   stroke = defaultColor,
   fill = defaultColor,
   strokeWidth = 1,
@@ -28,10 +19,11 @@ export const MapPath: FC<MapPathProps> = ({
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const { animationOptions } = useChart();
-  const dataPath = useMemo(
-    () => generateGeoFeaturePath(shapeDatum, projectionType, projectionCenter),
-    [shapeDatum, projectionType, projectionCenter]
-  );
+  const { projection } = useMap();
+  const dataPath = useMemo(() => {
+    const geoPathGenerator = getGeoPathByProjection(projection);
+    return geoPathGenerator(shapeDatum.feature);
+  }, [projection, shapeDatum.feature]);
 
   const currentData = useAnimation(dataPath || '', '', animationOptions) || '';
 

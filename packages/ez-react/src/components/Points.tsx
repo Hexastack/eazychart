@@ -52,7 +52,7 @@ export const Points: FC<PointsProps> = ({
 
   if (scopedSlots && scopedSlots.default) {
     return (
-      <g className="ez-points">
+      <g className="ez-points" {...rest}>
         {scopedSlots.default({
           shapeData,
           scales: { xScale, yScale },

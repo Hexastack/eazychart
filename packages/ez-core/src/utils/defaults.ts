@@ -7,9 +7,11 @@ import {
   ChartContext,
   TooltipContext,
   ShapeDatum,
+  MapContext,
 } from './types';
 import { Point, Anchor, Dimensions, ShapeAttributes } from '../types';
 import { AnimationOptions } from '../animation/types';
+import { computeMapProjection } from './map';
 
 export const defaultColor = '#1f77b4';
 
@@ -108,4 +110,13 @@ export const defaultChartContext: ChartContext = {
   isRTL: false,
   registerScale: () => {},
   getScale: () => null,
+};
+
+export const defaultMapContext: MapContext = {
+  mapData: [],
+  projection: computeMapProjection('geoMercator', {
+    offset: [0, 0],
+    center: [0, 0],
+    scale: 0,
+  }),
 };

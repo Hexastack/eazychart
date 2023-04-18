@@ -1,32 +1,30 @@
 import Vue from 'vue';
 import { render } from '@testing-library/vue';
-import {
-  dimensions,
-  geoFeatureA,
-  tooltip,
-} from 'eazychart-core/src/sample-data';
+import { geoFeatureA, tooltip } from 'eazychart-core/src/sample-data';
 import MapPath from '@/components/shapes/MapPath';
 import {
-  calculateGeoProjectionCenter,
+  calculateGeoProjectionViewport,
+  computeMapProjection,
   defaultChartDimensions,
 } from 'eazychart-core/src';
 import { GeoFeatureDatum } from 'eazychart-core/src/types';
 
 describe('MapPath', () => {
   it('renders an svg path given a GeoJSON feature', async () => {
-    const projectionCenter = calculateGeoProjectionCenter(
+    const projectionViewport = calculateGeoProjectionViewport(
       { type: 'FeatureCollection', features: [geoFeatureA] },
       'geoMercator',
       defaultChartDimensions,
     );
+    const projection = computeMapProjection('geoMercator', projectionViewport);
+
     const wrapper = render(MapPath, {
       propsData: {
         shapeDatum: {
           id: '1',
           color: 'red',
-          ...geoFeatureA,
+          feature: geoFeatureA,
         } as GeoFeatureDatum,
-        projectionCenter,
       },
       provide: {
         __reactiveInject__: {
@@ -37,9 +35,9 @@ describe('MapPath', () => {
               delay: 0,
             },
           },
+          mapContext: { projection },
         },
         tooltip,
-        dimensions,
       },
     });
 

@@ -56,12 +56,6 @@ export const MapChart: FC<MapChartProps> = ({
     TooltipComponent: Tooltip,
   },
 }) => {
-  if (geoJson && !('features' in geoJson)) {
-    throw new Error(
-      'GeoJSON must contain features so that each feature is mapped to a data item.'
-    );
-  }
-
   return (
     <Chart
       dimensions={dimensions}

@@ -11,18 +11,19 @@ import {
   getArgTypesByProp,
 } from 'eazychart-dev/storybook/utils';
 import { GeoProjectionType } from 'eazychart-core/src/types';
-import MapChart from '@/recipes/map/MapChart';
 import { ChartWrapper, buildTemplate } from '@/lib/storybook-utils';
+import BubbleMapChart from './BubbleMapChart';
 
 const mapChartArgs = {
   ...BASE_CHART_ARG_TYPES,
   ...getArgTypesByProp('map'),
   ...getArgTypesByProp('geoJson'),
+  ...getArgTypesByProp('bubble'),
 };
 
 const meta: Meta = {
-  title: 'Vue/Map Chart',
-  component: MapChart,
+  title: 'Vue/Map Chart/BubbleMap',
+  component: BubbleMapChart,
   parameters: {
     controls: { expanded: true },
   },
@@ -31,11 +32,11 @@ const meta: Meta = {
 
 export default meta;
 
-type MapChartProps = InstanceType<typeof MapChart>['$props'];
+type BubbleMapChartProps = InstanceType<typeof BubbleMapChart>['$props'];
 
-const DefaultTemplate: Story = buildTemplate((args: MapChartProps) => ({
-  title: 'Default',
-  components: { MapChart, ChartWrapper },
+const DefaultTemplate: Story = buildTemplate((args: BubbleMapChartProps) => ({
+  title: 'BubbleMap',
+  components: { BubbleMapChart, ChartWrapper },
   props: {
     allPropsFromArgs: {
       default: () => args,
@@ -43,7 +44,7 @@ const DefaultTemplate: Story = buildTemplate((args: MapChartProps) => ({
   },
   template: `
     <ChartWrapper>
-      <MapChart v-bind="allPropsFromArgs" />
+      <BubbleMapChart v-bind="allPropsFromArgs" />
     </ChartWrapper>
   `,
 }));
@@ -51,7 +52,7 @@ const DefaultTemplate: Story = buildTemplate((args: MapChartProps) => ({
 // By passing using the Args format for exported stories,
 // you can control the props for a component for reuse in a test
 // https://storybook.js.org/docs/vue/workflows/unit-testing
-export const Default = DefaultTemplate.bind({});
+export const BubbleMap = DefaultTemplate.bind({});
 
 const defaultArguments = flattenArgs({
   map: {
@@ -59,14 +60,23 @@ const defaultArguments = flattenArgs({
     valueDomainKey: 'value',
     projectionType: 'geoMercator' as GeoProjectionType,
     stroke: 'black',
-    fill: 'black',
+    fill: 'white',
   },
   dimensions: { width: 800, height: 600 },
   padding,
   animationOptions,
   colors: ['white', 'pink', 'red'],
+  bubble: {
+    domainKey: 'rValue',
+    minRadius: 5,
+    maxRadius: 20,
+    opacity: 0.5,
+    stroke: 'black',
+    strokeWidth: 1,
+    colors: ['green', 'yellowgreen', 'yellow'],
+  },
   geoJson: mapGeoJson,
   data: mapData,
 });
 
-Default.args = defaultArguments;
+BubbleMap.args = defaultArguments;

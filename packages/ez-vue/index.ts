@@ -14,6 +14,7 @@ import Legend from './src/components/addons/legend/Legend';
 import Tooltip from './src/components/addons/tooltip/Tooltip';
 import MultiLineChart from './src/recipes/line/MultiLineChart';
 import MapChart from './src/recipes/map/MapChart';
+import BubbleMapChart from './src/recipes/map/BubbleMapChart';
 import ResponsiveChartContainer from './src/components/ResponsiveChartContainer';
 
 export {
@@ -33,5 +34,6 @@ export {
   Tooltip,
   MultiLineChart,
   MapChart,
+  BubbleMapChart,
   ResponsiveChartContainer,
 };

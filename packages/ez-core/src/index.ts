@@ -37,3 +37,5 @@ export {
 export { default as Axis } from './axis';
 
 export * from './utils';
+
+export * from './types';

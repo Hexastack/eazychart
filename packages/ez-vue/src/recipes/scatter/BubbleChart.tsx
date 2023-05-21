@@ -10,6 +10,7 @@ import {
   Position,
   RawData,
   BubbleConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import { ScaleLinear } from 'eazychart-core/src';
@@ -124,6 +125,14 @@ export default class BubbleChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   render() {
     const {
       xAxis,
@@ -136,6 +145,7 @@ export default class BubbleChart extends Vue {
       isRTL,
       $scopedSlots,
       dimensions,
+      onShapeClick,
     } = this;
 
     return (
@@ -146,6 +156,7 @@ export default class BubbleChart extends Vue {
         animationOptions={animationOptions}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
+        onShapeClick={onShapeClick}
       >
         <CartesianScale
           xScaleConfig={{

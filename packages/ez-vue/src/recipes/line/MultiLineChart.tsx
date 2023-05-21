@@ -13,6 +13,7 @@ import {
   LineConfig,
   MarkerConfig,
   AxisConfigMulti,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -146,6 +147,14 @@ export default class MultiLineChart extends mixins(ToggleDomainKeyMixin) {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   getData(): RawData {
     return this.data;
   }
@@ -171,6 +180,7 @@ export default class MultiLineChart extends mixins(ToggleDomainKeyMixin) {
       activeDomain,
       activeDomainKeys,
       toggleDomainKey,
+      onShapeClick,
     } = this;
 
     const scopedSlots = {
@@ -186,8 +196,9 @@ export default class MultiLineChart extends mixins(ToggleDomainKeyMixin) {
         rawData={data}
         padding={padding}
         animationOptions={animationOptions}
-        scopedSlots={scopedSlots}
         isRTL={isRTL}
+        onShapeClick={onShapeClick}
+        scopedSlots={scopedSlots}
       >
         <CartesianScale
           xScaleConfig={{

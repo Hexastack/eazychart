@@ -13,6 +13,7 @@ import {
   LineConfig,
   MarkerConfig,
   ScaleLinearOrBand,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
@@ -166,6 +167,14 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   getData(): RawData {
     return this.data;
   }
@@ -194,6 +203,7 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
       activeData,
       activeColors,
       toggleDatum,
+      onShapeClick,
     } = this;
 
     const scopedSlots = {
@@ -209,6 +219,7 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
         rawData={activeData}
         padding={padding}
         animationOptions={animationOptions}
+        onShapeClick={onShapeClick}
         scopedSlots={scopedSlots}
         isRTL={isRTL}
       >

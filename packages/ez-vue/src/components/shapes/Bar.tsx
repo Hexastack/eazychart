@@ -41,6 +41,10 @@ export default class Bar extends mixins(AnimationMixin) {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
+  handleClick(event: MouseEvent) {
+    this.chart.onShapeClick && this.chart.onShapeClick(this.shapeDatum, event);
+  }
+
   get animationArguments() {
     return {
       from: this.currentShapeDatum,
@@ -57,6 +61,7 @@ export default class Bar extends mixins(AnimationMixin) {
       handleMouseOver,
       handleMouseMove,
       handleMouseLeave,
+      handleClick,
     } = this;
     const {
       color, x, y, width, height,
@@ -72,6 +77,7 @@ export default class Bar extends mixins(AnimationMixin) {
         onMouseover={handleMouseOver}
         onMousemove={handleMouseMove}
         onMouseleave={handleMouseLeave}
+        onClick={handleClick}
         data-testid="ez-bar"
       />
     );

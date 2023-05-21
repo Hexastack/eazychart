@@ -18,6 +18,7 @@ import {
   AreaData,
   AreaCurve,
   ScaleLinearOrBand,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import Chart from '@/components/Chart';
 import Axis from '@/components/scales/Axis';
@@ -170,6 +171,14 @@ export default class LineErrorMarginChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   get dataMarginBounds() {
     const { data, yAxis, errorMargins } = this;
     const dataValues = data.map((datum) => datum[yAxis.domainKey] as number);
@@ -197,6 +206,7 @@ export default class LineErrorMarginChart extends Vue {
       isRTL,
       $scopedSlots,
       dimensions,
+      onShapeClick,
     } = this;
     const [lowsestMarginValue, highestMarginValue] = this.dataMarginBounds;
     return (
@@ -205,6 +215,7 @@ export default class LineErrorMarginChart extends Vue {
         rawData={data}
         padding={padding}
         animationOptions={animationOptions}
+        onShapeClick={onShapeClick}
         scopedSlots={$scopedSlots}
         isRTL={isRTL}
       >

@@ -14,6 +14,8 @@ import {
   RawData,
   NormalizedDatum,
   AnyScale,
+  ShapeClickEventHandler,
+  ShapeDatum,
 } from 'eazychart-core/src/types';
 import {
   defaultChartAnimationOptions,
@@ -70,6 +72,14 @@ export default class Chart extends Vue {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   private containerDimensions: Dimensions = {
     width: 0,
     height: 0,
@@ -90,6 +100,7 @@ export default class Chart extends Vue {
     isRTL: this.isRTL,
     registerScale: this.registerScale,
     getScale: this.getScale,
+    onShapeClick: this.handleClick,
   };
 
   created() {
@@ -166,6 +177,10 @@ export default class Chart extends Vue {
       ...datum,
       isActive: newState,
     });
+  }
+
+  handleClick(shapeDatum: ShapeDatum, e: MouseEvent) {
+    this.onShapeClick(shapeDatum, e);
   }
 
   getLegendRef() {

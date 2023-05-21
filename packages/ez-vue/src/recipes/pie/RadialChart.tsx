@@ -6,6 +6,7 @@ import {
   RawData,
   RadialConfig,
   Dimensions,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -100,6 +101,14 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
   })
   private readonly arc!: RadialConfig;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   getData(): RawData {
     return this.data;
   }
@@ -124,6 +133,7 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
       activeData,
       activeColors,
       toggleDatum,
+      onShapeClick,
     } = this;
 
     const scopedSlots = {
@@ -139,6 +149,7 @@ export default class RadialChart extends mixins(ToggleDatumMixin) {
         rawData={activeData}
         padding={padding}
         animationOptions={animationOptions}
+        onShapeClick={onShapeClick}
         scopedSlots={scopedSlots}
       >
         <LinearScale

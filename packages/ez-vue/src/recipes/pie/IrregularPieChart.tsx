@@ -6,6 +6,7 @@ import {
   RawData,
   PieConfig,
   Dimensions,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -102,6 +103,14 @@ export default class IrregularPieChart extends mixins(ToggleDatumMixin) {
   })
   private readonly arc!: PieConfig;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   getData(): RawData {
     return this.data;
   }
@@ -126,6 +135,7 @@ export default class IrregularPieChart extends mixins(ToggleDatumMixin) {
       activeData,
       activeColors,
       toggleDatum,
+      onShapeClick,
     } = this;
 
     const scopedSlots = {
@@ -141,6 +151,7 @@ export default class IrregularPieChart extends mixins(ToggleDatumMixin) {
         rawData={activeData}
         padding={padding}
         animationOptions={animationOptions}
+        onShapeClick={onShapeClick}
         scopedSlots={scopedSlots}
       >
         <LinearScale definition={{ domainKey: valueDomainKey }}>

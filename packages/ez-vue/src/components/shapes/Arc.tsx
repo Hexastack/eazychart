@@ -95,6 +95,10 @@ export default class Arc extends mixins(AnimationMixin) {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
+  handleClick(event: MouseEvent) {
+    this.chart.onShapeClick && this.chart.onShapeClick(this.shapeDatum, event);
+  }
+
   get animationArguments() {
     return {
       from: this.currentShapeDatum,
@@ -125,6 +129,7 @@ export default class Arc extends mixins(AnimationMixin) {
       handleMouseOver,
       handleMouseMove,
       handleMouseLeave,
+      handleClick,
     } = this;
     return (
       <path
@@ -135,6 +140,7 @@ export default class Arc extends mixins(AnimationMixin) {
         onMouseover={handleMouseOver}
         onMousemove={handleMouseMove}
         onMouseleave={handleMouseLeave}
+        onClick={handleClick}
         class="ez-arc"
         data-testid="ez-arc"
       />

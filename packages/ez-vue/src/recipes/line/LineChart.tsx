@@ -12,6 +12,7 @@ import {
   RawData,
   LineConfig,
   MarkerConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -135,6 +136,14 @@ export default class LineChart extends Vue {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   render() {
     const {
       xAxis,
@@ -148,6 +157,7 @@ export default class LineChart extends Vue {
       isRTL,
       $scopedSlots,
       dimensions,
+      onShapeClick,
     } = this;
 
     return (
@@ -156,8 +166,9 @@ export default class LineChart extends Vue {
         rawData={data}
         padding={padding}
         animationOptions={animationOptions}
-        scopedSlots={$scopedSlots}
         isRTL={isRTL}
+        onShapeClick={onShapeClick}
+        scopedSlots={$scopedSlots}
       >
         <CartesianScale
           xScaleConfig={{

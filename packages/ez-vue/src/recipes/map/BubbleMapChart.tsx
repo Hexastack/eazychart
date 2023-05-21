@@ -8,6 +8,7 @@ import {
   AnimationOptions,
   RawData,
   BubbleConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import Chart from '@/components/Chart';
@@ -109,6 +110,14 @@ export default class BubbleMapChart extends Vue {
   })
   private readonly data!: RawData;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   render() {
     const {
       geoJson,
@@ -120,6 +129,7 @@ export default class BubbleMapChart extends Vue {
       data,
       colors,
       bubble,
+      onShapeClick,
     } = this;
 
     if (geoJson && !('features' in geoJson)) {
@@ -133,8 +143,9 @@ export default class BubbleMapChart extends Vue {
         dimensions={dimensions}
         padding={padding}
         animationOptions={animationOptions}
-        scopedSlots={$scopedSlots}
         rawData={data}
+        onShapeClick={onShapeClick}
+        scopedSlots={$scopedSlots}
       >
         <ColorScale
           type={'quantile'}

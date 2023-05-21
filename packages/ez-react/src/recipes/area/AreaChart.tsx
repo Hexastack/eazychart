@@ -11,6 +11,7 @@ import {
   Dimensions,
   AreaConfig,
   MarkerConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -30,6 +31,7 @@ export interface AreaChartProps extends SVGAttributes<SVGGElement> {
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     TooltipComponent?: FC<TooltipProps>;
   };
@@ -71,6 +73,7 @@ export const AreaChart: FC<AreaChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
@@ -81,6 +84,7 @@ export const AreaChart: FC<AreaChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
+      onShapeClick={onShapeClick}
       scopedSlots={scopedSlots}
     >
       <CartesianScale

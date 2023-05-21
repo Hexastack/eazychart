@@ -2,10 +2,10 @@ import React, { DOMAttributes, useEffect, useRef, useState } from 'react';
 import { useChart } from '@/lib/use-chart';
 import { LegendItem } from '@/components/addons/legend/LegendItem';
 import { debounce } from 'eazychart-core/src';
-import { Dimensions } from 'eazychart-core/src/types';
+import { Dimensions, LegendClickEventHandler } from 'eazychart-core/src/types';
 
 export interface LegendProps extends DOMAttributes<HTMLDivElement> {
-  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
+  onLegendClick?: LegendClickEventHandler;
   onLegendResize?: ({ width, height }: Dimensions) => void;
 }
 

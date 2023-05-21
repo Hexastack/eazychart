@@ -18,7 +18,7 @@ export const MapPath: FC<MapPathProps> = ({
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
-  const { animationOptions } = useChart();
+  const { animationOptions, onShapeClick } = useChart();
   const { projection } = useMap();
   const dataPath = useMemo(() => {
     const geoPathGenerator = getGeoPathByProjection(projection);
@@ -39,6 +39,10 @@ export const MapPath: FC<MapPathProps> = ({
     hideTooltip(shapeDatum, event as any as MouseEvent);
   };
 
+  const handleClick: MouseEventHandler<SVGPathElement> = (event) => {
+    onShapeClick && onShapeClick(shapeDatum, event as any as MouseEvent);
+  };
+
   if (!dataPath) return null;
 
   return (
@@ -52,6 +56,7 @@ export const MapPath: FC<MapPathProps> = ({
       onMouseOver={handleMouseOver}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       {...rest}
       className="ez-map-path"
     />

@@ -13,7 +13,7 @@ export const Bar: FC<BarProps> = ({
   shapeDatum = defaultRectangleDatum,
   ...rest
 }) => {
-  const { animationOptions } = useChart();
+  const { animationOptions, onShapeClick } = useChart();
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
   const currentShapeDatum = useAnimation(
     shapeDatum,
@@ -34,6 +34,10 @@ export const Bar: FC<BarProps> = ({
     hideTooltip(shapeDatum, event as any as MouseEvent);
   };
 
+  const handleClick: MouseEventHandler<SVGRectElement> = (event) => {
+    onShapeClick && onShapeClick(shapeDatum, event as any as MouseEvent);
+  };
+
   return (
     <rect
       fill={color}
@@ -44,6 +48,7 @@ export const Bar: FC<BarProps> = ({
       onMouseOver={handleMouseOver}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       {...rest}
       data-testid="ez-bar"
       className="ez-bar"

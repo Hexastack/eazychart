@@ -69,6 +69,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -87,6 +88,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <CartesianScale

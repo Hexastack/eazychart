@@ -5,6 +5,7 @@ import {
   ChartPadding,
   Dimensions,
   PieConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -23,6 +24,7 @@ export interface IrregularPieChartProps extends SVGAttributes<SVGGElement> {
   labelDomainKey?: string;
   arc?: PieConfig;
   dimensions: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
@@ -54,6 +56,7 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
     strokeWidth: 0,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -71,6 +74,7 @@ export const IrregularPieChart: FC<IrregularPieChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <LinearScale domainKey={valueDomainKey}>

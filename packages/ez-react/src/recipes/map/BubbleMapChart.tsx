@@ -44,6 +44,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
     top: 100,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     // @todo : support Legend
     // LegendComponent: Legend,
@@ -56,6 +57,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
+      onShapeClick={onShapeClick}
       scopedSlots={scopedSlots}
     >
       <ColorScale

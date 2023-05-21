@@ -110,6 +110,7 @@ export const defaultChartContext: ChartContext = {
   isRTL: false,
   registerScale: () => {},
   getScale: () => null,
+  onShapeClick: () => {},
 };
 
 export const defaultMapContext: MapContext = {

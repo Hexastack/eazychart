@@ -24,7 +24,7 @@ export const Arc: FC<ArcProps> = ({
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
-  const { animationOptions } = useChart();
+  const { animationOptions, onShapeClick } = useChart();
   const currentShapeData = useAnimation(
     shapeDatum,
     {
@@ -56,16 +56,20 @@ export const Arc: FC<ArcProps> = ({
     ]
   );
 
-  const handleMouseOver: MouseEventHandler<SVGRectElement> = (event) => {
+  const handleMouseOver: MouseEventHandler<SVGPathElement> = (event) => {
     showTooltip(shapeDatum, event as any as MouseEvent);
   };
 
-  const handleMouseMove: MouseEventHandler<SVGRectElement> = (event) => {
+  const handleMouseMove: MouseEventHandler<SVGPathElement> = (event) => {
     moveTooltip(shapeDatum, event as any as MouseEvent);
   };
 
-  const handleMouseLeave: MouseEventHandler<SVGRectElement> = (event) => {
+  const handleMouseLeave: MouseEventHandler<SVGPathElement> = (event) => {
     hideTooltip(shapeDatum, event as any as MouseEvent);
+  };
+
+  const handleClick: MouseEventHandler<SVGPathElement> = (event) => {
+    onShapeClick && onShapeClick(shapeDatum, event as any as MouseEvent);
   };
 
   return (
@@ -78,6 +82,7 @@ export const Arc: FC<ArcProps> = ({
       onMouseOver={handleMouseOver}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       data-testid="ez-arc"
       className="ez-arc"
     />

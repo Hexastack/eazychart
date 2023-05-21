@@ -5,6 +5,7 @@ import {
   ChartPadding,
   Dimensions,
   RadialConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -23,6 +24,7 @@ export interface RadialChartProps extends SVGAttributes<SVGGElement> {
   labelDomainKey?: string;
   arc?: RadialConfig;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
@@ -53,6 +55,7 @@ export const RadialChart: FC<RadialChartProps> = ({
     sortValues: (a, b) => b - a,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -70,6 +73,7 @@ export const RadialChart: FC<RadialChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <LinearScale domainKey={valueDomainKey} range={[0, Math.PI * 2]}>

@@ -12,6 +12,8 @@ import {
   Dimensions,
   RawData,
   AnyScale,
+  ShapeClickEventHandler,
+  LegendClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProvider } from '@/components/addons/tooltip/TooltipProvider';
 import { LegendProvider } from '@/components/addons/legend/LegendProvider';
@@ -30,7 +32,8 @@ export type ChartProps = {
     TooltipComponent?: React.FC<TooltipProps>;
   };
   isRTL?: boolean;
-  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
+  onShapeClick?: ShapeClickEventHandler;
+  onLegendClick?: LegendClickEventHandler;
   children?: React.ReactNode;
   isWrapped?: boolean;
 };
@@ -43,6 +46,7 @@ export const Chart: FC<ChartProps> = ({
   children,
   scopedSlots = { TooltipComponent: Tooltip },
   isRTL = false,
+  onShapeClick,
   onLegendClick,
   isWrapped = true,
 }) => {
@@ -151,6 +155,7 @@ export const Chart: FC<ChartProps> = ({
         isRTL,
         registerScale,
         getScale,
+        onShapeClick,
       }}
     >
       {/*

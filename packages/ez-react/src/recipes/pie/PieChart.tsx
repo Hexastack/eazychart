@@ -5,6 +5,7 @@ import {
   ChartPadding,
   Dimensions,
   PieConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -22,6 +23,7 @@ export interface PieChartProps extends SVGAttributes<SVGGElement> {
   labelDomainKey?: string;
   arc?: PieConfig;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
@@ -53,6 +55,7 @@ export const PieChart: FC<PieChartProps> = ({
     strokeWidth: 0,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -71,6 +74,7 @@ export const PieChart: FC<PieChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <ColorScale domainKey={labelDomainKey} range={activeColors}>

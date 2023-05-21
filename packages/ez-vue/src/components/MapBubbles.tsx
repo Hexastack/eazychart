@@ -41,6 +41,12 @@ export default class Bubbles extends Vue {
     type: String,
     required: true,
   })
+  private readonly geoDomainKey!: string;
+
+  @Prop({
+    type: String,
+    required: true,
+  })
   private readonly rDomainKey!: string;
 
   get shapeData() {
@@ -49,8 +55,9 @@ export default class Bubbles extends Vue {
     return scaleMapBubbleData(
       chart.data,
       mapData,
-      projection,
+      this.geoDomainKey,
       this.rDomainKey,
+      projection,
       this.rScale,
       colorScale,
     );

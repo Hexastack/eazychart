@@ -17,7 +17,7 @@ import {
   PointDatum,
   RectangleDatum,
 } from './types';
-import { getGeoPathByProjection } from '../utils/map'
+import { getGeoPathByProjection } from '../utils/map';
 
 export const scaleDatumValue = <T = string | number>(
   datum: NormalizedDatum,
@@ -253,9 +253,9 @@ export const scaleGeoFeatureData = (
   valueDomainKey: string,
   projection: GeoProjection,
   colorScale: AnyScale | undefined,
-  defaultColor: string,
+  defaultColor: string
 ): GeoFeatureData => {
-  const geoPath = getGeoPathByProjection(projection)
+  const geoPath = getGeoPathByProjection(projection);
   return features.map((feature, idx) => {
     let color = defaultColor;
     let id: string = `${feature.id || idx}`;
@@ -299,27 +299,33 @@ export const scaleGeoFeatureData = (
 export const scaleMapBubbleData = (
   data: NormalizedData,
   mapData: GeoFeatureData,
-  projection: GeoProjection,
+  geoDomainKey: string,
   rDomainKey: string,
+  projection: GeoProjection,
   rScale: ScaleSqrt,
   colorScale: AnyScale
 ): PointDatum[] => {
-  const geoPath = getGeoPathByProjection(projection)
-  return mapData.map(shapeDatum => {
-    const datum = data.find(
-      datum => rDomainKey in datum && datum.id === shapeDatum.id
-    );
-    if (datum) {
-      const v = datum[rDomainKey] as number;
-      const [x, y] = geoPath.centroid(shapeDatum.feature);
-      return {
-        id: shapeDatum.id,
-        x,
-        y,
-        radius: rScale.scale(v),
-        color: colorScale.scale(v),
-      };
-    }
-    return { id: shapeDatum.id, x: 0, y: 0, color: '#000' };
-  });
+  const geoPath = getGeoPathByProjection(projection);
+  return mapData
+    .map(shapeDatum => {
+      const datum = data.find(
+        datum =>
+          rDomainKey in datum &&
+          shapeDatum.feature.properties &&
+          shapeDatum.feature.properties[geoDomainKey] === datum[geoDomainKey]
+      );
+      if (datum) {
+        const v = datum[rDomainKey] as number;
+        const [x, y] = geoPath.centroid(shapeDatum.feature);
+        return {
+          id: shapeDatum.id,
+          x,
+          y,
+          radius: rScale.scale(v),
+          color: colorScale.scale(v),
+        };
+      }
+      return undefined;
+    })
+    .filter(d => !!d) as PointDatum[];
 };

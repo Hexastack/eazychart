@@ -8,6 +8,7 @@ import { useMap } from '@/lib/use-map';
 import { useColorScale } from './scales/ColorScale';
 
 export interface MapBubblesProps {
+  geoDomainKey: string;
   rDomainKey: string;
   stroke?: string;
   strokeWidth?: number;
@@ -18,6 +19,7 @@ export interface MapBubblesProps {
 }
 
 export const MapBubbles: FC<MapBubblesProps> = ({
+  geoDomainKey,
   rDomainKey,
   stroke,
   strokeWidth,
@@ -34,13 +36,14 @@ export const MapBubbles: FC<MapBubblesProps> = ({
     return scaleMapBubbleData(
       data,
       mapData,
-      projection,
+      geoDomainKey,
       rDomainKey,
+      projection,
       rScale,
       colorScale
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data, projection, rDomainKey, rScale]);
+  }, [data, projection, geoDomainKey, rDomainKey, rScale]);
 
   if (scopedSlots && scopedSlots.default) {
     return (

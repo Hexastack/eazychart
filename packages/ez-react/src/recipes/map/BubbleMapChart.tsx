@@ -74,6 +74,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
               range={[bubble.minRadius, bubble.maxRadius]}
             >
               <MapBubbles
+                geoDomainKey={map.geoDomainKey}
                 rDomainKey={bubble.domainKey}
                 stroke={bubble.stroke}
                 strokeWidth={bubble.strokeWidth}

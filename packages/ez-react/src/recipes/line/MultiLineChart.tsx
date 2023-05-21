@@ -12,6 +12,7 @@ import {
   LineConfig,
   MarkerConfig,
   AxisConfigMulti,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -35,6 +36,7 @@ export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
   yAxis?: AxisConfigMulti<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
     LegendComponent: FC<LegendProps>;
@@ -77,6 +79,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     TooltipComponent: Tooltip,
     LegendComponent: Legend,
@@ -92,6 +95,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDomainKey}
     >
       <CartesianScale

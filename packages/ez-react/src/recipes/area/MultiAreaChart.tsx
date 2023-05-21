@@ -20,6 +20,7 @@ import {
   Dimensions,
   AreaConfig,
   Direction,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import React, { FC, SVGAttributes } from 'react';
 
@@ -35,6 +36,7 @@ export interface MultiAreaChartProps extends SVGAttributes<SVGGElement> {
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
   yAxis?: AxisConfigMulti<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
     LegendComponent: FC<LegendProps>;
@@ -78,6 +80,7 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     TooltipComponent: Tooltip,
     LegendComponent: Legend,
@@ -92,6 +95,7 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDomainKey}
     >
       <CartesianScale

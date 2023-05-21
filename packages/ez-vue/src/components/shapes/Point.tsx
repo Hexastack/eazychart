@@ -59,6 +59,10 @@ export default class Point extends mixins(AnimationMixin) {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
+  handleClick(event: MouseEvent) {
+    this.chart.onShapeClick && this.chart.onShapeClick(this.shapeDatum, event);
+  }
+
   get animationArguments() {
     return {
       from: this.currentShapeDatum,
@@ -79,6 +83,7 @@ export default class Point extends mixins(AnimationMixin) {
       handleMouseOver,
       handleMouseMove,
       handleMouseLeave,
+      handleClick,
     } = this;
     const { color, x, y } = currentShapeDatum;
     return (
@@ -92,6 +97,7 @@ export default class Point extends mixins(AnimationMixin) {
         onMouseover={handleMouseOver}
         onMousemove={handleMouseMove}
         onMouseleave={handleMouseLeave}
+        onClick={handleClick}
         stroke-width={strokeWidth}
         data-testid="ez-point"
       />

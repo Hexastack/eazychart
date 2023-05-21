@@ -9,6 +9,7 @@ import {
   GridConfig,
   AxisConfig,
   Dimensions,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Prop } from 'vue-property-decorator';
 import { ScaleBand, ScaleLinear } from 'eazychart-core/src';
@@ -121,6 +122,14 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
   })
   private readonly isRTL!: boolean;
 
+  @Prop({
+    type: Function as PropType<ShapeClickEventHandler>,
+    default() {
+      return () => {};
+    },
+  })
+  private readonly onShapeClick!: ShapeClickEventHandler;
+
   getData(): RawData {
     return this.data;
   }
@@ -146,6 +155,7 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
       activeData,
       activeColors,
       toggleDatum,
+      onShapeClick,
     } = this;
 
     const scopedSlots = {
@@ -161,8 +171,9 @@ export default class ColumnChart extends mixins(ToggleDatumMixin) {
         rawData={activeData}
         padding={padding}
         animationOptions={animationOptions}
-        scopedSlots={scopedSlots}
         isRTL={isRTL}
+        onShapeClick={onShapeClick}
+        scopedSlots={scopedSlots}
       >
         <CartesianScale
           xScaleConfig={{

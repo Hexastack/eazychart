@@ -65,6 +65,10 @@ export default class MapPath extends mixins(AnimationMixin) {
     this.tooltip.hideTooltip(this.shapeDatum, event);
   }
 
+  handleClick(event: MouseEvent) {
+    this.chart.onShapeClick && this.chart.onShapeClick(this.shapeDatum, event);
+  }
+
   get animationArguments() {
     const { shapeDatum } = this;
     const geoPathGenerator = getGeoPathByProjection(this.mapContext.projection);
@@ -88,6 +92,7 @@ export default class MapPath extends mixins(AnimationMixin) {
       handleMouseOver,
       handleMouseMove,
       handleMouseLeave,
+      handleClick,
     } = this;
 
     return (
@@ -101,6 +106,7 @@ export default class MapPath extends mixins(AnimationMixin) {
         onMouseover={handleMouseOver}
         onMousemove={handleMouseMove}
         onMouseleave={handleMouseLeave}
+        onClick={handleClick}
         class="ez-map-path"
       />
     );

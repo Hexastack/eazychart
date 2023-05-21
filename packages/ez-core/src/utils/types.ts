@@ -92,7 +92,8 @@ export interface ChartContext {
   isRTL: boolean;
   registerScale: (scaleId: string, scale: AnyScale) => void;
   getScale: (scaleId: string) => AnyScale | null;
-  onLegendClick?: (key: string, isActive: boolean, color: string) => void;
+  onShapeClick?: ShapeClickEventHandler;
+  onLegendClick?: LegendClickEventHandler;
 }
 
 export interface MapContext {
@@ -202,3 +203,7 @@ export type MapConfig = {
 
 
 export type ShapeDatum = PointDatum | RectangleDatum | ArcDatum | GeoFeatureDatum;
+
+export type ShapeClickEventHandler = (shapeDatum: ShapeDatum, e: MouseEvent) => void;
+
+export type LegendClickEventHandler = (key: string, isActive: boolean, color: string) => void;

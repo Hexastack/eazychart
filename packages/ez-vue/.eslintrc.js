@@ -53,6 +53,7 @@ module.exports = {
       },
     ],
     'max-classes-per-file': ['error', 2],
+    '@typescript-eslint/no-empty-function': 'off',
   },
   overrides: [
     {

@@ -34,6 +34,7 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
     strokeWidth: 0,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -51,6 +52,7 @@ export const SemiCircleChart: FC<SemiCircleChartProps> = ({
       padding={padding}
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <ColorScale domainKey={labelDomainKey} range={activeColors}>

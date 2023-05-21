@@ -9,6 +9,7 @@ import {
   GridConfig,
   Position,
   RawData,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Axis } from '@/components/scales/Axis';
 import { Chart } from '@/components/Chart';
@@ -30,6 +31,7 @@ export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
@@ -64,6 +66,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     LegendComponent: Legend,
     TooltipComponent: Tooltip,
@@ -83,6 +86,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
       animationOptions={animationOptions}
       scopedSlots={scopedSlots}
       isRTL={isRTL}
+      onShapeClick={onShapeClick}
       onLegendClick={toggleDatum}
     >
       <CartesianScale

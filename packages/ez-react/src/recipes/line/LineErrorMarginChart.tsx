@@ -15,6 +15,7 @@ import {
   RawDatum,
   AreaData,
   AreaCurve,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -42,6 +43,7 @@ export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
     positive: string; // in percent [0..1]
     negative: string; // in percent [0..1]
   };
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     TooltipComponent?: FC<TooltipProps>;
   };
@@ -89,6 +91,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
   errorMargins = { positive: 'positiveMargin', negative: 'negativeMargin' },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
@@ -110,6 +113,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
+      onShapeClick={onShapeClick}
       scopedSlots={scopedSlots}
     >
       <CartesianScale

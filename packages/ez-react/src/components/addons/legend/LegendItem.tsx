@@ -1,9 +1,10 @@
+import { LegendClickEventHandler } from 'eazychart-core/src/types';
 import React, { DOMAttributes, useState } from 'react';
 
 export interface LegendItemProps extends DOMAttributes<HTMLDivElement> {
   label: string;
   color: string;
-  onToggle?: (key: string, isActive: boolean, color: string) => void;
+  onToggle?: LegendClickEventHandler;
 }
 
 export const LegendItem: React.FC<LegendItemProps> = ({

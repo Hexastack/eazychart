@@ -6,6 +6,7 @@ import {
   RawData,
   GeoJsonData,
   MapConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Map } from '@/components/Map';
 import { LegendProps } from '@/components/addons/legend/Legend';
@@ -21,6 +22,7 @@ export interface MapChartProps extends SVGAttributes<SVGGElement> {
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     LegendComponent: React.FC<LegendProps>;
     TooltipComponent: React.FC<TooltipProps>;
@@ -50,6 +52,7 @@ export const MapChart: FC<MapChartProps> = ({
     top: 100,
   },
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     // @todo : support Legend
     // LegendComponent: Legend,
@@ -62,6 +65,7 @@ export const MapChart: FC<MapChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
+      onShapeClick={onShapeClick}
       scopedSlots={scopedSlots}
     >
       <ColorScale

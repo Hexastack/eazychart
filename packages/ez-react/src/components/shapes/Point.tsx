@@ -18,7 +18,7 @@ export const Point: FC<PointProps> = ({
   ...rest
 }) => {
   const { showTooltip, hideTooltip, moveTooltip } = useTooltip();
-  const { animationOptions } = useChart();
+  const { animationOptions, onShapeClick } = useChart();
   const currentShapeDatum = useAnimation(
     shapeDatum,
     defaultPointDatum,
@@ -39,6 +39,10 @@ export const Point: FC<PointProps> = ({
     hideTooltip(shapeDatum, event as any as MouseEvent);
   };
 
+  const handleClick: MouseEventHandler<SVGCircleElement> = (event) => {
+    onShapeClick && onShapeClick(shapeDatum, event as any as MouseEvent);
+  };
+
   return (
     <circle
       stroke={stroke || color}
@@ -49,6 +53,7 @@ export const Point: FC<PointProps> = ({
       onMouseOver={handleMouseOver}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleClick}
       {...rest}
       strokeWidth={strokeWidth}
       data-testid="ez-point"

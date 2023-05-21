@@ -9,6 +9,7 @@ import {
   AxisConfig,
   Dimensions,
   PointConfig,
+  ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -28,6 +29,7 @@ export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   isRTL?: boolean;
   dimensions?: Partial<Dimensions>;
+  onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
     TooltipComponent: FC<TooltipProps>;
   };
@@ -62,6 +64,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
   },
   isRTL = false,
   dimensions = {},
+  onShapeClick,
   scopedSlots = {
     TooltipComponent: Tooltip,
   },
@@ -72,6 +75,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
       rawData={data}
       padding={padding}
       animationOptions={animationOptions}
+      onShapeClick={onShapeClick}
       scopedSlots={scopedSlots}
     >
       <CartesianScale

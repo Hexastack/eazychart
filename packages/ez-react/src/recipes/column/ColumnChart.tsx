@@ -95,6 +95,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
           definition: {
             direction: Direction.HORIZONTAL,
             domainKey: xAxis.domainKey,
+            reverse: isRTL,
           },
         }}
         yScaleConfig={{

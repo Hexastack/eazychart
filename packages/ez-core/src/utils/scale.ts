@@ -26,7 +26,7 @@ export const scaleDatumValue = <T = string | number>(
 ) => {
   if (domainKey in datum) {
     const value = datum[domainKey] as T;
-    const scaleValue = AnyScale.scale(value as NumberLike) || 0;
+    const scaleValue = AnyScale.scale(value as NumberLike);
     return scaleValue;
   }
   throw new Error('Domain key does not exist in the supplied data');
@@ -143,9 +143,11 @@ export const scalePointData = (
   xScale: AnyScale,
   yScale: AnyScale
 ): PointDatum[] => {
-  return data.map(datum => {
-    return scalePointDatum(datum, xDomainKey, yDomainKey, xScale, yScale);
-  });
+  return data
+    .map(datum => {
+      return scalePointDatum(datum, xDomainKey, yDomainKey, xScale, yScale);
+    })
+    .filter(d => typeof d.x !== undefined && typeof d.y !== 'undefined');
 };
 
 export const scaleBubbleData = (

@@ -22,8 +22,8 @@ describe('QuantileScale domain', () => {
     const quantile = new D3ScaleQuantile({
       ...{ domainKey: 'value' },
     });
-    quantile.setData([{ value: 20 }, { value: 50 }]);
-    expect(quantile.scale.domain()).toEqual([20, 50]);
+    quantile.setData([{ value: 20 }, { value: 10 }, { value: 50 }]);
+    expect(quantile.scale.domain()).toEqual([10, 20, 50]);
   });
 
   it('Resolves to 0 when it is not possible to deduce the domain from data and domainKey is provided but not valid', () => {

@@ -43,9 +43,10 @@ class ScaleQuantile
     data: Array<any>,
     fallback: ArrayOfTwoOrMoreNumbers = [] as unknown as ArrayOfTwoOrMoreNumbers
   ): ArrayOfTwoOrMoreNumbers => {
-    if (definition.domain) return definition.domain;
-    if (Number.isFinite(definition.min) && Number.isFinite(definition.max))
-      return [definition.min, definition.max] as [number, number];
+    if (definition.domain) {
+      return definition.domain;
+    }
+
     if (definition.domainKey && data.length) {
       const values: Array<number> = data.map((d) => {
         if (definition.domainKey && definition.domainKey in d) {
@@ -55,14 +56,16 @@ class ScaleQuantile
         return (
           Object.values(d).find((value: unknown) => Number.isFinite(value)) || 0
         );
-      });
+      }).sort((a, b) => a - b);
+
       const min = Number.isFinite(definition.min)
         ? (definition.min as number)
         : Math.min(definition.softMin, ...values) - definition.minPadding;
       const max = Number.isFinite(definition.max)
         ? (definition.max as number)
         : Math.max(definition.softMax, ...values) + definition.maxPadding;
-      return [min, max];
+      
+      return [min, ...values.slice(1, -1), max] as unknown as ArrayOfTwoOrMoreNumbers;
     }
     return fallback;
   };
@@ -113,7 +116,7 @@ class ScaleQuantile
   ): D3ScaleQuantile<NumberLike, unknown> {
     const range = this.getQuantileScaleRange(this.definition, dimensions);
     const domain = this.getQuantileScaleDomain(this.definition, data);
-
+    console.log("Range ==== ", range, domain, data.map((d) => d[this.definition.domainKey as any]))
     let scale = scaleQuantile(range).domain(domain) as D3ScaleQuantile<
       NumberLike,
       unknown

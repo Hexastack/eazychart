@@ -116,7 +116,7 @@ class ScaleQuantile
   ): D3ScaleQuantile<NumberLike, unknown> {
     const range = this.getQuantileScaleRange(this.definition, dimensions);
     const domain = this.getQuantileScaleDomain(this.definition, data);
-    console.log("Range ==== ", range, domain, data.map((d) => d[this.definition.domainKey as any]))
+
     let scale = scaleQuantile(range).domain(domain) as D3ScaleQuantile<
       NumberLike,
       unknown

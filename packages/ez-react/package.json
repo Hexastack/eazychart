@@ -1,6 +1,6 @@
 {
   "name": "eazychart-react",
-  "version": "0.7.0-alpha.0",
+  "version": "0.7.1-alpha.0",
   "description": "React version of the EazyChart Library.",
   "keywords": [
     "chart",
@@ -76,7 +76,7 @@
     "babel-eslint": "^10.0.3",
     "babel-loader": "^8.2.3",
     "eazychart-css": "^0.2.1-alpha.0",
-    "eazychart-dev": "^0.7.0-alpha.0",
+    "eazychart-dev": "^0.7.1-alpha.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^6.0.0",
@@ -105,7 +105,7 @@
     "react": "^16.8.0 || ^17.0.0 || ^18.0.0"
   },
   "dependencies": {
-    "eazychart-core": "^0.7.0-alpha.0"
+    "eazychart-core": "^0.7.1-alpha.0"
   },
   "gitHead": "3eb2feb73572be3e79cfdeb3cc3e2412160cbbff"
 }

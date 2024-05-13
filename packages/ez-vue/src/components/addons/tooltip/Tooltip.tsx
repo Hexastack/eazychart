@@ -128,6 +128,8 @@ export default class Tooltip extends mixins(AnimationMixin) {
           ))}
         </div>
       </div>
-    ) : null;
+    ) : (
+      <div class="ez-tooltip"></div>
+    );
   }
 }

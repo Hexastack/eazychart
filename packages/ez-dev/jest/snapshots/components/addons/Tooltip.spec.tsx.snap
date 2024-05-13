@@ -1,10 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Tooltip renders no tooltip when shape is being hovered 1`] = `
-<div
-  class="ez-tooltip"
-  style="left: 416px; top: 284px; opacity: 0;"
->
+<div class="ez-tooltip">
 </div>
 `;
 

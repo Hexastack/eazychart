@@ -35,7 +35,7 @@ type ColorScaleQuantileProps = ScaleQuantileDefinition & {
   isWrapped?: boolean;
 };
 
-type ColorScaleProps = ColorScaleOrdinalProps | ColorScaleQuantileProps;
+export type ColorScaleProps = ColorScaleOrdinalProps | ColorScaleQuantileProps;
 
 export const ColorScale: FC<ColorScaleProps> = ({
   children,

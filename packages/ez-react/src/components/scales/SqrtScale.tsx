@@ -20,9 +20,16 @@ export const useSqrtScale = () => {
   return useContext(SqrtScaleContext);
 };
 
-export const SqrtScale: FC<
-  ScaleSqrtDefinition & { children: React.ReactNode; isWrapped?: boolean }
-> = ({ children, isWrapped = true, ...definition }) => {
+export type SqrtScaleProps = ScaleSqrtDefinition & {
+  children: React.ReactNode;
+  isWrapped?: boolean;
+};
+
+export const SqrtScale: FC<SqrtScaleProps> = ({
+  children,
+  isWrapped = true,
+  ...definition
+}) => {
   const { data, dimensions } = useChart();
 
   const sqrtScale = useMemo<ScaleSqrt>(() => {

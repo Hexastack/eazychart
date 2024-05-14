@@ -20,9 +20,16 @@ export const useLinearScale = () => {
   return useContext(LinearScaleContext);
 };
 
-export const LinearScale: FC<
-  ScaleLinearDefinition & { children: React.ReactNode; isWrapped?: boolean }
-> = ({ children, isWrapped = true, ...definition }) => {
+export type LinearScaleProps = ScaleLinearDefinition & {
+  children: React.ReactNode;
+  isWrapped?: boolean;
+};
+
+export const LinearScale: FC<LinearScaleProps> = ({
+  children,
+  isWrapped = true,
+  ...definition
+}) => {
   const { data, dimensions } = useChart();
 
   const linearScale = useMemo<ScaleLinear>(() => {

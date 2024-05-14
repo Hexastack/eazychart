@@ -1,7 +1,7 @@
-// addons
+// addons components
 export { Legend, LegendProps } from '@/components/addons/legend/Legend';
 export { Tooltip, TooltipProps } from '@/components/addons/tooltip/Tooltip';
-// scales
+// scales components
 export { Grid, GridProps } from '@/components/scales/grid/Grid';
 export { GridLines, GridLinesProps } from '@/components/scales/grid/GridLines';
 export { Axis, AxisProps } from '@/components/scales/Axis';
@@ -25,7 +25,7 @@ export {
   SqrtScaleProps,
   useSqrtScale,
 } from '@/components/scales/SqrtScale';
-// shapes
+// shapes components
 export { Arc, ArcProps } from '@/components/shapes/Arc';
 export { AreaPath, AreaPathProps } from '@/components/shapes/AreaPath';
 export { Bar, BarProps } from '@/components/shapes/Bar';

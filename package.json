@@ -27,7 +27,8 @@
   "scripts": {
     "prepare": "husky install",
     "clean": "lerna clean",
-    "setup": "lerna clean -y && rm -rf node_modules/ && yarn",
+    "bootstrap": "lerna bootstrap",
+    "setup": "lerna clean -y && rm -rf node_modules/ && yarn && lerna bootstrap",
     "storybook:react": "lerna run storybook --scope=eazychart-react --stream",
     "storybook:vue": "lerna run storybook --scope=eazychart-vue --stream",
     "storybook": "lerna run storybook --scope=eazychart-vue --scope=eazychart-react --stream",

@@ -75,7 +75,7 @@
     }
   ],
   "dependencies": {
-    "conventional-changelog-conventionalcommits": "^8.0.0",
+    "conventional-changelog-conventionalcommits": "^4.6.3",
     "d3-ease": "^3.0.1",
     "d3-geo": "^3.0.1",
     "d3-interpolate": "^3.0.1",

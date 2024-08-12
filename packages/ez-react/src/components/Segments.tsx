@@ -11,6 +11,7 @@ export interface SegmentsProps extends SVGAttributes<SVGGElement> {
   yDomainKey: string;
   line?: LineConfig;
   marker?: MarkerConfig;
+  sortFn?: (a: PointDatum, b: PointDatum) => number;
 }
 
 export const Segments: FC<SegmentsProps> = ({
@@ -27,6 +28,7 @@ export const Segments: FC<SegmentsProps> = ({
     radius: 5,
     color: '#FFF',
   },
+  sortFn,
 }) => {
   const { colorScale } = useColorScale();
 
@@ -45,10 +47,15 @@ export const Segments: FC<SegmentsProps> = ({
       stroke={color}
       scopedSlots={{
         default: ({ shapeData }) => {
-          const pointData: PointDatum[] = shapeData.map((pointDatum) => ({
+          let pointData: PointDatum[] = shapeData.map((pointDatum) => ({
             ...pointDatum,
             color,
           }));
+
+          if (sortFn) {
+            pointData = pointData.sort(sortFn);
+          }
+
           return (
             <g className="ez-segments">
               <LinePath

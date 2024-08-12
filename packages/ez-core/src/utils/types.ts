@@ -15,9 +15,10 @@ import {
   Point,
   ScaleBandDefinition,
   ScaleLinearDefinition,
+  ScaleTimeDefinition,
   ShapeAttributes,
 } from '../types';
-import { ScaleBand, ScaleLinear, ScaleOrdinal, ScaleQuantile } from '../scales';
+import { ScaleBand, ScaleLinear, ScaleOrdinal, ScaleQuantile, ScaleTime } from '../scales';
 
 export type Class<T> = new (...args: any[]) => T;
 
@@ -140,9 +141,9 @@ export type LineConfig = CurveConfig & {
   curve?: LineCurve;
 };
 
-export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal | ScaleQuantile;
+export type AnyScale = ScaleLinear | ScaleBand | ScaleOrdinal | ScaleQuantile | ScaleTime;
 
-export type ScaleLinearOrBand = ScaleBand | ScaleLinear;
+export type ScaleLinearOrBand = ScaleBand | ScaleLinear | ScaleTime;
 
 export type ScaleConfig =
   | {
@@ -152,7 +153,11 @@ export type ScaleConfig =
   | {
       ScaleClass: Class<ScaleBand>;
       definition: ScaleBandDefinition;
-    };
+    }
+  | {
+    ScaleClass: Class<ScaleTime>;
+    definition: ScaleTimeDefinition;
+  };
 
 export type GeoJsonData = GeoJSON;
 export type GeoFeature = Feature<Geometry, GeoJsonProperties>;

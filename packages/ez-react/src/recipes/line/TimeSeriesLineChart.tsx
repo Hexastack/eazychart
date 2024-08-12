@@ -1,5 +1,5 @@
 import React, { FC, SVGAttributes } from 'react';
-import { ScaleLinear } from 'eazychart-core/src';
+import { ScaleLinear, ScaleTime } from 'eazychart-core/src';
 import {
   Direction,
   Position,
@@ -20,7 +20,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { Segments } from '@/components/Segments';
 
-export interface LineChartProps extends SVGAttributes<SVGGElement> {
+export interface TimeSeriesLineChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
   line?: LineConfig;
   marker?: MarkerConfig;
@@ -37,7 +37,7 @@ export interface LineChartProps extends SVGAttributes<SVGGElement> {
   };
 }
 
-export const LineChart: FC<LineChartProps> = ({
+export const TimeSeriesLineChart: FC<TimeSeriesLineChartProps> = ({
   data,
   line = {
     stroke: '#339999',
@@ -89,7 +89,7 @@ export const LineChart: FC<LineChartProps> = ({
     >
       <CartesianScale
         xScaleConfig={{
-          ScaleClass: ScaleLinear,
+          ScaleClass: ScaleTime,
           definition: {
             direction: Direction.HORIZONTAL,
             domainKey: xAxis.domainKey,

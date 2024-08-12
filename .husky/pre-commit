@@ -2,5 +2,6 @@
 . "$(dirname "$0")/_/husky.sh"
 
 # yarn test
-lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents
+# turbo run --concurrency 1 -- --stream precommit --since HEAD --exclude-dependents
 
+# turbo run precommit --concurrency 1

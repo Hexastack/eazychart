@@ -48,13 +48,20 @@
     "lint": "tsdx lint",
     "prepare": "tsdx build",
     "size": "size-limit",
-    "analyze": "size-limit --why"
+    "analyze": "size-limit --why",
+    "clean": "rm -rf node_modules/ dist/",
+    "setup": "yarn install"
   },
   "prettier": {
     "printWidth": 80,
     "semi": true,
     "singleQuote": true,
     "trailingComma": "es5"
+  },
+  "workspaces": {
+    "nohoist": [
+      "**"
+    ]
   },
   "module": "dist/eazychart-core.esm.js",
   "size-limit": [
@@ -68,6 +75,7 @@
     }
   ],
   "dependencies": {
+    "conventional-changelog-conventionalcommits": "^4.6.3",
     "d3-ease": "^3.0.1",
     "d3-geo": "^3.0.1",
     "d3-interpolate": "^3.0.1",

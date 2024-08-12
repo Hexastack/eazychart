@@ -39,7 +39,9 @@
     "prefix": "postcss css/style.css --use autoprefixer -o css/style.css",
     "compress": "node-sass css/style.css css/style.css --output-style compressed",
     "build": "npm-run-all compile prefix compress",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "clean": "rm -rf node_modules/",
+    "setup": "yarn install"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.1",
@@ -47,6 +49,9 @@
     "npm-run-all": "^4.1.5",
     "postcss": "^8.4.5",
     "postcss-cli": "^9.1.0"
+  },
+  "workspaces": {
+    "nohoist": ["**"]
   },
   "gitHead": "232adf76d2550b73fbdcb01e4203f8b9cde03515"
 }

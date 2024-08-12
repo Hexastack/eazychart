@@ -44,7 +44,9 @@
     "build": "rollup -c rollup.config.js",
     "type-check": "tsc",
     "precommit": "yarn lint && yarn type-check",
-    "prepare": "yarn build"
+    "prepare": "yarn build",
+    "clean": "rm -rf node_modules/ dist",
+    "setup": "yarn install"
   },
   "husky": {
     "hooks": {

@@ -39,7 +39,7 @@ jobs:
         yarn setup
     - name: Check lint and prettier
       run: |
-        lerna run --concurrency 1 --stream precommit --since HEAD --exclude-dependents
+        npx turbo run precommit
     - name: Run tests 
       run: |
         yarn run test

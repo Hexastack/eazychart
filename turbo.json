@@ -1,0 +1,49 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "tasks": {
+    "clean": {
+      "dependsOn": ["^clean"],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": [],
+      "outputs": ["dist/**"]
+    },
+    "setup": {
+      "dependsOn": ["^setup"],
+      "outputs": ["dist/**"]
+    },
+    "prepare": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "storybook": {
+    "dependsOn": [],
+    "outputs": []
+    },
+    "storybook:react": {
+    "dependsOn": [],
+    "outputs": []
+    },
+    "storybook:vue": {
+    "dependsOn": [],
+    "outputs": []
+    },
+    "test": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "test:vue": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "test:core": {
+      "dependsOn": [],
+      "outputs": []
+    },
+    "precommit": {
+      "dependsOn": [],
+      "outputs": []
+    }
+  }
+}

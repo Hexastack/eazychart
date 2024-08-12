@@ -2,7 +2,19 @@
   "name": "eazychart-monorepo",
   "version": "0.0.1",
   "description": "EazyChart is an easy to use reactive library that allows you to add customizable charts into your React or Vue web applications.",
-  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "keywords": [
+    "chart",
+    "library",
+    "svg",
+    "react",
+    "dataviz",
+    "graph",
+    "typescript",
+    "javascript",
+    "data",
+    "visualization",
+    "web"
+  ],
   "author": "Hexastack",
   "license": "MIT",
   "repository": {
@@ -14,28 +26,34 @@
   },
   "homepage": "https://eazychart.com",
   "private": true,
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": [
+      "**"
+    ]
+  },
   "devDependencies": {
-    "react-syntax-highlighter": "^15.5.0",
     "@commitlint/cli": "^16.0.1",
     "@commitlint/config-conventional": "^16.0.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0"
+    "react-syntax-highlighter": "^15.5.0",
+    "turbo": "^2.0.12"
   },
   "engines": {
     "node": "=16"
   },
+  "packageManager": "yarn@1.22.11",
   "scripts": {
     "prepare": "husky install",
-    "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap",
-    "setup": "lerna clean -y && rm -rf node_modules/ && yarn && lerna bootstrap",
-    "storybook:react": "lerna run storybook --scope=eazychart-react --stream",
-    "storybook:vue": "lerna run storybook --scope=eazychart-vue --stream",
-    "storybook": "lerna run storybook --scope=eazychart-vue --scope=eazychart-react --stream",
-    "test:core": "lerna run test --scope=eazychart-core --stream",
-    "test:vue": "lerna run test --scope=eazychart-vue --stream",
-    "test:react": "lerna run test --scope=eazychart-react --stream",
-    "test": "lerna run test --stream",
-    "build": "lerna run build --stream"
+    "clean": "turbo run clean && rm -rf node_modules/",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "setup": "yarn && turbo run setup",
+    "storybook:react": "turbo run storybook --filter=eazychart-react",
+    "storybook:vue": "turbo run storybook --filter=eazychart-vue",
+    "storybook": "turbo run storybook --filter=eazychart-react --filter=eazychart-vue",
+    "test:core": "turbo run test --filter=eazychart-core",
+    "test:vue": "turbo run test --filter=eazychart-vue",
+    "test:react": "turbo run test --filter=eazychart-react"
   }
 }

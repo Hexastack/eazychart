@@ -1,8 +1,23 @@
 {
   "name": "eazychart-monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
   "version": "0.0.1",
   "description": "EazyChart is an easy to use reactive library that allows you to add customizable charts into your React or Vue web applications.",
-  "keywords": ["chart", "library", "svg", "react", "dataviz", "graph", "typescript", "javascript", "data", "visualization", "web"],
+  "keywords": [
+    "chart",
+    "library",
+    "svg",
+    "react",
+    "dataviz",
+    "graph",
+    "typescript",
+    "javascript",
+    "data",
+    "visualization",
+    "web"
+  ],
   "author": "Hexastack",
   "license": "MIT",
   "repository": {
@@ -15,27 +30,26 @@
   "homepage": "https://eazychart.com",
   "private": true,
   "devDependencies": {
-    "react-syntax-highlighter": "^15.5.0",
     "@commitlint/cli": "^16.0.1",
     "@commitlint/config-conventional": "^16.0.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0"
+    "rimraf": "^6.0.1"
   },
   "engines": {
-    "node": "=16"
+    "node": ">=18.16.0"
   },
   "scripts": {
     "prepare": "husky install",
-    "clean": "lerna clean",
-    "bootstrap": "lerna bootstrap",
-    "setup": "lerna clean -y && rm -rf node_modules/ && yarn && lerna bootstrap",
-    "storybook:react": "lerna run storybook --scope=eazychart-react --stream",
-    "storybook:vue": "lerna run storybook --scope=eazychart-vue --stream",
-    "storybook": "lerna run storybook --scope=eazychart-vue --scope=eazychart-react --stream",
-    "test:core": "lerna run test --scope=eazychart-core --stream",
-    "test:vue": "lerna run test --scope=eazychart-vue --stream",
-    "test:react": "lerna run test --scope=eazychart-react --stream",
-    "test": "lerna run test --stream",
-    "build": "lerna run build --stream"
+    "clean": "rimraf -g \"packages/**/lib\" \"packages/**/*.tsbuildinfo\"",
+    "bootstrap": "npm install",
+    "setup": "npm run clean && rm -rf node_modules/ && npm install",
+    "storybook:react": "npm run storybook --workspace=eazychart-react",
+    "storybook:vue": "npm run storybook --workspace=eazychart-vue",
+    "storybook": "npm run storybook --workspaces",
+    "test:core": "npm run test --workspace=eazychart-core",
+    "test:vue": "npm run test --workspace=eazychart-vue",
+    "test:react": "npm run test --workspace=eazychart-react",
+    "test": "npm run test --workspaces",
+    "build": "npm run build --workspaces"
   }
 }

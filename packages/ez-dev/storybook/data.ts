@@ -73,6 +73,101 @@ export const evolutionData: RawData = [...Array(23).keys()].map((_v, idx) => {
   };
 });
 
+
+export const evolutionData2: RawData = [
+  {
+    xValue: 0,
+    yValue: +(Math.random() * 10).toFixed(2),
+    yValue1: +(Math.random() * 100).toFixed(2),
+    yValue2: +(Math.random() * 1000).toFixed(2),
+    temperature: "Temperature at 0H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 1,
+    yValue: +(Math.random() * 10 + 10).toFixed(2),
+    yValue1: +(Math.random() * 100 + 20).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 30).toFixed(2),
+    temperature: "Temperature at 1H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 2,
+    yValue: +(Math.random() * 10 + 20).toFixed(2),
+    yValue1: +(Math.random() * 100 + 40).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 60).toFixed(2),
+    temperature: "Temperature at 2H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 3,
+    yValue: +(Math.random() * 10 + 30).toFixed(2),
+    yValue1: +(Math.random() * 100 + 60).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 90).toFixed(2),
+    temperature: "Temperature at 3H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 4,
+    yValue: +(Math.random() * 10 + 40).toFixed(2),
+    yValue1: +(Math.random() * 100 + 80).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 120).toFixed(2),
+    temperature: "Temperature at 4H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 5,
+    yValue: +(Math.random() * 10 + 50).toFixed(2),
+    yValue1: +(Math.random() * 100 + 100).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 150).toFixed(2),
+    temperature: "Temperature at 5H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 5,
+    yValue: +(Math.random() * 10 + 60).toFixed(2),
+    yValue1: +(Math.random() * 100 + 120).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 180).toFixed(2),
+    temperature: "Temperature at 6H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 7,
+    yValue: +(Math.random() * 10 + 70).toFixed(2),
+    yValue1: +(Math.random() * 100 + 140).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 210).toFixed(2),
+    temperature: "Temperature at 7H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 8,
+    yValue: +(Math.random() * 10 + 80).toFixed(2),
+    yValue1: +(Math.random() * 100 + 160).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 240).toFixed(2),
+    temperature: "Temperature at 8H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  },
+  {
+    xValue: 9,
+    yValue: +(Math.random() * 10 + 90).toFixed(2),
+    yValue1: +(Math.random() * 100 + 180).toFixed(2),
+    yValue2: +(Math.random() * 1000 + 270).toFixed(2),
+    temperature: "Temperature at 9H",
+    positiveMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+    negativeMargin: (0.2 + Math.random() * 0.2).toFixed(2),
+  }
+];
+
+
 export const colors = ['#26547c', '#ef476f', '#ffd166', '#06d6a0', '#06d6d1'];
 
 export const areaColors = ['#339999', '#993399', '#333399'];

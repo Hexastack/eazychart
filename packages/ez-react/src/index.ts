@@ -69,6 +69,10 @@ export {
 } from '@/recipes/column/LineColumnChart';
 export { LineChart, LineChartProps } from '@/recipes/line/LineChart';
 export {
+  TimeSeriesLineChart,
+  TimeSeriesLineChartProps,
+} from '@/recipes/line/TimeSeriesLineChart';
+export {
   LineErrorMarginChart,
   LineErrorMarginChartProps,
 } from '@/recipes/line/LineErrorMarginChart';

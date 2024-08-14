@@ -35,10 +35,10 @@
   "scripts": {
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --no-fix",
-    "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
-    "build": "npx vue-cli-service build --target lib --name eazychart ./index.ts",
-    "storybook": "start-storybook -p 6007 --no-open",
-    "build-storybook": "build-storybook",
+    "build:inline-lib": "VUE_CLI_SERVICE_CONFIG_PATH=tsconfig.build.json npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
+    "build": "VUE_CLI_SERVICE_CONFIG_PATH=tsconfig.build.json npx vue-cli-service build --target lib --name eazychart ./index.ts",
+    "storybook": "storybook dev -p 6007 --no-open",
+    "build-storybook": "storybook build",
     "type-check": "tsc",
     "precommit": "npm run  type-check && npm run lint"
   },
@@ -55,17 +55,18 @@
   },
   "dependencies": {
     "core-js": "^3.22.2",
-    "eazychart-core": "^0.7.1-alpha.0",
     "vue-loader": "^17.4.2"
   },
   "peerDependencies": {
-    "vue": "^2.6.0"
+    "vue": "^2.6.0",
+    "eazychart-core": "^0.7.1-alpha.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
     "@storybook/addon-actions": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",
     "@storybook/addon-links": "^8.2.9",
+    "@storybook/addons": "^7.6.17",
     "@storybook/vue": "^7.6.17",
     "@testing-library/vue": "^5.8.2",
     "@types/jest": "^24.0.19",
@@ -90,7 +91,8 @@
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "eazychart-core": "^0.7.1-alpha.0"
   },
   "gitHead": "3eb2feb73572be3e79cfdeb3cc3e2412160cbbff"
 }

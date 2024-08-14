@@ -1,16 +1,25 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": "./",
+    "rootDir": "../",
+    "baseUrl": "../",
     "declaration": true,
-    "declarationDir": "./dist/types"
+    "declarationDir": "./dist/types",
+    "paths": {
+      "@/*": ["./ez-react/src/*"],
+      "tests/*": ["./ez-react/tests/*"],
+      "eazychart-core/*": ["./ez-core/*"]
+    }
   },  
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
   ],
   "exclude": [
+    "src/**/*.stories.tsx",
+    "src/lib/storybook-utils.tsx",
     "node_modules",
-    "tests"
+    "tests",
+    "ez-vue"
   ]
 }

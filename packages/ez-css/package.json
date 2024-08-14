@@ -38,8 +38,7 @@
     "compile": "node-sass sass/main.scss css/style.css",
     "prefix": "postcss css/style.css --use autoprefixer -o css/style.css",
     "compress": "node-sass css/style.css css/style.css --output-style compressed",
-    "build": "npm-run-all compile prefix compress",
-    "prepare": "yarn build"
+    "build": "npm-run-all compile prefix compress"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.1",

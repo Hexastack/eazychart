@@ -1,10 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 import Tabs from './Tabs';
 
-<Meta
-  title="Get Started/Installation"
-  parameters={{ options: { isToolshown: false }, id: 2 }}
-/>
+<Meta title="Get Started/Installation" parameters={{ options: { isToolshown: false }, id: 2 }} />
 
 # Installation
 
@@ -13,16 +10,9 @@ First things first, you need to install the **EazyChart** library for your proje
 If you are using npm or yarn for your project, use one of the command line below depending on the project:
 
 <Tabs tabbedClassName="story-tabbed-code-block-very-small" showTabs={true}>
-  <Tab
-    title="npm"
-    language="bash"
-    code={`npm install --save eazychart-react eazychart-css`}
-  ></Tab>
-  <Tab
-    title="yarn"
-    language="bash"
-    code={`yarn add eazychart-react eazychart-css`}
-  ></Tab>
+  <Tab title="npm" language="bash" code={`npm install --save eazychart-react eazychart-css`} />
+
+  <Tab title="yarn" language="bash" code={`yarn add eazychart-react eazychart-css`} />
 </Tabs>
 
 Great, now you installed **EazyChart**, you are ready for the next step where you can add your first chart

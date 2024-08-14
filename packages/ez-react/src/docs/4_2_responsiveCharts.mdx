@@ -1,10 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 import Tabs from './Tabs';
 
-<Meta
-  title="Get Started/Essentials/Responsive Charts"
-  parameters={{ options: { isToolshown: false }, id: 5 }}
-/>
+<Meta title="Get Started/Essentials/Responsive Charts" parameters={{ options: { isToolshown: false }, id: 5 }} />
 
 # Responsive Charts
 
@@ -17,11 +14,8 @@ This container will let your chart have the dimensions of the outer container wh
 
 For React Web app:
 
-<Tabs
-tabbedClassName="story-tabbed-code-block-middle"
-showTabs={true}
->
-  <Tab 
+<Tabs tabbedClassName="story-tabbed-code-block-middle" showTabs={true}>
+  <Tab
     title="React"
     language="jsx"
     code={
@@ -35,9 +29,9 @@ const MyApp = (props) => {
     </ResponsiveChartContainer>
   );
 };`}
-    >
-  </Tab>
-  <Tab 
+  />
+
+  <Tab
     title="Vue"
     language="markup"
     code={
@@ -50,7 +44,6 @@ const MyApp = (props) => {
   import {ResponsiveChartContainer} from 'eazychart-vue';
   // other imports 
   // logic
-</script>`}>
-
-  </Tab>
+</script>`}
+  />
 </Tabs>

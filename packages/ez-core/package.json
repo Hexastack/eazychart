@@ -46,7 +46,6 @@
     "coverage": "TZ=EST tsdx test --coverage",
     "doc": "jsdoc -c jsdoc.json",
     "lint": "tsdx lint",
-    "prepare": "tsdx build",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },

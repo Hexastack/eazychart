@@ -35,13 +35,12 @@
   "scripts": {
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint --no-fix",
-    "build:inline-lib": "npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
-    "build": "npx vue-cli-service build --target lib --name eazychart ./index.ts",
-    "storybook": "start-storybook -p 6007 --no-open",
-    "build-storybook": "build-storybook",
+    "build:inline-lib": "VUE_CLI_SERVICE_CONFIG_PATH=tsconfig.build.json npx vue-cli-service build --target lib --name eazychart --inline-vue ./index.ts",
+    "build": "VUE_CLI_SERVICE_CONFIG_PATH=tsconfig.build.json npx vue-cli-service build --target lib --name eazychart ./index.ts",
+    "storybook": "storybook dev -p 6007 --no-open",
+    "build-storybook": "storybook build",
     "type-check": "tsc",
-    "precommit": "yarn type-check && yarn lint",
-    "prepare": "yarn build"
+    "precommit": "npm run  type-check && npm run lint"
   },
   "husky": {
     "hooks": {
@@ -56,41 +55,44 @@
   },
   "dependencies": {
     "core-js": "^3.22.2",
-    "eazychart-core": "^0.7.1-alpha.0"
+    "vue-loader": "^17.4.2"
   },
   "peerDependencies": {
-    "vue": "^2.6.0"
+    "vue": "^2.6.0",
+    "eazychart-core": "^0.7.1-alpha.0"
   },
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.16.8",
-    "@storybook/addon-actions": "^6.4.19",
-    "@storybook/addon-essentials": "^6.4.19",
-    "@storybook/addon-links": "^6.4.19",
-    "@storybook/vue": "^6.4.19",
+    "@storybook/addon-actions": "^8.2.9",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addons": "^7.6.17",
+    "@storybook/vue": "^7.6.17",
     "@testing-library/vue": "^5.8.2",
     "@types/jest": "^24.0.19",
-    "@typescript-eslint/eslint-plugin": "^4.18.0",
-    "@typescript-eslint/parser": "^4.18.0",
+    "@typescript-eslint/eslint-plugin": "^8.1.0",
+    "@typescript-eslint/parser": "^8.1.0",
     "@vue/cli-plugin-babel": "~4.5.0",
-    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-plugin-unit-jest": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
-    "@vue/eslint-config-airbnb": "^5.0.2",
-    "@vue/eslint-config-typescript": "^7.0.0",
+    "@vue/eslint-config-airbnb": "^8.0.0",
+    "@vue/eslint-config-typescript": "^13.0.0",
     "@vue/test-utils": "^1.0.3",
     "babel-loader": "^8.2.3",
     "eazychart-css": "^0.2.1-alpha.0",
     "eazychart-dev": "^0.7.1-alpha.0",
-    "eslint": "^6.7.2",
-    "eslint-import-resolver-typescript": "^3.5.1",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-vue": "^6.2.2",
-    "typescript": "~4.1.5",
+    "eslint": "^8.2.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-vue": "^9.27.0",
+    "typescript": "^4.5.4",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
-    "vue-template-compiler": "^2.6.11"
+    "vue-template-compiler": "^2.6.11",
+    "eazychart-core": "^0.7.1-alpha.0"
   },
   "gitHead": "3eb2feb73572be3e79cfdeb3cc3e2412160cbbff"
 }

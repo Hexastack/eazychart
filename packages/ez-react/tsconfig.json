@@ -5,21 +5,11 @@
     "jsx": "react",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "tests/*": [
-        "tests/*"
-      ]
-    },
-  },  
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+      "@/*": ["src/*"],
+      "tests/*": ["tests/*"],
+      "eazychart-core/*": ["./node_modules/eazychart-core/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", "tests/**/*.tsx"],
+  "exclude": ["node_modules"]
 }

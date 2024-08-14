@@ -1,10 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 import Tabs from './Tabs';
 
-<Meta
-  title="Get Started/Your First Chart"
-  parameters={{ options: { isToolshown: false }, id: 3 }}
-/>
+<Meta title="Get Started/Your First Chart" parameters={{ options: { isToolshown: false }, id: 3 }} />
 
 # Your First Chart
 
@@ -18,7 +15,7 @@ EazyChart provides a set of ready-to-use charts that you can fully customize. In
     code={`// Code for importing the bar chart component
 import { BarChart } from 'eazychart-react';
 import 'eazychart-css';`}
-  ></Tab>
+  />
 </Tabs>
 
 The above code will import the bar chart to wherever you want to use it.
@@ -39,15 +36,15 @@ Hang on there, you still have a couple of things to do. You need to define the d
   { country: 'Spain', population: 46 },
   { country: 'Australia', population: 25 },
 ];`}
-  ></Tab>
+  />
 </Tabs>
 
 Awesome. Now you’ll need to configure the chart. To do so, we will need to create an object that will contain all the props we need to define.
 
 As an example. In order to display a Bar chart into your project, you will need to specify :
 
-- The data that you will be displaying (data).
-- The axes that you will use to represent the data on. Basic charts typically have two axes that are used to plot data in two dimensions (X Axis and Y Axis).
+* The data that you will be displaying (data).
+* The axes that you will use to represent the data on. Basic charts typically have two axes that are used to plot data in two dimensions (X Axis and Y Axis).
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
   <Tab
@@ -64,7 +61,7 @@ As an example. In order to display a Bar chart into your project, you will need 
     title: 'Country',
   },
 };`}
-  ></Tab>
+  />
 </Tabs>
 
 The **xAxis** is for defining the horizontal axis or the x-axis that will display the values in the data (numerical values). **yAxis** is for defining the vertical axis or y-axis that will display the value part of the data (categorical values).
@@ -113,22 +110,15 @@ export const App = () => {
     </div>
   );
 };`}
-  ></Tab>
+  />
 </Tabs>
 
 Now that everything is in order, run your project using npm or yarn, open up your browser, and you should be able to see your chart on your screen.
 
 <Tabs tabbedClassName="story-tabbed-code-block-very-small" showTabs={true}>
-  <Tab
-    title="npm"
-    language="bash"
-    code={`npm run start`}
-  ></Tab>
-  <Tab
-    title="yarn"
-    language="bash"
-    code={`yarn start`}
-  ></Tab>
+  <Tab title="npm" language="bash" code={`npm run start`} />
+
+  <Tab title="yarn" language="bash" code={`yarn start`} />
 </Tabs>
 
 ![Example of Bar Chart](https://docs.eazychart.com/images/barchart.png)

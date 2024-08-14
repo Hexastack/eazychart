@@ -1,0 +1,25 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["webpack-env", "jest"],
+    "rootDir": "../",
+    "baseUrl": "../",
+    "paths": {
+      "@": ["ez-vue/src"],
+      "@/*": ["ez-vue/src/*"],
+      "tests/*": ["ez-vue/tests/*"],
+      "eazychart-core/*": ["ez-core/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
+    "tests/**/*.ts",
+    "tests/**/*.tsx"
+  ],
+  "exclude": ["src/**/*.stories.tsx", "node_modules"]
+}

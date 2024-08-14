@@ -1,10 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 import Tabs from './Tabs';
 
-<Meta
-  title="Get Started/Essentials/Custom CSS"
-  parameters={{ options: { isToolshown: false }, id: 4 }}
-/>
+<Meta title="Get Started/Essentials/Custom CSS" parameters={{ options: { isToolshown: false }, id: 4 }} />
 
 # Custom CSS
 
@@ -32,13 +29,13 @@ Create a `.css` file and add your styling into it as the example above:
 .ez-tooltip {
   background-color: #ffffff95; /* With some opacity */
 }`}
-  ></Tab>
+  />
 </Tabs>
 
 And then import your css file into your app main file like so:
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
-  <Tab language="javascript" code={`import './ez-styles.css';`}></Tab>
+  <Tab language="javascript" code={`import './ez-styles.css';`} />
 </Tabs>
 
 > **Note:** Import the file only in the app main file, you won’t need to import it in every component.
@@ -77,7 +74,8 @@ function App() {
   );
 }
 export default App;`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -118,7 +116,7 @@ export default App;`}
     background-color: #ffffff95;
   }
 </style>`}
-  ></Tab>
+  />
 </Tabs>
 
 > All the css classes can be found in the [Github repo](https://github.com/Hexastack/eazychart/tree/master/packages/ez-css).

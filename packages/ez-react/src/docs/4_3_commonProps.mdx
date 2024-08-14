@@ -1,10 +1,7 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 import Tabs from './Tabs';
 
-<Meta
-  title="Get Started/Essentials/Common Props"
-  parameters={{ options: { isToolshown: false }, id: 6 }}
-/>
+<Meta title="Get Started/Essentials/Common Props" parameters={{ options: { isToolshown: false }, id: 6 }} />
 
 # Common Props
 
@@ -42,7 +39,7 @@ Our data will look like the following:
     country: 'Japan',
   },
 ];`}
-  ></Tab>
+  />
 </Tabs>
 
 The column chart in this case is the best option.
@@ -59,7 +56,8 @@ In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yA
   yAxis={{ domainKey: 'gdp', nice: 10}}
   colors={['#fe4a49', '#2ab7ca', '#fed766']}
 />`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -69,7 +67,7 @@ In our case, the `country` will be presented on the `xAxis` and `gdp` on the `yA
   :yAxis="{ domainKey: 'gdp', nice: 10}"
   :colors="['#fe4a49', '#2ab7ca', '#fed766']"
 />`}
-  ></Tab>
+  />
 </Tabs>
 
 The result is shown in the image below.
@@ -156,7 +154,8 @@ These animations can be provided to the chart and are used as follows:
     delay: 0,
   }}
 />`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -171,7 +170,7 @@ These animations can be provided to the chart and are used as follows:
     delay: 0,
   }"
 />`}
-  ></Tab>
+  />
 </Tabs>
 
 ![Bounce animation in Column Chart](https://docs.eazychart.com/images/custom-css-animation.gif)
@@ -194,7 +193,8 @@ This prop is useful when styling your whole web application.
     top: 200,
   }}
 ></ColumnChart>`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -207,14 +207,14 @@ This prop is useful when styling your whole web application.
     top: 100,
   }"
 ></ColumnChart>`}
-  ></Tab>
+  />
 </Tabs>
 
-- Column Chart **without changing the default padding options**:
+* Column Chart **without changing the default padding options**:
 
 ![Column chart without padding](https://docs.eazychart.com/images/custom-css-before-padding.png)
 
-- Column Chart **with padding top and bottom changed**:
+* Column Chart **with padding top and bottom changed**:
 
 ![Column chart with padding](https://docs.eazychart.com/images/custom-css-after-padding.png)
 
@@ -224,10 +224,7 @@ By default, Chart recipes in EazyChart have 800x600 pixel dimensions that can be
 If you wish to give your chart recipe fixed dimensions, you should pass the dimensions as in the example below:
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={false}>
-  <Tab
-    language="javascript"
-    code={`const dimensions = { width: 1200, height: 800 };`}
-  ></Tab>
+  <Tab language="javascript" code={`const dimensions = { width: 1200, height: 800 };`} />
 </Tabs>
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
@@ -238,7 +235,8 @@ If you wish to give your chart recipe fixed dimensions, you should pass the dime
   // .. here should add the rest of the properties
   dimensions={{ width: 1200, height: 800 }}
 ></BarChart>`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -246,7 +244,7 @@ If you wish to give your chart recipe fixed dimensions, you should pass the dime
   # .. here should add the rest of the properties
   :dimensions="{ width: 1200, height: 800}"
 ></BarChart>`}
-  ></Tab>
+  />
 </Tabs>
 
 ## Grid
@@ -263,7 +261,7 @@ Grid lines provide helpful hints to the viewer, particularly for large or compli
   directions: [Direction.HORIZONTAL, Direction.VERTICAL],
   color: '#a8a8a8',
 };`}
-  ></Tab>
+  />
 </Tabs>
 
 <Tabs tabbedClassName="story-tabbed-code-block" showTabs={true}>
@@ -277,7 +275,8 @@ Grid lines provide helpful hints to the viewer, particularly for large or compli
     color: '#a8a8a8',
   }}
 ></ColumnChart>`}
-  ></Tab>
+  />
+
   <Tab
     title="Vue"
     language="markup"
@@ -288,7 +287,7 @@ Grid lines provide helpful hints to the viewer, particularly for large or compli
     color: '#a8a8a8',
   }"
 ></ColumnChart>`}
-  ></Tab>
+  />
 </Tabs>
 
 ## Scoped Slots
@@ -303,7 +302,7 @@ When adding a chart to your project or creating your own chart recipe, add your 
   LegendComponent: Legend,
   TooltipComponent: Tooltip,
 };`}
-  ></Tab>
+  />
 </Tabs>
 
 ## Tooltip

@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 import { RawData } from 'eazychart-core/src/types';
-import { getDomainByKeys } from 'eazychart-core';
+import { getDomainByKeys } from 'eazychart-core/src';
 
 export const useToggableDomainKey = (data: RawData, domainKeys: string[]) => {
   // Setup a state for the domain keys to make them toggable

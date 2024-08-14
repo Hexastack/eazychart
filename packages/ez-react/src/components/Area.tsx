@@ -5,7 +5,7 @@ import { Points } from '@/components/Points';
 import { useColorScale } from '@/components/scales/ColorScale';
 import { AreaPath } from './shapes/AreaPath';
 import { LinePath } from './shapes/LinePath';
-import { ScaleOrdinal } from 'eazychart-core';
+import { ScaleOrdinal } from 'eazychart-core/src';
 
 export interface AreaProps extends SVGAttributes<SVGGElement> {
   xDomainKey: string;

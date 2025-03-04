@@ -10,7 +10,13 @@ import { MapBubbles } from '@/components/MapBubbles';
 
 export interface BubbleMapChartProps extends MapChartProps {
   bubble: BubbleConfig;
-  layers?: GeoJsonData[];
+  layers?: Array<{
+    geoJson: GeoJsonData;
+    map: {
+      stroke: string;
+      fill: string;
+    };
+  }>;
 }
 
 export const BubbleMapChart: FC<BubbleMapChartProps> = ({
@@ -74,7 +80,14 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
             range={bubble.colors}
           >
             {layers.map((layer, idx) => (
-              <Map key={idx} map={map} geoJson={layer} />
+              <Map
+                key={idx}
+                map={{
+                  ...map,
+                  ...layer.map,
+                }}
+                geoJson={layer.geoJson}
+              />
             ))}
             <SqrtScale
               domainKey={bubble.domainKey}

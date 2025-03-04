@@ -74,21 +74,21 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
         range={colors}
       >
         <Map map={map} geoJson={geoJson}>
+          {layers.map((layer, idx) => (
+            <Map
+              key={idx}
+              map={{
+                ...map,
+                ...layer.map,
+              }}
+              geoJson={layer.geoJson}
+            />
+          ))}
           <ColorScale
             type={'quantile'}
             domainKey={bubble.domainKey}
             range={bubble.colors}
           >
-            {layers.map((layer, idx) => (
-              <Map
-                key={idx}
-                map={{
-                  ...map,
-                  ...layer.map,
-                }}
-                geoJson={layer.geoJson}
-              />
-            ))}
             <SqrtScale
               domainKey={bubble.domainKey}
               range={[bubble.minRadius, bubble.maxRadius]}

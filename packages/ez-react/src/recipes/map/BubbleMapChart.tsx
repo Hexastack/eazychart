@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BubbleConfig } from 'eazychart-core/src/types';
+import { BubbleConfig, GeoJsonData } from 'eazychart-core/src/types';
 import { Map } from '@/components/Map';
 import { Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -10,6 +10,7 @@ import { MapBubbles } from '@/components/MapBubbles';
 
 export interface BubbleMapChartProps extends MapChartProps {
   bubble: BubbleConfig;
+  layers?: GeoJsonData[];
 }
 
 export const BubbleMapChart: FC<BubbleMapChartProps> = ({
@@ -23,6 +24,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
     stroke: 'white',
     fill: 'black',
   },
+  layers = [],
   bubble = {
     domainKey: 'rValue',
     minRadius: 1,
@@ -71,6 +73,7 @@ export const BubbleMapChart: FC<BubbleMapChartProps> = ({
             domainKey={bubble.domainKey}
             range={bubble.colors}
           >
+            {layers.map((layer) => <Map map={map} geoJson={layer}>)}
             <SqrtScale
               domainKey={bubble.domainKey}
               range={[bubble.minRadius, bubble.maxRadius]}

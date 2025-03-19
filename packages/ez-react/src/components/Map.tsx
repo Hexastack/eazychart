@@ -8,7 +8,7 @@ import { GeoJsonData, MapConfig } from 'eazychart-core/src/types';
 import { MapPath } from './shapes/MapPath';
 import { useColorScale } from './scales/ColorScale';
 import { useChart } from '@/lib/use-chart';
-import { MapContext } from '@/lib/use-map';
+import { MapContext, useMap } from '@/lib/use-map';
 
 export interface MapProps extends SVGAttributes<SVGPathElement> {
   isWrapped?: boolean;
@@ -23,6 +23,7 @@ export const Map: React.FC<MapProps> = ({
   children,
   ...rest
 }) => {
+  const parentMap = useMap();
   // Validate GeoJSON data structure
   if (geoJson && !('features' in geoJson)) {
     throw new Error(
@@ -39,8 +40,11 @@ export const Map: React.FC<MapProps> = ({
   );
 
   const projection = useMemo(
-    () => computeMapProjection(projectionType, projectionViewport),
-    [projectionType, projectionViewport]
+    () =>
+      parentMap.mapData.length > 0
+        ? parentMap.projection
+        : computeMapProjection(projectionType, projectionViewport),
+    [parentMap, projectionType, projectionViewport]
   );
 
   const mapData = useMemo(() => {

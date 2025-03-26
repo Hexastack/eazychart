@@ -94,10 +94,7 @@ exports[`RadialChart renders a Radial chart 1`] = `
         </div>
       </div>
     </div>
-    <div
-      class="ez-tooltip"
-      style="left: 0px; top: 0px; opacity: 0;"
-    >
+    <div class="ez-tooltip">
     </div>
   </div>
 </div>

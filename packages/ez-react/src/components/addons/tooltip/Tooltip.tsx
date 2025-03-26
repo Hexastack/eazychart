@@ -51,7 +51,7 @@ export const Tooltip: FC<TooltipProps> = ({
   };
 
   return (
-    <div className="ez-tooltip" style={animatedStyle} {...rest}>
+    <div className="ez-tooltip" style={datum && animatedStyle} {...rest}>
       {datum ? (
         <>
           {shapeDatum?.color && (
@@ -61,21 +61,17 @@ export const Tooltip: FC<TooltipProps> = ({
             ></div>
           )}
           <div className="ez-tooltip-text">
-            {Object.keys(attributes).map((attribute) => {
-              return (
-                <div
-                  key={attribute}
-                  className={`ez-tooltip-attribute ${attribute}`}
-                >
-                  <div className="ez-tooltip-attribute--name">
-                    {attribute} :
-                  </div>
-                  <div className="ez-tooltip-attribute--value">
-                    {datum[attribute] as string}
-                  </div>
+            {Object.keys(attributes).map((attribute) => (
+              <div
+                key={attribute}
+                className={`ez-tooltip-attribute ${attribute}`}
+              >
+                <div className="ez-tooltip-attribute--name">{attribute} :</div>
+                <div className="ez-tooltip-attribute--value">
+                  {datum[attribute] as string}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </>
       ) : null}

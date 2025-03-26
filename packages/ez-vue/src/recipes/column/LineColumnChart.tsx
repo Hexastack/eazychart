@@ -229,6 +229,7 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
             definition: {
               direction: Direction.HORIZONTAL,
               domainKey: xAxis.domainKey,
+              reverse: isRTL,
             },
           }}
           yScaleConfig={{
@@ -266,6 +267,7 @@ export default class LineColumnChart extends mixins(ToggleDatumMixin) {
             definition: {
               direction: Direction.HORIZONTAL,
               domainKey: xAxis.domainKey,
+              reverse: isRTL,
             },
           }}
           yScaleConfig={{

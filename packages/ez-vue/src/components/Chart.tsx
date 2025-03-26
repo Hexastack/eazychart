@@ -163,7 +163,7 @@ export default class Chart extends Vue {
   @Watch('chart.dataDict', { deep: true })
   onDataDictChange() {
     const data = Object.values(this.chart.dataDict);
-    this.chart.data = this.isRTL ? data.reverse() : data;
+    this.chart.data = data;
   }
 
   @Watch('isRTL')

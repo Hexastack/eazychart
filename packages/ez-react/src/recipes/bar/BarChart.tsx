@@ -21,6 +21,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
 import { useToggableDatum } from '@/lib/useToggableDatum';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface BarChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -98,15 +99,7 @@ export const BarChart: FC<BarChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: xAxis.domain,
-            maxPadding: xAxis.maxPadding,
-            minPadding: xAxis.minPadding,
-            max: xAxis.max,
-            min: xAxis.min,
-            softMax: xAxis.softMax,
-            softMin: xAxis.softMin,
-            roundRange: xAxis.roundRange,
-            clamp: xAxis.clamp,
+            ...getDefinedLinearScaleOptions(xAxis),
           },
         }}
         yScaleConfig={{

@@ -21,6 +21,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
 import { useToggableDatum } from '@/lib/useToggableDatum';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -104,15 +105,7 @@ export const ColumnChart: FC<ColumnChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
-            domain: yAxis.domain,
-            maxPadding: yAxis.maxPadding,
-            minPadding: yAxis.minPadding,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis),
           },
         }}
       >

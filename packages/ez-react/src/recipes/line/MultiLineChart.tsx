@@ -24,6 +24,7 @@ import { ColorScale } from '@/components/scales/ColorScale';
 import { Legend, LegendProps } from '@/components/addons/legend/Legend';
 import { Segments } from '@/components/Segments';
 import { useToggableDomainKey } from '@/lib/useToggableDomainKey';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface MultiLineChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -108,15 +109,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: xAxis.domain,
-            maxPadding: xAxis.maxPadding,
-            minPadding: xAxis.minPadding,
-            max: xAxis.max,
-            min: xAxis.min,
-            softMax: xAxis.softMax,
-            softMin: xAxis.softMin,
-            roundRange: xAxis.roundRange,
-            clamp: xAxis.clamp,
+            ...getDefinedLinearScaleOptions(xAxis),
           },
         }}
         yScaleConfig={{
@@ -125,14 +118,7 @@ export const MultiLineChart: FC<MultiLineChartProps> = ({
             direction: Direction.VERTICAL,
             domain: activeDomain,
             nice: yAxis.nice || 0,
-            maxPadding: yAxis.maxPadding,
-            minPadding: yAxis.minPadding,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis, ['domain']),
           },
         }}
       >

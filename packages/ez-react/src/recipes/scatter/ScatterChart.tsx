@@ -19,6 +19,7 @@ import { Axis } from '@/components/scales/Axis';
 import { Grid } from '@/components/scales/grid/Grid';
 import { ScaleLinear } from 'eazychart-core/src';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface ScatterChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -87,15 +88,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: xAxis.domain,
-            maxPadding: xAxis.maxPadding,
-            minPadding: xAxis.minPadding,
-            max: xAxis.max,
-            min: xAxis.min,
-            softMax: xAxis.softMax,
-            softMin: xAxis.softMin,
-            roundRange: xAxis.roundRange,
-            clamp: xAxis.clamp,
+            ...getDefinedLinearScaleOptions(xAxis),
           },
         }}
         yScaleConfig={{
@@ -104,15 +97,7 @@ export const ScatterChart: FC<ScatterChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
-            domain: yAxis.domain,
-            maxPadding: yAxis.maxPadding,
-            minPadding: yAxis.minPadding,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis),
           },
         }}
       >

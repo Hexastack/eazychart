@@ -9,6 +9,7 @@ import {
   GridConfig,
   Position,
   RawData,
+  ScaleLinearDefinition,
   ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Axis } from '@/components/scales/Axis';
@@ -29,7 +30,7 @@ export interface ColumnChartProps extends SVGAttributes<SVGGElement> {
   grid?: GridConfig;
   isRTL?: boolean;
   xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
-  yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
+  yAxis?: AxisConfig<Position.LEFT | Position.RIGHT> & ScaleLinearDefinition;
   dimensions?: Partial<Dimensions>;
   onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
@@ -103,6 +104,15 @@ export const ColumnChart: FC<ColumnChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
+            domain: yAxis.domain,
+            maxPadding: yAxis.maxPadding,
+            minPadding: yAxis.minPadding,
+            max: yAxis.max,
+            min: yAxis.min,
+            softMax: yAxis.softMax,
+            softMin: yAxis.softMin,
+            roundRange: yAxis.roundRange,
+            clamp: yAxis.clamp,
           },
         }}
       >

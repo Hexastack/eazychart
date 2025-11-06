@@ -11,6 +11,7 @@ import {
   Dimensions,
   BubbleConfig,
   ShapeClickEventHandler,
+  ScaleLinearDefinition,
 } from 'eazychart-core/src/types';
 import { TooltipProps, Tooltip } from '@/components/addons/tooltip/Tooltip';
 import { Chart } from '@/components/Chart';
@@ -26,8 +27,8 @@ export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   animationOptions?: AnimationOptions;
   padding?: ChartPadding;
   grid?: GridConfig;
-  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
-  yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
+  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP> & ScaleLinearDefinition;
+  yAxis?: AxisConfig<Position.LEFT | Position.RIGHT> & ScaleLinearDefinition;
   isRTL?: boolean;
   dimensions?: Partial<Dimensions>;
   onShapeClick?: ShapeClickEventHandler;
@@ -89,6 +90,15 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
+            domain: xAxis.domain,
+            maxPadding: xAxis.maxPadding,
+            minPadding: xAxis.minPadding,
+            max: xAxis.max,
+            min: xAxis.min,
+            softMax: xAxis.softMax,
+            softMin: xAxis.softMin,
+            roundRange: xAxis.roundRange,
+            clamp: xAxis.clamp,
           },
         }}
         yScaleConfig={{
@@ -97,6 +107,15 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
+            domain: yAxis.domain,
+            maxPadding: yAxis.maxPadding,
+            minPadding: yAxis.minPadding,
+            max: yAxis.max,
+            min: yAxis.min,
+            softMax: yAxis.softMax,
+            softMin: yAxis.softMin,
+            roundRange: yAxis.roundRange,
+            clamp: yAxis.clamp,
           },
         }}
       >

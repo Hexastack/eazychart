@@ -27,6 +27,7 @@ import { LinePath } from '@/components/shapes/LinePath';
 import { Point } from '@/components/shapes/Point';
 import { AreaPath } from '@/components/shapes/AreaPath';
 import { CartesianScale } from '@/components/scales/CartesianScale';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface LineErrorMarginChartProps extends SVGAttributes<SVGGElement> {
   line: LineConfig;
@@ -125,15 +126,7 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: xAxis.domain,
-            maxPadding: xAxis.maxPadding,
-            minPadding: xAxis.minPadding,
-            max: xAxis.max,
-            min: xAxis.min,
-            softMax: xAxis.softMax,
-            softMin: xAxis.softMin,
-            roundRange: xAxis.roundRange,
-            clamp: xAxis.clamp,
+            ...getDefinedLinearScaleOptions(xAxis),
           },
         }}
         yScaleConfig={{
@@ -144,13 +137,10 @@ export const LineErrorMarginChart: FC<LineErrorMarginChartProps> = ({
             nice: yAxis.nice || 0,
             minPadding: lowsestMarginValue,
             maxPadding: highestMarginValue,
-            domain: yAxis.domain,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis, [
+              'maxPadding',
+              'minPadding',
+            ]),
           },
         }}
       >

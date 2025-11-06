@@ -20,6 +20,7 @@ import { Point } from '@/components/shapes/Point';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { ColorScale } from '@/components/scales/ColorScale';
 import { useToggableDatum } from '@/lib/useToggableDatum';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface LineColumnChartProps extends ColumnChartProps {
   yLineAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
@@ -132,15 +133,7 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yLineAxis.domainKey,
             nice: yAxis.nice || 0,
-            domain: yAxis.domain,
-            maxPadding: yAxis.maxPadding,
-            minPadding: yAxis.minPadding,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis),
           },
         }}
       >

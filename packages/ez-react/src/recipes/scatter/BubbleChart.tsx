@@ -20,6 +20,7 @@ import { Grid } from '@/components/scales/grid/Grid';
 import { Bubbles } from '@/components/Bubbles';
 import { CartesianScale } from '@/components/scales/CartesianScale';
 import { LinearScale } from '@/components/scales/LinearScale';
+import { getDefinedLinearScaleOptions } from '@/recipes/utils/linearScale';
 
 export interface BubbleChartProps extends SVGAttributes<SVGGElement> {
   data: RawData;
@@ -90,15 +91,7 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
-            domain: xAxis.domain,
-            maxPadding: xAxis.maxPadding,
-            minPadding: xAxis.minPadding,
-            max: xAxis.max,
-            min: xAxis.min,
-            softMax: xAxis.softMax,
-            softMin: xAxis.softMin,
-            roundRange: xAxis.roundRange,
-            clamp: xAxis.clamp,
+            ...getDefinedLinearScaleOptions(xAxis),
           },
         }}
         yScaleConfig={{
@@ -107,15 +100,7 @@ export const BubbleChart: FC<BubbleChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yAxis.domainKey,
             nice: yAxis.nice || 0,
-            domain: yAxis.domain,
-            maxPadding: yAxis.maxPadding,
-            minPadding: yAxis.minPadding,
-            max: yAxis.max,
-            min: yAxis.min,
-            softMax: yAxis.softMax,
-            softMin: yAxis.softMin,
-            roundRange: yAxis.roundRange,
-            clamp: yAxis.clamp,
+            ...getDefinedLinearScaleOptions(yAxis),
           },
         }}
       >

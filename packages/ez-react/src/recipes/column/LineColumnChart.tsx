@@ -132,6 +132,15 @@ export const LineColumnChart: FC<LineColumnChartProps> = ({
             direction: Direction.VERTICAL,
             domainKey: yLineAxis.domainKey,
             nice: yAxis.nice || 0,
+            domain: yAxis.domain,
+            maxPadding: yAxis.maxPadding,
+            minPadding: yAxis.minPadding,
+            max: yAxis.max,
+            min: yAxis.min,
+            softMax: yAxis.softMax,
+            softMin: yAxis.softMin,
+            roundRange: yAxis.roundRange,
+            clamp: yAxis.clamp,
           },
         }}
       >

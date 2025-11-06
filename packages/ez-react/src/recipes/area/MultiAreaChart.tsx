@@ -21,6 +21,7 @@ import {
   AreaConfig,
   Direction,
   ShapeClickEventHandler,
+  ScaleLinearDefinition,
 } from 'eazychart-core/src/types';
 import React, { FC, SVGAttributes } from 'react';
 
@@ -33,8 +34,9 @@ export interface MultiAreaChartProps extends SVGAttributes<SVGGElement> {
   padding?: ChartPadding;
   grid?: GridConfig;
   isRTL?: boolean;
-  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
-  yAxis?: AxisConfigMulti<Position.LEFT | Position.RIGHT>;
+  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP> & ScaleLinearDefinition;
+  yAxis?: AxisConfigMulti<Position.LEFT | Position.RIGHT> &
+    ScaleLinearDefinition;
   dimensions?: Partial<Dimensions>;
   onShapeClick?: ShapeClickEventHandler;
   scopedSlots?: {
@@ -106,6 +108,15 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
+            domain: xAxis.domain,
+            maxPadding: xAxis.maxPadding,
+            minPadding: xAxis.minPadding,
+            max: xAxis.max,
+            min: xAxis.min,
+            softMax: xAxis.softMax,
+            softMin: xAxis.softMin,
+            roundRange: xAxis.roundRange,
+            clamp: xAxis.clamp,
           },
         }}
         yScaleConfig={{
@@ -114,6 +125,14 @@ export const MultiAreaChart: FC<MultiAreaChartProps> = ({
             direction: Direction.VERTICAL,
             domain: activeDomain,
             nice: yAxis.nice || 0,
+            maxPadding: yAxis.maxPadding,
+            minPadding: yAxis.minPadding,
+            max: yAxis.max,
+            min: yAxis.min,
+            softMax: yAxis.softMax,
+            softMin: yAxis.softMin,
+            roundRange: yAxis.roundRange,
+            clamp: yAxis.clamp,
           },
         }}
       >

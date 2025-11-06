@@ -9,6 +9,7 @@ import {
   GridConfig,
   Position,
   RawData,
+  ScaleLinearDefinition,
   ShapeClickEventHandler,
 } from 'eazychart-core/src/types';
 import { Axis } from '@/components/scales/Axis';
@@ -28,7 +29,7 @@ export interface BarChartProps extends SVGAttributes<SVGGElement> {
   padding?: ChartPadding;
   grid?: GridConfig;
   isRTL?: boolean;
-  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP>;
+  xAxis?: AxisConfig<Position.BOTTOM | Position.TOP> & ScaleLinearDefinition;
   yAxis?: AxisConfig<Position.LEFT | Position.RIGHT>;
   dimensions?: Partial<Dimensions>;
   onShapeClick?: ShapeClickEventHandler;
@@ -97,6 +98,15 @@ export const BarChart: FC<BarChartProps> = ({
             domainKey: xAxis.domainKey,
             nice: xAxis.nice || 0,
             reverse: isRTL,
+            domain: xAxis.domain,
+            maxPadding: xAxis.maxPadding,
+            minPadding: xAxis.minPadding,
+            max: xAxis.max,
+            min: xAxis.min,
+            softMax: xAxis.softMax,
+            softMin: xAxis.softMin,
+            roundRange: xAxis.roundRange,
+            clamp: xAxis.clamp,
           },
         }}
         yScaleConfig={{

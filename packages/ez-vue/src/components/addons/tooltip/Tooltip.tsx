@@ -129,7 +129,7 @@ export default class Tooltip extends mixins(AnimationMixin) {
         </div>
       </div>
     ) : (
-      <div class="ez-tooltip" style={animatedStyle}></div>
+      <div class="ez-tooltip"></div>
     );
   }
 }
